@@ -27,14 +27,25 @@ class OAuth2Controller extends \BaseController {
 		//return '» OAUTH2 Authorize';
 	//}
 	
-	public function getAuthorizeWeb()
+	public function getAuthorize()
 	{
-		return '» OAUTH2 AuthorizeWeb';
+		// get the data from the check-authorization-params filter
+		$params = Session::get('authorize-params');
+		
+		// get the user id
+		$params['user_id'] = Auth::user()->id;
+		
+		// display the authorization form
+		return View::make('authorization-form', array('params' => $params));
+		
+		//return '» OAUTH2 Authorize';
 	}
 	
-	public function getAccess()
+	public function postAccessToken()
 	{
-		return '» OAUTH2 Access';
+		return AuthorizationServer::performAccessTokenFlow();
+		
+		//return '» POST OAUTH2 Access Token';
 	}
 
 	public function getAccesstokens()

@@ -1577,18 +1577,135 @@
         ]
     },
     {
-        "name": "laravel/framework",
-        "version": "v4.2.1",
-        "version_normalized": "4.2.1.0",
+        "name": "league/oauth2-server",
+        "version": "2.1.3",
+        "version_normalized": "2.1.3.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/laravel/framework.git",
-            "reference": "be75911bf8f7fe81a2db1dd2585324d080289dd5"
+            "url": "https://github.com/thephpleague/oauth2-server.git",
+            "reference": "a9b52ab56a5bac383f7d300aec2e234285d7f861"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/laravel/framework/zipball/be75911bf8f7fe81a2db1dd2585324d080289dd5",
-            "reference": "be75911bf8f7fe81a2db1dd2585324d080289dd5",
+            "url": "https://api.github.com/repos/thephpleague/oauth2-server/zipball/a9b52ab56a5bac383f7d300aec2e234285d7f861",
+            "reference": "a9b52ab56a5bac383f7d300aec2e234285d7f861",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "replace": {
+            "league/oauth2server": "*",
+            "lncd/oauth2": "*"
+        },
+        "require-dev": {
+            "mockery/mockery": ">=0.7.2"
+        },
+        "suggest": {
+            "zetacomponents/database": "Allows use of the build in PDO storage classes"
+        },
+        "time": "2014-05-23 15:29:49",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "League\\OAuth2\\Server": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Alex Bilbie",
+                "email": "hello@alexbilbie.com",
+                "homepage": "http://www.alexbilbie.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "A lightweight and powerful OAuth 2.0 authorization and resource server library with support for all the core specification grants. This library will allow you to secure your API with OAuth and allow your applications users to approve apps that want to access their data from your API.",
+        "homepage": "https://github.com/php-loep/oauth2-server",
+        "keywords": [
+            "Authentication",
+            "api",
+            "authorization",
+            "oauth",
+            "oauth2",
+            "resource",
+            "server"
+        ]
+    },
+    {
+        "name": "lucadegasperi/oauth2-server-laravel",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/lucadegasperi/oauth2-server-laravel.git",
+            "reference": "a97064af2b2cef8c5343ff9b296e4847264f3cdc"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/lucadegasperi/oauth2-server-laravel/zipball/a97064af2b2cef8c5343ff9b296e4847264f3cdc",
+            "reference": "a97064af2b2cef8c5343ff9b296e4847264f3cdc",
+            "shasum": ""
+        },
+        "require": {
+            "league/oauth2-server": "2.1.x",
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "league/phpunit-coverage-listener": "v1.1.2",
+            "mockery/mockery": ">=0.7.2",
+            "orchestra/testbench": "2.0.*",
+            "phpunit/phpunit": "3.7.22",
+            "squizlabs/php_codesniffer": "1.*"
+        },
+        "time": "2013-11-19 10:24:01",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/migrations",
+                "tests/TestCase.php"
+            ],
+            "psr-0": {
+                "LucaDegasperi\\OAuth2Server": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Luca Degasperi",
+                "email": "packages@lucadegasperi.com"
+            }
+        ],
+        "description": "A Laravel 4 wrapper for the popular OAuth 2.0 Server package league/oauth2-server",
+        "keywords": [
+            "api",
+            "laravel",
+            "oauth",
+            "oauth2",
+            "server"
+        ]
+    },
+    {
+        "name": "laravel/framework",
+        "version": "v4.2.3",
+        "version_normalized": "4.2.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/laravel/framework.git",
+            "reference": "0efc0c962f28c9b5f3ce2da899c7a08a9471b5b1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/laravel/framework/zipball/0efc0c962f28c9b5f3ce2da899c7a08a9471b5b1",
+            "reference": "0efc0c962f28c9b5f3ce2da899c7a08a9471b5b1",
             "shasum": ""
         },
         "require": {
@@ -1658,7 +1775,7 @@
         "suggest": {
             "doctrine/dbal": "Allow renaming columns and dropping SQLite columns."
         },
-        "time": "2014-06-01 18:14:55",
+        "time": "2014-06-11 21:33:06",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1693,6 +1810,128 @@
         "keywords": [
             "framework",
             "laravel"
+        ]
+    },
+    {
+        "name": "guzzlehttp/streams",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/guzzle/streams.git",
+            "reference": "cf0c8c33ca95cc147efba4c714f630ee44767180"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/guzzle/streams/zipball/cf0c8c33ca95cc147efba4c714f630ee44767180",
+            "reference": "cf0c8c33ca95cc147efba4c714f630ee44767180",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2014-04-03 04:48:24",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "GuzzleHttp\\Stream\\": "src/"
+            },
+            "files": [
+                "src/functions.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Dowling",
+                "email": "mtdowling@gmail.com",
+                "homepage": "https://github.com/mtdowling"
+            }
+        ],
+        "description": "Provides a simple abstraction over streams of data (Guzzle 4+)",
+        "homepage": "http://guzzlephp.org/",
+        "keywords": [
+            "Guzzle",
+            "stream"
+        ]
+    },
+    {
+        "name": "guzzlehttp/guzzle",
+        "version": "4.1.1",
+        "version_normalized": "4.1.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/guzzle/guzzle.git",
+            "reference": "577a69ff7d0a24e9576a2885c3a7afbaadd51ec1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/577a69ff7d0a24e9576a2885c3a7afbaadd51ec1",
+            "reference": "577a69ff7d0a24e9576a2885c3a7afbaadd51ec1",
+            "shasum": ""
+        },
+        "require": {
+            "ext-json": "*",
+            "guzzlehttp/streams": "~1.0",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "ext-curl": "*",
+            "phpunit/phpunit": "~4.0",
+            "psr/log": "~1.0"
+        },
+        "suggest": {
+            "ext-curl": "Guzzle will use specific adapters if cURL is present"
+        },
+        "time": "2014-06-08 20:00:20",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "4.1.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "GuzzleHttp\\": "src/"
+            },
+            "files": [
+                "src/functions.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Dowling",
+                "email": "mtdowling@gmail.com",
+                "homepage": "https://github.com/mtdowling"
+            }
+        ],
+        "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
+        "homepage": "http://guzzlephp.org/",
+        "keywords": [
+            "client",
+            "curl",
+            "framework",
+            "http",
+            "http client",
+            "rest",
+            "web service"
         ]
     }
 ]

@@ -39,7 +39,7 @@ return array(
 	|
 	*/
 
-	'timezone' => 'GMT',
+	'timezone' => 'UTC',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -122,6 +122,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
+		'LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider'
 	),
 
 	/*
@@ -189,6 +190,9 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
+		// OAuth2 aliases
+		'AuthorizationServer' => 'LucaDegasperi\OAuth2Server\Facades\AuthorizationServerFacade',
+		'ResourceServer' => 'LucaDegasperi\OAuth2Server\Facades\ResourceServerFacade'
 	),
 
 );
