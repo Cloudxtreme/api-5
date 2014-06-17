@@ -26,25 +26,38 @@ define('LANGUAGE_NL', 'nl');
 	define ('MEMCACHE_PORT', 11211);
 	define ('MEMCACHE_PREFIX', 'cwdev');
 	
-	//define('DB_HOST', '127.0.0.1');
-	define('DB_HOST', '127.0.0.1:13306');
+	define('DB_PROTOCOL', 'mysql');
+	define('DB_HOST', '127.0.0.1');
 	define('DB_USERNAME', 'myuser');
 	define('DB_PASSWORD', 'myuser');
 	define('DB_NAME', 'cloudwalkers');
 	define('DB_PORT', '3307');
 	define('DB_CHARSET', 'utf8');
 	
-	define('DB_OAUTH2_ENGINE', 'sqlite3');
-	define('DB_OAUTH2_NAME', 'cloudwalkers.db');
-	define('DB_OAUTH2_HOST', '127.0.0.1');
-	define('DB_OAUTH2_DATABASE', 'C:\\dev_data\\SQLite\\Cloudwalkers\\cloudwalkers.db');
-	define('DB_OAUTH2_USERNAME', 'myuser');
-	define('DB_OAUTH2_PASSWORD', 'myuser');
-	define('DB_OAUTH2_PORT', '');
-	define('DB_OAUTH2_DSN', 'sqlite:C:/dev_data/SQLite/Cloudwalkers/'. DB_OAUTH2_NAME);
+	//OAUTH2 connection
+	define('DB_OAUTH2_ENGINE', 'mysql');
+	
+	if (DB_OAUTH2_ENGINE == 'sqlite3') {
+		define('DB_OAUTH2_PROTOCOL', 'sqlite');
+		define('DB_OAUTH2_HOST', '127.0.0.1');
+		define('DB_OAUTH2_PORT', '8787');
+		define('DB_OAUTH2_USERNAME', 'myuser');
+		define('DB_OAUTH2_PASSWORD', 'myuser');
+		define('DB_OAUTH2_NAME', 'cloudwalkers.db');
+		define('DB_OAUTH2_DATABASE', 'C:\\dev_data\\SQLite\\Cloudwalkers\\cloudwalkers.db');
+		define('DB_OAUTH2_DSN', DB_OAUTH2_PROTOCOL .':'. DB_OAUTH2_DATABASE);
+	} else {
+		define('DB_OAUTH2_PROTOCOL', 'mysql');
+		define('DB_OAUTH2_HOST', '127.0.0.1');
+		define('DB_OAUTH2_PORT', '3307');
+		define('DB_OAUTH2_USERNAME', 'myuser');
+		define('DB_OAUTH2_PASSWORD', 'myuser');
+		define('DB_OAUTH2_NAME', 'cloudwalkers');
+		define('DB_OAUTH2_DATABASE', 'cloudwalkers');
+		define('DB_OAUTH2_DSN', DB_OAUTH2_PROTOCOL .':dbname='.DB_OAUTH2_DATABASE.';host='.DB_OAUTH2_HOST);
+	}
+	
 	define('DB_OAUTH2_CHARSET', 'utf8');
-
-	//define('DB_OAUTH2_DSN', 'sqlite:dbname='.DB_OAUTH2_DATABASE.';host='.DB_OAUTH2_HOST);
 
 	define('DB_CUSTOM_LOG_MYSQL', true);
 	define('DB_CUSTOM_LOG_SQLITE', true);

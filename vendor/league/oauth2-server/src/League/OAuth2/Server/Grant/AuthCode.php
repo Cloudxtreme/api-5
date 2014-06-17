@@ -202,11 +202,14 @@ class AuthCode implements GrantTypeInterface {
         // Associate the auth code
         $authCodeId = $this->authServer->getStorage('session')->associateAuthCode($sessionId, $authCode, time() + $this->authTokenTTL);
 
-        // Associate the scopes to the auth code
-        foreach ($authParams['scopes'] as $scope) {
-            $this->authServer->getStorage('session')->associateAuthCodeScope($authCodeId, $scope['id']);
-        }
-
+		//Check if we have scopes
+		if (isset($authParams['scopes']) && is_array($authParams['scopes'])) {
+			// Associate the scopes to the auth code
+			foreach ($authParams['scopes'] as $scope) {
+				$this->authServer->getStorage('session')->associateAuthCodeScope($authCodeId, $scope['id']);
+			}
+		}
+	
         return $authCode;
     }
 

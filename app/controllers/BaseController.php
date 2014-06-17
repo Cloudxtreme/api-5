@@ -1,6 +1,7 @@
 <?php
 
-class BaseController extends Controller {
+class BaseController extends Controller 
+{
 
 public $config_folder = "";
 public $config_file = "";
@@ -9,6 +10,8 @@ public $config_file = "";
 	{
 		// Define the config folder
 		$this->config_folder = str_replace("\\", "/", dirname(__FILE__) ."/../config");
+		
+		//include_once dirname(__FILE__) .'/../../../app/config/mutable-local.php';
 		
 		// Check if we have a development configuration file
 		if (file_exists($this->config_folder . "/mutable-local.php")) {
@@ -23,18 +26,12 @@ public $config_file = "";
 			
 		}
 		
-		// Include configuration settings
+		//die($this->config_file);
+		
+		// Include configuration settings /app/config/{ mutable.php || mutable-local.php }
 		require_once $this->config_file;
 		
 		
-		/*
-		// API request
-		$this->authserver = new League\OAuth2\Server\Authorization(
-                 new League\OAuth2\Server\Storage\PDO\Client($db),
-                 new League\OAuth2\Server\Storage\PDO\Session($db),
-                 new League\OAuth2\Server\Storage\PDO\Scope($db)
-         );
-		*/
 	}
 
 

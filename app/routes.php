@@ -153,6 +153,14 @@ Route::group(['prefix' => 'api'], function()
 // DEMO - OAUTH2 Authentication
 // ----------------------------------------------------------------------------
 
+Route::group(['prefix' => 'demo', 'namespace' => 'Demo'], function()
+{
+	//GET => /demo/oauth2/authorize
+	Route::get('oauth2/authorize', 'DemoController@getOauth2Authorize');
+});
+
+//GET => /demo/
+//GET => /demo/signin
 Route::controller('demo', 'Demo\\DemoController');
 
 // ----------------------------------------------------------------------------
