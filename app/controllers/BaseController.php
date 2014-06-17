@@ -31,7 +31,6 @@ public $config_file = "";
 		// Include configuration settings /app/config/{ mutable.php || mutable-local.php }
 		require_once $this->config_file;
 		
-		
 	}
 
 

@@ -33,11 +33,11 @@ class DemoController
 	public function __construct() {
 		
 		@session_start();
-		ini_set('display_errors', true);
-		error_reporting(-1);
+		//ini_set('display_errors', true);
+		//error_reporting(-1);
 		
 		// --------------------------------------------------------------------
-		// LOAD PARENT CONFIGURATION
+		// LOAD CONFIGURATION FROM BASE CONTROLLER
 		// --------------------------------------------------------------------
 		parent::__construct();
 		
@@ -356,6 +356,39 @@ class DemoController
 		//  approved it so show them a form
 		return View::make('/demo/oauth-authorize', $params);
 	}
+	
+	public function getAccessToken()
+	{
+		try {
+	
+			// Tell the auth server to issue an access token
+			$response = $this->authserver->issueAccessToken();
+	
+		} catch (League\OAuth2\Server\Exception\ClientException $e) {
+	
+			// Throw an exception because there was a problem with the client's request
+			$response = array(
+					'error' =>  $this->authserver->getExceptionType($e->getCode()),
+					'error_description' => $e->getMessage()
+			);
+	
+			// Set the correct header
+			header($this->authserver->getExceptionHttpHeaders($this->authserver->getExceptionType($e->getCode())));
+	
+		} catch (Exception $e) {
+	
+			// Throw an error when a non-library specific exception has been thrown
+			$response = array(
+					'error' =>  'undefined_error',
+					'error_description' => $e->getMessage()
+			);
+		}
+	
+		header('Content-type: application/json');
+		echo json_encode($response);
+	}
+	
+	
 	
 	public function missingMethod($parameters = array())
 	{
