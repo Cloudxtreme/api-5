@@ -158,7 +158,11 @@ Route::group(['prefix' => 'demo', 'namespace' => 'Demo'], function()
 	//GET => /demo/oauth2/authorize
 	Route::get('oauth2/authorize', 'DemoController@getOauth2Authorize');
 	
+	//GET => /demo/access_token
 	Route::get('access_token', 'DemoController@getAccessToken');
+	
+	//GET => /demo/test_user
+	Route::get('test_user', 'DemoController@getTestUser');
 });
 
 //GET => /demo/

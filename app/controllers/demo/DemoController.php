@@ -27,8 +27,10 @@ class DemoController
 	|
 	*/
 	
-	public $db = null; // Database connection
-	public $db_oauth2 = null; // OAuth2 connection
+	public $db = null;         // Database connection
+	public $db_oauth2 = null;  // OAuth2 connection
+	public $authserver = null; // OAuth2 server object
+	
 	
 	public function __construct() {
 		
@@ -101,6 +103,34 @@ class DemoController
 		// Enable the authorization code grant type
 		$this->authserver->addGrantType(new \League\OAuth2\Server\Grant\AuthCode($this->authserver));
 		
+		
+		$server = $this->authserver;
+		
+		$checkToken = function () use ($server) {
+	
+		    return function() use ($server)
+		    {
+		        // Test for token existance and validity
+		        try {
+		            $server->isValid();
+		        }
+				// The access token is missing or invalid...
+				catch (League\OAuth2\Server\Exception\InvalidAccessTokenException $e)
+				{
+					$app = \Slim\Slim::getInstance();
+					$res = $app->response();
+					$res['Content-Type'] = 'application/json';
+					$res->status(403);
+		
+					$res->body(json_encode(array(
+							'error' =>  $e->getMessage()
+					)));
+				}
+			};
+		};
+		
+		
+		
 	}
 	
 	public function getIndex()
@@ -117,6 +147,59 @@ class DemoController
 		$data = 'Hello, back home!';
 	
 		return $data;
+	}
+	
+	public function getTestUser(){
+		
+		//$user_model = new UserModel();
+		
+		//$user = $user_model->getUser($id);
+		
+		$user = array(
+			'user_id'   => 1,
+			'firstname' => 'Roberto',
+			'lastname'  => 'S'
+		);
+		
+		if ( ! $user)
+		{
+			$res = $app->response();
+			$res->status(404);
+			$res['Content-Type'] = 'application/json';
+			$res->body(json_encode(array(
+					'error' => 'User not found'
+			)));
+		}
+		
+		else
+		{
+			// Basic response
+			$response = array(
+					'error' => null,
+					'result'    =>  array(
+							'user_id'   =>  $user['user_id'],
+							'firstname' =>  $user['firstname'],
+							'lastname'  =>  $user['lastname']
+					)
+			);
+		
+			// If the acess token has the "user.contact" access token include
+			//  an email address and phone numner
+			if ($this->authserver->hasScope('user.contact'))
+			{
+				$response['result']['email'] = $user['email'];
+				$response['result']['phone'] = $user['phone'];
+			}
+		
+			// Respond
+			$res = $app->response();
+			$res['Content-Type'] = 'application/json';
+		
+			$res->body(json_encode($response));
+		}
+		
+		
+		return "Test User";
 	}
 	
 
