@@ -117,14 +117,14 @@ class DemoController
 				// The access token is missing or invalid...
 				catch (League\OAuth2\Server\Exception\InvalidAccessTokenException $e)
 				{
-					$app = \Slim\Slim::getInstance();
-					$res = $app->response();
-					$res['Content-Type'] = 'application/json';
-					$res->status(403);
+					//$app = \Slim\Slim::getInstance();
+					//$res = $app->response();
+					//$res['Content-Type'] = 'application/json';
+					//$res->status(403);
 		
-					$res->body(json_encode(array(
-							'error' =>  $e->getMessage()
-					)));
+					//$res->body(json_encode(array(
+							//'error' =>  $e->getMessage()
+					//)));
 				}
 			};
 		};
@@ -185,17 +185,19 @@ class DemoController
 		
 			// If the acess token has the "user.contact" access token include
 			//  an email address and phone numner
-			if ($this->authserver->hasScope('user.contact'))
+			/*if ($this->authserver->hasScope('user.contact'))
 			{
 				$response['result']['email'] = $user['email'];
 				$response['result']['phone'] = $user['phone'];
-			}
+			}*/
 		
 			// Respond
-			$res = $app->response();
-			$res['Content-Type'] = 'application/json';
+			//$res = $app->response();
+			//$res['Content-Type'] = 'application/json';
 		
-			$res->body(json_encode($response));
+			//$res->body(json_encode($response));
+			
+			
 		}
 		
 		
@@ -320,7 +322,7 @@ class DemoController
 
 				//die("USER DETAILS: $u_id, $u_email");
 				
-				if ("$u_id" == '' || $u_email == '') {
+				if ("$u_id" == '' || "$u_email" == '') {
 					Session::put('user_id', null);
 					Session::put('user_email', null);
 					

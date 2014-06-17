@@ -52,8 +52,8 @@ define('LANGUAGE_NL', 'nl');
 		define('DB_OAUTH2_PORT', '3307');
 		define('DB_OAUTH2_USERNAME', 'myuser');
 		define('DB_OAUTH2_PASSWORD', 'myuser');
-		define('DB_OAUTH2_NAME', 'cloudwalkers');
-		define('DB_OAUTH2_DATABASE', 'cloudwalkers');
+		define('DB_OAUTH2_NAME', 'cloudwalkers_oauth2');
+		define('DB_OAUTH2_DATABASE', 'cloudwalkers_oauth2');
 		define('DB_OAUTH2_DSN', DB_OAUTH2_PROTOCOL .':dbname='.DB_OAUTH2_DATABASE.';host='.DB_OAUTH2_HOST);
 	}
 	

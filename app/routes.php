@@ -161,13 +161,37 @@ Route::group(['prefix' => 'demo', 'namespace' => 'Demo'], function()
 	//GET => /demo/access_token
 	Route::get('access_token', 'DemoController@getAccessToken');
 	
-	//GET => /demo/test_user
-	Route::get('test_user', 'DemoController@getTestUser');
+	// Authenticate request /demo/test_user
+	Route::get('test_user', array('before' => 'check_oauth', 'uses' => 'DemoController@getTestUser'));
+	
 });
+
+// before "auth"
+Route::filter("check_oauth", function()
+{
+	// TODO: Check token, to be able to access API endpoint
+	
+	/*
+	if (Input::server("token") !== $user->token)
+	{
+		App::abort(400, "Invalid token");
+	}*/
+});
+
+
+//GET => /demo/test_user
+//Route::get(['prefix' => 'test_user', 'namespace' => 'Demo', 'before' => 'auth'], 'DemoController@getTestUser');
+//Route::get(['prefix' => 'test_user', 'namespace' => 'Demo', 'before' => 'auth'], 'DemoController@getTestUser');
+
+//Route::group(['prefix' => 'demo/test_user', 'namespace' => 'Demo', 'before' => 'auth'], function() {
+	//DemoController->getTestUser();
+//});
+
+
 
 //GET => /demo/
 //GET => /demo/signin
-Route::controller('demo', 'Demo\\DemoController');
+Route::controller('demo', 'demo\\DemoController');
 
 // ----------------------------------------------------------------------------
 // Tests
