@@ -36,7 +36,7 @@ Route::group(['prefix' => 'oauth2'], function()
 {
 	
 	//echo "GROUP OAUTH";
-	
+	/*
 	App::singleton('oauth2', function() {
 	
 		$storage = new OAuth2\Storage\Pdo(array('dsn' => 'mysql:dbname='. DB_NAME .';host='. DB_HOST, 'username' => DB_USERNAME, 'password' => DB_PASSWORD));
@@ -47,6 +47,7 @@ Route::group(['prefix' => 'oauth2'], function()
 	
 		return $server;
 	});
+	*/
 	
 	//App::singleton('oauth2')->
 	
@@ -55,7 +56,7 @@ Route::group(['prefix' => 'oauth2'], function()
 	//Route::get('authorize/web', 'OAuth2Controller@getAuthorizeWeb');
 	
 	//GET => /oauth2/authorize
-	//Route::get('authorize', 'OAuth2Controller@getAuthorize');
+	Route::get('authorize', 'OAuth2Controller@getAuthorize');
 	
 	//Route::get('authorize', array('before' => 'check-authorization-params|auth', 'OAuth2Controller@getAuthorizes'));
 	
@@ -64,12 +65,19 @@ Route::group(['prefix' => 'oauth2'], function()
 	// ----------------------------------------------------------------------------
 	Route::post('access_token', 'OAuth2Controller@postAccessToken');
 	
+	/*
+	Route::get('authorize', array('before' => 'check-authorization-params', function()
+	{
+	
+	}));
+	*/
+	
 	
 	// ----------------------------------------------------------------------------
 	// 
 	// ----------------------------------------------------------------------------
 	
-	Route::get('authorize', array('before' => 'check-authorization-params|auth', function()
+	/*Route::get('authorize', array('before' => 'check-authorization-params|auth', function()
 	{
 		// get the data from the check-authorization-params filter
 		$params = Session::get('authorize-params');
@@ -79,12 +87,13 @@ Route::group(['prefix' => 'oauth2'], function()
 	
 		// display the authorization form
 		return View::make('authorization-form', array('params' => $params));
-	}));
+	}));*/
+	
 	
 	// ----------------------------------------------------------------------------
 	//
 	// ----------------------------------------------------------------------------
-	
+	/*
 	Route::post('authorize', array('before' => 'check-authorization-params|auth|csrf', function()
 	{
 		// get the data from the check-authorization-params filter
@@ -110,7 +119,7 @@ Route::group(['prefix' => 'oauth2'], function()
 			return Redirect::to(AuthorizationServer::makeRedirectWithError($params));
 		}
 	}));
-	
+	*/
 	
 	/*
 	Route::post('oauth/access_token', function()
@@ -162,9 +171,27 @@ Route::group(['prefix' => 'demo', 'namespace' => 'Demo'], function()
 	Route::get('access_token', 'DemoController@getAccessToken');
 	
 	// Authenticate request /demo/test_user
-	Route::get('test_user', array('before' => 'check_oauth', 'uses' => 'DemoController@getTestUser'));
+	//Route::get('test_user', array('before' => 'check_oauth', 'uses' => 'DemoController@getTestUser'));
+	//Route::get('test_user', array('before' => 'check-authorization-params', 'uses' => 'DemoController@getTestUser'));
+
+	// POST & GET => /demo/test_user
+	Route::any('test_user', array('before' => 'check-authorization-params', 'uses' => 'DemoController@getTestUser'));
 	
 });
+
+//Route::filter('check-authorization-params', 'demo\\CheckAuthorizationParamsFilter');
+
+//Route::filter('check-authorization-params', '\\League\\OAuth2\\Server\\Filters\\CheckAuthorizationParamsFilter');
+
+// filter to check if the auth code grant type params are provided
+//Route::filter('check-authorization-params', 'LucaDegasperi\OAuth2Server\Filters\CheckAuthorizationParamsFilter');
+
+// make sure an endpoint is accessible only by authrized members eventually with specific scopes
+//Route::filter('oauth', 'LucaDegasperi\OAuth2Server\Filters\OAuthFilter');
+
+// make sure an endpoint is accessible only by a specific owner
+//Route::filter('oauth-owner', 'LucaDegasperi\OAuth2Server\Filters\OAuthOwnerFilter');
+
 
 // before "auth"
 Route::filter("check_oauth", function()
@@ -202,8 +229,10 @@ Route::group(['prefix' => 'test', 'namespace' => 'Test'], function()
 	//GET => /test/oauth2
 	Route::get('oauth2', 'TestOAuth2Controller@test_oauth2');
 	
+	Route::get('flow', 'TestOAuth2Controller@test_flow');
+	
 	//GET => /test/oauth2auth
-	Route::get('oauth2auth', 'TestOAuth2Controller@test_oauth2_authorize');
+	Route::get('oauth2authorize', 'TestOAuth2Controller@test_oauth2_authorize');
 });
 
 

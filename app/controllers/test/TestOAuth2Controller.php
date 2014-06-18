@@ -4,6 +4,7 @@
 
 namespace Test;
 
+use Exception;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ClientException;
 
@@ -213,6 +214,75 @@ class TestOAuth2Controller extends \BaseController {
 		*/
 	
 	
+	}
+	
+	public function test_flow() {
+		
+		$provider = new \League\OAuth2\Client\Provider\Cloudwalkers (array(
+			'clientId'     => 'I6Lh72kTItE6y29Ig607N74M7i21oyTo',
+			'clientSecret' => 'dswREHV2YJjF7iL5Zr5ETEFBwGwDQYjQ',
+			'redirectUri'  => 'http://cloudwalkers-api.local/demo/backhome'
+		));
+		
+		if ( ! isset($_GET['code'])) {
+		
+			die("We dont have a CODE, going to -> ". $provider->getAuthorizationUrl());
+			
+			// If we don't have an authorization code then get one
+			header('Location: '. $provider->getAuthorizationUrl());
+			
+			exit;
+		
+		} else {
+		
+			// Try to get an access token (using the authorization code grant)
+			$token = $provider->getAccessToken('authorization_code', [
+					'code' => $_GET['code']
+					]);
+		
+			// If you are using Eventbrite you will need to add the grant_type parameter (see below)
+			$token = $provider->getAccessToken('authorization_code', [
+					'code' => $_GET['code'],
+					'grant_type' => 'authorization_code'
+					]);
+		
+			// Optional: Now you have a token you can look up a users profile data
+			try {
+		
+				// We got an access token, let's now get the user's details
+				$userDetails = $provider->getUserDetails($token);
+		
+				// Use these details to create a new profile
+				printf('Hello %s!', $userDetails->firstName);
+		
+			} catch (Exception $e) {
+		
+				// Failed to get user details
+				//exit('Oh dear...');
+			}
+		
+			/*
+			// Use this to interact with an API on the users behalf
+			echo $token->accessToken;
+		
+			// Use this to get a new access token if the old one expires
+			echo $token->refreshToken;
+		
+			// Number of seconds until the access token will expire, and need refreshing
+			echo $token->expires;
+			*/
+		}
+	}	
+	
+	public function test_refresh () {
+		$provider = new League\OAuth2\Client\Provider\Cloudwalkers (array(
+			'clientId'     => 'I6Lh72kTItE6y29Ig607N74M7i21oyTo',
+			'clientSecret' => 'dswREHV2YJjF7iL5Zr5ETEFBwGwDQYjQ',
+			'redirectUri'  => 'http://cloudwalkers-api.local/demo/backhome'
+		));
+		
+		$grant = new \League\OAuth2\Client\Grant\RefreshToken();
+		$token = $provider->getAccessToken($grant, ['refresh_token' => $refreshToken]);
 	}
 	
 	public function missingMethod($parameters = array())

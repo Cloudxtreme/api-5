@@ -9,9 +9,7 @@ use \Redirect as Redirect;
 use \League\OAuth2\Server\Util\RedirectUri as RedirectUri;
 use \League\OAuth2\Server\Storage\PDO\Db as DBOauth;
 
-class DemoController 
-	extends \BaseController 
-	//implements \BaseController 
+class DemoController extends \BaseController 
 {
 
 	/*
@@ -42,8 +40,6 @@ class DemoController
 		// LOAD CONFIGURATION FROM BASE CONTROLLER
 		// --------------------------------------------------------------------
 		parent::__construct();
-		
-		//include_once dirname(__FILE__) .'/../../../app/config/mutable-local.php';
 		
 		// --------------------------------------------------------------------
 		// MYSQL CONNECTION
@@ -129,6 +125,7 @@ class DemoController
 			};
 		};
 		
+		$checkToken();
 		
 		
 	}
@@ -201,7 +198,7 @@ class DemoController
 		}
 		
 		
-		return "Test User";
+		return "DemoController @ Test User";
 	}
 	
 
@@ -282,43 +279,54 @@ class DemoController
 					throw new \Exception('Please enter your password.');
 				}
 	
-				//die("$email, $password");
+// 				//die("$email, $password");
 				
-				// Verify the user's username and password
-				// Set the user's ID to a session
+// 				// Verify the user's username and password
+// 				// Set the user's ID to a session
 
-				// But first we reset session
-				//Session::put('user_id', null);
+// 				// But first we reset session
+// 				//Session::put('user_id', null);
 				
-				//$email = $this->db->escape($email);
-				//$password = $this->db->escape($password);
+// 				//$email = $this->db->escape($email);
+// 				//$password = $this->db->escape($password);
 		
-				$sql = "SELECT
-							u.u_id as u_id,
-							u.u_email as u_email
-						FROM
-							users u
-						WHERE
-							u.u_email = :email AND 
-							u.u_password = MD5(CONCAT(:password, u.u_salt));";
+// 				$sql = "SELECT
+// 							u.u_id as u_id,
+// 							u.u_email as u_email
+// 						FROM
+// 							users u
+// 						WHERE
+// 							u.u_email = :email AND 
+// 							u.u_password = MD5(CONCAT(:password, u.u_salt));";
 				
-				$params = array(
-					':email' => $email,
-					':password' => $password
+// 				$params = array(
+// 					':email' => $email,
+// 					':password' => $password
 						
-				);
+// 				);
 				
-				//Query user details
-				$rows = $this->db->queryAndFetchAll($sql, $params);
+// 				//Query user details
+// 				$rows = $this->db->queryAndFetchAll($sql, $params);
 				
-				// Clear sensitive information
-				unset($email, $password, $params);
+// 				// Clear sensitive information
+// 				unset($email, $password, $params);
 				
-				// Check if the row exists and is valid
-				$row = isset($rows[0]) && is_array($rows[0]) ? $rows[0] : null;
+// 				// Check if the row exists and is valid
+// 				$row = isset($rows[0]) && is_array($rows[0]) ? $rows[0] : null;
 				
-				$u_id = isset($row['u_id']) ? $row['u_id'] : '';
-				$u_email = isset($row['u_email']) ? $row['u_email'] : '';
+// 				$u_id = isset($row['u_id']) ? $row['u_id'] : '';
+// 				$u_email = isset($row['u_email']) ? $row['u_email'] : '';
+				
+				
+				// ------------------------------------------------------------------------------------------------
+				// Avoid connection to database, because this is just the API for authentication and authorization 
+				// ------------------------------------------------------------------------------------------------
+				// Populate a user "hard-coded", as a quick example (above code works, but the "oauth2" database
+				// does not have the "users" table)
+				$u_id    = 1;
+				$u_email = "robertos@agap2.pt";
+				// ------------------------------------------------------------------------------------------------
+				
 
 				//die("USER DETAILS: $u_id, $u_email");
 				

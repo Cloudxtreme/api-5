@@ -1,5 +1,7 @@
 <?php
 
+use \League\OAuth2\Server\Storage\PDO\Db as DBOauth;
+
 class OAuth2Controller extends \BaseController {
 
 	/*
@@ -15,7 +17,49 @@ class OAuth2Controller extends \BaseController {
 	|
 	*/
 	
-	public $restful = true;
+	//public $restful = true;
+	
+	public $db_oauth2 = null;
+	
+	public function __construct()
+	{
+		// --------------------------------------------------------------------
+		// LOAD CONFIGURATION FROM BASE CONTROLLER
+		// --------------------------------------------------------------------
+		parent::__construct();
+		
+		// --------------------------------------------------------------------
+		// MYSQL CONNECTION
+		// --------------------------------------------------------------------
+		
+		// Initiate the request handler which deals with $_GET, $_POST, etc
+		$request = new \League\OAuth2\Server\Util\Request();
+	
+		// Initiate a new database connection
+		//$db = new League\OAuth2\Server\Storage\PDO\Db('mysql://user:pass@localhost/oauth');
+		
+		// Initiate a new database connection
+		$dsn = DB_OAUTH2_PROTOCOL . ':host='. DB_OAUTH2_HOST .';port='. DB_OAUTH2_PORT .';dbname='. DB_OAUTH2_NAME;
+		$username = DB_OAUTH2_USERNAME;
+		$password = DB_OAUTH2_PASSWORD;
+		
+		$options = null;
+		
+		//die($dsn);
+		
+		$this->db_oauth2 = new DBOauth($dsn, $username, $password, $options);
+	
+		// Create the auth server, the three parameters passed are references
+		//  to the storage models
+		$this->authserver = new League\OAuth2\Server\Authorization(
+				new ClientModel,
+				new SessionModel,
+				new ScopeModel
+		);
+	
+		// Enable the authorization code grant type
+		$this->authserver->addGrantType(new League\OAuth2\Server\Grant\AuthCode());
+	}
 
 	public function getIndex()
 	{
@@ -43,7 +87,10 @@ class OAuth2Controller extends \BaseController {
 	
 	public function postAccessToken()
 	{
-		return AuthorizationServer::performAccessTokenFlow();
+		
+		
+		
+		//return AuthorizationServer::performAccessTokenFlow();
 		
 		//return '» POST OAUTH2 Access Token';
 	}
