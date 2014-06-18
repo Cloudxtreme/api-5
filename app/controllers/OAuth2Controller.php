@@ -2,6 +2,11 @@
 
 use \League\OAuth2\Server\Storage\PDO\Db as DBOauth;
 
+//new ClientModel, new SessionModel, new ScopeModel
+use \League\OAuth2\Server\Storage\PDO\Client as ClientModel;
+use \League\OAuth2\Server\Storage\PDO\Session as ClientSession;
+use \League\OAuth2\Server\Storage\PDO\Scope as ClientScope;
+
 class OAuth2Controller extends \BaseController {
 
 	/*
@@ -45,10 +50,29 @@ class OAuth2Controller extends \BaseController {
 		
 		$options = null;
 		
-		//die($dsn);
+		// --------------------------------------------------------------------
+		// OAUTH2
+		// --------------------------------------------------------------------
 		
-		$this->db_oauth2 = new DBOauth($dsn, $username, $password, $options);
-	
+		// Initiate the request handler which deals with $_GET, $_POST, etc
+		$request = new \League\OAuth2\Server\Util\Request();
+		
+		/*
+		// Create the auth server, the three parameters passed are references
+		// to the storage models
+		$this->authserver = new \League\OAuth2\Server\Authorization(
+				//new ClientModel, new SessionModel, new ScopeModel
+				new \League\OAuth2\Server\Storage\PDO\Client,
+				new \League\OAuth2\Server\Storage\PDO\Session,
+				new \League\OAuth2\Server\Storage\PDO\Scope
+		);
+		
+		// Enable the authorization code grant type
+		//$this->authserver->addGrantType(new \League\OAuth2\Server\Grant\AuthCode($this->authserver));
+		//$this->authserver->addGrantType();
+		 */
+		
+		
 		// Create the auth server, the three parameters passed are references
 		//  to the storage models
 		$this->authserver = new League\OAuth2\Server\Authorization(
@@ -56,9 +80,12 @@ class OAuth2Controller extends \BaseController {
 				new SessionModel,
 				new ScopeModel
 		);
-	
+		
 		// Enable the authorization code grant type
 		$this->authserver->addGrantType(new League\OAuth2\Server\Grant\AuthCode());
+		
+		$server = $this->authserver;
+		
 	}
 
 	public function getIndex()
