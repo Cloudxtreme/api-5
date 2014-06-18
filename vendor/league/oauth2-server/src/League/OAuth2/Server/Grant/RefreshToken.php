@@ -24,6 +24,8 @@ use League\OAuth2\Server\Storage\ScopeInterface;
  */
 class RefreshToken implements GrantTypeInterface {
 
+    use GrantTrait;
+
     /**
      * Grant identifier
      * @var string
@@ -59,44 +61,6 @@ class RefreshToken implements GrantTypeInterface {
      * @var boolean
      */
     protected $rotateRefreshTokens = false;
-
-    /**
-     * Constructor
-     * @param Authorization $authServer Authorization server instance
-     * @return void
-     */
-    public function __construct(Authorization $authServer)
-    {
-        $this->authServer = $authServer;
-    }
-
-    /**
-     * Return the identifier
-     * @return string
-     */
-    public function getIdentifier()
-    {
-        return $this->identifier;
-    }
-
-    /**
-     * Return the response type
-     * @return string
-     */
-    public function getResponseType()
-    {
-        return $this->responseType;
-    }
-
-    /**
-     * Override the default access token expire time
-     * @param int $accessTokenTTL
-     * @return void
-     */
-    public function setAccessTokenTTL($accessTokenTTL)
-    {
-        $this->accessTokenTTL = $accessTokenTTL;
-    }
 
     /**
      * Set the TTL of the refresh token

@@ -91,7 +91,7 @@ class Request implements RequestInterface
         }
 
         return $this->normalizeHeaders($headers);
-    }
+   }
 
     protected function getPropertyValue($property, $index = null, $default = null)
     {

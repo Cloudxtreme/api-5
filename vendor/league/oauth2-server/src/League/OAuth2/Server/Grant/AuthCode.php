@@ -24,6 +24,8 @@ use League\OAuth2\Server\Storage\ScopeInterface;
  */
 class AuthCode implements GrantTypeInterface {
 
+    use GrantTrait;
+
     /**
      * Grant identifier
      * @var string
@@ -53,44 +55,6 @@ class AuthCode implements GrantTypeInterface {
      * @var integer
      */
     protected $authTokenTTL = 600;
-
-    /**
-     * Constructor
-     * @param Authorization $authServer Authorization server instance
-     * @return void
-     */
-    public function __construct(Authorization $authServer)
-    {
-        $this->authServer = $authServer;
-    }
-
-    /**
-     * Return the identifier
-     * @return string
-     */
-    public function getIdentifier()
-    {
-        return $this->identifier;
-    }
-
-    /**
-     * Return the response type
-     * @return string
-     */
-    public function getResponseType()
-    {
-        return $this->responseType;
-    }
-
-    /**
-     * Override the default access token expire time
-     * @param int $accessTokenTTL
-     * @return void
-     */
-    public function setAccessTokenTTL($accessTokenTTL)
-    {
-        $this->accessTokenTTL = $accessTokenTTL;
-    }
 
     /**
      * Override the default access token expire time
@@ -202,14 +166,11 @@ class AuthCode implements GrantTypeInterface {
         // Associate the auth code
         $authCodeId = $this->authServer->getStorage('session')->associateAuthCode($sessionId, $authCode, time() + $this->authTokenTTL);
 
-		//Check if we have scopes
-		if (isset($authParams['scopes']) && is_array($authParams['scopes'])) {
-			// Associate the scopes to the auth code
-			foreach ($authParams['scopes'] as $scope) {
-				$this->authServer->getStorage('session')->associateAuthCodeScope($authCodeId, $scope['id']);
-			}
-		}
-	
+        // Associate the scopes to the auth code
+        foreach ($authParams['scopes'] as $scope) {
+            $this->authServer->getStorage('session')->associateAuthCodeScope($authCodeId, $scope['id']);
+        }
+
         return $authCode;
     }
 
@@ -279,7 +240,7 @@ class AuthCode implements GrantTypeInterface {
 
         $response = array(
             'access_token'  =>  $accessToken,
-            'token_type'    =>  'bearer',
+            'token_type'    =>  'Bearer',
             'expires'       =>  $accessTokenExpires,
             'expires_in'    =>  $accessTokenExpiresIn
         );
