@@ -280,6 +280,21 @@ class TestOAuth2Controller extends \BaseController {
 		
 		echo "ACCESS TOKEN: $token<br />\n";
 		
+		$res = $client->get('http://cloudwalkers-api.local/api/v2/accounts', [
+			'headers' => [
+				'Authorization' => 'Bearer '. $token
+			]
+		]);
+		
+		$response_api = $res->getBody();
+		
+		//$token = isset($response_api['access_token']) ? $response_api['access_token'] : null;
+		
+		//echo "API CALL: $response_api<br />\n";
+		
+		echo "API CALL: <br />\n";
+		
+		echo var_export($response_api);
 		
 		
 		//echo $res->getBody();                 // {"type":"User"...'
