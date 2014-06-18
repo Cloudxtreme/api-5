@@ -3,12 +3,15 @@
 namespace League\OAuth2\Server\Storage\PDO;
 
 use League\OAuth2\Server\Storage\ClientInterface;
+use \League\OAuth2\Server\Storage\PDO\Db as DBOauth;
 
 class Client implements ClientInterface
 {
     public function getClient($clientId, $clientSecret = null, $redirectUri = null, $grantType = null)
     {
-        $db = \ezcDbInstance::get();
+        //$db = \ezcDbInstance::get();
+        
+    	$db = new DBOauth();
 
         if ( ! is_null($redirectUri) && is_null($clientSecret)) {
             $stmt = $db->prepare('SELECT oauth_clients.id, oauth_clients.secret, oauth_client_endpoints.redirect_uri, oauth_clients.name FROM oauth_clients LEFT JOIN oauth_client_endpoints ON oauth_client_endpoints.client_id = oauth_clients.id WHERE oauth_clients.id = :clientId AND oauth_client_endpoints.redirect_uri = :redirectUri');

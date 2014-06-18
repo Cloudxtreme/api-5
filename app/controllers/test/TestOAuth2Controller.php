@@ -36,7 +36,7 @@ class TestOAuth2Controller extends \BaseController {
 			$res = $client->post('http://cloudwalkers-api.local/oauth2/access_token', [
 				'body' => [
 					'grant_type' => 'client_credentials',
-					'client_id' => 'I6Lh72kTItE6y29Ig607N74M7i21oyTo',
+					'client_id' => '1',
 					'client_secret' => 'dswREHV2YJjF7iL5Zr5ETEFBwGwDQYjQ',
 					'state' => 0,
 					'scope' => 'user'
@@ -152,6 +152,7 @@ class TestOAuth2Controller extends \BaseController {
 	
 	public function test_oauth2_authorize()
 	{
+	
 		$res = null;
 	
 		$client = new \GuzzleHttp\Client();
@@ -166,17 +167,21 @@ class TestOAuth2Controller extends \BaseController {
 		password=the_password&
 		scope=scope1,scope2&
 		state=123456789
+		
+		
+		'client_id' => 'I6Lh72kTItE6y29Ig607N74M7i21oyTo',
 		*/
 		$res = $client->post('http://cloudwalkers-api.local/oauth2/authorize', [
 			'body' => [
 			'grant_type' => 'client_credentials',
-			'client_id' => 'I6Lh72kTItE6y29Ig607N74M7i21oyTo',
+			'client_id' => '1',
 			'client_secret' => 'dswREHV2YJjF7iL5Zr5ETEFBwGwDQYjQ',
 			'state' => 0,
 			'scope' => 'user'
 			]
 		]);
 	
+		
 		/*} catch (RequestException $e) {
 		 //Catch the invalid login
 		echo $e->getRequest();
@@ -192,7 +197,8 @@ class TestOAuth2Controller extends \BaseController {
 		//} catch (\Exception $e) {
 		//}
 	
-		if (empty($res)) {
+		
+		/*if (empty($res)) {
 			echo json_encode(array('error'=>'Invalid request'));
 			return;
 		} else {
@@ -203,8 +209,13 @@ class TestOAuth2Controller extends \BaseController {
 				return;
 			}
 		}
+		*/
 	
-	
+		//echo $res->getBody();
+		
+		//echo json_encode(var_export($res));
+		
+		echo json_encode($res->json());
 			
 		/*
 		 echo $res->getStatusCode();           // 200
@@ -216,17 +227,98 @@ class TestOAuth2Controller extends \BaseController {
 	
 	}
 	
-	public function test_flow() {
+	public function test_client_flow() {
+		
+		$res = null;
+		
+		$client = new \GuzzleHttp\Client();
+		
+		try 
+		{
+			$url = 'http://cloudwalkers-api.local/oauth2/authorize'.
+				'?grant_type=authorization_code'.
+				'&client_id=1'.
+				'&client_secret=dswREHV2YJjF7iL5Zr5ETEFBwGwDQYjQ'.
+				'&state=0'.
+				'&scope=user'.
+				'&response_type=code'.
+				'&redirect_uri='. urlencode('http://cloudwalkers-api.local/demo/backhome')
+				;
+		
+			$res = $client->get($url);
+			
+		} catch (Exception $e) {
+			
+			echo "FLOW ERROR: ". $e->getMessage();
+			
+		}
+		
+		$response_code = $res->json();
+		
+		//echo json_encode($res->json());
+		
+		$code = isset($response_code['code']) ? $response_code['code'] : null;
+		
+		echo "TOKEN CODE: $code<br />\n";
+		
+		$res = $client->post('http://cloudwalkers-api.local/oauth2/access_token', [
+			'body' => [
+				'grant_type' => 'authorization_code',
+				'code' => $code,
+				'client_id' => '1',
+				'client_secret' => 'dswREHV2YJjF7iL5Zr5ETEFBwGwDQYjQ',
+				//'state' => 0,
+				//'scope' => 'user',
+				'redirect_uri' => 'http://cloudwalkers-api.local/demo/backhome'
+				//'redirect_uri' => urlencode('http://cloudwalkers-api.local/demo/backhome')
+			]
+		]);
+		
+		$response_token = $res->json();
+		
+		$token = isset($response_token['access_token']) ? $response_token['access_token'] : null;
+		
+		echo "ACCESS TOKEN: $token<br />\n";
+		
+		
+		
+		//echo $res->getBody();                 // {"type":"User"...'
+		
+		//echo var_export($res);
+		
+		//echo var_export($code);
+		
+				
+		//echo $res;
+				
+		//echo json_encode($res->json());
+		
+		//var_export($res);
+		
+		die('<br>DONE...');
+		
+		return;
+		
+		$res = $client->post('http://cloudwalkers-api.local/oauth2/authorize', [
+				'body' => [
+				'grant_type' => 'authorization_code',
+				'client_id' => '1',
+				'client_secret' => 'dswREHV2YJjF7iL5Zr5ETEFBwGwDQYjQ',
+				'state' => 0,
+				'scope' => 'user'
+				]
+				]);
+		
 		
 		$provider = new \League\OAuth2\Client\Provider\Cloudwalkers (array(
-			'clientId'     => 'I6Lh72kTItE6y29Ig607N74M7i21oyTo',
+			'clientId'     => '1',
 			'clientSecret' => 'dswREHV2YJjF7iL5Zr5ETEFBwGwDQYjQ',
 			'redirectUri'  => 'http://cloudwalkers-api.local/demo/backhome'
 		));
 		
 		if ( ! isset($_GET['code'])) {
 		
-			die("We dont have a CODE, going to -> ". $provider->getAuthorizationUrl());
+			//die("We dont have a CODE, going to -> ". $provider->getAuthorizationUrl());
 			
 			// If we don't have an authorization code then get one
 			header('Location: '. $provider->getAuthorizationUrl());
@@ -237,14 +329,14 @@ class TestOAuth2Controller extends \BaseController {
 		
 			// Try to get an access token (using the authorization code grant)
 			$token = $provider->getAccessToken('authorization_code', [
-					'code' => $_GET['code']
-					]);
+				'code' => $_GET['code']
+				]);
 		
 			// If you are using Eventbrite you will need to add the grant_type parameter (see below)
 			$token = $provider->getAccessToken('authorization_code', [
-					'code' => $_GET['code'],
-					'grant_type' => 'authorization_code'
-					]);
+				'code' => $_GET['code'],
+				'grant_type' => 'authorization_code'
+				]);
 		
 			// Optional: Now you have a token you can look up a users profile data
 			try {

@@ -3,6 +3,7 @@
 namespace League\OAuth2\Server\Storage\PDO;
 
 use League\OAuth2\Server\Storage\SessionInterface;
+use \League\OAuth2\Server\Storage\PDO\Db as DBOauth;
 
 class Session 
 	implements SessionInterface
@@ -10,7 +11,7 @@ class Session
     public function createSession($clientId, $ownerType, $ownerId)
     {
         //$db = \ezcDbInstance::get();
-		$db = new Db();
+		$db = new DBOauth();
 
         $stmt = $db->conn->prepare('INSERT INTO oauth_sessions (client_id, owner_type,  owner_id) VALUE
          (:clientId, :ownerType, :ownerId)');
@@ -25,7 +26,7 @@ class Session
     public function deleteSession($clientId, $ownerType, $ownerId)
     {
         //$db = \ezcDbInstance::get();
-		$db = new Db();
+		$db = new DBOauth();
 
         $stmt = $db->conn->prepare('DELETE FROM oauth_sessions WHERE client_id = :clientId AND
          owner_type = :type AND owner_id = :typeId');
@@ -38,7 +39,7 @@ class Session
     public function associateRedirectUri($sessionId, $redirectUri)
     {
         //$db = \ezcDbInstance::get();
-		$db = new Db();
+		$db = new DBOauth();
 
         $stmt = $db->conn->prepare('INSERT INTO oauth_session_redirects (session_id, redirect_uri)
          VALUE (:sessionId, :redirectUri)');
@@ -50,7 +51,7 @@ class Session
     public function associateAccessToken($sessionId, $accessToken, $expireTime)
     {
         //$db = \ezcDbInstance::get();
-		$db = new Db();
+		$db = new DBOauth();
 
         $stmt = $db->conn->prepare('INSERT INTO oauth_session_access_tokens (session_id, access_token, access_token_expires)
          VALUE (:sessionId, :accessToken, :accessTokenExpire)');
@@ -65,7 +66,7 @@ class Session
     public function associateRefreshToken($accessTokenId, $refreshToken, $expireTime, $clientId)
     {
        // $db = \ezcDbInstance::get();
-	   $db = new Db();
+	   $db = new DBOauth();
 
         $stmt = $db->conn->prepare('INSERT INTO oauth_session_refresh_tokens (session_access_token_id, refresh_token, refresh_token_expires, client_id) VALUE
          (:accessTokenId, :refreshToken, :expireTime, :clientId)');
@@ -79,7 +80,7 @@ class Session
     public function associateAuthCode($sessionId, $authCode, $expireTime)
     {
         //$db = \ezcDbInstance::get();
-		$db = new Db();
+		$db = new DBOauth();
 
         $stmt = $db->conn->prepare('INSERT INTO oauth_session_authcodes (session_id, auth_code, auth_code_expires)
          VALUE (:sessionId, :authCode, :authCodeExpires)');
@@ -94,7 +95,7 @@ class Session
     public function removeAuthCode($sessionId)
     {
         //$db = \ezcDbInstance::get();
-		$db = new Db();
+		$db = new DBOauth();
 
         $stmt = $db->conn->prepare('DELETE FROM oauth_session_authcodes WHERE session_id = :sessionId');
         $stmt->bindValue(':sessionId', $sessionId);
@@ -104,7 +105,7 @@ class Session
     public function validateAuthCode($clientId, $redirectUri, $authCode)
     {
         //$db = \ezcDbInstance::get();
-		$db = new Db();
+		$db = new DBOauth();
 
         $stmt = $db->conn->prepare('SELECT oauth_sessions.id AS session_id, oauth_session_authcodes.id AS authcode_id
          FROM oauth_sessions JOIN oauth_session_authcodes ON oauth_session_authcodes.`session_id`
@@ -126,7 +127,7 @@ class Session
     public function validateAccessToken($accessToken)
     {
         //$db = \ezcDbInstance::get();
-		$db = new Db();
+		$db = new DBOauth();
 
         $stmt = $db->conn->prepare('SELECT session_id, oauth_sessions.`client_id`, oauth_sessions.`owner_id`, oauth_sessions.`owner_type` FROM `oauth_session_access_tokens` JOIN oauth_sessions ON oauth_sessions.`id` = session_id WHERE  access_token = :accessToken AND access_token_expires >= ' . time());
         $stmt->bindValue(':accessToken', $accessToken);
@@ -139,7 +140,7 @@ class Session
     public function removeRefreshToken($refreshToken)
     {
         //$db = \ezcDbInstance::get();
-		$db = new Db();
+		$db = new DBOauth();
 
         $stmt = $db->conn->prepare('DELETE FROM `oauth_session_refresh_tokens` WHERE refresh_token = :refreshToken');
         $stmt->bindValue(':refreshToken', $refreshToken);
@@ -149,7 +150,7 @@ class Session
     public function validateRefreshToken($refreshToken, $clientId)
     {
         //$db = \ezcDbInstance::get();
-		$db = new Db();
+		$db = new DBOauth();
 
         $stmt = $db->conn->prepare('SELECT session_access_token_id FROM `oauth_session_refresh_tokens` WHERE
          refresh_token = :refreshToken AND client_id = :clientId AND refresh_token_expires >= ' . time());
@@ -164,7 +165,7 @@ class Session
     public function getAccessToken($accessTokenId)
     {
         //$db = \ezcDbInstance::get();
-		$db = new Db();
+		$db = new DBOauth();
 
         $stmt = $db->conn->prepare('SELECT * FROM `oauth_session_access_tokens` WHERE `id` = :accessTokenId');
         $stmt->bindValue(':accessTokenId', $accessTokenId);
@@ -177,7 +178,7 @@ class Session
     public function associateAuthCodeScope($authCodeId, $scopeId)
     {
         //$db = \ezcDbInstance::get();
-		$db = new Db();
+		$db = new DBOauth();
 
         $stmt = $db->conn->prepare('INSERT INTO `oauth_session_authcode_scopes` (`oauth_session_authcode_id`, `scope_id`) VALUES (:authCodeId, :scopeId)');
         $stmt->bindValue(':authCodeId', $authCodeId);
@@ -188,7 +189,7 @@ class Session
     public function getAuthCodeScopes($oauthSessionAuthCodeId)
     {
         //$db = \ezcDbInstance::get();
-		$db = new Db();
+		$db = new DBOauth();
 
         $stmt = $db->conn->prepare('SELECT scope_id FROM `oauth_session_authcode_scopes` WHERE oauth_session_authcode_id = :authCodeId');
         $stmt->bindValue(':authCodeId', $oauthSessionAuthCodeId);
@@ -200,7 +201,7 @@ class Session
     public function associateScope($accessTokenId, $scopeId)
     {
         //$db = \ezcDbInstance::get();
-		$db = new Db();
+		$db = new DBOauth();
 
         $stmt = $db->conn->prepare('INSERT INTO `oauth_session_token_scopes` (`session_access_token_id`, `scope_id`)
          VALUE (:accessTokenId, :scopeId)');
@@ -212,7 +213,7 @@ class Session
     public function getScopes($accessToken)
     {
         //$db = \ezcDbInstance::get();
-		$db = new Db();
+		$db = new DBOauth();
 
         $stmt = $db->conn->prepare('SELECT oauth_scopes.* FROM oauth_session_token_scopes JOIN oauth_session_access_tokens ON oauth_session_access_tokens.`id` = `oauth_session_token_scopes`.`session_access_token_id` JOIN oauth_scopes ON oauth_scopes.id = `oauth_session_token_scopes`.`scope_id` WHERE access_token = :accessToken');
         $stmt->bindValue(':accessToken', $accessToken);

@@ -101,6 +101,13 @@ class OAuth2Controller extends \BaseController {
 		// get the data from the check-authorization-params filter
 		$params = Session::get('authorize-params');
 		
+		// Get the user ID
+		//$params['user_id'] = Session::get('user_id');
+		
+		$params['user_id'] = Session::get('client_id');
+		
+		if (empty($params)) die('FILTER :: check-authorization-params returned empty'); 
+		
 		//echo var_export(Auth::user()); die('OAuth2Controller.getAuthorize');
 		//echo var_export($params); die('OAuth2Controller.getAuthorize');
 		
@@ -114,6 +121,7 @@ class OAuth2Controller extends \BaseController {
 		$code = $this->authserver->getGrantType('authorization_code')->newAuthoriseRequest('user', $params['user_id'], $params);
 		
 		// Redirect the user back to the client with an authorization code
+		/*
 		return Redirect::to(
 			League\OAuth2\Server\Util\RedirectUri::make($params['redirect_uri'],
 				array(
@@ -121,6 +129,12 @@ class OAuth2Controller extends \BaseController {
 					'state' =>  isset($params['state']) ? $params['state'] : ''
 				)
 			));
+		*/
+		
+		return json_encode(array(
+				'code'  =>  $code,
+				'state' =>  isset($params['state']) ? $params['state'] : ''
+			)); 
 		
 		//return '» OAUTH2 Authorize';
 	}
@@ -128,12 +142,16 @@ class OAuth2Controller extends \BaseController {
 	public function postAccessToken()
 	{
 		
+		//$this->authserver->isValid();
+		
+		//return;
+		
 		try {
 		
 			// Tell the auth server to issue an access token
 			$response = $this->authserver->issueAccessToken();
 			
-			var_export($response); die('OAuth2Controller.postAccessToken');
+			//var_export($response); die('OAuth2Controller.postAccessToken');
 		
 		} catch (\League\OAuth2\Server\Exception\ClientException $e) {
 		
@@ -143,6 +161,8 @@ class OAuth2Controller extends \BaseController {
 					'error_description' => $e->getMessage()
 			);
 		
+			//var_export($response); die('OAuth2Controller.postAccessToken');
+			
 			// Set the correct header
 			@header($this->authserver->getExceptionHttpHeaders($this->authserver->getExceptionType($e->getCode())));
 		

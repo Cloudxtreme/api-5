@@ -141,8 +141,12 @@ class DemoController extends \BaseController
 	
 	public function getBackhome()
 	{
+		$code = $_GET['code'];
+		
+		$str_code = "CODE: $code";
+		
 		// Show back home page
-		$data = 'Hello, back home!';
+		$data = 'Hello, back home!<br /><br />'. $str_code;
 	
 		return $data;
 	}
@@ -482,6 +486,52 @@ class DemoController extends \BaseController
 		echo json_encode($response);
 	}
 	
+	
+/**
+	 * Run the check authorization params filter
+	 *
+	 * @param Route $route the route being called
+	 * @param Request $request the request object
+	 * @param string $scope additional filter arguments
+	 * @return Response|null a bad response in case the params are invalid
+	 */
+	public function CheckAuthorizationParamsFilter($route, $request, $scope = null)
+	{
+		//echo "=> FILTER :: CheckAuthorizationParamsFilter<br />\n";
+		
+		//die('DemoController.CheckAuthorizationParamsFilter');
+		
+		
+		try {
+			
+			// Tell the auth server to check the required parameters are in the
+			//  query string
+			$params = $this->authserver->getGrantType('authorization_code')->checkAuthoriseParams();
+			
+			//$params['owner_id'] = $params['client_id']; 
+				
+			Session::put('authorize-params', $params);
+			
+
+			//echo "=> FILTER :: CheckAuthorizationParamsFilter<br />\n"; die('X...');
+
+		} catch (ClientException $e) {
+
+			return Response::json(array(
+					'status' => 400,
+					'error' => 'bad_request',
+					'error_message' => $e->getMessage(),
+			), 400);
+
+		} catch (Exception $e) {
+
+			return Response::json(array(
+					'status' => 500,
+					'error' => 'internal_server_error',
+					'error_message' => 'Internal Server Error: '. $e->getMessage(),
+			), 500);
+		}
+	}
 	
 	
 	public function missingMethod($parameters = array())

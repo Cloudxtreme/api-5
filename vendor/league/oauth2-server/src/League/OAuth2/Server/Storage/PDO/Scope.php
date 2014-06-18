@@ -3,12 +3,15 @@
 namespace League\OAuth2\Server\Storage\PDO;
 
 use League\OAuth2\Server\Storage\ScopeInterface;
+use \League\OAuth2\Server\Storage\PDO\Db as DBOauth;
 
 class Scope implements ScopeInterface
 {
     public function getScope($scope, $clientId = null, $grantType = null)
     {
-        $db = \ezcDbInstance::get();
+        //$db = \ezcDbInstance::get();
+        
+    	$db = new DBOauth();
 
         $stmt = $db->prepare('SELECT * FROM oauth_scopes WHERE oauth_scopes.scope = :scope');
         $stmt->bindValue(':scope', $scope);

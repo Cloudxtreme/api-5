@@ -182,7 +182,10 @@ Route::group(['prefix' => 'demo', 'namespace' => 'Demo'], function()
 	
 });
 
-//Route::filter('check-authorization-params', 'demo\\CheckAuthorizationParamsFilter');
+//Route::filter('check-authorization-params1', 'League\OAuth2\Server\Filters\CheckAuthorizationParamsFilter');
+Route::filter('check-authorization-params', 'demo\DemoController@CheckAuthorizationParamsFilter');
+
+
 
 //Route::filter('check-authorization-params', '\\League\\OAuth2\\Server\\Filters\\CheckAuthorizationParamsFilter');
 
@@ -230,12 +233,15 @@ Route::controller('demo', 'demo\\DemoController');
 Route::group(['prefix' => 'test', 'namespace' => 'Test'], function()
 {
 	//GET => /test/oauth2
+	//GET => /test/test_oauth2
 	Route::get('oauth2', 'TestOAuth2Controller@test_oauth2');
+	Route::get('test_oauth2', 'TestOAuth2Controller@test_oauth2');
 	
-	Route::get('flow', 'TestOAuth2Controller@test_flow');
+	//GET => /test/test_client_flow
+	Route::get('test_client_flow', 'TestOAuth2Controller@test_client_flow');
 	
-	//GET => /test/oauth2auth
-	Route::get('oauth2authorize', 'TestOAuth2Controller@test_oauth2_authorize');
+	//GET => /test/test_oauth2_authorize
+	Route::get('test_oauth2_authorize', 'TestOAuth2Controller@test_oauth2_authorize');
 });
 
 
