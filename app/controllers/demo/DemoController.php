@@ -97,7 +97,8 @@ class DemoController extends \BaseController
 		);
 		
 		// Enable the authorization code grant type
-		$this->authserver->addGrantType(new \League\OAuth2\Server\Grant\AuthCode($this->authserver));
+		//$this->authserver->addGrantType(new \League\OAuth2\Server\Grant\AuthCode($this->authserver));
+		$this->authserver->addGrantType(new \League\OAuth2\Server\Grant\AuthCode());
 		
 		
 		$server = $this->authserver;
@@ -461,8 +462,8 @@ class DemoController extends \BaseController
 	
 			// Throw an exception because there was a problem with the client's request
 			$response = array(
-					'error' =>  $this->authserver->getExceptionType($e->getCode()),
-					'error_description' => $e->getMessage()
+				'error' =>  $this->authserver->getExceptionType($e->getCode()),
+				'error_description' => $e->getMessage()
 			);
 	
 			// Set the correct header
