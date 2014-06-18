@@ -56,7 +56,10 @@ Route::group(['prefix' => 'oauth2'], function()
 	//Route::get('authorize/web', 'OAuth2Controller@getAuthorizeWeb');
 	
 	//GET => /oauth2/authorize
-	Route::get('authorize', 'OAuth2Controller@getAuthorize');
+	//Route::get('authorize', 'OAuth2Controller@getAuthorize');
+	
+	Route::any('authorize', array('before' => 'check-authorization-params', 'uses' => 'OAuth2Controller@getAuthorize'));
+	
 	
 	//Route::get('authorize', array('before' => 'check-authorization-params|auth', 'OAuth2Controller@getAuthorizes'));
 	
@@ -175,7 +178,7 @@ Route::group(['prefix' => 'demo', 'namespace' => 'Demo'], function()
 	//Route::get('test_user', array('before' => 'check-authorization-params', 'uses' => 'DemoController@getTestUser'));
 
 	// POST & GET => /demo/test_user
-	Route::any('test_user', array('before' => 'check-authorization-params', 'uses' => 'DemoController@getTestUser'));
+	//Route::any('test_user', array('before' => 'check-authorization-params', 'uses' => 'DemoController@getTestUser'));
 	
 });
 
