@@ -111,7 +111,10 @@ return array(
 		'Illuminate\Mail\MailServiceProvider',
 		'Illuminate\Database\MigrationServiceProvider',
 		'Illuminate\Pagination\PaginationServiceProvider',
-		'Illuminate\Queue\QueueServiceProvider',
+		
+		//'Illuminate\Queue\QueueServiceProvider', // Replaced by 'Pafelin\Gearman\GearmanServiceProvider'
+		'Pafelin\Gearman\GearmanServiceProvider',
+		
 		'Illuminate\Redis\RedisServiceProvider',
 		'Illuminate\Remote\RemoteServiceProvider',
 		'Illuminate\Auth\Reminders\ReminderServiceProvider',

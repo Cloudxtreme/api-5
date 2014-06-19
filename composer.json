@@ -8,6 +8,8 @@
 		,"league/oauth2-server": "3.*"
 		,"league/oauth2-client": "~0.3"
 		,"guzzlehttp/guzzle": "~4"
+		,"illuminate/support": "4.*"
+		,"pafelin/gearman": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

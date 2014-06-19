@@ -242,6 +242,19 @@ Route::group(['prefix' => 'test', 'namespace' => 'Test'], function()
 	
 	//GET => /test/test_oauth2_authorize
 	Route::get('test_oauth2_authorize', 'TestOAuth2Controller@test_oauth2_authorize');
+	
+	//GET => /test/worker
+	Route::get('worker', function()
+	{
+
+		foreach (array(1,2,3) as $row) {
+
+			Queue::push('gearman\\Services', array('action'=>'get_token', 'message' => 'Token №' . $row));
+			
+		}
+		
+	});
+	
 });
 
 
