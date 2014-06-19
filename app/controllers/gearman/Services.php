@@ -2,6 +2,7 @@
 
 namespace Gearman;
 
+use Predis\Cluster\Distribution\EmptyRingException;
 class Services
 {
 
@@ -14,10 +15,20 @@ class Services
 	
 	public function fire($job, $data)
 	{
+		echo "WORKER: ". var_export($data) ."\n";
+		
+		throw new Exception("WORKER IS WORKING!!!");
+		
+		return;
+		
 		//I send an email to my email address with subject "gearman test" and message whatever comes from gearman
 		//mail('robertos@agap2.pt', 'gearman test', $data['message']);
 		
 		//echo "OK...: ". $data['message'] ."<br />\n";
+		
+		//Delay 2 second to test
+		//Sleep(2);
+		
 		
 		$res = null;
 		$has_error = false;

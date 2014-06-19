@@ -2,8 +2,12 @@
 
 namespace Pafelin\Gearman;
 
-use \GearmanClient;
-use \GearmanWorker;
+//use \GearmanClient;
+//use \GearmanWorker;
+
+use \Net_Gearman_Client as GearmanClient;
+use \Net_Gearman_Worker as GearmanWorker;
+
 use Illuminate\Queue\Queue;
 use Illuminate\Queue\QueueInterface;
 use \Exception;
@@ -16,6 +20,7 @@ class GearmanQueue extends Queue implements QueueInterface
     protected $client;
     protected $queue;
 
+    //public function __construct(GearmanClient $client, GearmanWorker $worker, $queue)
     public function __construct(GearmanClient $client, GearmanWorker $worker, $queue)
     {
         $this->client = $client;

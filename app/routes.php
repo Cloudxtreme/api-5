@@ -248,7 +248,8 @@ Route::group(['prefix' => 'test', 'namespace' => 'Test'], function()
 	{
 
 		foreach (array(1,2,3) as $row) {
-
+			echo "Adding $row<br />\n";
+				
 			Queue::push('gearman\\Services', array('action'=>'get_token', 'message' => 'Token №' . $row));
 			
 		}
