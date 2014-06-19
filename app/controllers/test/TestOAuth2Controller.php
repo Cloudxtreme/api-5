@@ -227,9 +227,19 @@ class TestOAuth2Controller extends \BaseController {
 	
 	}
 	
+
+
+	public function is_json($str) {
+		//json_decode($string);
+		//return (json_last_error() == JSON_ERROR_NONE);
+		
+		return is_array(json_decode($str,true));
+	}
+	
 	public function test_client_flow() {
 		
 		$res = null;
+		$has_error = false;
 		
 		$client = new \GuzzleHttp\Client();
 		
@@ -248,18 +258,29 @@ class TestOAuth2Controller extends \BaseController {
 			$res = $client->get($url);
 			
 		} catch (Exception $e) {
-			
-			echo "FLOW ERROR: ". $e->getMessage();
-			
+			$has_error = true;
+			//echo "FLOW ERROR: ". $e->getMessage();
 		}
 		
-		$response_code = $res->json();
+		if ($res === null || $this->is_json($res->getBody()) === false) {
+			$has_error = true;
+			
+			throw new Exception("Unable to obtain a valid AUTHORIZATION CODE");
+			
+			return;
+		}
+		
+		try 
+		{
+			$response_code = $res->json();
+		} catch (Exception $e) {
+			//echo "REQ ERROR: ". $e->getMessage();
+		}
 		
 		//echo json_encode($res->json());
 		
 		$code = isset($response_code['code']) ? $response_code['code'] : null;
 		
-		echo "TOKEN CODE: $code<br />\n";
 		
 		$res = $client->post('http://cloudwalkers-api.local/oauth2/access_token', [
 			'body' => [
@@ -278,7 +299,7 @@ class TestOAuth2Controller extends \BaseController {
 		
 		$token = isset($response_token['access_token']) ? $response_token['access_token'] : null;
 		
-		echo "ACCESS TOKEN: $token<br />\n";
+		
 		
 		$res = $client->get('http://cloudwalkers-api.local/api/v2/accounts', [
 			'headers' => [
@@ -292,6 +313,8 @@ class TestOAuth2Controller extends \BaseController {
 		
 		//echo "API CALL: $response_api<br />\n";
 		
+		echo "TOKEN CODE: $code<br />\n";
+		echo "ACCESS TOKEN: $token<br />\n";
 		echo "API CALL: <br />\n";
 		
 		echo var_export($response_api);
