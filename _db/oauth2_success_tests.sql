@@ -11,9 +11,8 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Dumping database structure for cloudwalkers_oauth2
-CREATE DATABASE IF NOT EXISTS `cloudwalkers_oauth2` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
-USE `cloudwalkers_oauth2`;
-
+-- CREATE DATABASE IF NOT EXISTS `cloudwalkers_oauth2` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+-- USE `cloudwalkers_oauth2`;
 
 -- Dumping structure for table cloudwalkers_oauth2.oauth_clients
 CREATE TABLE IF NOT EXISTS `oauth_clients` (
