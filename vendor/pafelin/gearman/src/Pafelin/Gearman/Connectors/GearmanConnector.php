@@ -13,11 +13,11 @@ class GearmanConnector implements ConnectorInterface {
 
     public function connect(array $config) {
 
-    	$config['host'] = '127.0.0.1';
+    	$config['host'] = '192.168.56.1';
     	$config['port'] = '4730';
     	$config['queue'] = 'gearman';
     	 
-    	$servers = array('127.0.0.1:4730');
+    	$servers = array('192.168.56.1:4730');
     	$timeout = 1000;
     	
     	if(!defined('SOCKET_EAGAIN')) define('SOCKET_EAGAIN', 4);
@@ -26,8 +26,8 @@ class GearmanConnector implements ConnectorInterface {
     	
     	
     	//require_once 'Net/Gearman/Client.php';
-    	include_once 'C:/dev/cloudwalkers-api.local/vhosts/www/app/components/net_gearman/Net/Gearman/Client.php';
-    	include_once 'C:/dev/cloudwalkers-api.local/vhosts/www/app/components/net_gearman/Net/Gearman/Worker.php';
+    	include_once '/app/components/net_gearman/Net/Gearman/Client.php';
+    	include_once '/app/components/net_gearman/Net/Gearman/Worker.php';
     	//include_once 'C:/dev/cloudwalkers-api.local/vhosts/www/app/components/net_gearman/Net/Gearman/Task.php';
     	
     	$client = new \Net_Gearman_Client('localhost:4730');

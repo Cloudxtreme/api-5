@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -244,19 +245,13 @@ Route::group(['prefix' => 'test', 'namespace' => 'Test'], function()
 	Route::get('test_oauth2_authorize', 'TestOAuth2Controller@test_oauth2_authorize');
 	
 	//GET => /test/worker
-	Route::get('worker', function()
-	{
-
-		foreach (array(1,2,3) as $row) {
-			echo "Adding $row<br />\n";
-				
-			Queue::push('gearman\\Services', array('action'=>'get_token', 'message' => 'Token №' . $row));
-			
-		}
-		
-	});
+	Route::get('worker', 'TestOAuth2Controller@test_worker');
+	
+	Route::get('get_user_details', 'TestOAuth2Controller@get_user_details');
 	
 });
+
+
 
 
 

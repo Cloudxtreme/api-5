@@ -1,5 +1,7 @@
 <?php
 
+namespace NGM;
+
 /**
  * Interface for Danga's Gearman job scheduling system
  *
@@ -33,7 +35,7 @@
  * @link      https://github.com/brianlmoon/net_gearman
  * @see       Net_Gearman_Set, Net_Gearman_Client
  */
-class Net_Gearman_Task
+class Net_Gearman_Task extends \BaseController 
 {
     /**
      * The function/job to run
@@ -368,4 +370,10 @@ class Net_Gearman_Task
                            $denominator);
         }
     }
+    
+    public function test_hello($str) {
+    	return 'Hello: '. $str;
+    	
+    }
+    
 }

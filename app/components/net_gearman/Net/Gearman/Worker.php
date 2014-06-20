@@ -1,4 +1,7 @@
 <?php
+
+namespace NGM;
+
 /**
  * Interface for Danga's Gearman job scheduling system
  *

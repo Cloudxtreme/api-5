@@ -8,6 +8,12 @@ use Exception;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ClientException;
 
+use \GearmanClient as GearmanClient;
+
+//use \NGM\Net_Gearman_Client as Net_Gearman_Client;
+//use \NGM\Net_Gearman_Task as Net_Gearman_Task;
+
+
 class TestOAuth2Controller extends \BaseController {
 
 	/*
@@ -415,6 +421,78 @@ class TestOAuth2Controller extends \BaseController {
 		$token = $provider->getAccessToken($grant, ['refresh_token' => $refreshToken]);
 	}
 	
+	
+	public function test_worker () {
+	
+		//foreach (array(1,2,3) as $row) {
+		foreach (array(1) as $row) {
+			
+			echo "Adding $row<br />\n";
+		
+			
+			//Queue::push('gearman\\Services', array('action'=>'get_token', 'message' => 'Token №' . $row));
+			
+			// Create our client object
+			$client = new GearmanClient();
+			
+			// Add a server
+			//$client->addServer('192.168.56.1', '4730'); // by default host/port will be "localhost" & 4730
+			$client->addServer('192.168.56.102', '4730'); // by default host/port will be "localhost" & 4730
+			
+			echo "Sending job\n";
+			
+			// Send reverse job
+			$result = $client->doHigh("reverse", "Hello!");
+			
+			//$result = $client->doNormal("reverse", "Hello!");
+			
+			//$result = $client->doBackground("reverse", "Hello!");
+			
+			if ($result) {
+				echo "Success: $result\n";
+			}
+				
+			
+		}
+		
+		// GET => /test/get_user_details
+		
+		public function get_user_details ($params = array()) {
+		
+			$username = isset($params['username'])
+			
+			//foreach (array(1) as $row) {
+				
+				echo "Adding $row<br />\n";
+		
+					
+				//Queue::push('gearman\\Services', array('action'=>'get_token', 'message' => 'Token №' . $row));
+					
+				// Create our client object
+				$client = new GearmanClient();
+					
+				// Add a server
+				//$client->addServer('192.168.56.1', '4730'); // by default host/port will be "localhost" & 4730
+				$client->addServer('192.168.56.102', '4730'); // by default host/port will be "localhost" & 4730
+				
+				echo "Sending job\n";
+		
+				// Send reverse job
+				$result = $client->doHigh("reverse", "Hello!");
+
+				//$result = $client->doNormal("reverse", "Hello!");
+					
+				//$result = $client->doBackground("reverse", "Hello!");
+					
+				if ($result) {
+					echo "Success: $result\n";
+				}
+	
+								
+			//}
+	}
+	
+	
 	public function missingMethod($parameters = array())
 	{
 		// TODO: Log all requests of the missing endpoints
@@ -422,4 +500,15 @@ class TestOAuth2Controller extends \BaseController {
 		var_dump($parameters);
 	}
 	
+}
+
+
+function complete($func, $handle, $result) {
+	var_dump($func);
+	var_dump($handle);
+	var_dump($result);
+}
+
+function fail($task_object) {
+	var_dump($task_object);
 }

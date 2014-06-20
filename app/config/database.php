@@ -54,7 +54,7 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => '127.0.0.1',
+			'host'      => '192.168.56.1',
 			'port'      => '3307',
 			'database'  => 'cloudwalkers_oauth2',
 			'username'  => 'myuser',

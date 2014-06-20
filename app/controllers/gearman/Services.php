@@ -3,6 +3,7 @@
 namespace Gearman;
 
 use Predis\Cluster\Distribution\EmptyRingException;
+
 class Services
 {
 

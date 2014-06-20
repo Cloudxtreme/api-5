@@ -1,6 +1,6 @@
 <?php
 
-use \Net_Gearman_Task as Net_Gearman_Task;
+namespace NGM;
 
 /**
  * Interface for Danga's Gearman job scheduling system
@@ -25,6 +25,7 @@ use \Net_Gearman_Task as Net_Gearman_Task;
 
 require_once 'Net/Gearman/Connection.php';
 require_once 'Net/Gearman/Set.php';
+require_once 'Net/Gearman/Task.php';
 
 /**
  * A client for submitting jobs to Gearman
@@ -39,7 +40,7 @@ require_once 'Net/Gearman/Set.php';
  * @copyright 2007-2008 Digg.com, Inc.
  * @link      https://github.com/brianlmoon/net_gearman
  */
-class Net_Gearman_Client
+class Net_Gearman_Client extends \BaseController
 {
     /**
      * Our randomly selected connection
