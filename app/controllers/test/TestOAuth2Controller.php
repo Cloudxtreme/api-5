@@ -455,41 +455,42 @@ class TestOAuth2Controller extends \BaseController {
 			
 		}
 		
-		// GET => /test/get_user_details
+	}
 		
-		public function get_user_details ($params = array()) {
+	// GET => /test/get_user_details
+	public function get_user_details ($params = array()) {
 		
-			$username = isset($params['username'])
-			
-			//foreach (array(1) as $row) {
-				
-				echo "Adding $row<br />\n";
-		
-					
-				//Queue::push('gearman\\Services', array('action'=>'get_token', 'message' => 'Token №' . $row));
-					
-				// Create our client object
-				$client = new GearmanClient();
-					
-				// Add a server
-				//$client->addServer('192.168.56.1', '4730'); // by default host/port will be "localhost" & 4730
-				$client->addServer('192.168.56.102', '4730'); // by default host/port will be "localhost" & 4730
-				
-				echo "Sending job\n";
-		
-				// Send reverse job
-				$result = $client->doHigh("reverse", "Hello!");
+		// Override function $params
+		$params = array();
 
-				//$result = $client->doNormal("reverse", "Hello!");
-					
-				//$result = $client->doBackground("reverse", "Hello!");
-					
-				if ($result) {
-					echo "Success: $result\n";
-				}
-	
-								
-			//}
+		$params['email'] = isset($_POST['email'])     ? strtolower(trim($_POST['email'])) : '';
+		$params['email'] = isset($_POST['$password']) ? $_POST['$password']               : '';
+		
+		echo "Checking if user exists by email \"$email\" (and get its details)<br />\n";
+
+		
+		//Queue::push('gearman\\Services', array('action'=>'get_token', 'message' => 'Token №' . $row));
+			
+		// Create our client object
+		$client = new GearmanClient();
+			
+		// Add a server
+		//$client->addServer('192.168.56.1', '4730'); // by default host/port will be "localhost" & 4730
+		$client->addServer('192.168.56.102', '4730'); // by default host/port will be "localhost" & 4730
+		
+		echo "Sending job\n";
+
+		// Send reverse job
+		$result = $client->doHigh("get_user_details", $params);
+
+		//$result = $client->doNormal("reverse", "Hello!");
+			
+		//$result = $client->doBackground("reverse", "Hello!");
+			
+		if ($result) {
+			echo "Success: $result\n";
+		}
+
 	}
 	
 	
