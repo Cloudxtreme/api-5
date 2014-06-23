@@ -30,7 +30,7 @@ define('LANGUAGE_NL', 'nl');
 	define('DB_HOST', '192.168.56.1');
 	define('DB_USERNAME', 'myuser');
 	define('DB_PASSWORD', 'myuser');
-	define('DB_NAME', 'cloudwalkers');
+	define('DB_NAME', 'cloudwalkers_oauth2');
 	define('DB_PORT', '3307');
 	define('DB_CHARSET', 'utf8');
 	

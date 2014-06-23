@@ -4,10 +4,17 @@
 
 namespace Test;
 
+// PHP
 use Exception;
+
+// Laravel
+use \Input as Input;
+
+// Guzzle
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ClientException;
 
+// Gearman
 use \GearmanClient as GearmanClient;
 
 //use \NGM\Net_Gearman_Client as Net_Gearman_Client;
@@ -463,11 +470,13 @@ class TestOAuth2Controller extends \BaseController {
 		// Override function $params
 		$params = array();
 
-		$params['email'] = isset($_POST['email'])     ? strtolower(trim($_POST['email'])) : '';
-		$params['email'] = isset($_POST['$password']) ? $_POST['$password']               : '';
+		//$params['email'] = isset($_POST['email'])     ? strtolower(trim($_POST['email'])) : '';
+		//$params['email'] = isset($_POST['$password']) ? $_POST['$password']               : '';
 		
-		echo "Checking if user exists by email \"$email\" (and get its details)<br />\n";
-
+		// Send { "email", "password" } from POST or GET
+		$params = Input::only('email', 'password');
+		
+		echo "Checking if user exists by email \"{$params['email']}\", password and get its details.<br />\n";
 		
 		//Queue::push('gearman\\Services', array('action'=>'get_token', 'message' => 'Token №' . $row));
 			
@@ -478,20 +487,58 @@ class TestOAuth2Controller extends \BaseController {
 		//$client->addServer('192.168.56.1', '4730'); // by default host/port will be "localhost" & 4730
 		$client->addServer('192.168.56.102', '4730'); // by default host/port will be "localhost" & 4730
 		
-		echo "Sending job\n";
+		echo "Sending job:<br />\n";
 
 		// Send reverse job
-		$result = $client->doHigh("get_user_details", $params);
+		$result = $client->doHigh("get_user_details", json_encode($params));
 
 		//$result = $client->doNormal("reverse", "Hello!");
 			
 		//$result = $client->doBackground("reverse", "Hello!");
 			
 		if ($result) {
-			echo "Success: $result\n";
+			echo "Success: $result<br />\n";
 		}
 
 	}
+	
+	public function get_oauth2_access_token ($params = array()) {
+	
+		// Override function $params
+		$params = array();
+	
+		//$params['email'] = isset($_POST['email'])     ? strtolower(trim($_POST['email'])) : '';
+		//$params['email'] = isset($_POST['$password']) ? $_POST['$password']               : '';
+	
+		// Send { "email", "password" } from POST or GET
+		//$params = Input::only('email', 'password');
+	
+		echo "Get OAUTH2 ACCESS TOKEN:<br />\n";
+	
+		//Queue::push('gearman\\Services', array('action'=>'get_token', 'message' => 'Token №' . $row));
+			
+		// Create our client object
+		$client = new GearmanClient();
+			
+		// Add a server
+		//$client->addServer('192.168.56.1', '4730'); // by default host/port will be "localhost" & 4730
+		$client->addServer('192.168.56.102', '4730'); // by default host/port will be "localhost" & 4730
+	
+		echo "Sending job:<br />\n";
+	
+		// Send reverse job
+		$result = $client->doHigh("get_oauth2_access_token", json_encode($params));
+	
+		//$result = $client->doNormal("reverse", "Hello!");
+			
+		//$result = $client->doBackground("reverse", "Hello!");
+			
+		if ($result) {
+			echo "Success: $result<br />\n";
+		}
+	
+	}
+	
 	
 	
 	public function missingMethod($parameters = array())

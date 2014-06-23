@@ -247,7 +247,14 @@ Route::group(['prefix' => 'test', 'namespace' => 'Test'], function()
 	//GET => /test/worker
 	Route::get('worker', 'TestOAuth2Controller@test_worker');
 	
-	Route::get('get_user_details', 'TestOAuth2Controller@get_user_details');
+	//GET,POST => /test/get_user_details
+	Route::any('get_user_details', 'TestOAuth2Controller@get_user_details');
+	
+	//GET,POST => /test/get_oauth2_authorize
+	Route::any('get_oauth2_authorize', 'TestOAuth2Controller@get_oauth2_authorize');
+	
+	//GET,POST => /test/get_oauth2_access_token
+	Route::any('get_oauth2_access_token', 'TestOAuth2Controller@get_oauth2_access_token');
 	
 });
 

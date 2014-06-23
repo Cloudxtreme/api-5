@@ -45,25 +45,40 @@ return array(
 	*/
 
 	'connections' => array(
-
+/*
 		'sqlite' => array(
 			'driver'   => 'sqlite',
 			'database' => __DIR__.'/../database/production.sqlite',
 			'prefix'   => '',
-		),
+		),*/
 
-		'mysql' => array(
+		'mysqlcw' => array(
+			/*'read' => array(
+				'host' => '192.168.56.1',
+				'port'      => '3307'
+				//'port'      => '13306'
+			),
+			'write' => array(
+				'host' => '196.168.56.1',
+				'port'      => '3307'
+				//'port'      => '13306'
+			),*/
 			'driver'    => 'mysql',
 			'host'      => '192.168.56.1',
 			'port'      => '3307',
-			'database'  => 'cloudwalkers_oauth2',
+			//'port'      => '13306',
+			'database'  => 'cloudwalkers',
 			'username'  => 'myuser',
 			'password'  => 'myuser',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
+			'options'   => array(
+					//PDO::ATTR_PERSISTENT => true, // Optimization with the connection pool
+					//PDO::FETCH_ASSOC
+			),
 		),
-
+/*
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',
@@ -83,7 +98,7 @@ return array(
 			'password' => '',
 			'prefix'   => '',
 		),
-
+*/
 	),
 
 	/*
