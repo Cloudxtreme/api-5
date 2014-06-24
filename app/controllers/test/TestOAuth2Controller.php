@@ -5,20 +5,19 @@
 namespace Test;
 
 // PHP
-use Exception;
+use \Exception as Exception;
 
 // Laravel
 use \Input as Input;
+use \Config as Config;
+use \App as App;
 
 // Guzzle
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Exception\ClientException;
+use \GuzzleHttp\Exception\RequestException as RequestException;
+use \GuzzleHttp\Exception\ClientException as ClientException;
 
 // Gearman
 use \GearmanClient as GearmanClient;
-
-//use \NGM\Net_Gearman_Client as Net_Gearman_Client;
-//use \NGM\Net_Gearman_Task as Net_Gearman_Task;
 
 
 class TestOAuth2Controller extends \BaseController {
@@ -44,9 +43,14 @@ class TestOAuth2Controller extends \BaseController {
 		
 		$client = new \GuzzleHttp\Client();
 		
+		
+		$api_settings = Config::get('api.settings');
+		
+		$api_url = $api_settings['base_url']; // http://cloudwalkers-api.local/
+		
 		//try {
 		
-			$res = $client->post('http://cloudwalkers-api.local/oauth2/access_token', [
+			$res = $client->post($api_url . 'oauth2/access_token', [
 				'body' => [
 					'grant_type' => 'client_credentials',
 					'client_id' => '1',
@@ -98,6 +102,12 @@ class TestOAuth2Controller extends \BaseController {
 	public function test_oauth2_token()
 	{
 		$res = null;
+		
+		
+		$api_settings = Config::get('api.settings');
+		
+		$api_url = $api_settings['base_url']; // http://cloudwalkers-api.local/
+		
 	
 		$client = new \GuzzleHttp\Client();
 	
@@ -112,7 +122,7 @@ class TestOAuth2Controller extends \BaseController {
 			scope=scope1,scope2&
 			state=123456789
 		 */
-		$res = $client->post('http://cloudwalkers-api.local/oauth2/access_token', [
+		$res = $client->post($api_url . 'oauth2/access_token', [
 				'body' => [
 				'grant_type' => 'client_credentials',
 				'client_id' => 'I6Lh72kTItE6y29Ig607N74M7i21oyTo',
@@ -168,6 +178,12 @@ class TestOAuth2Controller extends \BaseController {
 	
 		$res = null;
 	
+		
+		$api_settings = Config::get('api.settings');
+		
+		$api_url = $api_settings['base_url']; // http://cloudwalkers-api.local/
+		
+		
 		$client = new \GuzzleHttp\Client();
 	
 		//try {
@@ -184,7 +200,7 @@ class TestOAuth2Controller extends \BaseController {
 		
 		'client_id' => 'I6Lh72kTItE6y29Ig607N74M7i21oyTo',
 		*/
-		$res = $client->post('http://cloudwalkers-api.local/oauth2/authorize', [
+		$res = $client->post($api_url . 'oauth2/authorize', [
 			'body' => [
 			'grant_type' => 'client_credentials',
 			'client_id' => '1',
@@ -254,11 +270,17 @@ class TestOAuth2Controller extends \BaseController {
 		$res = null;
 		$has_error = false;
 		
+		
+		$api_settings = Config::get('api.settings');
+		
+		$api_url = $api_settings['base_url']; // http://cloudwalkers-api.local/
+		
+		
 		$client = new \GuzzleHttp\Client();
 		
 		try 
 		{
-			$url = 'http://cloudwalkers-api.local/oauth2/authorize'.
+			$url = $api_url . 'oauth2/authorize'.
 				'?grant_type=authorization_code'.
 				'&client_id=1'.
 				'&client_secret=dswREHV2YJjF7iL5Zr5ETEFBwGwDQYjQ'.
@@ -295,7 +317,7 @@ class TestOAuth2Controller extends \BaseController {
 		$code = isset($response_code['code']) ? $response_code['code'] : null;
 		
 		
-		$res = $client->post('http://cloudwalkers-api.local/oauth2/access_token', [
+		$res = $client->post($api_url . 'oauth2/access_token', [
 			'body' => [
 				'grant_type' => 'authorization_code',
 				'code' => $code,
@@ -314,7 +336,7 @@ class TestOAuth2Controller extends \BaseController {
 		
 		
 		
-		$res = $client->get('http://cloudwalkers-api.local/api/v2/accounts', [
+		$res = $client->get($api_url . 'api/v2/accounts', [
 			'headers' => [
 				'Authorization' => 'Bearer '. $token
 			]
@@ -333,88 +355,6 @@ class TestOAuth2Controller extends \BaseController {
 		echo var_export($response_api);
 		
 		
-		//echo $res->getBody();                 // {"type":"User"...'
-		
-		//echo var_export($res);
-		
-		//echo var_export($code);
-		
-				
-		//echo $res;
-				
-		//echo json_encode($res->json());
-		
-		//var_export($res);
-		
-		die('<br>DONE...');
-		
-		return;
-		
-		$res = $client->post('http://cloudwalkers-api.local/oauth2/authorize', [
-				'body' => [
-				'grant_type' => 'authorization_code',
-				'client_id' => '1',
-				'client_secret' => 'dswREHV2YJjF7iL5Zr5ETEFBwGwDQYjQ',
-				'state' => 0,
-				'scope' => 'user'
-				]
-				]);
-		
-		
-		$provider = new \League\OAuth2\Client\Provider\Cloudwalkers (array(
-			'clientId'     => '1',
-			'clientSecret' => 'dswREHV2YJjF7iL5Zr5ETEFBwGwDQYjQ',
-			'redirectUri'  => 'http://cloudwalkers-api.local/demo/backhome'
-		));
-		
-		if ( ! isset($_GET['code'])) {
-		
-			//die("We dont have a CODE, going to -> ". $provider->getAuthorizationUrl());
-			
-			// If we don't have an authorization code then get one
-			header('Location: '. $provider->getAuthorizationUrl());
-			
-			exit;
-		
-		} else {
-		
-			// Try to get an access token (using the authorization code grant)
-			$token = $provider->getAccessToken('authorization_code', [
-				'code' => $_GET['code']
-				]);
-		
-			// If you are using Eventbrite you will need to add the grant_type parameter (see below)
-			$token = $provider->getAccessToken('authorization_code', [
-				'code' => $_GET['code'],
-				'grant_type' => 'authorization_code'
-				]);
-		
-			// Optional: Now you have a token you can look up a users profile data
-			try {
-		
-				// We got an access token, let's now get the user's details
-				$userDetails = $provider->getUserDetails($token);
-		
-				// Use these details to create a new profile
-				printf('Hello %s!', $userDetails->firstName);
-		
-			} catch (Exception $e) {
-		
-				// Failed to get user details
-				//exit('Oh dear...');
-			}
-		
-			/*
-			// Use this to interact with an API on the users behalf
-			echo $token->accessToken;
-		
-			// Use this to get a new access token if the old one expires
-			echo $token->refreshToken;
-		
-			// Number of seconds until the access token will expire, and need refreshing
-			echo $token->expires;
-			*/
-		}
 	}	
 	
 	public function test_refresh () {
@@ -443,8 +383,13 @@ class TestOAuth2Controller extends \BaseController {
 			$client = new GearmanClient();
 			
 			// Add a server
-			//$client->addServer('192.168.56.1', '4730'); // by default host/port will be "localhost" & 4730
-			$client->addServer('192.168.56.102', '4730'); // by default host/port will be "localhost" & 4730
+			//$client->addServer('192.168.56.102', '4730'); // by default host/port will be "localhost" & 4730
+
+			$servers = Config::get('gearman.servers');
+			
+			foreach ($servers as $server => $port) {
+				$client->addServer($server, (int) $port);
+			}
 			
 			echo "Sending job\n";
 			
@@ -484,18 +429,28 @@ class TestOAuth2Controller extends \BaseController {
 		$client = new GearmanClient();
 			
 		// Add a server
-		//$client->addServer('192.168.56.1', '4730'); // by default host/port will be "localhost" & 4730
-		$client->addServer('192.168.56.102', '4730'); // by default host/port will be "localhost" & 4730
+		//$client->addServer('192.168.56.102', '4730'); // by default host/port will be "localhost" & 4730
+		
+		
+		$servers = Config::get('gearman.servers');
+		
+		foreach ($servers as $server => $port) {
+			//if (App::environment('local'))
+			//{
+				echo "Connecting to server: $server, $port<br />\n";
+			//}
+			
+			$client->addServer("$server", "$port");
+		}
+		
 		
 		echo "Sending job:<br />\n";
 
-		// Send reverse job
+		$result = false;
+		
+		// Send job
 		$result = $client->doHigh("get_user_details", json_encode($params));
 
-		//$result = $client->doNormal("reverse", "Hello!");
-			
-		//$result = $client->doBackground("reverse", "Hello!");
-			
 		if ($result) {
 			echo "Success: $result<br />\n";
 		}
@@ -521,9 +476,15 @@ class TestOAuth2Controller extends \BaseController {
 		$client = new GearmanClient();
 			
 		// Add a server
-		//$client->addServer('192.168.56.1', '4730'); // by default host/port will be "localhost" & 4730
-		$client->addServer('192.168.56.102', '4730'); // by default host/port will be "localhost" & 4730
-	
+		//$client->addServer('192.168.56.102', '4730'); // by default host/port will be "localhost" & 4730
+		
+		$servers = Config::get('gearman.servers');
+		
+		foreach ($servers as $server => $port) {
+			$client->addServer($server, (int) $port);
+		}
+		
+		
 		echo "Sending job:<br />\n";
 	
 		// Send reverse job
@@ -539,7 +500,41 @@ class TestOAuth2Controller extends \BaseController {
 	
 	}
 	
+	// Test :: Show settings (configured in Laravel) and loaded in the respective environment (local, staging, production)
 	
+	public function show_settings() {
+		
+		// Dump all loaded configuration items
+		// var_dump(Config::getItems())
+		
+		// If you want to see the configuration settings for a particular group, use Config::get('groupname').
+		
+		// Dump all the database settings
+		// var_dump(Config::get('database'));
+		
+		echo "<pre>";
+		
+		//var_dump(Config::get('database'));
+		
+		//var_dump(Config::get('gearman'));
+		
+		//var_dump(Config::get('api'));
+		
+		$servers = Config::get('gearman.servers');
+		
+		var_dump($servers);
+		
+		$api_settings = Config::get('api.settings');
+		
+		var_dump($api_settings);
+		
+		
+		
+		//var_dump(Config::getItems());
+		
+		echo "</pre>";
+		
+	} 
 	
 	public function missingMethod($parameters = array())
 	{

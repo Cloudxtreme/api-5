@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => 'mysqlcw',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -44,6 +44,19 @@ return array(
 	|
 	*/
 
+	// This is the "default" configuration, when sub-folder { /local/, /staging/, /production/ } is not found
+	
+	// Dump all loaded configuration items
+	// var_dump(Config::getItems())
+	
+	// If you want to see the configuration settings for a particular group, use Config::get('groupname').
+	
+	// Dump all the database settings
+	// var_dump(Config::get('database'));
+		
+	// ------------------------------------------------------------------------
+	// These are the fallback settings	
+	// ------------------------------------------------------------------------
 	'connections' => array(
 /*
 		'sqlite' => array(
@@ -65,8 +78,8 @@ return array(
 			),*/
 			'driver'    => 'mysql',
 			'host'      => '192.168.56.1',
-			'port'      => '3307',
-			//'port'      => '13306',
+			//'port'      => '3307',
+			'port'      => '13306',
 			'database'  => 'cloudwalkers',
 			'username'  => 'myuser',
 			'password'  => 'myuser',
@@ -78,6 +91,7 @@ return array(
 					//PDO::FETCH_ASSOC
 			),
 		),
+			
 /*
 		'pgsql' => array(
 			'driver'   => 'pgsql',
@@ -124,7 +138,7 @@ return array(
 	| such as APC or Memcached. Laravel makes it easy to dig right in.
 	|
 	*/
-
+	/*
 	'redis' => array(
 
 		'cluster' => false,
@@ -136,5 +150,5 @@ return array(
 		),
 
 	),
-
+	*/
 );

@@ -21,30 +21,18 @@ return array(
 	'connections' => array(
 
 		'mysqlcw' => array(
-			/*'read' => array(
-				'host' => '192.168.56.1',
-				'port'      => '3307'
-				//'port'      => '13306'
-			),
-			'write' => array(
-				'host' => '196.168.56.1',
-				'port'      => '3307'
-				//'port'      => '13306'
-			),*/
-				
 			'driver'    => 'mysql',
-			'host'      => '192.168.56.1',
-			//'port'      => '3307',
-			'port'      => '13306',
+			'host'      => 'db.cloudwalkers.com', // HOST: db.cloudwalkers.com
+			'port'      => '3306',
 			'database'  => 'cloudwalkers',
 			'username'  => 'myuser',
-			'password'  => 'myuser_lo',
+			'password'  => 'myuser',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 			'options'   => array(
-					//PDO::ATTR_PERSISTENT => true, // Optimization with the connection pool
-					//PDO::FETCH_ASSOC
+				//PDO::ATTR_PERSISTENT => true, // Optimization with the connection pool
+				//PDO::FETCH_ASSOC
 			),
 		)
 

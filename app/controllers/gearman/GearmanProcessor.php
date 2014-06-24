@@ -1,5 +1,12 @@
 <?php
 
+// ----------------------------------------------------------------------------
+// Workers daemon
+// ----------------------------------------------------------------------------
+// This file allows to send a task/job to a GearmanWorker to process and return
+// information to the GearmanServer
+// ----------------------------------------------------------------------------
+
 namespace Gearman;
 
 // Gearman
@@ -23,6 +30,7 @@ $app = require_once __DIR__.'/../../../bootstrap/start.php';
 use \Illuminate\Support\Facades\DB as DB;
 use \Response as Response;
 use \Config as Config;
+use \App as App;
 
 
 function is_json($str) {
@@ -37,9 +45,24 @@ function is_json($str) {
 $worker = new GearmanWorker();
 
 // Add a server (again, same defaults apply as a worker)
-//$worker->addServer();
-//$worker->addServer('192.168.56.1', 4370);
-$worker->addServer('192.168.56.102', '4730'); // by default host/port will be "localhost" & 4730
+
+//$worker->addServer('192.168.56.102', '4730'); // by default host/port will be "localhost" & 4730
+
+
+$servers = Config::get('gearman.workers');
+
+foreach ($servers as $server => $port) {
+	//if (App::environment('local'))
+	//{
+		echo "Connecting to $server : $port<br />\n";
+	//}
+	
+	//$worker->addServer($server, (int) $port);
+	
+	$worker->addServer("$server", (int) $port);
+	
+	//$worker->addServer('192.168.56.102', '4731'); break;
+}
 
 
 // Existing functions
@@ -52,10 +75,19 @@ $functions_to_declare = array(
 
 // Inform the server that this worker can process the following function calls
 foreach ($functions_to_declare as $func_ix => $func) {
-	echo "Declaring: {$func_ix} -> {$func}\n";
+	
+	if (App::environment('local'))
+	{
+		echo "Declaring: {$func_ix} -> {$func}\n";
+	}
+	
 	$worker->addFunction($func_ix, $func);
 }
 
+// ----------------------------------------------------------------------------
+// TODO: Add dynamic terminate and restart when we have implemented a new
+//       functionality or updated an existing one. 
+// ----------------------------------------------------------------------------
 
 while (1) {
 	//try {
@@ -74,7 +106,7 @@ function before_process($job, $workload) {
 	echo "Workload: $workload\n";
 } 
 
-// A much simple reverse function
+// A simple reverse function
 function reverse_fn(GearmanJob $job) {
 	$workload = $job->workload();
 	
@@ -132,6 +164,7 @@ function getUserDetails(GearmanJob $job) {
 				'password' => $password
 			);
 
+			//die('Connecting DB...');
 			
 			// Database connection
 			$db = DB::connection('mysqlcw');
@@ -200,7 +233,13 @@ function getOauth2Authorize(GearmanJob $job) {
 		
 		$error = array('error'=>'JSON: Invalid data was sent');
 	}*/
+	
+	
+	$api_settings = Config::get('api.settings');
 
+	$api_url = $api_settings['base_url']; // http://cloudwalkers-api.local/
+	
+	
 	// We have a job to process
 	if ($workload) {
 		$res = null;
@@ -210,7 +249,7 @@ function getOauth2Authorize(GearmanJob $job) {
 		
 		try
 		{
-			$url = 'http://cloudwalkers-api.local/oauth2/authorize'.
+			$url = $api_url . 'oauth2/authorize'.
 					'?grant_type=authorization_code'.
 					'&client_id=1'.
 					'&client_secret=dswREHV2YJjF7iL5Zr5ETEFBwGwDQYjQ'.
@@ -285,6 +324,10 @@ function getOauth2AccessToken(GearmanJob $job) {
 	$error = array('error'=>'JSON: Invalid data was sent');
 	}*/
 
+	$api_settings = Config::get('api.settings');
+	
+	$api_url = $api_settings['base_url']; // http://cloudwalkers-api.local/
+	
 	// We have a job to process
 	if ($workload) {
 		$res = null;
@@ -294,7 +337,7 @@ function getOauth2AccessToken(GearmanJob $job) {
 
 		try
 		{
-			$url = 'http://cloudwalkers-api.local/oauth2/authorize'.
+			$url = $api_url . 'oauth2/authorize'.
 					'?grant_type=authorization_code'.
 					'&client_id=1'.
 					'&client_secret=dswREHV2YJjF7iL5Zr5ETEFBwGwDQYjQ'.
@@ -345,7 +388,7 @@ function getOauth2AccessToken(GearmanJob $job) {
 		$code = isset($response_code['code']) ? $response_code['code'] : null;
 		
 		
-		$res = $client->post('http://cloudwalkers-api.local/oauth2/access_token', [
+		$res = $client->post($api_url . 'oauth2/access_token', [
 			'body' => [
 			'grant_type' => 'authorization_code',
 			'code' => $code,
@@ -353,7 +396,7 @@ function getOauth2AccessToken(GearmanJob $job) {
 			'client_secret' => 'dswREHV2YJjF7iL5Zr5ETEFBwGwDQYjQ',
 			//'state' => 0,
 			//'scope' => 'user',
-			'redirect_uri' => 'http://cloudwalkers-api.local/demo/backhome'
+			'redirect_uri' => $api_url . 'demo/backhome'
 			//'redirect_uri' => urlencode('http://cloudwalkers-api.local/demo/backhome')
 		]
 		]);

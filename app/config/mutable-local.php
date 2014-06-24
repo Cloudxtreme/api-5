@@ -19,6 +19,17 @@ define('LANGUAGE_NL', 'nl');
 	define('BASE_URL', 'http://cloudwalkers-engine.local/');
 	define('BASE_URL_SSL', 'https://cloudwalkers-engine.local/');
 	
+	define('DOMAIN_API_URL', 'cloudwalkers-api.local/');
+	define('DOMAIN_API_URL_SSL', 'cloudwalkers-api.local/');
+	
+	//Check if the request if made through HTTPS
+	if ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') 
+	  || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)) {
+		define('BASE_API_URL', 'https://'. DOMAIN_API_URL_SSL);
+	} else {
+		define('BASE_API_URL', 'http://'. DOMAIN_API_URL);
+	}
+	
 	define('GEARMAN_SERVER', false);
 	define('GEARMAN_PORT', 4730);
 

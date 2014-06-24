@@ -8,6 +8,11 @@ public $config_file = "";
 
 	function __construct()
 	{
+		// --------------------------------------------------------------------
+		// TODO: Check if we want to maintain the same logic with the "mutable.php"
+		//       or use the Laravel settings / configuration files
+		// --------------------------------------------------------------------
+		
 		// Define the config folder
 		$this->config_folder = str_replace("\\", "/", dirname(__FILE__) ."/../config");
 		
@@ -25,8 +30,6 @@ public $config_file = "";
 			$this->config_file = $this->config_folder . "/mutable.php";
 			
 		}
-		
-		//die($this->config_file);
 		
 		// Include configuration settings /app/config/{ mutable.php || mutable-local.php }
 		require_once $this->config_file;
