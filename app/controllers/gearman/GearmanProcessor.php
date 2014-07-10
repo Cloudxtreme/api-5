@@ -49,7 +49,7 @@ $worker = new GearmanWorker();
 //$worker->addServer('192.168.56.102', '4730'); // by default host/port will be "localhost" & 4730
 
 
-$servers = Config::get('gearman.workers');
+$servers = Config::get('gearman.servers');
 
 foreach ($servers as $server => $port) {
 	//if (App::environment('local'))
@@ -59,7 +59,9 @@ foreach ($servers as $server => $port) {
 	
 	//$worker->addServer($server, (int) $port);
 	
-	$worker->addServer("$server", (int) $port);
+	//$worker->addServer("$server", (int) $port);
+	
+	$worker->addServer('192.168.56.102', '4730'); break; // TEST!
 	
 	//$worker->addServer('192.168.56.102', '4731'); break;
 }
