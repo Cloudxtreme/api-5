@@ -1,6 +1,5 @@
 <?php
 
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -35,10 +34,30 @@ Route::get('/', function()
 // ----------------------------------------------------------------------------
 Route::group(['prefix' => 'oauth2'], function()
 {
-
 	
-	// GET => /oauth2/authorize
-	//        Filter "check-authorization-params" is called to setup $params (@ SESSION)
+	//echo "GROUP OAUTH";
+	/*
+	App::singleton('oauth2', function() {
+	
+		$storage = new OAuth2\Storage\Pdo(array('dsn' => 'mysql:dbname='. DB_NAME .';host='. DB_HOST, 'username' => DB_USERNAME, 'password' => DB_PASSWORD));
+		$server = new OAuth2\Server($storage);
+	
+		$server->addGrantType(new OAuth2\GrantType\ClientCredentials($storage));
+		$server->addGrantType(new OAuth2\GrantType\UserCredentials($storage));
+	
+		return $server;
+	});
+	*/
+	
+	//App::singleton('oauth2')->
+	
+	
+	//GET => /oauth2/authorize/web
+	//Route::get('authorize/web', 'OAuth2Controller@getAuthorizeWeb');
+	
+	//GET => /oauth2/authorize
+	//Route::get('authorize', 'OAuth2Controller@getAuthorize');
+	
 	Route::any('authorize', array('before' => 'check-authorization-params', 'uses' => 'OAuth2Controller@getAuthorize'));
 	
 	
@@ -48,9 +67,17 @@ Route::group(['prefix' => 'oauth2'], function()
 	// POST => /oauth2/authorize/web
 	// ----------------------------------------------------------------------------
 	Route::post('access_token', 'OAuth2Controller@postAccessToken');
-
+	
+	/*
+	Route::get('authorize', array('before' => 'check-authorization-params', function()
+	{
+	
+	}));
+	*/
+	
+	
 	// ----------------------------------------------------------------------------
-	// TEST authorize-params
+	// 
 	// ----------------------------------------------------------------------------
 	
 	/*Route::get('authorize', array('before' => 'check-authorization-params|auth', function()
@@ -64,7 +91,50 @@ Route::group(['prefix' => 'oauth2'], function()
 		// display the authorization form
 		return View::make('authorization-form', array('params' => $params));
 	}));*/
-
+	
+	
+	// ----------------------------------------------------------------------------
+	//
+	// ----------------------------------------------------------------------------
+	/*
+	Route::post('authorize', array('before' => 'check-authorization-params|auth|csrf', function()
+	{
+		// get the data from the check-authorization-params filter
+		$params = Session::get('authorize-params');
+	
+		// get the user id
+		$params['user_id'] = Auth::user()->id;
+	
+		// check if the user approved or denied the authorization request
+		if (Input::get('approve') !== null) {
+	
+			$code = AuthorizationServer::newAuthorizeRequest('user', $params['user_id'], $params);
+	
+			Session::forget('authorize-params');
+	
+			return Redirect::to(AuthorizationServer::makeRedirectWithCode($code, $params));
+		}
+	
+		if (Input::get('deny') !== null) {
+	
+			Session::forget('authorize-params');
+	
+			return Redirect::to(AuthorizationServer::makeRedirectWithError($params));
+		}
+	}));
+	*/
+	
+	/*
+	Route::post('oauth/access_token', function()
+	{
+		return AuthorizationServer::performAccessTokenFlow();
+	});
+	*/
+	
+	//GET => /oauth2/
+	//GET => /oauth2/requesttoken
+	//GET => /oauth2/accesstoken
+	//Route::controller('', 'OAuth2Controller');
 });
 
 // ----------------------------------------------------------------------------
@@ -112,10 +182,15 @@ Route::group(['prefix' => 'demo', 'namespace' => 'Demo'], function()
 	
 });
 
-// Filter to check if the auth code grant type params are provided
-// Overrided from:
-// Route::filter('check-authorization-params', 'LucaDegasperi\OAuth2Server\Filters\CheckAuthorizationParamsFilter');
+//Route::filter('check-authorization-params1', 'League\OAuth2\Server\Filters\CheckAuthorizationParamsFilter');
 Route::filter('check-authorization-params', 'demo\DemoController@CheckAuthorizationParamsFilter');
+
+
+
+//Route::filter('check-authorization-params', '\\League\\OAuth2\\Server\\Filters\\CheckAuthorizationParamsFilter');
+
+// filter to check if the auth code grant type params are provided
+//Route::filter('check-authorization-params', 'LucaDegasperi\OAuth2Server\Filters\CheckAuthorizationParamsFilter');
 
 // make sure an endpoint is accessible only by authrized members eventually with specific scopes
 //Route::filter('oauth', 'LucaDegasperi\OAuth2Server\Filters\OAuthFilter');
@@ -133,8 +208,7 @@ Route::filter("check_oauth", function()
 	if (Input::server("token") !== $user->token)
 	{
 		App::abort(400, "Invalid token");
-	}
-	*/
+	}*/
 });
 
 // ----------------------------------------------------------------------------
@@ -144,6 +218,18 @@ Route::filter("check_oauth", function()
 // GET => /demo/signin
 // ----------------------------------------------------------------------------
 
+//GET => /demo/test_user
+//Route::get(['prefix' => 'test_user', 'namespace' => 'Demo', 'before' => 'auth'], 'DemoController@getTestUser');
+//Route::get(['prefix' => 'test_user', 'namespace' => 'Demo', 'before' => 'auth'], 'DemoController@getTestUser');
+
+//Route::group(['prefix' => 'demo/test_user', 'namespace' => 'Demo', 'before' => 'auth'], function() {
+	//DemoController->getTestUser();
+//});
+
+
+
+//GET => /demo/
+//GET => /demo/signin
 Route::controller('demo', 'demo\\DemoController');
 
 // ----------------------------------------------------------------------------
@@ -169,7 +255,19 @@ Route::group(['prefix' => 'test', 'namespace' => 'Test'], function()
 	//GET => /test/worker
 	//Test :: Send some text and return the text reversed (standard Gearman Worker test)
 	Route::get('worker', 'TestOAuth2Controller@test_worker');
-	
+	/*
+	Route::get('worker', function()
+	{
+
+		foreach (array(1,2,3) as $row) {
+			echo "Adding $row<br />\n";
+				
+			Queue::push('gearman\\Services', array('action'=>'get_token', 'message' => 'Token №' . $row));
+			
+		}
+		
+	});
+	*/
 	//GET,POST => /test/get_user_details
 	//Test :: Obtain user details by { "email", "password" }
 	Route::any('get_user_details', 'TestOAuth2Controller@get_user_details');
@@ -186,8 +284,6 @@ Route::group(['prefix' => 'test', 'namespace' => 'Test'], function()
 	Route::get('show_settings', 'TestOAuth2Controller@show_settings');
 	
 });
-
-
 
 
 
