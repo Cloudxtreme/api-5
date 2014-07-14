@@ -26,7 +26,23 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('homestead'),
+	// "hostname" of the machine/server
+	//
+	// Load its respective settings from the following sub-folder
+	//
+	'local' => array(
+		'FRM_BEE_12',                 // RCS - Desktop 
+		'FRM_BEE_12.bee-eng.CORP',    // RCS - Desktop
+		'localhost.localdomain'       // RCS - Virtual Machine (Fedora)
+	),
+	'staging' => array(
+		'devapi.cloudwalkers.be',     // Development Server
+		'devplatform.cloudwalkers.be' // Development Server
+	),
+	'production' => array(
+		'cloudwalkers.be',            // Production Server
+		'www.cloudwalkers.be'         // Production Server
+	),
 
 ));
 
