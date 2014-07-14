@@ -1,0 +1,8 @@
+Files to configure:
+
+app\config\cache.php
+app\config\database.php
+app\config\local\database.php
+app\config\mutable-local.php
+
+
