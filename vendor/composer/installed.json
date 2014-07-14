@@ -705,65 +705,6 @@
         ]
     },
     {
-        "name": "league/oauth2-server",
-        "version": "3.2",
-        "version_normalized": "3.2.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/thephpleague/oauth2-server.git",
-            "reference": "e8aeaf0777eef0fe91fae81c7ce1e331c7033894"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/thephpleague/oauth2-server/zipball/e8aeaf0777eef0fe91fae81c7ce1e331c7033894",
-            "reference": "e8aeaf0777eef0fe91fae81c7ce1e331c7033894",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4.0"
-        },
-        "replace": {
-            "lncd/oauth2": "*"
-        },
-        "require-dev": {
-            "league/phpunit-coverage-listener": "~1.0",
-            "mockery/mockery": ">=0.7.2"
-        },
-        "time": "2014-04-06 21:04:19",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "League\\OAuth2\\Server": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Alex Bilbie",
-                "email": "hello@alexbilbie.com",
-                "homepage": "http://www.alexbilbie.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "A lightweight and powerful OAuth 2.0 authorization and resource server library with support for all the core specification grants. This library will allow you to secure your API with OAuth and allow your applications users to approve apps that want to access their data from your API.",
-        "keywords": [
-            "Authentication",
-            "api",
-            "auth",
-            "authorization",
-            "oauth",
-            "oauth2",
-            "protect",
-            "resource",
-            "secure",
-            "server"
-        ]
-    },
-    {
         "name": "guzzle/guzzle",
         "version": "v3.9.1",
         "version_normalized": "3.9.1.0",
@@ -2067,6 +2008,65 @@
         "keywords": [
             "framework",
             "laravel"
+        ]
+    },
+    {
+        "name": "league/oauth2-server",
+        "version": "3.2.1",
+        "version_normalized": "3.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/thephpleague/oauth2-server.git",
+            "reference": "4362f17fd63c0329c4a4e5a905d39feaf70240b8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/thephpleague/oauth2-server/zipball/4362f17fd63c0329c4a4e5a905d39feaf70240b8",
+            "reference": "4362f17fd63c0329c4a4e5a905d39feaf70240b8",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "replace": {
+            "lncd/oauth2": "*"
+        },
+        "require-dev": {
+            "league/phpunit-coverage-listener": "~1.0",
+            "mockery/mockery": ">=0.7.2"
+        },
+        "time": "2014-07-11 15:21:40",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "League\\OAuth2\\Server": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Alex Bilbie",
+                "email": "hello@alexbilbie.com",
+                "homepage": "http://www.alexbilbie.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "A lightweight and powerful OAuth 2.0 authorization and resource server library with support for all the core specification grants. This library will allow you to secure your API with OAuth and allow your applications users to approve apps that want to access their data from your API.",
+        "keywords": [
+            "Authentication",
+            "api",
+            "auth",
+            "authorization",
+            "oauth",
+            "oauth2",
+            "protect",
+            "resource",
+            "secure",
+            "server"
         ]
     }
 ]

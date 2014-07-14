@@ -18,9 +18,13 @@ use \GuzzleHttp\Exception\ClientException as ClientException;
 
 // Gearman
 use \GearmanClient as GearmanClient;
+//use \Gearman\Status as GearmanServerStatus;
+//use \Status\GearmanServerStatus as GearmanServerStatus;
+use \Gearman\GearmanServerStatus as GearmanServerStatus;
 
-
-class TestOAuth2Controller extends \BaseController {
+class TestOAuth2Controller 
+	extends \BaseController 
+{
 
 	/*
 	|--------------------------------------------------------------------------
@@ -519,15 +523,39 @@ class TestOAuth2Controller extends \BaseController {
 		//var_dump(Config::get('gearman'));
 		
 		//var_dump(Config::get('api'));
+		echo "<h1>Database</h1>";
 		
-		$servers = Config::get('gearman.servers');
+		$api_settings = Config::get('database.connections');
 		
-		var_dump($servers);
+		var_dump($api_settings);
+		
+		
+		echo "<h1>Database</h1>";
+		
+		$api_settings = Config::get('database.connections.oauth2');
+		
+		var_dump($api_settings);
+		
+		
+		echo "<h1>API.Settings</h1>";
 		
 		$api_settings = Config::get('api.settings');
 		
 		var_dump($api_settings);
 		
+		
+		echo "<h1>Gearman.Workers</h1>";
+		
+		$servers = Config::get('gearman.servers');
+		
+		var_dump($servers);
+		
+		
+		echo "<h1>Gearman Server Status</h1>";
+		
+		$gss = new GearmanServerStatus();
+		
+		echo print_r($gss->getStatus(),true);
 		
 		
 		//var_dump(Config::getItems());

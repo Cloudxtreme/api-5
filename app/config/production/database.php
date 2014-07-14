@@ -22,8 +22,8 @@ return array(
 
 		'mysqlcw' => array(
 			'driver'    => 'mysql',
-			'host'      => 'db.cloudwalkers.com', // HOST: db.cloudwalkers.com
-			'port'      => '3306',
+			'host'      => '192.168.56.1', // HOST: db.cloudwalkers.be
+			'port'      => '13306',
 			'database'  => 'cloudwalkers',
 			'username'  => 'myuser',
 			'password'  => 'myuser',

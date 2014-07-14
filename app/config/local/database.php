@@ -20,6 +20,22 @@ return array(
 
 	'connections' => array(
 
+		'oauth2' => array(
+			'driver'    => 'mysql',
+			'host'      => '10.4.99.24', // 192.168.56.1
+			'port'      => '13306',
+			'database'  => 'cloudwalkers_oauth2',
+			'username'  => 'myuser',
+			'password'  => 'myuser',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+			'options'   => array(
+				//PDO::ATTR_PERSISTENT => true, // Optimization with the connection pool
+				//PDO::FETCH_ASSOC
+			),
+		),
+			
 		'mysqlcw' => array(
 			/*'read' => array(
 				'host' => '192.168.56.1',
@@ -27,18 +43,18 @@ return array(
 				//'port'      => '13306'
 			),
 			'write' => array(
-				'host' => '196.168.56.1',
+				'host' => '192.168.56.1',
 				'port'      => '3307'
 				//'port'      => '13306'
 			),*/
 				
 			'driver'    => 'mysql',
-			'host'      => '192.168.56.1',
+			'host'      => '10.4.99.24', // 192.168.56.1
 			//'port'      => '3307',
 			'port'      => '13306',
 			'database'  => 'cloudwalkers',
 			'username'  => 'myuser',
-			'password'  => 'myuser_lo',
+			'password'  => 'myuser',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

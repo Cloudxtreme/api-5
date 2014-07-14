@@ -54,14 +54,15 @@ $servers = Config::get('gearman.servers');
 foreach ($servers as $server => $port) {
 	//if (App::environment('local'))
 	//{
-		echo "Connecting to $server : $port<br />\n";
+		echo "Connecting to $server:$port<br />\n";
 	//}
 	
 	//$worker->addServer($server, (int) $port);
 	
 	//$worker->addServer("$server", (int) $port);
+	$worker->addServer("$server", "$port");
 	
-	$worker->addServer('192.168.56.102', '4730'); break; // TEST!
+	//$worker->addServer('192.168.56.102', '4730'); break; // TEST!
 	
 	//$worker->addServer('192.168.56.102', '4731'); break;
 }
