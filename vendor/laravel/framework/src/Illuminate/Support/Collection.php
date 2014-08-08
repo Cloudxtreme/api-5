@@ -140,11 +140,21 @@ class Collection implements ArrayAccess, ArrayableInterface, Countable, Iterator
 	/**
 	 * Get a flattened array of the items in the collection.
 	 *
-	 * @return array
+	 * @return \Illuminate\Support\Collection
 	 */
 	public function flatten()
 	{
 		return new static(array_flatten($this->items));
+	}
+
+	/**
+	 * Flip the items in the collection.
+	 *
+	 * @return \Illuminate\Support\Collection
+	 */
+	public function flip()
+	{
+		return new static(array_flip($this->items));
 	}
 
 	/**
@@ -196,6 +206,26 @@ class Collection implements ArrayAccess, ArrayableInterface, Countable, Iterator
 	}
 
 	/**
+	 * Key an associative array by a field.
+	 *
+	 * @param  string  $keyBy
+	 * @return \Illuminate\Support\Collection
+	 */
+	public function keyBy($keyBy)
+	{
+		$results = [];
+
+		foreach ($this->items as $item)
+		{
+			$key = data_get($item, $keyBy);
+
+			$results[$key] = $item;
+		}
+
+		return new static($results);
+	}
+
+	/**
 	 * Determine if an item exists in the collection by key.
 	 *
 	 * @param  mixed  $key
@@ -239,6 +269,16 @@ class Collection implements ArrayAccess, ArrayableInterface, Countable, Iterator
 	public function isEmpty()
 	{
 		return empty($this->items);
+	}
+
+	/**
+	 * Get the keys of the collection items.
+	 *
+	 * @return array
+	 */
+	public function keys()
+	{
+		return array_keys($this->items);
 	}
 
 	/**

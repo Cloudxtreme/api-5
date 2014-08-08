@@ -20,27 +20,49 @@ return array(
 
 	'connections' => array(
 
-		'mysql' => array(
+		'oauth2' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'homestead',
-			'username'  => 'homestead',
-			'password'  => 'secret',
+			'host'      => '10.4.99.24', // 192.168.56.1
+			'port'      => '13306',
+			'database'  => 'cloudwalkers_oauth2',
+			'username'  => 'myuser',
+			'password'  => 'myuser',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
+			'options'   => array(
+				//PDO::ATTR_PERSISTENT => true, // Optimization with the connection pool
+				//PDO::FETCH_ASSOC
+			),
 		),
-
-		'pgsql' => array(
-			'driver'   => 'pgsql',
-			'host'     => 'localhost',
-			'database' => 'homestead',
-			'username' => 'homestead',
-			'password' => 'secret',
-			'charset'  => 'utf8',
-			'prefix'   => '',
-			'schema'   => 'public',
-		),
+			
+		'mysqlcw' => array(
+			/*'read' => array(
+				'host' => '192.168.56.1',
+				'port'      => '3307'
+				//'port'      => '13306'
+			),
+			'write' => array(
+				'host' => '192.168.56.1',
+				'port'      => '3307'
+				//'port'      => '13306'
+			),*/
+				
+			'driver'    => 'mysql',
+			'host'      => '10.4.99.24', // 192.168.56.1
+			//'port'      => '3307',
+			'port'      => '13306',
+			'database'  => 'cloudwalkers',
+			'username'  => 'myuser',
+			'password'  => 'myuser',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+			'options'   => array(
+					//PDO::ATTR_PERSISTENT => true, // Optimization with the connection pool
+					//PDO::FETCH_ASSOC
+			),
+		)
 
 	),
 

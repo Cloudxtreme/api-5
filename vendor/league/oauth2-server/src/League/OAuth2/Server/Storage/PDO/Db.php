@@ -72,6 +72,10 @@ class Db {
 		return $this->query($sql, $params, $pdo_fetch_params)->fetchAll();
 	}
 
+	function prepare($sql, $options = array()) {
+		return $this->conn->prepare($sql, $options);
+	}
+	
 	function escape($str) {
 		return $this->conn->quote($str);
 	}

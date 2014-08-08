@@ -9,9 +9,9 @@ use \Redirect as Redirect;
 use \League\OAuth2\Server\Util\RedirectUri as RedirectUri;
 use \League\OAuth2\Server\Storage\PDO\Db as DBOauth;
 
-class DemoController 
-	extends \BaseController 
-	//implements \BaseController 
+
+
+class DemoController extends \BaseController 
 {
 
 	/*
@@ -42,8 +42,6 @@ class DemoController
 		// LOAD CONFIGURATION FROM BASE CONTROLLER
 		// --------------------------------------------------------------------
 		parent::__construct();
-		
-		//include_once dirname(__FILE__) .'/../../../app/config/mutable-local.php';
 		
 		// --------------------------------------------------------------------
 		// MYSQL CONNECTION
@@ -101,7 +99,8 @@ class DemoController
 		);
 		
 		// Enable the authorization code grant type
-		$this->authserver->addGrantType(new \League\OAuth2\Server\Grant\AuthCode($this->authserver));
+		//$this->authserver->addGrantType(new \League\OAuth2\Server\Grant\AuthCode($this->authserver));
+		$this->authserver->addGrantType(new \League\OAuth2\Server\Grant\AuthCode());
 		
 		
 		$server = $this->authserver;
@@ -117,18 +116,19 @@ class DemoController
 				// The access token is missing or invalid...
 				catch (League\OAuth2\Server\Exception\InvalidAccessTokenException $e)
 				{
-					$app = \Slim\Slim::getInstance();
-					$res = $app->response();
-					$res['Content-Type'] = 'application/json';
-					$res->status(403);
+					//$app = \Slim\Slim::getInstance();
+					//$res = $app->response();
+					//$res['Content-Type'] = 'application/json';
+					//$res->status(403);
 		
-					$res->body(json_encode(array(
-							'error' =>  $e->getMessage()
-					)));
+					//$res->body(json_encode(array(
+							//'error' =>  $e->getMessage()
+					//)));
 				}
 			};
 		};
 		
+		$checkToken();
 		
 		
 	}
@@ -143,8 +143,12 @@ class DemoController
 	
 	public function getBackhome()
 	{
+		$code = $_GET['code'];
+		
+		$str_code = "CODE: $code";
+		
 		// Show back home page
-		$data = 'Hello, back home!';
+		$data = 'Hello, back home!<br /><br />'. $str_code;
 	
 		return $data;
 	}
@@ -185,21 +189,23 @@ class DemoController
 		
 			// If the acess token has the "user.contact" access token include
 			//  an email address and phone numner
-			if ($this->authserver->hasScope('user.contact'))
+			/*if ($this->authserver->hasScope('user.contact'))
 			{
 				$response['result']['email'] = $user['email'];
 				$response['result']['phone'] = $user['phone'];
-			}
+			}*/
 		
 			// Respond
-			$res = $app->response();
-			$res['Content-Type'] = 'application/json';
+			//$res = $app->response();
+			//$res['Content-Type'] = 'application/json';
 		
-			$res->body(json_encode($response));
+			//$res->body(json_encode($response));
+			
+			
 		}
 		
 		
-		return "Test User";
+		return "DemoController @ Test User";
 	}
 	
 
@@ -280,47 +286,58 @@ class DemoController
 					throw new \Exception('Please enter your password.');
 				}
 	
-				//die("$email, $password");
+// 				//die("$email, $password");
 				
-				// Verify the user's username and password
-				// Set the user's ID to a session
+// 				// Verify the user's username and password
+// 				// Set the user's ID to a session
 
-				// But first we reset session
-				//Session::put('user_id', null);
+// 				// But first we reset session
+// 				//Session::put('user_id', null);
 				
-				//$email = $this->db->escape($email);
-				//$password = $this->db->escape($password);
+// 				//$email = $this->db->escape($email);
+// 				//$password = $this->db->escape($password);
 		
-				$sql = "SELECT
-							u.u_id as u_id,
-							u.u_email as u_email
-						FROM
-							users u
-						WHERE
-							u.u_email = :email AND 
-							u.u_password = MD5(CONCAT(:password, u.u_salt));";
+// 				$sql = "SELECT
+// 							u.u_id as u_id,
+// 							u.u_email as u_email
+// 						FROM
+// 							users u
+// 						WHERE
+// 							u.u_email = :email AND 
+// 							u.u_password = MD5(CONCAT(:password, u.u_salt));";
 				
-				$params = array(
-					':email' => $email,
-					':password' => $password
+// 				$params = array(
+// 					':email' => $email,
+// 					':password' => $password
 						
-				);
+// 				);
 				
-				//Query user details
-				$rows = $this->db->queryAndFetchAll($sql, $params);
+// 				//Query user details
+// 				$rows = $this->db->queryAndFetchAll($sql, $params);
 				
-				// Clear sensitive information
-				unset($email, $password, $params);
+// 				// Clear sensitive information
+// 				unset($email, $password, $params);
 				
-				// Check if the row exists and is valid
-				$row = isset($rows[0]) && is_array($rows[0]) ? $rows[0] : null;
+// 				// Check if the row exists and is valid
+// 				$row = isset($rows[0]) && is_array($rows[0]) ? $rows[0] : null;
 				
-				$u_id = isset($row['u_id']) ? $row['u_id'] : '';
-				$u_email = isset($row['u_email']) ? $row['u_email'] : '';
+// 				$u_id = isset($row['u_id']) ? $row['u_id'] : '';
+// 				$u_email = isset($row['u_email']) ? $row['u_email'] : '';
+				
+				
+				// ------------------------------------------------------------------------------------------------
+				// Avoid connection to database, because this is just the API for authentication and authorization 
+				// ------------------------------------------------------------------------------------------------
+				// Populate a user "hard-coded", as a quick example (above code works, but the "oauth2" database
+				// does not have the "users" table)
+				$u_id    = 1;
+				$u_email = "robertos@agap2.pt";
+				// ------------------------------------------------------------------------------------------------
+				
 
 				//die("USER DETAILS: $u_id, $u_email");
 				
-				if ("$u_id" == '' || $u_email == '') {
+				if ("$u_id" == '' || "$u_email" == '') {
 					Session::put('user_id', null);
 					Session::put('user_email', null);
 					
@@ -451,8 +468,8 @@ class DemoController
 	
 			// Throw an exception because there was a problem with the client's request
 			$response = array(
-					'error' =>  $this->authserver->getExceptionType($e->getCode()),
-					'error_description' => $e->getMessage()
+				'error' =>  $this->authserver->getExceptionType($e->getCode()),
+				'error_description' => $e->getMessage()
 			);
 	
 			// Set the correct header
@@ -471,6 +488,52 @@ class DemoController
 		echo json_encode($response);
 	}
 	
+	
+/**
+	 * Run the check authorization params filter
+	 *
+	 * @param Route $route the route being called
+	 * @param Request $request the request object
+	 * @param string $scope additional filter arguments
+	 * @return Response|null a bad response in case the params are invalid
+	 */
+	public function CheckAuthorizationParamsFilter($route, $request, $scope = null)
+	{
+		//echo "=> FILTER :: CheckAuthorizationParamsFilter<br />\n";
+		
+		//die('DemoController.CheckAuthorizationParamsFilter');
+		
+		
+		try {
+			
+			// Tell the auth server to check the required parameters are in the
+			//  query string
+			$params = $this->authserver->getGrantType('authorization_code')->checkAuthoriseParams();
+			
+			//$params['owner_id'] = $params['client_id']; 
+				
+			Session::put('authorize-params', $params);
+			
+
+			//echo "=> FILTER :: CheckAuthorizationParamsFilter<br />\n"; die('X...');
+
+		} catch (ClientException $e) {
+
+			return Response::json(array(
+					'status' => 400,
+					'error' => 'bad_request',
+					'error_message' => $e->getMessage(),
+			), 400);
+
+		} catch (Exception $e) {
+
+			return Response::json(array(
+					'status' => 500,
+					'error' => 'internal_server_error',
+					'error_message' => 'Internal Server Error: '. $e->getMessage(),
+			), 500);
+		}
+	}
 	
 	
 	public function missingMethod($parameters = array())

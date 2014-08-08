@@ -244,6 +244,10 @@ class Authorization
         if (is_null($identifier)) {
             $identifier = $grantType->getIdentifier();
         }
+
+        // Inject server into grant
+        $grantType->setAuthorizationServer($this);
+
         $this->grantTypes[$identifier] = $grantType;
 
         if ( ! is_null($grantType->getResponseType())) {
@@ -261,6 +265,11 @@ class Authorization
         return (array_key_exists($identifier, $this->grantTypes));
     }
 
+    /**
+     * Returns response types
+     *
+     * @return array
+     */
     public function getResponseTypes()
     {
         return $this->responseTypes;
@@ -287,11 +296,12 @@ class Authorization
 
     /**
      * Default scope to be used if none is provided and requireScopeParam is false
-     * @var string|array
+     * @param string|array $default
      */
     public function setDefaultScope($default = null)
     {
         $this->defaultScope = $default;
+        return $this;
     }
 
     /**
@@ -321,6 +331,7 @@ class Authorization
     public function requireStateParam($require = true)
     {
         $this->requireStateParam = $require;
+        return $this;
     }
 
     /**
@@ -341,6 +352,7 @@ class Authorization
     public function setScopeDelimeter($scopeDelimeter = ' ')
     {
         $this->scopeDelimeter = $scopeDelimeter;
+        return $this;
     }
 
     /**
@@ -359,6 +371,7 @@ class Authorization
     public function setAccessTokenTTL($accessTokenTTL = 3600)
     {
         $this->accessTokenTTL = $accessTokenTTL;
+        return $this;
     }
 
     /**
@@ -369,6 +382,7 @@ class Authorization
     public function setRequest(Util\RequestInterface $request)
     {
         $this->request = $request;
+        return $this;
     }
 
     /**
@@ -381,7 +395,6 @@ class Authorization
         if ($this->request === null) {
             // @codeCoverageIgnoreStart
             $this->request = Request::buildFromGlobals();
-
         }
         // @codeCoverageIgnoreEnd
 

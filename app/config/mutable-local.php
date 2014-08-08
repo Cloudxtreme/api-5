@@ -19,6 +19,17 @@ define('LANGUAGE_NL', 'nl');
 	define('BASE_URL', 'http://cloudwalkers-engine.local/');
 	define('BASE_URL_SSL', 'https://cloudwalkers-engine.local/');
 	
+	define('DOMAIN_API_URL', 'cloudwalkers-api.local/');
+	define('DOMAIN_API_URL_SSL', 'cloudwalkers-api.local/');
+	
+	//Check if the request if made through HTTPS
+	if ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') 
+	  || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)) {
+		define('BASE_API_URL', 'https://'. DOMAIN_API_URL_SSL);
+	} else {
+		define('BASE_API_URL', 'http://'. DOMAIN_API_URL);
+	}
+	
 	define('GEARMAN_SERVER', false);
 	define('GEARMAN_PORT', 4730);
 
@@ -27,11 +38,11 @@ define('LANGUAGE_NL', 'nl');
 	define ('MEMCACHE_PREFIX', 'cwdev');
 	
 	define('DB_PROTOCOL', 'mysql');
-	define('DB_HOST', '127.0.0.1');
+	define('DB_HOST', '10.4.99.24'); // 192.168.56.1
 	define('DB_USERNAME', 'myuser');
 	define('DB_PASSWORD', 'myuser');
-	define('DB_NAME', 'cloudwalkers');
-	define('DB_PORT', '3307');
+	define('DB_NAME', 'cloudwalkers_oauth2');
+	define('DB_PORT', '13306');
 	define('DB_CHARSET', 'utf8');
 	
 	//OAUTH2 connection
@@ -39,7 +50,7 @@ define('LANGUAGE_NL', 'nl');
 	
 	if (DB_OAUTH2_ENGINE == 'sqlite3') {
 		define('DB_OAUTH2_PROTOCOL', 'sqlite');
-		define('DB_OAUTH2_HOST', '127.0.0.1');
+		define('DB_OAUTH2_HOST', '192.168.56.1');
 		define('DB_OAUTH2_PORT', '8787');
 		define('DB_OAUTH2_USERNAME', 'myuser');
 		define('DB_OAUTH2_PASSWORD', 'myuser');
@@ -48,12 +59,12 @@ define('LANGUAGE_NL', 'nl');
 		define('DB_OAUTH2_DSN', DB_OAUTH2_PROTOCOL .':'. DB_OAUTH2_DATABASE);
 	} else {
 		define('DB_OAUTH2_PROTOCOL', 'mysql');
-		define('DB_OAUTH2_HOST', '127.0.0.1');
+		define('DB_OAUTH2_HOST', '192.168.56.1');
 		define('DB_OAUTH2_PORT', '3307');
 		define('DB_OAUTH2_USERNAME', 'myuser');
 		define('DB_OAUTH2_PASSWORD', 'myuser');
-		define('DB_OAUTH2_NAME', 'cloudwalkers');
-		define('DB_OAUTH2_DATABASE', 'cloudwalkers');
+		define('DB_OAUTH2_NAME', 'cloudwalkers_oauth2');
+		define('DB_OAUTH2_DATABASE', 'cloudwalkers_oauth2');
 		define('DB_OAUTH2_DSN', DB_OAUTH2_PROTOCOL .':dbname='.DB_OAUTH2_DATABASE.';host='.DB_OAUTH2_HOST);
 	}
 	

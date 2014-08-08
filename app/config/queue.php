@@ -15,7 +15,8 @@ return array(
 	|
 	*/
 
-	'default' => 'sync',
+	//'default' => 'sync',
+	'default' => 'gearman',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -63,6 +64,12 @@ return array(
 			'queue'  => 'default',
 		),
 
+		'gearman' => array(
+			'driver' => 'gearman',
+			'host'   => 'localserver.6min.local',
+			'queue'  => 'default',
+			'port'   => '4730'
+		)
 	),
 
 	/*

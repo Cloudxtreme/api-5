@@ -8,6 +8,11 @@ public $config_file = "";
 
 	function __construct()
 	{
+		// --------------------------------------------------------------------
+		// TODO: Check if we want to maintain the same logic with the "mutable.php"
+		//       or use the Laravel settings / configuration files
+		// --------------------------------------------------------------------
+		
 		// Define the config folder
 		$this->config_folder = str_replace("\\", "/", dirname(__FILE__) ."/../config");
 		

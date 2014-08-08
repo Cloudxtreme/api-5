@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'http://cloudwalkers-api.local',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -111,7 +111,10 @@ return array(
 		'Illuminate\Mail\MailServiceProvider',
 		'Illuminate\Database\MigrationServiceProvider',
 		'Illuminate\Pagination\PaginationServiceProvider',
-		'Illuminate\Queue\QueueServiceProvider',
+		
+		//'Illuminate\Queue\QueueServiceProvider', // Replaced by 'Pafelin\Gearman\GearmanServiceProvider'
+		'Pafelin\Gearman\GearmanServiceProvider',
+		
 		'Illuminate\Redis\RedisServiceProvider',
 		'Illuminate\Remote\RemoteServiceProvider',
 		'Illuminate\Auth\Reminders\ReminderServiceProvider',
@@ -120,9 +123,9 @@ return array(
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
-		'Illuminate\Workbench\WorkbenchServiceProvider',
+		'Illuminate\Workbench\WorkbenchServiceProvider'
 
-		'LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider'
+		//'LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider'
 	),
 
 	/*
@@ -191,8 +194,8 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 
 		// OAuth2 aliases
-		'AuthorizationServer' => 'LucaDegasperi\OAuth2Server\Facades\AuthorizationServerFacade',
-		'ResourceServer' => 'LucaDegasperi\OAuth2Server\Facades\ResourceServerFacade'
+		//'AuthorizationServer' => 'LucaDegasperi\OAuth2Server\Facades\AuthorizationServerFacade',
+		//'ResourceServer' => 'LucaDegasperi\OAuth2Server\Facades\ResourceServerFacade'
 	),
 
 );

@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => 'mysqlcw',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -44,25 +44,55 @@ return array(
 	|
 	*/
 
+	// This is the "default" configuration, when sub-folder { /local/, /staging/, /production/ } is not found
+	
+	// Dump all loaded configuration items
+	// var_dump(Config::getItems())
+	
+	// If you want to see the configuration settings for a particular group, use Config::get('groupname').
+	
+	// Dump all the database settings
+	// var_dump(Config::get('database'));
+		
+	// ------------------------------------------------------------------------
+	// These are the fallback settings	
+	// ------------------------------------------------------------------------
 	'connections' => array(
-
+/*
 		'sqlite' => array(
 			'driver'   => 'sqlite',
 			'database' => __DIR__.'/../database/production.sqlite',
 			'prefix'   => '',
-		),
+		),*/
 
-		'mysql' => array(
+		'mysqlcw' => array(
+			/*'read' => array(
+				'host' => '192.168.56.1',
+				'port'      => '3307'
+				//'port'      => '13306'
+			),
+			'write' => array(
+				'host' => '192.168.56.1',
+				'port'      => '3307'
+				//'port'      => '13306'
+			),*/
 			'driver'    => 'mysql',
-			'host'      => '127.0.0.1:3307',
+			'host'      => '192.168.56.1',
+			//'port'      => '3307',
+			'port'      => '13306',
 			'database'  => 'cloudwalkers',
 			'username'  => 'myuser',
 			'password'  => 'myuser',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
+			'options'   => array(
+					//PDO::ATTR_PERSISTENT => true, // Optimization with the connection pool
+					//PDO::FETCH_ASSOC
+			),
 		),
-
+			
+/*
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',
@@ -82,7 +112,7 @@ return array(
 			'password' => '',
 			'prefix'   => '',
 		),
-
+*/
 	),
 
 	/*
@@ -108,7 +138,7 @@ return array(
 	| such as APC or Memcached. Laravel makes it easy to dig right in.
 	|
 	*/
-
+	/*
 	'redis' => array(
 
 		'cluster' => false,
@@ -120,5 +150,5 @@ return array(
 		),
 
 	),
-
+	*/
 );
