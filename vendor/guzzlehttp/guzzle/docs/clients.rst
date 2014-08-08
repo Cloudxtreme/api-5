@@ -70,7 +70,7 @@ base URL that is a URI template with parameters.
     use GuzzleHttp\Client;
 
     $client = new Client([
-        'base_url' => ['https://api.twitter.com/{version}', ['version' => 'v1.1']],
+        'base_url' => ['https://api.twitter.com/{version}/', ['version' => 'v1.1']],
         'defaults' => [
             'headers' => ['Foo' => 'Bar'],
             'query'   => ['testing' => '123'],
@@ -297,7 +297,7 @@ immeditaley and prevent subsequent requests from being sent.
     use GuzzleHttp\Event\ErrorEvent;
 
     $client->sendAll($requests, [
-        'error' => function (ErrorEvent $event) use (&$errors) {
+        'error' => function (ErrorEvent $event) {
             throw $event->getException();
         }
     ]);

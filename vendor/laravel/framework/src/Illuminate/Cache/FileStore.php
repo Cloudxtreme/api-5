@@ -63,9 +63,7 @@ class FileStore implements StoreInterface {
 		// this directory much cleaner for us as old files aren't hanging out.
 		if (time() >= $expire)
 		{
-			$this->forget($key);
-
-			return null;
+			return $this->forget($key);
 		}
 
 		return unserialize(substr($contents, 10));

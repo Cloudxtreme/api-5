@@ -66,9 +66,9 @@ return array(
 
 		'gearman' => array(
 			'driver' => 'gearman',
-			'host'   => 'localserver.6min.local',
+			'host'   => 'devgearman.cloudwalkers.be',
 			'queue'  => 'default',
-			'port'   => '4730'
+			'port'   => '4740'
 		)
 	),
 

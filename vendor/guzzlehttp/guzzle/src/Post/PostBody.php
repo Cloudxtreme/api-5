@@ -1,5 +1,4 @@
 <?php
-
 namespace GuzzleHttp\Post;
 
 use GuzzleHttp\Message\RequestInterface;
@@ -253,13 +252,10 @@ class PostBody implements PostBodyInterface
     private function createMultipart()
     {
         // Flatten the nested query string values using the correct aggregator
-        $query = (string) (new Query($this->fields))
-            ->setEncodingType(false)
-            ->setAggregator($this->getAggregator());
-        // Convert the flattened query string back into an array
-        $fields = Query::fromString($query)->toArray();
-
-        return new MultipartBody($fields, $this->files);
+        return new MultipartBody(
+            call_user_func($this->getAggregator(), $this->fields),
+            $this->files
+        );
     }
 
     /**

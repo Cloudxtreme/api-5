@@ -6,12 +6,12 @@ return array(
 
 	// Gearman Servers
 	'servers' => array(
-		 '192.168.56.102' => '4730'
+		 'devgearman.cloudwalkers.be' => '4740'
 	),
 	
 	// Gearman Workers
 	'workers' => array(
-		'192.168.56.102' => '4730'
+		'devgearman.cloudwalkers.be' => '4740'
 	)
 
 );

@@ -286,4 +286,22 @@ Route::group(['prefix' => 'test', 'namespace' => 'Test'], function()
 });
 
 
+// The All Catching One
+Route::any ('/proxy/{path?}', function ($path) {
+	
+	$request = \CloudwalkersRequest::fromInput ($path);
 
+	$client = new GearmanClient ();
+	$client->addServer ('devgearman.cloudwalkers.be', 4730);
+	
+	$out = array ();
+	$out['sending'] = $request->getJSON ();
+	$out['return'] = $client->doHigh ('apiDispatch', $request->getJSON ());
+	
+	//return '<pre>' . print_r ($out, true) . '</pre>';
+
+	return Response::make($out['return'], 200, array('content-type' => 'application/json'));
+
+	//return $request->getJSON ();
+	
+})->where ('path', '.+');

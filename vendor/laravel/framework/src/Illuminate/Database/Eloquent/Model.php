@@ -256,11 +256,9 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	 */
 	protected function bootIfNotBooted()
 	{
-		$class = get_class($this);
-
-		if ( ! isset(static::$booted[$class]))
+		if ( ! isset(static::$booted[get_class($this)]))
 		{
-			static::$booted[$class] = true;
+			static::$booted[get_class($this)] = true;
 
 			$this->fireModelEvent('booting', false);
 
@@ -304,7 +302,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	 */
 	protected static function bootTraits()
 	{
-		foreach (class_uses_recursive(get_called_class()) as $trait)
+		foreach (class_uses(get_called_class()) as $trait)
 		{
 			if (method_exists(get_called_class(), $method = 'boot'.class_basename($trait)))
 			{
@@ -536,7 +534,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	 */
 	public static function firstOrCreate(array $attributes)
 	{
-		if ( ! is_null($instance = static::where($attributes)->first()))
+		if ( ! is_null($instance = static::firstByAttributes($attributes)))
 		{
 			return $instance;
 		}
@@ -552,28 +550,12 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	 */
 	public static function firstOrNew(array $attributes)
 	{
-		if ( ! is_null($instance = static::where($attributes)->first()))
+		if ( ! is_null($instance = static::firstByAttributes($attributes)))
 		{
 			return $instance;
 		}
 
 		return new static($attributes);
-	}
-
-	/**
-	 * Create or update a record matching the attributes, and fill it with values.
-	 *
-	 * @param array $attributes
-	 * @param array $values
-	 * @return \Illuminate\Database\Eloquent\Model
-	 */
-	public static function updateOrCreate(array $attributes, array $values = array())
-	{
-		$instance = static::firstOrNew($attributes);
-
-		$instance->fill($values)->save();
-
-		return $instance;
 	}
 
 	/**
@@ -584,7 +566,14 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	 */
 	protected static function firstByAttributes($attributes)
 	{
-		return static::where($attributes)->first();
+		$query = static::query();
+
+		foreach ($attributes as $key => $value)
+		{
+			$query->where($key, $value);
+		}
+
+		return $query->first() ?: null;
 	}
 
 	/**
@@ -1390,9 +1379,9 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	 */
 	protected function finishSave(array $options)
 	{
-		$this->fireModelEvent('saved', false);
-
 		$this->syncOriginal();
+
+		$this->fireModelEvent('saved', false);
 
 		if (array_get($options, 'touch', true)) $this->touchOwners();
 	}
@@ -1401,7 +1390,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	 * Perform a model update operation.
 	 *
 	 * @param  \Illuminate\Database\Eloquent\Builder  $query
-	 * @return bool|null
+	 * @return bool
 	 */
 	protected function performUpdate(Builder $query)
 	{
@@ -2855,7 +2844,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 
 		if (isset(static::$mutatorCache[$class]))
 		{
-			return static::$mutatorCache[$class];
+			return static::$mutatorCache[get_class($this)];
 		}
 
 		return array();
