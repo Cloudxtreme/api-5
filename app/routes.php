@@ -1,5 +1,7 @@
 <?php
 
+define ('APP_SECRET_KEY', 'bmgroup tickee catlab pineapple orange');
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -288,19 +290,31 @@ Route::group(['prefix' => 'test', 'namespace' => 'Test'], function()
 
 // The All Catching One
 Route::any ('/proxy/{path?}', function ($path) {
+		
+	$request = \Neuron\Net\Request::fromInput ($path);
 	
-	$request = \CloudwalkersRequest::fromInput ($path);
+	//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
+	
+	$segments = Request::segments ();
+	array_shift ($segments);
+	
+	$request->setSegments ($segments);
+	
 
 	$client = new GearmanClient ();
-	$client->addServer ('devgearman.cloudwalkers.be', 4730);
+	$client->addServer ('localhost', 4730);
 	
-	$out = array ();
-	$out['sending'] = $request->getJSON ();
-	$out['return'] = $client->doHigh ('apiDispatch', $request->getJSON ());
+	$data = $client->doHigh ('apiDispatch', $request->toJSON ());
+	$response = \Neuron\Net\Response::fromJSON ($data);
+	
+	$response->output ();
+	//print_r ($response->getData ());
+	exit;
 	
 	//return '<pre>' . print_r ($out, true) . '</pre>';
+	
 
-	return Response::make($out['return'], 200, array('content-type' => 'application/json'));
+	//return Response::make($out['return'], 200, array('content-type' => 'application/json'));
 
 	//return $request->getJSON ();
 	

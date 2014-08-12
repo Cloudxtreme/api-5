@@ -29,6 +29,7 @@ return array(
     'Pafelin\\Gearman' => array($vendorDir . '/pafelin/gearman/src'),
     'PHPParser' => array($vendorDir . '/nikic/php-parser/lib'),
     'Normalizer' => array($vendorDir . '/patchwork/utf8/class'),
+    'Neuron' => array($baseDir . '/app'),
     'Net' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Math' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'League\\OAuth2\\Server' => array($vendorDir . '/league/oauth2-server/src'),

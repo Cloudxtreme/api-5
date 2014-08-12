@@ -4,12 +4,12 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		 "laravel/framework": "4.2.*"
-		,"league/oauth2-server": "3.*"
-		,"league/oauth2-client": "~0.3"
-		,"guzzlehttp/guzzle": "~4"
-		,"illuminate/support": "4.*"
-		,"pafelin/gearman": "dev-master"
+		"laravel/framework": "4.2.*",
+		"league/oauth2-server": "3.*",
+		"league/oauth2-client": "~0.3",
+		"guzzlehttp/guzzle": "~4",
+		"illuminate/support": "4.*",
+		"pafelin/gearman": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
@@ -19,7 +19,10 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php"
-		]
+		],
+		"psr-0":{
+			"Neuron": "app/"
+		}
 	},
 	"scripts": {
 		"post-install-cmd": [
