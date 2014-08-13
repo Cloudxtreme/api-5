@@ -84,9 +84,13 @@ abstract class Entity {
 	{
 		$data = array ();
 
-		if ($this->getData () && !empty ($data['data']))
+		if ($this->getData ())
 		{
-			$data['data'] = $this->getData ();
+			$plaindata = $this->getData ();
+			if (!empty ($plaindata))
+			{
+				$data['data'] = $this->getData ();
+			}
 		}
 		
 		$data['body'] = $this->getBody ();
