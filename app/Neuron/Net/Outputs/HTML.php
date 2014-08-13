@@ -37,15 +37,17 @@ class HTML implements Output {
 		{
 			echo $response->getBody ();
 		}
-
-		if (!is_string ($response->getData ()))
-		{
-			echo print_r ($response->getData ());
-		}
-
 		else
 		{
-			echo $response->getData ();
+			if (!is_string ($response->getData ()))
+			{
+				print_r ($response->getData ());
+			}
+
+			else
+			{
+				echo $response->getData ();
+			}
 		}
 	}
 	

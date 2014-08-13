@@ -54,7 +54,7 @@ abstract class Entity {
 		}
 
 		// The body. If data is found, body is not used.
-		if (isset ($data['data']))
+		if (isset ($data['data']) && !empty ($data['data']))
 		{
 			$model->setData ($data['data']);
 		}
@@ -84,13 +84,12 @@ abstract class Entity {
 	{
 		$data = array ();
 
-		if ($this->getData ())
+		if ($this->getData () && !empty ($data['data']))
 		{
 			$data['data'] = $this->getData ();
 		}
-		else {
-			$data['body'] = $this->getBody ();
-		}
+		
+		$data['body'] = $this->getBody ();
 
 		$data['session'] = $this->getSession ();
 		$data['headers'] = $this->getHeaders ();
@@ -104,6 +103,12 @@ abstract class Entity {
 	 */
 	private static function calculateSignature (array $data)
 	{
+		$txt = self::calculateBaseString ($data);
+		return md5 ($txt);
+	}
+
+	private static function calculateBaseString (array $data)
+	{
 		unset ($data['signature']);
 
 		$txt = '\(^-^)/ !Stupid Rainbow Tables! \(^-^)/ ';
@@ -111,9 +116,10 @@ abstract class Entity {
 		{
 			$txt .= $k . ":" . json_encode ($v) . "|";
 		}
+
 		$txt .= APP_SECRET_KEY;
 
-		return md5 ($txt);
+		return $txt;
 	}
 
 	/**
@@ -257,7 +263,7 @@ abstract class Entity {
 	 * @param string $name
 	 * @param string $value
 	 */
-	public function setHeader ($name, $value)
+	public function setHeader ($name, $value = null)
 	{
 		if (!isset ($this->headers))
 		{

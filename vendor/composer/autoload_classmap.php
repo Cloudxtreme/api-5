@@ -878,6 +878,7 @@ return array(
     'Net_SFTP_Stream' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Net/SFTP/Stream.php',
     'Net_SSH1' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Net/SSH1.php',
     'Net_SSH2' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Net/SSH2.php',
+    'Neuron\\InputStream' => $baseDir . '/app/Neuron/InputStream.php',
     'Neuron\\Net\\Client' => $baseDir . '/app/Neuron/Net/Client.php',
     'Neuron\\Net\\Entity' => $baseDir . '/app/Neuron/Net/Entity.php',
     'Neuron\\Net\\Outputs\\HTML' => $baseDir . '/app/Neuron/Net/Outputs/HTML.php',

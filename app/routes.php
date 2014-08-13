@@ -294,12 +294,12 @@ Route::any ('/proxy/{path?}', function ($path) {
 	$request = \Neuron\Net\Request::fromInput ($path);
 	
 	//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
+
 	
 	$segments = Request::segments ();
 	array_shift ($segments);
 	
 	$request->setSegments ($segments);
-	
 
 	$client = new GearmanClient ();
 	$client->addServer ('localhost', 4730);
