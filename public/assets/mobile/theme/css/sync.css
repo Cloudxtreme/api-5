@@ -1,0 +1,19 @@
+/* Sync */
+
+#sync-draw	{
+	display: block; margin: 60px auto 0;
+}
+
+#sync-icon	{
+	height: 20px; position: relative; top: -94px; left: 0px;
+	font-size: 21px; color: rgba(255,255,255,.5); text-align: center; 
+}
+/*#sync-icon .icon-globe	{ color: rgb(20,64,88); }*/
+
+#sync-text	{
+	font-size: 1.2em; color: #BAE2F0; text-shadow: 0 -1px rgba(0,0,0,.2); text-align: center;
+}
+
+#sync-text small	{
+	color: white; text-shadow: none;
+}

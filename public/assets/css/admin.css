@@ -1,0 +1,116 @@
+body
+{
+    font-size: 13px;
+    font-family: Verdana, sans-serif;
+}
+
+/** NAVBAR
+***********/
+
+.navbar .brand {
+	padding: 9px 20px 9px !important;
+}
+
+
+.navbar .brand > span.label-warning {
+	position: relative;
+	bottom: 3px;
+}
+
+h1 {
+	text-align: left;
+	margin-top: 20px;
+	padding: 0 0 10px 0;
+	border-bottom: 1px solid #eee;
+}
+
+#debug
+{
+    background: rgba(204, 204, 204, 0.74);
+    border: 1px solid darkred;
+    padding: 10px;
+}
+
+
+/** STREAMS
+	************/
+
+	/** Time Passed Row Color
+	*********************/
+
+		.table thead tr > th {
+			font-size: 13px;
+			line-height: 15px;
+			text-align: center;
+		}
+		.table tbody tr > td {
+			font-size: 12px;
+			line-height: 15px;
+		}
+		.table tbody tr > td.no-results-found {
+			font-size: 12px;
+			font-weight: bold;
+			text-align: center !important;
+			padding: 20px 0;
+			background-color: #f3f3f3;
+		}
+
+		.table tbody tr.m5>td {
+			background-color: #F1C40F;
+			color: #333;
+		}
+		.table tbody tr.m15>td {
+			background-color: #E67E22;
+			color: #fff;
+		}
+		.table tbody tr.m30>td {
+			background-color: #E74C3C;
+			color: #fff;
+		}
+		.table th, .table td {
+			text-align: inherit !important;
+		}
+
+		.tablesort:hover {
+			cursor: hand;
+			cursor: pointer;
+		}
+	/** Table Paginator
+	*********************/
+
+		.pagination > span.label {
+			float: left;
+			padding: 5px;
+		}
+		.clickable 	{ cursor: pointer; }
+		.active 	{ font-weight: bold; background-color: #ccc; }
+		div.pager { float: right; width: auto; height: auto; padding: 10px; }
+		div.pager>span.page-number { padding: 5px; }
+
+/** ACCOUNTS MANAGEMENT
+************************/
+	.registration-page {
+		margin: 0 auto;
+	}
+
+	/** ACCOUNTS MANAGEMENT // EDIT
+	*******************************/
+
+		#userInformation, #userEdit {
+			margin: 0;
+			margin-bottom: 10px;
+		}
+		#userInformation h3, #userEdit h3 {
+			margin: -15px 0 10px 0;
+			padding: 0;
+			font-size: 20px;
+			border-bottom: 1px solid #CCC;
+		}
+		#password-change {
+			width: 300px;
+			margin: 0 auto;
+			padding: 20px 0;
+		}
+		#password-change input {
+			margin-bottom: 5px;
+		}

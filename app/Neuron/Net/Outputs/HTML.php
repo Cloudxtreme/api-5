@@ -28,6 +28,14 @@ class HTML implements Output {
 			}
 		}
 
+		if ($response->getCookies ())
+		{
+			foreach ($response->getCookies () as $k => $v)
+			{
+				setcookie ($k, $v);
+			}
+		}
+
 		$this->outputContent ($response);
 	}
 	

@@ -23,6 +23,7 @@ abstract class Entity {
 	private $headers;
 	private $session;
 	private $data;
+	private $cookies;
 
 	private $application;
 
@@ -74,6 +75,16 @@ abstract class Entity {
 			$model->setHeaders ($data['headers']);
 		}
 
+		if (isset ($data['cookies']))
+		{
+			$model->setCookies ($data['cookies']);
+		}
+
+		if (isset ($data['post']))
+		{
+			$model->setPost ($data['post']);
+		}
+
 		return $model;
 	}
 
@@ -97,6 +108,8 @@ abstract class Entity {
 
 		$data['session'] = $this->getSession ();
 		$data['headers'] = $this->getHeaders ();
+		$data['cookies'] = $this->getCookies ();
+		$data['post'] = $this->getPost ();
 
 		return $data;
 	}
@@ -290,6 +303,16 @@ abstract class Entity {
 	public function getHeaders ()
 	{
 		return $this->headers;
+	}
+
+	public function setCookies ($cookies)
+	{
+		$this->cookies = $cookies;
+	}
+
+	public function getCookies ()
+	{
+		return $this->cookies;
 	}
 
 } 

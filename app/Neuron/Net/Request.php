@@ -38,6 +38,8 @@ class Request
 		$model->setBody (InputStream::getInput ());
 		$model->setHeaders (getallheaders ());
 		$model->setParameters ($_GET);
+		$model->setCookies ($_COOKIE);
+		$model->setPost ($_POST);
 
 		return $model;
 	}
