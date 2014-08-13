@@ -40,6 +40,7 @@ class Request
 		$model->setParameters ($_GET);
 		$model->setCookies ($_COOKIE);
 		$model->setPost ($_POST);
+		$model->setEnvironment ($_SERVER);
 
 		return $model;
 	}
@@ -77,6 +78,7 @@ class Request
 	private $url;
 	private $parameters;
 	private $input;
+	private $environment;
 
 	/**
 	 * @param $method
@@ -178,8 +180,18 @@ class Request
 		$data['method'] = $this->getMethod ();
 		$data['parameters'] = $this->getParameters ();
 		$data['segments'] = $this->getSegments ();
+		$data['environment'] = $this->getEnvironment ();
 
 		return $data;
 	}
 
+	public function setEnvironment ($data)
+	{
+		$this->environment = $data;
+	}
+
+	public function getEnvironment ()
+	{
+		return $this->environment;
+	}
 } 

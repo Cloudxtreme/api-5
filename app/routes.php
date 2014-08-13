@@ -305,6 +305,14 @@ Route::any ('/proxy/{path?}', function ($path) {
 	$data = $client->doHigh ('apiDispatch', $request->toJSON ());
 	$response = \Neuron\Net\Response::fromJSON ($data);
 
+	// Hack the body for forms
+	if ($response->getBody ())
+	{
+		$body = $response->getBody ();
+		$body = str_replace ('action="http://cloudwalkers-api.local/', 'action="http://cloudwalkers-api.local/proxy/', $body);
+		$response->setBody ($body);
+	}
+
 	$response->output ();
 	//print_r ($response->getData ());
 	exit;
