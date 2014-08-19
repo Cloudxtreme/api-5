@@ -2,7 +2,8 @@
 namespace GuzzleHttp\Post;
 
 use GuzzleHttp\Message\RequestInterface;
-use GuzzleHttp\Stream;
+use GuzzleHttp\Stream\StreamInterface;
+use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Query;
 
 /**
@@ -11,7 +12,7 @@ use GuzzleHttp\Query;
  */
 class PostBody implements PostBodyInterface
 {
-    /** @var Stream\StreamInterface */
+    /** @var StreamInterface */
     private $body;
 
     /** @var callable */
@@ -211,6 +212,11 @@ class PostBody implements PostBodyInterface
         return false;
     }
 
+    public function flush()
+    {
+        return false;
+    }
+
     /**
      * Return a stream object that is built from the POST fields and files.
      *
@@ -226,7 +232,7 @@ class PostBody implements PostBodyInterface
         } elseif ($this->fields) {
             return $this->body = $this->createUrlEncoded();
         } else {
-            return $this->body = Stream\create();
+            return $this->body = Stream::factory();
         }
     }
 
@@ -261,11 +267,11 @@ class PostBody implements PostBodyInterface
     /**
      * Creates an application/x-www-form-urlencoded stream body
      *
-     * @return Stream\StreamInterface
+     * @return StreamInterface
      */
     private function createUrlEncoded()
     {
-        return Stream\create($this->getFields(true));
+        return Stream::factory($this->getFields(true));
     }
 
     /**
