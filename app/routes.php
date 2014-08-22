@@ -168,7 +168,7 @@ Route::get ('version', function ()
 	$request->setSegments ($segments);
 
 	$client = new GearmanClient ();
-	$client->addServer ('devgearman.cloudwalkers.be', 4740);
+	$client->addServer ('devgearman.cloudwalkers.be', 4730);
 
 	$data = $client->doHigh ('apiDispatch', $request->toJSON ());
 	$response = \Neuron\Net\Response::fromJSON ($data);
