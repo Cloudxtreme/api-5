@@ -33,7 +33,8 @@ $env = $app->detectEnvironment(array(
 	'local' => array(
 		'FRM_BEE_12',                 // RCS - Desktop 
 		'FRM_BEE_12.bee-eng.CORP',    // RCS - Desktop
-		'localhost.localdomain'       // RCS - Virtual Machine (Fedora)
+		'localhost.localdomain',       // RCS - Virtual Machine (Fedora)
+		'thijs-home-i7'
 	),
 	'staging' => array(
 		'devapi.cloudwalkers.be',     // Development Server

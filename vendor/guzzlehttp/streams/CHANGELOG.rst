@@ -2,6 +2,24 @@
 Changelog
 =========
 
+2.1.0 (2014-08-17)
+------------------
+
+* Added an InflateStream to inflate gzipped or deflated content.
+* Added ``flush`` to stream wrapper.
+* Added the ability to easily register the GuzzleStreamWrapper if needed.
+
+2.0.0 (2014-08-16)
+------------------
+
+* Deprecated functions.php and moved all of those methods to
+  ``GuzzleHttp\Streams\Utils``. Use ``GuzzleHttp\Stream\Stream::factory()``
+  instead of ``GuzzleHttp\Stream\create()`` to create new streams.
+* Added ``flush()`` to ``StreamInterface``. This method is used to flush any
+  underlying stream write buffers.
+* Added ``FnStream`` to easily decorate stream behavior with callables.
+* ``Utils::hash`` now throws an exception when the stream cannot seek to 0.
+
 1.5.1 (2014-09-10)
 ------------------
 

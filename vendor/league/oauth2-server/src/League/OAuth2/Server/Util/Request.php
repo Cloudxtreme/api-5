@@ -76,18 +76,15 @@ class Request implements RequestInterface
 
     protected function readHeaders()
     {
-        if (function_exists('apache_request_headers')) {
+        if (function_exists('getallheaders')) {
             // @codeCoverageIgnoreStart
-            $headers = apache_request_headers();
-        } elseif (function_exists('http_get_request_headers')) {
-            $headers = http_get_request_headers();
+            $headers = getallheaders();
         } else {
             // @codeCoverageIgnoreEnd
             $headers = array();
             foreach ($this->server() as $name => $value) {
                 if (substr($name, 0, 5) == 'HTTP_') {
-                    // HTTP_FOO_BAR becomes FOO-BAR
-                    $name = str_replace(array('HTTP_', '_'), array('', '-'), $name);
+                    $name = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))));
                     $headers[$name] = $value;
                 }
             }

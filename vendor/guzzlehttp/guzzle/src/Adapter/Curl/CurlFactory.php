@@ -1,11 +1,11 @@
 <?php
-
 namespace GuzzleHttp\Adapter\Curl;
 
 use GuzzleHttp\Adapter\TransactionInterface;
 use GuzzleHttp\Message\MessageFactoryInterface;
 use GuzzleHttp\Message\RequestInterface;
-use GuzzleHttp\Stream;
+use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Stream\LazyOpenStream;
 use GuzzleHttp\Exception\AdapterException;
 
 /**
@@ -63,32 +63,24 @@ class CurlFactory
         }
 
         $config = $request->getConfig();
-        $options = array(
+        $options = [
             CURLOPT_URL            => $url,
             CURLOPT_CONNECTTIMEOUT => $config['connect_timeout'] ?: 150,
             CURLOPT_RETURNTRANSFER => false,
             CURLOPT_HEADER         => false,
-            CURLOPT_WRITEFUNCTION  => array($mediator, 'writeResponseBody'),
-            CURLOPT_HEADERFUNCTION => array($mediator, 'receiveResponseHeader'),
-            CURLOPT_READFUNCTION   => array($mediator, 'readRequestBody'),
+            CURLOPT_WRITEFUNCTION  => [$mediator, 'writeResponseBody'],
+            CURLOPT_HEADERFUNCTION => [$mediator, 'receiveResponseHeader'],
+            CURLOPT_READFUNCTION   => [$mediator, 'readRequestBody'],
             CURLOPT_HTTP_VERSION   => $request->getProtocolVersion() === '1.0'
                 ? CURL_HTTP_VERSION_1_0 : CURL_HTTP_VERSION_1_1,
             CURLOPT_SSL_VERIFYPEER => 1,
             CURLOPT_SSL_VERIFYHOST => 2,
             '_headers'             => $request->getHeaders()
-        );
+        ];
 
         if (defined('CURLOPT_PROTOCOLS')) {
             // Allow only HTTP and HTTPS protocols
             $options[CURLOPT_PROTOCOLS] = CURLPROTO_HTTP | CURLPROTO_HTTPS;
-        }
-
-        // Add CURLOPT_ENCODING if Accept-Encoding header is provided
-        if ($request->hasHeader('Accept-Encoding')) {
-            $options[CURLOPT_ENCODING] = $request->getHeader('Accept-Encoding');
-            // Let cURL set the Accept-Encoding header. Without this change
-            // curl could add a duplicate value.
-            $this->removeHeader('Accept-Encoding', $options);
         }
 
         // cURL sometimes adds a content-type by default. Prevent this.
@@ -278,8 +270,16 @@ class CurlFactory
         $options[CURLOPT_SSLKEY] = $value;
     }
 
-    private function add_stream()
-    {
+    private function add_stream(
+        RequestInterface $request,
+        RequestMediator $mediator,
+        &$options,
+        $value
+    ) {
+        if ($value === false) {
+            return;
+        }
+
         throw new AdapterException('cURL adapters do not support the "stream"'
             . ' request option. This error is typically encountered when trying'
             . ' to send requests with the "stream" option set to true in '
@@ -297,8 +297,23 @@ class CurlFactory
         $value
     ) {
         $mediator->setResponseBody(is_string($value)
-            ? new Stream\LazyOpenStream($value, 'w')
-            : Stream\create($value));
+            ? new LazyOpenStream($value, 'w')
+            : Stream::factory($value));
+    }
+
+    private function add_decode_content(
+        RequestInterface $request,
+        RequestMediator $mediator,
+        &$options,
+        $value
+    ) {
+        if (!$request->hasHeader('Accept-Encoding')) {
+            $options[CURLOPT_ENCODING] = '';
+            // Don't let curl send the header over the wire
+            $options[CURLOPT_HTTPHEADER][] = 'Accept-Encoding:';
+        } else {
+            $options[CURLOPT_ENCODING] = $request->getHeader('Accept-Encoding');
+        }
     }
 
     /**

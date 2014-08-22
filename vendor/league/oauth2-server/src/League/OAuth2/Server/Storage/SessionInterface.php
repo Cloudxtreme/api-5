@@ -74,7 +74,7 @@ interface SessionInterface
      * @param  int    $sessionId   The session ID
      * @param  string $accessToken The access token
      * @param  int    $expireTime  Unix timestamp of the access token expiry time
-     * @return int                 The access token ID
+     * @return void
      */
     public function associateAccessToken($sessionId, $accessToken, $expireTime);
 
@@ -208,7 +208,7 @@ interface SessionInterface
      *  AND refresh_token_expires >= UNIX_TIMESTAMP(NOW()) AND client_id = :clientId
      * </code>
      *
-     * @param  string   $refreshToken The refresh token
+     * @param  string   $refreshToken The access token
      * @param  string   $clientId     The client ID
      * @return int|bool               The ID of the access token the refresh token is linked to (or false if invalid)
      */
@@ -315,8 +315,7 @@ interface SessionInterface
      * <code>
      * array (
      *     array(
-     *         'id'     =>  (int),
-     *         'scope'  =>  (string),
+     *         'key'    =>  (string),
      *         'name'   =>  (string),
      *         'description'    =>  (string)
      *     ),

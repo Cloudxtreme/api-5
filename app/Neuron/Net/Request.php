@@ -70,6 +70,11 @@ class Request
 		{
 			$model->setSegments ($data['segments']);
 		}
+		
+		if (isset ($data['environment']))
+		{
+			$model->setEnvironment ($data['environment']);
+		}
 
 		return $model;
 	}

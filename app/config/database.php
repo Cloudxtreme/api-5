@@ -77,10 +77,10 @@ return array(
 				//'port'      => '13306'
 			),*/
 			'driver'    => 'mysql',
-			'host'      => '192.168.56.1',
+			'host'      => 'localhost',
 			//'port'      => '3307',
-			'port'      => '13306',
-			'database'  => 'cloudwalkers',
+			'port'      => '3306',
+			'database'  => 'cloudwalkers_api',
 			'username'  => 'myuser',
 			'password'  => 'myuser',
 			'charset'   => 'utf8',

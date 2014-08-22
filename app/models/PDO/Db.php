@@ -60,7 +60,7 @@ class Db {
 		// MySQL settings from Laravel configuration
 		$settings = Config::get('database.connections.oauth2');
 		
-		$dsn      = $settings['driver'] .':dbname='. $settings['database'] .';host='. $settings['host'] .':'. $settings['port'];
+		$dsn      = $settings['driver'] .':dbname='. $settings['database'] .';host='. $settings['host'] /* .':'. $settings['port'] */;
 		$username = $settings['username'];
 		$password = $settings['password'];
 		$options  = $settings['options'];

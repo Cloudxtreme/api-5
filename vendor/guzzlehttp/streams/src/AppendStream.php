@@ -1,5 +1,4 @@
 <?php
-
 namespace GuzzleHttp\Stream;
 
 /**
@@ -60,7 +59,7 @@ class AppendStream implements StreamInterface
 
     public function getContents($maxLength = -1)
     {
-        return copy_to_string($this, $maxLength);
+        return Utils::copyToString($this, $maxLength);
     }
 
     /**
@@ -201,6 +200,11 @@ class AppendStream implements StreamInterface
     }
 
     public function write($string)
+    {
+        return false;
+    }
+
+    public function flush()
     {
         return false;
     }

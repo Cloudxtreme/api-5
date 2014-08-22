@@ -1,6 +1,6 @@
 /vendor
 /composer.lock
-/tests/coverage
+/build/logs
+/build/coverage
 /docs
 /testing
-build/coverage

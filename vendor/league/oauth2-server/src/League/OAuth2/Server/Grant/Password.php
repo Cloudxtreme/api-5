@@ -24,8 +24,6 @@ use League\OAuth2\Server\Storage\ScopeInterface;
  */
 class Password implements GrantTypeInterface {
 
-    use GrantTrait;
-
     /**
      * Grant identifier
      * @var string
@@ -55,6 +53,44 @@ class Password implements GrantTypeInterface {
      * @var int
      */
     protected $accessTokenTTL = null;
+
+    /**
+     * Constructor
+     * @param Authorization $authServer Authorization server instance
+     * @return void
+     */
+    public function __construct(Authorization $authServer)
+    {
+        $this->authServer = $authServer;
+    }
+
+    /**
+     * Return the identifier
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * Return the response type
+     * @return string
+     */
+    public function getResponseType()
+    {
+        return $this->responseType;
+    }
+
+    /**
+     * Override the default access token expire time
+     * @param int $accessTokenTTL
+     * @return void
+     */
+    public function setAccessTokenTTL($accessTokenTTL)
+    {
+        $this->accessTokenTTL = $accessTokenTTL;
+    }
 
     /**
      * Set the callback to verify a user's username and password
@@ -170,7 +206,7 @@ class Password implements GrantTypeInterface {
 
         $response = array(
             'access_token'  =>  $accessToken,
-            'token_type'    =>  'Bearer',
+            'token_type'    =>  'bearer',
             'expires'       =>  $accessTokenExpires,
             'expires_in'    =>  $accessTokenExpiresIn
         );

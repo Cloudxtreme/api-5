@@ -59,48 +59,32 @@ return array(
     */
 
     'grant_types' => array(
-    		
-    	'client_credentials' => array(
-    		'class'            => 'League\OAuth2\Server\Grant\ClientCredentials',
-    		'access_token_ttl' => 3600,
-    	),
 
-    	'password' => array(
-    		'class'            => 'League\OAuth2\Server\Grant\Password',
-    		'access_token_ttl' => 604800,
-    		'callback'         => function($username, $password){
-    			$credentials = array(
-    				'email' => $username,
-    				'password' => $password,
-    			);
-    		
-	    		$valid = Auth::validate($credentials);
-		    		
-	    		if (!$valid) {
-	    			return false;
-	    		}
-		    		
-	    		return Auth::getProvider()->retrieveByCredentials($credentials)->id;
-   			}
-   		),
-   		
         'authorization_code' => array(
             'class'            => 'League\OAuth2\Server\Grant\AuthCode',
             'access_token_ttl' => 3600,
             'auth_token_ttl'   => 3600,
         ),
 
-        /*'password' => array(
+        'password' => array(
             'class'            => 'League\OAuth2\Server\Grant\Password',
             'access_token_ttl' => 604800,
             'callback'         => function ($username, $password) {
                 
-                return Auth::validate(array(
-                    'email'    => $username,
+                $credentials = array(
+                    'email' => $username,
                     'password' => $password,
-                ));
+                );
+
+                $valid = Auth::validate($credentials);
+
+                if (!$valid) {
+                    return false;
+                }
+
+                return Auth::getProvider()->retrieveByCredentials($credentials)->id;
             }
-        ),*/
+        ),
 
         'refresh_token' => array(
             'class'                 => 'League\OAuth2\Server\Grant\RefreshToken',
@@ -136,7 +120,7 @@ return array(
     | Scope Delimiter
     |--------------------------------------------------------------------------
     |
-    | Which caracter to use to split the scope parameter in the query string
+    | Which character to use to split the scope parameter in the query string
     |
     */
     'scope_delimiter' => ',',

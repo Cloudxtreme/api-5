@@ -2,15 +2,15 @@
 /**
  * Created by PhpStorm.
  * User: daedeloth
- * Date: 12/08/14
- * Time: 17:12
+ * Date: 12/03/14
+ * Time: 13:57
  */
 
 namespace Neuron;
 
-use Illuminate\Http\Request;
-
 class InputStream {
+
+	private $input;
 
 	public static function getInstance ()
 	{
@@ -23,11 +23,18 @@ class InputStream {
 		return $in;
 	}
 
+	private function __construct ()
+	{
+		$this->setInput (file_get_contents ('php://input'));
+	}
+
 	public static function getInput ()
 	{
-		$r = new Request ();
-		$request = $r->instance ();
-		return $request->getContent();
+		return self::getInstance ()->input;
 	}
-	
+
+	public function setInput ($input)
+	{
+		$this->input = $input;
+	}
 } 

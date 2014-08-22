@@ -23,9 +23,22 @@ interface GrantTypeInterface
 {
     /**
      * Constructor
+     * @param Authorization $authServer Authorization server instance
      * @return void
      */
-    public function __construct(Authorization $authServer = null);
+    public function __construct(Authorization $authServer);
+
+    /**
+     * Returns the grant identifier (used to validate grant_type in League\OAuth2\Server\Authorization::issueAccessToken())
+     * @return string
+     */
+    public function getIdentifier();
+
+    /**
+     * Returns the response type (used to validate response_type in League\OAuth2\Server\Grant\AuthCode::checkAuthoriseParams())
+     * @return null|string
+     */
+    public function getResponseType();
 
     /**
      * Complete the grant flow

@@ -22,9 +22,7 @@ use League\OAuth2\Server\Storage\ScopeInterface;
 /**
  * Client credentials grant class
  */
-class Implicit implements GrantTypeInterface {
-
-    use GrantTrait;
+class Implict implements GrantTypeInterface {
 
     /**
      * Grant identifier
@@ -45,10 +43,32 @@ class Implicit implements GrantTypeInterface {
     protected $authServer = null;
 
     /**
-     * Access token expires in override
-     * @var int
+     * Constructor
+     * @param Authorization $authServer Authorization server instance
+     * @return void
      */
-    protected $accessTokenTTL = null;
+    public function __construct(Authorization $authServer)
+    {
+        $this->authServer = $authServer;
+    }
+
+    /**
+     * Return the identifier
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * Return the response type
+     * @return string
+     */
+    public function getResponseType()
+    {
+        return $this->responseType;
+    }
 
     /**
      * Complete the client credentials grant
@@ -64,8 +84,7 @@ class Implicit implements GrantTypeInterface {
         $accessToken = SecureKey::make();
 
         // Compute expiry time
-        $accessTokenExpiresIn = ($this->accessTokenTTL !== null) ? $this->accessTokenTTL : $this->authServer->getAccessTokenTTL();
-        $accessTokenExpires = time() + $accessTokenExpiresIn;
+        $accessTokenExpires = time() + $this->authServer->getAccessTokenTTL();
 
         // Create a new session
         $sessionId = $this->authServer->getStorage('session')->createSession($authParams['client_id'], 'user', $authParams['user_id']);
@@ -79,10 +98,7 @@ class Implicit implements GrantTypeInterface {
         }
 
         $response = array(
-            'access_token'  =>  $accessToken,
-            'token_type'    =>  'Bearer',
-            'expires'       =>  $accessTokenExpires,
-            'expires_in'    =>  $accessTokenExpiresIn,
+            'access_token'  =>  $accessToken
         );
 
         return $response;
