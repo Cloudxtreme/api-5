@@ -180,8 +180,8 @@ Route::get ('version', function ()
 		$response->setBody ($body);
 	}
 
-	//$response->output ();
-	print_r ($response->toJSON ());
+	$response->output ();
+	//print_r ($response->toJSON ());
 	exit;
 });
 
