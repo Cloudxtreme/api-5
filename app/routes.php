@@ -113,14 +113,16 @@ if (!function_exists('http_response_code')) {
 	}
 }
 
-define  ('DB_HOST', 'db.cloudwalkers.be');
-define  ('DB_USERNAME', 'workers');
-define  ('DB_PASSWORD', 'dj99Pze!Ueh');
-define  ('DB_NAME', 'cloudwalkers_dev');
-define  ('DB_CHARSET', 'utf8');
+$databasesettings = Config::get ('database.connections.' . (Config::get ('database.default')));
+
+define  ('DB_HOST', $databasesettings['host']);
+define  ('DB_USERNAME', $databasesettings['username']);
+define  ('DB_PASSWORD', $databasesettings['password']);
+define  ('DB_NAME', $databasesettings['database']);
+define  ('DB_CHARSET', $databasesettings['charset']);
 
 define ('TEMPLATE_DIR', dirname (__FILE__) . '/templates/');
-define ('BASE_URL', 'https://devapi.cloudwalkers.be/');
+define ('BASE_URL', URL::to('/') . '/');
 
 Route::get ('localversion', function ()
 {
@@ -132,7 +134,11 @@ Route::get ('localversion', function ()
 	$request->setSegments (array ('version'));
 
 	$client = new GearmanClient ();
-	$client->addServer ('devgearman.cloudwalkers.be', 4730);
+	
+	foreach (Config::get ('gearman.servers') as $server => $port)
+	{
+		$client->addServer ($server, $port);
+	}
 
 	$data = $client->doHigh ('apiDispatch', $request->toJSON ());
 	$response = \Neuron\Net\Response::fromJSON ($data);
@@ -217,7 +223,7 @@ Route::any('oauth2/{path?}', function()
 })->where ('path', '.+');;
 
 // The All Catching One
-Route::any ('{path?}', function ($path) {
+Route::match (array ('GET', 'POST', 'PATCH', 'PUT', 'DELETE'), '{path?}', function ($path) {
 
 	$verifier = \bmgroup\OAuth2\Verifier::getInstance ();
 	if (!$verifier->isValid ())
@@ -225,6 +231,8 @@ Route::any ('{path?}', function ($path) {
 		header ('Access-Control-Allow-Origin: *');
 		header ('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, PATCH, OPTIONS');
 		header ('Access-Control-Allow-Headers: origin, x-requested-with, content-type, access_token, authorization');
+
+		http_response_code (403);
 		
 		echo '<p>I\'m sorry, no valid oauth2 information provided.</p>';
 		exit;
@@ -239,7 +247,10 @@ Route::any ('{path?}', function ($path) {
 	$request->setSegments ($segments);
 
 	$client = new GearmanClient ();
-	$client->addServer ('devgearman.cloudwalkers.be', 4730);
+	foreach (Config::get ('gearman.servers') as $server => $port)
+	{
+		$client->addServer ($server, $port);
+	}
 
 	$data = $client->doHigh ('apiDispatch', $request->toJSON ());
 	$response = \Neuron\Net\Response::fromJSON ($data);

@@ -58,29 +58,13 @@ return array(
 	// These are the fallback settings	
 	// ------------------------------------------------------------------------
 	'connections' => array(
-/*
-		'sqlite' => array(
-			'driver'   => 'sqlite',
-			'database' => __DIR__.'/../database/production.sqlite',
-			'prefix'   => '',
-		),*/
 
 		'mysqlcw' => array(
-			/*'read' => array(
-				'host' => '192.168.56.1',
-				'port'      => '3307'
-				//'port'      => '13306'
-			),
-			'write' => array(
-				'host' => '192.168.56.1',
-				'port'      => '3307'
-				//'port'      => '13306'
-			),*/
+
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			//'port'      => '3307',
 			'port'      => '3306',
-			'database'  => 'cloudwalkers_api',
+			'database'  => 'cloudwalkers',
 			'username'  => 'myuser',
 			'password'  => 'myuser',
 			'charset'   => 'utf8',
@@ -90,29 +74,7 @@ return array(
 					//PDO::ATTR_PERSISTENT => true, // Optimization with the connection pool
 					//PDO::FETCH_ASSOC
 			),
-		),
-			
-/*
-		'pgsql' => array(
-			'driver'   => 'pgsql',
-			'host'     => 'localhost',
-			'database' => 'forge',
-			'username' => 'forge',
-			'password' => '',
-			'charset'  => 'utf8',
-			'prefix'   => '',
-			'schema'   => 'public',
-		),
-
-		'sqlsrv' => array(
-			'driver'   => 'sqlsrv',
-			'host'     => 'localhost',
-			'database' => 'database',
-			'username' => 'root',
-			'password' => '',
-			'prefix'   => '',
-		),
-*/
+		)
 	),
 
 	/*
