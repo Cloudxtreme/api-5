@@ -150,21 +150,41 @@ Route::any ('/proxy/{path?}', function ($path) {
 		$body = str_replace ('action="http://cloudwalkers-api.local/', 'action="http://cloudwalkers-api.local/proxy/', $body);
 		$response->setBody ($body);
 	}
-	
-	// Also change the headers
 
 	$response->output ();
 	//print_r ($response->toJSON ());
 	exit;
 	
-	//return '<pre>' . print_r ($out, true) . '</pre>';
-	
-
-	//return Response::make($out['return'], 200, array('content-type' => 'application/json'));
-
-	//return $request->getJSON ();
-	
 })->where ('path', '.+');
+
+Route::get ('version', function ()
+{
+	$request = \Neuron\Net\Request::fromInput ('version');
+
+	//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
+	$segments = Request::segments ();
+	array_shift ($segments);
+
+	$request->setSegments ($segments);
+
+	$client = new GearmanClient ();
+	$client->addServer ('devgearman.cloudwalkers.be', 4730);
+
+	$data = $client->doHigh ('apiDispatch', $request->toJSON ());
+	$response = \Neuron\Net\Response::fromJSON ($data);
+
+	// Hack the body for forms
+	if ($response->getBody ())
+	{
+		$body = $response->getBody ();
+		$body = str_replace ('action="http://cloudwalkers-api.local/', 'action="http://cloudwalkers-api.local/proxy/', $body);
+		$response->setBody ($body);
+	}
+
+	$response->output ();
+	//print_r ($response->toJSON ());
+	exit;
+});
 
 Route::any('{path?}', function()
 {
