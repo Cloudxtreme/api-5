@@ -119,7 +119,7 @@ define  ('DB_CHARSET', 'utf8');
 define ('TEMPLATE_DIR', dirname (__FILE__) . '/templates/');
 define ('BASE_URL', 'https://devapi.cloudwalkers.be/');
 
-Route::get ('version', function ()
+Route::get ('localversion', function ()
 {
 	$request = \Neuron\Net\Request::fromInput ('version');
 
