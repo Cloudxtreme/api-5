@@ -152,7 +152,7 @@ Route::any('{path?}', function()
 	$page = new \bmgroup\Cloudwalkers\Page ();
 
 	$frontcontroller = new \Neuron\FrontController ();
-	$frontcontroller->setInput (Request::segments ());
+	$frontcontroller->setInput (array ('version'));
 	$frontcontroller->setPage ($page);
 
 	$frontcontroller->addController (new \bmgroup\Signin\FrontController ());
