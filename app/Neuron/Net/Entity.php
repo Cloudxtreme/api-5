@@ -24,6 +24,9 @@ abstract class Entity {
 	private $session;
 	private $data;
 	private $cookies;
+	
+	/** @var integer $status */
+	private $status;
 
 	private $application;
 
@@ -86,6 +89,11 @@ abstract class Entity {
 		{
 			$model->setPost ($data['post']);
 		}
+		
+		if (isset ($data['status']))
+		{
+			$model->setStatus ($data['status']);
+		}
 
 		return $model;
 	}
@@ -112,6 +120,7 @@ abstract class Entity {
 		$data['headers'] = $this->getHeaders ();
 		$data['cookies'] = $this->getCookies ();
 		$data['post'] = $this->getPost ();
+		$data['status'] = $this->getStatus ();
 
 		return $data;
 	}
@@ -315,6 +324,16 @@ abstract class Entity {
 	public function getCookies ()
 	{
 		return $this->cookies;
+	}
+
+	public function setStatus ($status)
+	{
+		$this->status = $status;
+	}
+
+	public function getStatus ()
+	{
+		return $this->status;
 	}
 
 } 

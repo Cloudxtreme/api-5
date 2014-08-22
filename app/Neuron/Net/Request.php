@@ -41,6 +41,7 @@ class Request
 		$model->setCookies ($_COOKIE);
 		$model->setPost ($_POST);
 		$model->setEnvironment ($_SERVER);
+		$model->setStatus (http_response_code ());
 
 		return $model;
 	}
@@ -71,11 +72,6 @@ class Request
 			$model->setSegments ($data['segments']);
 		}
 		
-		if (isset ($data['environment']))
-		{
-			$model->setEnvironment ($data['environment']);
-		}
-
 		if (isset ($data['environment']))
 		{
 			$model->setEnvironment ($data['environment']);
