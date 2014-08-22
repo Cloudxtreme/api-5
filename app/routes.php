@@ -204,7 +204,7 @@ Route::any ('{path?}', function ($path) {
 		header ('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, PATCH, OPTIONS');
 		header ('Access-Control-Allow-Headers: origin, x-requested-with, content-type, access_token, authorization');
 		
-		echo '<p>No valid oauth2 credentials provided.</p>';
+		echo '<p>I\'m sorry, no valid oauth2 information provided.</p>';
 		exit;
 	}
 
