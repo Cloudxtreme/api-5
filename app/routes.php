@@ -147,7 +147,7 @@ Route::get ('localversion', function ()
 	exit;
 });
 
-Route::any('{path?}', function()
+Route::any('login/{path?}', function()
 {
 	$page = new \bmgroup\Cloudwalkers\Page ();
 
@@ -169,8 +169,30 @@ Route::any('{path?}', function()
 
 })->where ('path', '.+');
 
+Route::any('oauth2/{path?}', function()
+{
+	$page = new \bmgroup\Cloudwalkers\Page ();
+
+	$frontcontroller = new \Neuron\FrontController ();
+	$frontcontroller->setInput (Request::segments ());
+	$frontcontroller->setPage ($page);
+
+	$frontcontroller->addController (new \bmgroup\Signin\FrontController ());
+	$frontcontroller->addController (new \bmgroup\OAuth2\FrontController ());
+
+	$response = $frontcontroller->dispatch ($page);
+
+	if ($response)
+	{
+		$response->output ();
+	}
+
+	exit;
+
+})->where ('path', '.+');;
+
 // The All Catching One
-Route::any ('/{path?}', function ($path) {
+Route::any ('{path?}', function ($path) {
 
 	$verifier = \bmgroup\OAuth2\Verifier::getInstance ();
 	if (!$verifier->isValid ())
