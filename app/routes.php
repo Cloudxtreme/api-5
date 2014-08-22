@@ -119,44 +119,6 @@ define  ('DB_CHARSET', 'utf8');
 define ('TEMPLATE_DIR', dirname (__FILE__) . '/templates/');
 define ('BASE_URL', 'https://devapi.cloudwalkers.be/');
 
-// The All Catching One
-Route::any ('/proxy/{path?}', function ($path) {
-
-	$verifier = \bmgroup\OAuth2\Verifier::getInstance ();
-	if (!$verifier->isValid ())
-	{
-		echo '<p>No valid oauth2 credentials provided.</p>';
-		exit;
-	}
-
-	$request = \Neuron\Net\Request::fromInput ($path);
-	
-	//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
-	$segments = Request::segments ();
-	array_shift ($segments);
-	
-	$request->setSegments ($segments);
-
-	$client = new GearmanClient ();
-	$client->addServer ('devgearman.cloudwalkers.be', 4730);
-
-	$data = $client->doHigh ('apiDispatch', $request->toJSON ());
-	$response = \Neuron\Net\Response::fromJSON ($data);
-
-	// Hack the body for forms
-	if ($response->getBody ())
-	{
-		$body = $response->getBody ();
-		$body = str_replace ('action="http://cloudwalkers-api.local/', 'action="http://cloudwalkers-api.local/proxy/', $body);
-		$response->setBody ($body);
-	}
-
-	$response->output ();
-	//print_r ($response->toJSON ());
-	exit;
-	
-})->where ('path', '.+');
-
 Route::get ('version', function ()
 {
 	$request = \Neuron\Net\Request::fromInput ('version');
@@ -203,6 +165,44 @@ Route::any('{path?}', function()
 		$response->output ();
 	}
 
+	exit;
+
+})->where ('path', '.+');
+
+// The All Catching One
+Route::any ('/{path?}', function ($path) {
+
+	$verifier = \bmgroup\OAuth2\Verifier::getInstance ();
+	if (!$verifier->isValid ())
+	{
+		echo '<p>No valid oauth2 credentials provided.</p>';
+		exit;
+	}
+
+	$request = \Neuron\Net\Request::fromInput ($path);
+
+	//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
+	$segments = Request::segments ();
+	array_shift ($segments);
+
+	$request->setSegments ($segments);
+
+	$client = new GearmanClient ();
+	$client->addServer ('devgearman.cloudwalkers.be', 4730);
+
+	$data = $client->doHigh ('apiDispatch', $request->toJSON ());
+	$response = \Neuron\Net\Response::fromJSON ($data);
+
+	// Hack the body for forms
+	if ($response->getBody ())
+	{
+		$body = $response->getBody ();
+		$body = str_replace ('action="http://cloudwalkers-api.local/', 'action="http://cloudwalkers-api.local/proxy/', $body);
+		$response->setBody ($body);
+	}
+
+	$response->output ();
+	//print_r ($response->toJSON ());
 	exit;
 
 })->where ('path', '.+');
