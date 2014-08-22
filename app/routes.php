@@ -29,6 +29,9 @@ App::before(function($request)
 		header ('Access-Control-Allow-Origin: *');
 		header ('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, PATCH, OPTIONS');
 		header ('Access-Control-Allow-Headers: origin, x-requested-with, content-type, access_token, authorization');
+		
+		echo 'These are not the droids you\'re looking for.'
+		
 		exit;
 	}
 });
