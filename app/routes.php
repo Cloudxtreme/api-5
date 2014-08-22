@@ -234,7 +234,7 @@ Route::match (array ('GET', 'POST', 'PATCH', 'PUT', 'DELETE'), '{path?}', functi
 
 		http_response_code (403);
 		
-		echo '<p>I\'m sorry, no valid oauth2 information provided.</p>';
+		echo 'I\'m sorry, no valid oauth2 information provided.';
 		exit;
 	}
 
