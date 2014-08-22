@@ -126,7 +126,7 @@ Route::get ('localversion', function ()
 	//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
 	$segments = Request::segments ();
 
-	$request->setSegments ($segments);
+	$request->setSegments (array ('version'));
 
 	$client = new GearmanClient ();
 	$client->addServer ('devgearman.cloudwalkers.be', 4730);
@@ -152,7 +152,7 @@ Route::any('{path?}', function()
 	$page = new \bmgroup\Cloudwalkers\Page ();
 
 	$frontcontroller = new \Neuron\FrontController ();
-	$frontcontroller->setInput (array ('version'));
+	$frontcontroller->setInput (Request::segments ());
 	$frontcontroller->setPage ($page);
 
 	$frontcontroller->addController (new \bmgroup\Signin\FrontController ());
