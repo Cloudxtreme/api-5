@@ -28,7 +28,10 @@ class HTML implements Output {
 			}
 		}
 
-		http_response_code ($response->getStatus ());
+		if ($response->getStatus ())
+		{
+			http_response_code ($response->getStatus ());
+		}
 
 		if ($response->getCookies ())
 		{
