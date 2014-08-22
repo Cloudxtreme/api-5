@@ -172,6 +172,28 @@ Route::any('login/{path?}', function()
 
 })->where ('path', '.+');
 
+Route::any('logout/{path?}', function()
+{
+	$page = new \bmgroup\Cloudwalkers\Page ();
+
+	$frontcontroller = new \Neuron\FrontController ();
+	$frontcontroller->setInput (Request::segments ());
+	$frontcontroller->setPage ($page);
+
+	$frontcontroller->addController (new \bmgroup\Signin\FrontController ());
+	$frontcontroller->addController (new \bmgroup\OAuth2\FrontController ());
+
+	$response = $frontcontroller->dispatch ($page);
+
+	if ($response)
+	{
+		$response->output ();
+	}
+
+	exit;
+
+})->where ('path', '.+');
+
 Route::any('oauth2/{path?}', function()
 {
 	$page = new \bmgroup\Cloudwalkers\Page ();

@@ -21,15 +21,21 @@ class FrontController
 	
 	/** var Response $response */
 	private $response;
+	
+	private static $instance;
 
 	public static function getInstance ()
 	{
-		static $in;
-		if (!isset ($in))
+		if (!isset (self::$instance))
 		{
-			$in = new self ();
+			self::$instance = new self ();
 		}
-		return $in;
+		return self::$instance;
+	}
+	
+	public static function destroy ()
+	{
+		self::$instance = false;
 	}
 
 	public function addController (NeuronInterfacesFrontController $controller)
