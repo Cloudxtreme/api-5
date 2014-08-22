@@ -1,0 +1,381 @@
+DB
+
+=====================================
+140318  9:30:13 INNODB MONITOR OUTPUT
+=====================================
+Per second averages calculated from the last 4 seconds
+----------
+SEMAPHORES
+----------
+OS WAIT ARRAY INFO: reservation count 1600528, signal count 1268612
+Mutex spin waits 0, rounds 772797499, OS waits 594728
+RW-shared spins 2439182, OS waits 629969; RW-excl spins 5292408, OS waits 154608
+------------------------
+LATEST DETECTED DEADLOCK
+------------------------
+140318  9:23:01
+*** (1) TRANSACTION:
+TRANSACTION 0 350183247, ACTIVE 6 sec, process no 25703, OS thread id 139981447767808 updating or deleting
+mysql tables in use 1, locked 1
+LOCK WAIT 18 lock struct(s), heap size 3024, 10 row lock(s), undo log entries 6
+MySQL thread id 195295, query id 5704046 localhost workers Updating
+UPDATE
+               messages_statistics
+           SET
+               mst_recent = 0
+           WHERE
+               m_id = 7336742 AND
+               stat_id = 73 AND
+               mst_recent = 1
+*** (1) WAITING FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 48 page no 137473 n bits 80 index `mst_recent` of table `cloudwalkers_dev`.`messages_statistics` trx id 0 350183247 lock_mode X insert intention waiting
+Record lock, heap no 1 PHYSICAL RECORD: n_fields 1; compact format; info bits 0
+0: len 8; hex 73757072656d756d; asc supremum;;
+
+*** (2) TRANSACTION:
+TRANSACTION 0 350183205, ACTIVE 25 sec, process no 25703, OS thread id 139953454163712 fetching rows, thread declared inside InnoDB 441
+mysql tables in use 3, locked 3
+46234 lock struct(s), heap size 6961136, 15682821 row lock(s), undo log entries 10
+MySQL thread id 195006, query id 5704048 localhost workers Searching rows for update
+UPDATE
+               messages_statistics
+           SET
+               mst_recent = 0
+           WHERE
+               m_id = 5149527 AND
+               stat_id = 47 AND
+               mst_recent = 1
+*** (2) HOLDS THE LOCK(S):
+RECORD LOCKS space id 48 page no 137473 n bits 80 index `mst_recent` of table `cloudwalkers_dev`.`messages_statistics` trx id 0 350183205 lock_mode X
+Record lock, heap no 1 PHYSICAL RECORD: n_fields 1; compact format; info bits 0
+0: len 8; hex 73757072656d756d; asc supremum;;
+
+*** (2) WAITING FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 48 page no 136951 n bits 1232 index `mst_recent` of table `cloudwalkers_dev`.`messages_statistics` trx id 0 350183205 lock_mode X waiting
+Record lock, heap no 460 PHYSICAL RECORD: n_fields 2; compact format; info bits 32
+0: len 1; hex 81; asc  ;; 1: len 4; hex 812a4fee; asc  *O ;;
+
+*** WE ROLL BACK TRANSACTION (1)
+------------
+TRANSACTIONS
+------------
+Trx id counter 0 350197716
+Purge done for trx's n:o < 0 350179703 undo n:o < 0 0
+History list length 3700
+LIST OF TRANSACTIONS FOR EACH SESSION:
+---TRANSACTION 0 0, not started, process no 25703, OS thread id 139981443774208
+MySQL thread id 196721, query id 5731646 83.96.195.192 root
+SHOW ENGINE INNODB STATUS
+---TRANSACTION 0 350197005, not started, process no 25703, OS thread id 139953795127040
+MySQL thread id 196675, query id 5730575 83.96.250.95 workers
+---TRANSACTION 0 350197707, not started, process no 25703, OS thread id 139953794328320
+MySQL thread id 196666, query id 5731602 83.96.250.95 workers
+---TRANSACTION 0 350197503, not started, process no 25703, OS thread id 139981547824896
+MySQL thread id 196630, query id 5731135 83.96.250.95 workers
+---TRANSACTION 0 350197596, not started, process no 25703, OS thread id 139953792198400
+MySQL thread id 196615, query id 5731310 83.96.250.95 workers
+---TRANSACTION 0 350197513, not started, process no 25703, OS thread id 139953794594560
+MySQL thread id 196504, query id 5731148 83.96.195.192 cloudwalkers
+---TRANSACTION 0 350194300, not started, process no 25703, OS thread id 139981442443008
+MySQL thread id 196503, query id 5725611 83.96.195.192 cloudwalkers
+---TRANSACTION 0 350193171, not started, process no 25703, OS thread id 139981547558656
+MySQL thread id 196153, query id 5722494 83.96.250.95 workers
+---TRANSACTION 0 350192588, not started, process no 25703, OS thread id 139981546493696
+MySQL thread id 195960, query id 5721399 83.96.250.95 workers
+---TRANSACTION 0 350192306, not started, process no 25703, OS thread id 139981448300288
+MySQL thread id 195345, query id 5720735 83.96.195.192 cloudwalkers
+---TRANSACTION 0 350077449, not started, process no 25703, OS thread id 139981443507968
+MySQL thread id 192403, query id 5551918 localhost workers
+---TRANSACTION 0 350063992, not started, process no 25703, OS thread id 139953796990720
+MySQL thread id 191456, query id 5530658 83.96.195.192 cloudwalkers
+---TRANSACTION 0 350197714, ACTIVE 0 sec, process no 25703, OS thread id 139953799653120 inserting
+mysql tables in use 1, locked 1
+LOCK WAIT 8 lock struct(s), heap size 1216, 3 row lock(s), undo log entries 7
+MySQL thread id 196645, query id 5731639 83.96.250.95 workers update
+REPLACE INTO
+               messages_statistics
+           SET
+               m_id = 6661210,
+               stat_id = 39,
+               mst_date = FROM_UNIXTIME(1395129600),
+               mst_value = '0',
+               mst_recent = 1
+Trx read view will not see trx with id >= 0 350197715, sees < 0 350179696
+------- TRX HAS BEEN WAITING 0 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 13 page no 161831 n bits 576 index `m_id_2` of table `cloudwalkers`.`messages_statistics` trx id 0 350197714 lock_mode X insert intention waiting
+Record lock, heap no 1 PHYSICAL RECORD: n_fields 1; compact format; info bits 0
+0: len 8; hex 73757072656d756d; asc supremum;;
+
+------------------
+---TRANSACTION 0 350197712, ACTIVE 0 sec, process no 25703, OS thread id 139953453631232
+26 lock struct(s), heap size 6752, 28 row lock(s), undo log entries 18
+MySQL thread id 196720, query id 5731645 83.96.250.95 workers
+Trx read view will not see trx with id >= 0 350197713, sees < 0 350179696
+---TRANSACTION 0 350197667, ACTIVE 6 sec, process no 25703, OS thread id 139981446170368 inserting
+mysql tables in use 1, locked 1
+LOCK WAIT 11 lock struct(s), heap size 1216, 4 row lock(s), undo log entries 5
+MySQL thread id 196699, query id 5731432 localhost workers update
+INSERT INTO `messages` SET m_id = '7337011', a_id = '3', am_hash = '2dcb53f9c404e0d9f3425a94ba9b231b'
+Trx read view will not see trx with id >= 0 350197668, sees < 0 350179696
+------- TRX HAS BEEN WAITING 6 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 315 page no 3 n bits 80 index `PRIMARY` of table `cloudwalkers_dev`.`accounts` trx id 0 350197667 lock mode S locks rec but not gap waiting
+Record lock, heap no 4 PHYSICAL RECORD: n_fields 5; compact format; info bits 0
+0: len 4; hex 80000003; asc     ;; 1: len 6; hex 000014df43cb; asc     C ;; 2: len 7; hex 0000002c951e7c; asc    ,  |;; 3: len 12; hex 626d67726f75702044454d4f; asc bmgroup DEMO;; 4: len 8; hex 8000125148816aef; asc    QH j ;;
+
+------------------
+---TRANSACTION 0 350197631, ACTIVE 6 sec, process no 25703, OS thread id 139953791932160 inserting
+mysql tables in use 1, locked 1
+LOCK WAIT 9 lock struct(s), heap size 1216, 3 row lock(s), undo log entries 5
+MySQL thread id 196692, query id 5731372 localhost workers update
+INSERT INTO `messages` SET m_id = '7337010', a_id = '3', am_hash = 'c780dfe7fc121c7eac65eb1c1ee04a11'
+Trx read view will not see trx with id >= 0 350197632, sees < 0 350179696
+------- TRX HAS BEEN WAITING 6 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 315 page no 3 n bits 80 index `PRIMARY` of table `cloudwalkers_dev`.`accounts` trx id 0 350197631 lock mode S locks rec but not gap waiting
+Record lock, heap no 4 PHYSICAL RECORD: n_fields 5; compact format; info bits 0
+0: len 4; hex 80000003; asc     ;; 1: len 6; hex 000014df43cb; asc     C ;; 2: len 7; hex 0000002c951e7c; asc    ,  |;; 3: len 12; hex 626d67726f75702044454d4f; asc bmgroup DEMO;; 4: len 8; hex 8000125148816aef; asc    QH j ;;
+
+------------------
+---TRANSACTION 0 350197571, ACTIVE 7 sec, process no 25703, OS thread id 139953791399680 inserting
+mysql tables in use 1, locked 1
+LOCK WAIT 9 lock struct(s), heap size 1216, 3 row lock(s), undo log entries 5
+MySQL thread id 196681, query id 5731268 localhost workers update
+INSERT INTO `messages` SET m_id = '7337009', a_id = '3', am_hash = '16587d37068e18b2f80dccc77e64d4a8'
+Trx read view will not see trx with id >= 0 350197572, sees < 0 350179696
+------- TRX HAS BEEN WAITING 7 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 315 page no 3 n bits 80 index `PRIMARY` of table `cloudwalkers_dev`.`accounts` trx id 0 350197571 lock mode S locks rec but not gap waiting
+Record lock, heap no 4 PHYSICAL RECORD: n_fields 5; compact format; info bits 0
+0: len 4; hex 80000003; asc     ;; 1: len 6; hex 000014df43cb; asc     C ;; 2: len 7; hex 0000002c951e7c; asc    ,  |;; 3: len 12; hex 626d67726f75702044454d4f; asc bmgroup DEMO;; 4: len 8; hex 8000125148816aef; asc    QH j ;;
+
+------------------
+---TRANSACTION 0 350197539, ACTIVE 8 sec, process no 25703, OS thread id 139953793795840 inserting
+mysql tables in use 1, locked 1
+LOCK WAIT 9 lock struct(s), heap size 1216, 3 row lock(s), undo log entries 5
+MySQL thread id 196691, query id 5731204 localhost workers update
+INSERT INTO `messages` SET m_id = '7337008', a_id = '3', am_hash = 'b357df9080bf4952bbb9f35b010e43d8'
+Trx read view will not see trx with id >= 0 350197540, sees < 0 350179696
+------- TRX HAS BEEN WAITING 8 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 315 page no 3 n bits 80 index `PRIMARY` of table `cloudwalkers_dev`.`accounts` trx id 0 350197539 lock mode S locks rec but not gap waiting
+Record lock, heap no 4 PHYSICAL RECORD: n_fields 5; compact format; info bits 0
+0: len 4; hex 80000003; asc     ;; 1: len 6; hex 000014df43cb; asc     C ;; 2: len 7; hex 0000002c951e7c; asc    ,  |;; 3: len 12; hex 626d67726f75702044454d4f; asc bmgroup DEMO;; 4: len 8; hex 8000125148816aef; asc    QH j ;;
+
+------------------
+---TRANSACTION 0 350197535, ACTIVE 8 sec, process no 25703, OS thread id 139981442709248 inserting
+mysql tables in use 1, locked 1
+LOCK WAIT 8 lock struct(s), heap size 1216, 3 row lock(s), undo log entries 6
+MySQL thread id 196674, query id 5731193 localhost workers update
+REPLACE INTO
+               messages_statistics
+           SET
+               m_id = 7337007,
+               stat_id = 39,
+               mst_date = FROM_UNIXTIME(1395129600),
+               mst_value = '8',
+               mst_recent = 1
+Trx read view will not see trx with id >= 0 350197536, sees < 0 350179696
+------- TRX HAS BEEN WAITING 8 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 48 page no 116990 n bits 480 index `m_id_2` of table `cloudwalkers_dev`.`messages_statistics` trx id 0 350197535 lock_mode X insert intention waiting
+Record lock, heap no 1 PHYSICAL RECORD: n_fields 1; compact format; info bits 0
+0: len 8; hex 73757072656d756d; asc supremum;;
+
+------------------
+---TRANSACTION 0 350197516, ACTIVE 8 sec, process no 25703, OS thread id 139953791665920 inserting
+mysql tables in use 1, locked 1
+LOCK WAIT 9 lock struct(s), heap size 1216, 3 row lock(s), undo log entries 5
+MySQL thread id 196687, query id 5731159 localhost workers update
+INSERT INTO `messages` SET m_id = '7337006', a_id = '3', am_hash = '5ac384668ddb0d145c944620a55ebebd'
+Trx read view will not see trx with id >= 0 350197517, sees < 0 350179696
+------- TRX HAS BEEN WAITING 8 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 315 page no 3 n bits 80 index `PRIMARY` of table `cloudwalkers_dev`.`accounts` trx id 0 350197516 lock mode S locks rec but not gap waiting
+Record lock, heap no 4 PHYSICAL RECORD: n_fields 5; compact format; info bits 0
+0: len 4; hex 80000003; asc     ;; 1: len 6; hex 000014df43cb; asc     C ;; 2: len 7; hex 0000002c951e7c; asc    ,  |;; 3: len 12; hex 626d67726f75702044454d4f; asc bmgroup DEMO;; 4: len 8; hex 8000125148816aef; asc    QH j ;;
+
+------------------
+---TRANSACTION 0 350197497, ACTIVE 9 sec, process no 25703, OS thread id 139953454163712 inserting
+mysql tables in use 1, locked 1
+LOCK WAIT 8 lock struct(s), heap size 1216, 3 row lock(s), undo log entries 5
+MySQL thread id 196685, query id 5731126 localhost workers update
+INSERT INTO `messages` SET m_id = '7337005', a_id = '3', am_hash = '5abd173b621fa26e389b52cabccd2acd'
+Trx read view will not see trx with id >= 0 350197498, sees < 0 350179696
+------- TRX HAS BEEN WAITING 9 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 315 page no 3 n bits 80 index `PRIMARY` of table `cloudwalkers_dev`.`accounts` trx id 0 350197497 lock mode S locks rec but not gap waiting
+Record lock, heap no 4 PHYSICAL RECORD: n_fields 5; compact format; info bits 0
+0: len 4; hex 80000003; asc     ;; 1: len 6; hex 000014df43cb; asc     C ;; 2: len 7; hex 0000002c951e7c; asc    ,  |;; 3: len 12; hex 626d67726f75702044454d4f; asc bmgroup DEMO;; 4: len 8; hex 8000125148816aef; asc    QH j ;;
+
+------------------
+---TRANSACTION 0 350197298, ACTIVE 11 sec, process no 25703, OS thread id 139953793529600 inserting
+mysql tables in use 1, locked 1
+LOCK WAIT 8 lock struct(s), heap size 1216, 3 row lock(s), undo log entries 6
+MySQL thread id 196656, query id 5730658 localhost workers update
+REPLACE INTO
+               messages_statistics
+           SET
+               m_id = 7336993,
+               stat_id = 39,
+               mst_date = FROM_UNIXTIME(1395129600),
+               mst_value = '8',
+               mst_recent = 1
+Trx read view will not see trx with id >= 0 350197299, sees < 0 350179696
+------- TRX HAS BEEN WAITING 11 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 48 page no 116990 n bits 480 index `m_id_2` of table `cloudwalkers_dev`.`messages_statistics` trx id 0 350197298 lock_mode X insert intention waiting
+Record lock, heap no 1 PHYSICAL RECORD: n_fields 1; compact format; info bits 0
+0: len 8; hex 73757072656d756d; asc supremum;;
+
+------------------
+---TRANSACTION 0 350196603, ACTIVE 13 sec, process no 25703, OS thread id 139981441644288 inserting
+mysql tables in use 1, locked 1
+LOCK WAIT 7 lock struct(s), heap size 1216, 3 row lock(s), undo log entries 4
+MySQL thread id 196651, query id 5729631 localhost workers update
+REPLACE INTO
+               messages_statistics
+           SET
+               m_id = 7336965,
+               stat_id = 73,
+               mst_date = FROM_UNIXTIME(1395129600),
+               mst_value = '0',
+               mst_recent = 1
+Trx read view will not see trx with id >= 0 350196604, sees < 0 350179696
+------- TRX HAS BEEN WAITING 13 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 48 page no 116990 n bits 480 index `m_id_2` of table `cloudwalkers_dev`.`messages_statistics` trx id 0 350196603 lock_mode X insert intention waiting
+Record lock, heap no 1 PHYSICAL RECORD: n_fields 1; compact format; info bits 0
+0: len 8; hex 73757072656d756d; asc supremum;;
+
+------------------
+---TRANSACTION 0 350195701, ACTIVE 14 sec, process no 25703, OS thread id 139981445105408 inserting
+mysql tables in use 1, locked 1
+LOCK WAIT 15 lock struct(s), heap size 3024, 13 row lock(s), undo log entries 10
+MySQL thread id 196642, query id 5728172 localhost workers update
+INSERT INTO `messages` SET m_id = '7336893', a_id = '3', am_hash = '70e51d600854fd3c43d004ab20fa653b'
+Trx read view will not see trx with id >= 0 350195702, sees < 0 350179696
+------- TRX HAS BEEN WAITING 14 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 315 page no 3 n bits 80 index `PRIMARY` of table `cloudwalkers_dev`.`accounts` trx id 0 350195701 lock mode S locks rec but not gap waiting
+Record lock, heap no 4 PHYSICAL RECORD: n_fields 5; compact format; info bits 0
+0: len 4; hex 80000003; asc     ;; 1: len 6; hex 000014df43cb; asc     C ;; 2: len 7; hex 0000002c951e7c; asc    ,  |;; 3: len 12; hex 626d67726f75702044454d4f; asc bmgroup DEMO;; 4: len 8; hex 8000125148816aef; asc    QH j ;;
+
+------------------
+---TRANSACTION 0 350195505, ACTIVE 15 sec, process no 25703, OS thread id 139953792730880 starting index read
+mysql tables in use 1, locked 1
+LOCK WAIT 2 lock struct(s), heap size 368, 1 row lock(s)
+MySQL thread id 196636, query id 5727719 83.96.195.192 cloudwalkers Updating
+UPDATE
+               accounts
+           SET
+               a_lastRefresh = FROM_UNIXTIME(1395131408),
+               a_name = 'bmgroup DEMO'
+           WHERE
+               a_id = 3
+------- TRX HAS BEEN WAITING 15 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 315 page no 3 n bits 80 index `PRIMARY` of table `cloudwalkers_dev`.`accounts` trx id 0 350195505 lock_mode X locks rec but not gap waiting
+Record lock, heap no 4 PHYSICAL RECORD: n_fields 5; compact format; info bits 0
+0: len 4; hex 80000003; asc     ;; 1: len 6; hex 000014df43cb; asc     C ;; 2: len 7; hex 0000002c951e7c; asc    ,  |;; 3: len 12; hex 626d67726f75702044454d4f; asc bmgroup DEMO;; 4: len 8; hex 8000125148816aef; asc    QH j ;;
+
+------------------
+---TRANSACTION 0 350193488, ACTIVE 36 sec, process no 25703, OS thread id 139981442176768 starting index read
+mysql tables in use 1, locked 1
+LOCK WAIT 2 lock struct(s), heap size 368, 1 row lock(s)
+MySQL thread id 196225, query id 5723623 83.96.195.192 cloudwalkers Updating
+UPDATE
+               accounts
+           SET
+               a_lastRefresh = FROM_UNIXTIME(1395131386),
+               a_name = 'bmgroup DEMO'
+           WHERE
+               a_id = 3
+------- TRX HAS BEEN WAITING 36 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 315 page no 3 n bits 80 index `PRIMARY` of table `cloudwalkers_dev`.`accounts` trx id 0 350193488 lock_mode X locks rec but not gap waiting
+Record lock, heap no 4 PHYSICAL RECORD: n_fields 5; compact format; info bits 0
+0: len 4; hex 80000003; asc     ;; 1: len 6; hex 000014df43cb; asc     C ;; 2: len 7; hex 0000002c951e7c; asc    ,  |;; 3: len 12; hex 626d67726f75702044454d4f; asc bmgroup DEMO;; 4: len 8; hex 8000125148816aef; asc    QH j ;;
+
+------------------
+---TRANSACTION 0 350193487, ACTIVE 36 sec, process no 25703, OS thread id 139981444839168 starting index read
+mysql tables in use 1, locked 1
+LOCK WAIT 2 lock struct(s), heap size 368, 1 row lock(s)
+MySQL thread id 196227, query id 5723619 83.96.195.192 cloudwalkers Updating
+UPDATE
+               accounts
+           SET
+               a_lastRefresh = FROM_UNIXTIME(1395131386),
+               a_name = 'bmgroup DEMO'
+           WHERE
+               a_id = 3
+------- TRX HAS BEEN WAITING 36 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 315 page no 3 n bits 80 index `PRIMARY` of table `cloudwalkers_dev`.`accounts` trx id 0 350193487 lock_mode X locks rec but not gap waiting
+Record lock, heap no 4 PHYSICAL RECORD: n_fields 5; compact format; info bits 0
+0: len 4; hex 80000003; asc     ;; 1: len 6; hex 000014df43cb; asc     C ;; 2: len 7; hex 0000002c951e7c; asc    ,  |;; 3: len 12; hex 626d67726f75702044454d4f; asc bmgroup DEMO;; 4: len 8; hex 8000125148816aef; asc    QH j ;;
+
+------------------
+---TRANSACTION 0 350183290, ACTIVE 432 sec, process no 25703, OS thread id 139953797523200
+10 lock struct(s), heap size 3024, 5 row lock(s), undo log entries 2
+MySQL thread id 195302, query id 5704230 localhost workers
+Trx read view will not see trx with id >= 0 350183291, sees < 0 350166177
+---TRANSACTION 0 350183264, ACTIVE 432 sec, process no 25703, OS thread id 139981447767808 inserting
+mysql tables in use 1, locked 1
+LOCK WAIT 5 lock struct(s), heap size 1216, 6 row lock(s), undo log entries 3
+MySQL thread id 195295, query id 5726444 localhost workers update
+INSERT INTO
+                   locks
+               SET
+                   l_name = 'twitterstream_35',
+                   l_date = FROM_UNIXTIME(1395131395)
+Trx read view will not see trx with id >= 0 350194789, sees < 0 350179696
+------- TRX HAS BEEN WAITING 18 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 332 page no 4 n bits 472 index `l_name` of table `cloudwalkers_dev`.`locks` trx id 0 350183264 lock mode S waiting
+Record lock, heap no 326 PHYSICAL RECORD: n_fields 2; compact format; info bits 32
+0: len 16; hex 7477697474657273747265616d5f3336; asc twitterstream_36;; 1: len 4; hex 8008f506; asc     ;;
+
+------------------
+---TRANSACTION 0 350179696, ACTIVE 587 sec, process no 25703, OS thread id 139953794062080
+10 lock struct(s), heap size 3024, 5 row lock(s), undo log entries 2
+MySQL thread id 194968, query id 5694532 localhost workers
+Trx read view will not see trx with id >= 0 350179697, sees < 0 350078325
+--------
+FILE I/O
+--------
+I/O thread 0 state: waiting for i/o request (insert buffer thread)
+I/O thread 1 state: waiting for i/o request (log thread)
+I/O thread 2 state: waiting for i/o request (read thread)
+I/O thread 3 state: waiting for i/o request (write thread)
+Pending normal aio reads: 0, aio writes: 0,
+ibuf aio reads: 0, log i/o's: 0, sync i/o's: 0
+Pending flushes (fsync) log: 0; buffer pool: 0
+578634 OS file reads, 2073418 OS file writes, 151696 OS fsyncs
+0.00 reads/s, 0 avg bytes/read, 5.00 writes/s, 1.50 fsyncs/s
+-------------------------------------
+INSERT BUFFER AND ADAPTIVE HASH INDEX
+-------------------------------------
+Ibuf: size 1, free list len 24, seg size 26,
+9157 inserts, 9157 merged recs, 3693 merges
+Hash table size 50999537, node heap has 109886 buffer(s)
+81.23 hash searches/s, 208.70 non-hash searches/s
+---
+LOG
+---
+Log sequence number 110 2381389965
+Log flushed up to   110 2381389379
+Last checkpoint at  110 2380664758
+0 pending log writes, 0 pending chkp writes
+1561302 log i/o's done, 5.00 log i/o's/second
+----------------------
+BUFFER POOL AND MEMORY
+----------------------
+Total memory allocated 28203943802; in additional pool allocated 1048576
+Dictionary memory allocated 848680
+Buffer pool size   1572864
+Free buffers       401108
+Database pages     1061870
+Modified db pages  567
+Pending reads 0
+Pending writes: LRU 0, flush list 0, single page 0
+Pages read 1037709, created 24266, written 776436
+0.00 reads/s, 0.00 creates/s, 0.00 writes/s
+Buffer pool hit rate 1000 / 1000
+--------------
+ROW OPERATIONS
+--------------
+0 queries inside InnoDB, 0 queries in queue
+16 read views open inside InnoDB
+Main thread process no. 25703, id 139953810409216, state: sleeping
+Number of rows inserted 1188550, updated 16870912, deleted 144274, read 20915532019
+15.75 inserts/s, 16.25 updates/s, 1.75 deletes/s, 102.97 reads/s
+----------------------------
+END OF INNODB MONITOR OUTPUT
+============================
