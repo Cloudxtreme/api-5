@@ -24,7 +24,7 @@ App::before(function($request)
 {
 	// Sent by the browser since request come in as cross-site AJAX
 	// The cross-site headers are sent via .htaccess
-	if ($request->getMethod() == "OPTIONS")
+	if (strtoupper ($request->getMethod()) == "OPTIONS")
 	{
 		header ('Access-Control-Allow-Origin: *');
 		header ('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, PATCH, OPTIONS');
