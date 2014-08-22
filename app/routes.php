@@ -85,9 +85,11 @@ Route::any ('/proxy/{path?}', function ($path) {
 		$body = str_replace ('action="http://cloudwalkers-api.local/', 'action="http://cloudwalkers-api.local/proxy/', $body);
 		$response->setBody ($body);
 	}
+	
+	// Also change the headers
 
 	$response->output ();
-	//print_r ($response->getData ());
+	//print_r ($response->toJSON ());
 	exit;
 	
 	//return '<pre>' . print_r ($out, true) . '</pre>';

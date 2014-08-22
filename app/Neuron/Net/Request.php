@@ -76,6 +76,11 @@ class Request
 			$model->setEnvironment ($data['environment']);
 		}
 
+		if (isset ($data['environment']))
+		{
+			$model->setEnvironment ($data['environment']);
+		}
+
 		return $model;
 	}
 
