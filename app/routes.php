@@ -143,7 +143,7 @@ else
 	\Neuron\Core\Template::addTemplatePath (TEMPLATE_DIR, null, true);
 }
 
-Route::get ('version', function ()
+Route::get ('1/version', function ()
 {
 	$request = \Neuron\Net\Request::fromInput ('version');
 
