@@ -125,7 +125,7 @@ define  ('DB_CHARSET', $databasesettings['charset']);
 define ('TEMPLATE_DIR', dirname (__FILE__) . '/templates/');
 define ('BASE_URL', URL::to('/') . '/');
 
-Route::get ('localversion', function ()
+Route::get ('version', function ()
 {
 	$request = \Neuron\Net\Request::fromInput ('version');
 
