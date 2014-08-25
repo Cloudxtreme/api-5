@@ -16,4 +16,13 @@ ini_set('display_errors', true);
 */
 
 require __DIR__.'/../bootstrap/autoload.php';
+$app = require_once __DIR__.'/../bootstrap/start.php';
 
+$client = new GearmanClient ();
+
+foreach (Config::get ('gearman.servers') as $server => $port)
+{
+	$client->addServer ($server, $port);
+}
+
+$data = $client->doHigh ('cron1', "cron1");
