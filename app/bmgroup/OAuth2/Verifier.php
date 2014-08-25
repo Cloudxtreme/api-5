@@ -62,6 +62,8 @@ class Verifier
 		);
 
 		$storage = new Pdo (array('dsn' => $dsn, 'username' => $username, 'password' => $password), $pdoconfig);
+		//$storage = DB::connection()->getPdo();
+		
 		$this->server = new Server($storage, array (
 			'allow_implicit' => true,
 			'access_lifetime' => 60 * 60 * 24 * 365 * 2

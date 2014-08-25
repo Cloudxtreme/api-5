@@ -25,11 +25,14 @@ App::before(function($request)
 {
 	// Sent by the browser since request come in as cross-site AJAX
 	// The cross-site headers are sent via .htaccess
-	if ($request->getMethod() == "OPTIONS")
+	if (strtoupper ($request->getMethod()) == "OPTIONS")
 	{
 		header ('Access-Control-Allow-Origin: *');
 		header ('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, PATCH, OPTIONS');
 		header ('Access-Control-Allow-Headers: origin, x-requested-with, content-type, access_token, authorization');
+		
+		echo 'These are not the droids you\'re looking for.';
+		
 		exit;
 	}
 });
@@ -111,67 +114,35 @@ if (!function_exists('http_response_code')) {
 	}
 }
 
-define  ('DB_HOST', 'db.cloudwalkers.be');
-define  ('DB_USERNAME', 'workers');
-define  ('DB_PASSWORD', 'dj99Pze!Ueh');
-define  ('DB_NAME', 'cloudwalkers_dev');
-define  ('DB_CHARSET', 'utf8');
+$databasesettings = Config::get ('database.connections.' . (Config::get ('database.default')));
+
+define  ('DB_HOST', $databasesettings['host']);
+define  ('DB_USERNAME', $databasesettings['username']);
+define  ('DB_PASSWORD', $databasesettings['password']);
+define  ('DB_NAME', $databasesettings['database']);
+define  ('DB_CHARSET', $databasesettings['charset']);
 
 define ('TEMPLATE_DIR', dirname (__FILE__) . '/templates/');
-define ('BASE_URL', 'https://devapi.cloudwalkers.be/');
+define ('BASE_URL', URL::to('/') . '/');
 
-// The All Catching One
-Route::any ('/proxy/{path?}', function ($path) {
-
-	$verifier = \bmgroup\OAuth2\Verifier::getInstance ();
-	if (!$verifier->isValid ())
-	{
-		echo '<p>No valid oauth2 credentials provided.</p>';
-		exit;
-	}
-
-	$request = \Neuron\Net\Request::fromInput ($path);
-	
-	//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
-	$segments = Request::segments ();
-	array_shift ($segments);
-	
-	$request->setSegments ($segments);
-
-	$user = MapperFactory::getUserMapper ()->getFromId ($verifier->getUserID ());
-	$request->setUser ($user);
-
-	$client = new GearmanClient ();
-	$client->addServer ('devgearman.cloudwalkers.be', 4730);
-
-	$data = $client->doHigh ('apiDispatch', $request->toJSON ());
-	$response = \Neuron\Net\Response::fromJSON ($data);
-
-	// Hack the body for forms
-	if ($response->getBody ())
-	{
-		$body = $response->getBody ();
-		$body = str_replace ('action="http://cloudwalkers-api.local/', 'action="http://cloudwalkers-api.local/proxy/', $body);
-		$response->setBody ($body);
-	}
-
-	$response->output ();
-	//print_r ($response->toJSON ());
-	exit;
-	
-})->where ('path', '.+');
-
-Route::get ('version', function ()
+Route::get ('localversion', function ()
 {
 	$request = \Neuron\Net\Request::fromInput ('version');
 
 	//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
 	$segments = Request::segments ();
 
-	$request->setSegments ($segments);
+	$request->setSegments (array ('version'));
+
+	$user = MapperFactory::getUserMapper ()->getFromId ($verifier->getUserID ());
+	$request->setUser ($user);
 
 	$client = new GearmanClient ();
-	$client->addServer ('devgearman.cloudwalkers.be', 4730);
+	
+	foreach (Config::get ('gearman.servers') as $server => $port)
+	{
+		$client->addServer ($server, $port);
+	}
 
 	$data = $client->doHigh ('apiDispatch', $request->toJSON ());
 	$response = \Neuron\Net\Response::fromJSON ($data);
@@ -189,7 +160,7 @@ Route::get ('version', function ()
 	exit;
 });
 
-Route::any('{path?}', function()
+Route::any('login/{path?}', function()
 {
 	$page = new \bmgroup\Cloudwalkers\Page ();
 
@@ -207,6 +178,97 @@ Route::any('{path?}', function()
 		$response->output ();
 	}
 
+	exit;
+
+})->where ('path', '.+');
+
+Route::any('logout/{path?}', function()
+{
+	$page = new \bmgroup\Cloudwalkers\Page ();
+
+	$frontcontroller = new \Neuron\FrontController ();
+	$frontcontroller->setInput (Request::segments ());
+	$frontcontroller->setPage ($page);
+
+	$frontcontroller->addController (new \bmgroup\Signin\FrontController ());
+	$frontcontroller->addController (new \bmgroup\OAuth2\FrontController ());
+
+	$response = $frontcontroller->dispatch ($page);
+
+	if ($response)
+	{
+		$response->output ();
+	}
+
+	exit;
+
+})->where ('path', '.+');
+
+Route::any('oauth2/{path?}', function()
+{
+	$page = new \bmgroup\Cloudwalkers\Page ();
+
+	$frontcontroller = new \Neuron\FrontController ();
+	$frontcontroller->setInput (Request::segments ());
+	$frontcontroller->setPage ($page);
+
+	$frontcontroller->addController (new \bmgroup\Signin\FrontController ());
+	$frontcontroller->addController (new \bmgroup\OAuth2\FrontController ());
+
+	$response = $frontcontroller->dispatch ($page);
+
+	if ($response)
+	{
+		$response->output ();
+	}
+
+	exit;
+
+})->where ('path', '.+');;
+
+// The All Catching One
+Route::match (array ('GET', 'POST', 'PATCH', 'PUT', 'DELETE'), '{path?}', function ($path) {
+
+	$verifier = \bmgroup\OAuth2\Verifier::getInstance ();
+	if (!$verifier->isValid ())
+	{
+		header ('Access-Control-Allow-Origin: *');
+		header ('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, PATCH, OPTIONS');
+		header ('Access-Control-Allow-Headers: origin, x-requested-with, content-type, access_token, authorization');
+
+		http_response_code (403);
+		
+		echo 'I\'m sorry, no valid oauth2 information provided.';
+		exit;
+	}
+
+	$request = \Neuron\Net\Request::fromInput ($path);
+
+	//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
+	$segments = Request::segments ();
+	array_shift ($segments);
+
+	$request->setSegments ($segments);
+
+	$client = new GearmanClient ();
+	foreach (Config::get ('gearman.servers') as $server => $port)
+	{
+		$client->addServer ($server, $port);
+	}
+
+	$data = $client->doHigh ('apiDispatch', $request->toJSON ());
+	$response = \Neuron\Net\Response::fromJSON ($data);
+
+	// Hack the body for forms
+	if ($response->getBody ())
+	{
+		$body = $response->getBody ();
+		$body = str_replace ('action="http://cloudwalkers-api.local/', 'action="http://cloudwalkers-api.local/proxy/', $body);
+		$response->setBody ($body);
+	}
+
+	$response->output ();
+	//print_r ($response->toJSON ());
 	exit;
 
 })->where ('path', '.+');

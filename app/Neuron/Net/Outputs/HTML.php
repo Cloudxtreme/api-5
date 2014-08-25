@@ -28,6 +28,11 @@ class HTML implements Output {
 			}
 		}
 
+		if ($response->getStatus ())
+		{
+			http_response_code ($response->getStatus ());
+		}
+
 		if ($response->getCookies ())
 		{
 			foreach ($response->getCookies () as $k => $v)
