@@ -24,6 +24,7 @@ class Authorize
 
 	public function dispatch (Page $page)
 	{
+		/*
 		$input = $this->getInput (2);
 
 		if (empty ($input))
@@ -39,8 +40,6 @@ class Authorize
 
 					return 'Redirecting to <a href="' . $url . '">' . $url . '</a>';
 					//header ('Location: ' . $url);
-
-					return;
 				}
 				else
 				{
@@ -53,6 +52,7 @@ class Authorize
 				$_SESSION['passes'] = 1;
 			}
 		}
+		*/
 
 		$server = Verifier::getInstance ()->getServer ();
 		$request = Verifier::getInstance ()->getRequest ();
