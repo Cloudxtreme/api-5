@@ -102,6 +102,7 @@ class Response
 	public function redirect ($url)
 	{
 		$this->setHeader ('Location', $url);
+		$this->setStatus (302);
 		$this->setData (array ('message' => 'Redirecting to ' . $url));
 	}
 
@@ -120,6 +121,11 @@ class Response
 	public function setOutput (Output $output)
 	{
 		$this->output = $output;
+	}
+
+	public function isOutputSet ()
+	{
+		return isset ($this->output);
 	}
 
 	/**

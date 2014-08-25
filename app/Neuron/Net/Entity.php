@@ -53,9 +53,9 @@ abstract class Entity {
 		}
 		*/
 
-		if (isset ($data['user']))
+		if (isset ($data['session']) && isset ($data['session']['user']))
 		{
-			$user = MapperFactory::getUserMapper ()->getFromId ($data['user']);
+			$user = MapperFactory::getUserMapper ()->getFromId ($data['session']['user']);
 			$model->setUser ($user);
 		}
 
@@ -331,9 +331,18 @@ abstract class Entity {
 		$this->status = $status;
 	}
 
+	public function isStatusSet ()
+	{
+		return isset ($this->status);
+	}
+
 	public function getStatus ()
 	{
-		return $this->status;
+		if (isset ($this->status))
+		{
+			return $this->status;
+		}
+		return 200;
 	}
 
 } 

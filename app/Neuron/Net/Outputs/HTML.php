@@ -20,17 +20,17 @@ class HTML implements Output {
 	
 	public function output (Response $response)
 	{
+		if ($response->getStatus ())
+		{
+			http_response_code ($response->getStatus ());
+		}
+
 		if ($response->getHeaders ())
 		{
 			foreach ($response->getHeaders () as $k => $v)
 			{
 				header ($k . ': ' . $v);
 			}
-		}
-
-		if ($response->getStatus ())
-		{
-			http_response_code ($response->getStatus ());
 		}
 
 		if ($response->getCookies ())
