@@ -134,9 +134,6 @@ Route::get ('localversion', function ()
 
 	$request->setSegments (array ('version'));
 
-	$user = MapperFactory::getUserMapper ()->getFromId ($verifier->getUserID ());
-	$request->setUser ($user);
-
 	$client = new GearmanClient ();
 	
 	foreach (Config::get ('gearman.servers') as $server => $port)
@@ -249,6 +246,9 @@ Route::match (array ('GET', 'POST', 'PATCH', 'PUT', 'DELETE'), '{path?}', functi
 	array_shift ($segments);
 
 	$request->setSegments ($segments);
+
+	$user = MapperFactory::getUserMapper ()->getFromId ($verifier->getUserID ());
+	$request->setUser ($user);
 
 	$client = new GearmanClient ();
 	foreach (Config::get ('gearman.servers') as $server => $port)
