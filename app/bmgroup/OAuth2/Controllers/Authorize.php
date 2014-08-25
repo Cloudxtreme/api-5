@@ -152,6 +152,9 @@ class Authorize
 				Query::replace ('oauth2_app_authorizations', $fields)->execute ();
 			}
 
+			// Destroy the session
+			Session::getInstance ()->destroy ();
+
 		}
 		$response->send();
 	}
