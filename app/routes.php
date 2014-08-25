@@ -143,7 +143,7 @@ else
 	\Neuron\Core\Template::addTemplatePath (TEMPLATE_DIR, null, true);
 }
 
-Route::get ('docs{path?}', function ($path)
+Route::get ('docs{path?}', function ($path = "")
 {
 
 	return Redirect::to ('https://superadmin.cloudwalkers.be/docs' . $path);
