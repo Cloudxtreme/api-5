@@ -5,6 +5,36 @@ use Neuron\MapperFactory;
 
 define ('APP_SECRET_KEY', 'bmgroup tickee catlab pineapple orange');
 
+$databasesettings = Config::get ('database.connections.' . (Config::get ('database.default')));
+
+define  ('DB_HOST', $databasesettings['host']);
+define  ('DB_USERNAME', $databasesettings['username']);
+define  ('DB_PASSWORD', $databasesettings['password']);
+define  ('DB_NAME', $databasesettings['database']);
+define  ('DB_CHARSET', $databasesettings['charset']);
+
+define ('TEMPLATE_DIR', dirname (dirname (__FILE__)) . '/templates/');
+define ('BASE_URL', URL::to('/') . '/');
+
+// Which templates to load (catlab code)
+$display = trim(\Neuron\Core\Tools::getInput('_GET', 'display', 'varchar'));
+
+if ((strlen($display) == 0) ||
+	($display == 'web'))
+{
+	$display = 'default';
+}
+
+if ($display == 'mobile')
+{
+	\Neuron\Core\Template::addTemplatePath (TEMPLATE_DIR . 'mobile', null, true);
+}
+else
+{
+	\Neuron\Core\Template::addTemplatePath (TEMPLATE_DIR, null, true);
+}
+
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -16,11 +46,6 @@ define ('APP_SECRET_KEY', 'bmgroup tickee catlab pineapple orange');
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
-
 App::before(function($request)
 {
 	// Sent by the browser since request come in as cross-site AJAX
@@ -30,11 +55,22 @@ App::before(function($request)
 		header ('Access-Control-Allow-Origin: *');
 		header ('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, PATCH, OPTIONS');
 		header ('Access-Control-Allow-Headers: origin, x-requested-with, content-type, access_token, authorization');
-		
+
 		echo 'These are not the droids you\'re looking for.';
-		
+
 		exit;
 	}
+});
+
+Route::get('/', function()
+{
+	return View::make('hello');
+});
+
+Route::get ('loginstatus', function ()
+{
+	$login = \Neuron\Session::getInstance ()->isLogin ();
+	return Response::json (array ('login' => $login));
 });
 
 
@@ -114,34 +150,6 @@ if (!function_exists('http_response_code')) {
 	}
 }
 
-$databasesettings = Config::get ('database.connections.' . (Config::get ('database.default')));
-
-define  ('DB_HOST', $databasesettings['host']);
-define  ('DB_USERNAME', $databasesettings['username']);
-define  ('DB_PASSWORD', $databasesettings['password']);
-define  ('DB_NAME', $databasesettings['database']);
-define  ('DB_CHARSET', $databasesettings['charset']);
-
-define ('TEMPLATE_DIR', dirname (dirname (__FILE__)) . '/templates/');
-define ('BASE_URL', URL::to('/') . '/');
-
-// Which templates to load (catlab code)
-$display = trim(\Neuron\Core\Tools::getInput('_GET', 'display', 'varchar'));
-
-if ((strlen($display) == 0) ||
-	($display == 'web'))
-{
-	$display = 'default';
-}
-
-if ($display == 'mobile')
-{
-	\Neuron\Core\Template::addTemplatePath (TEMPLATE_DIR . 'mobile', null, true);
-}
-else
-{
-	\Neuron\Core\Template::addTemplatePath (TEMPLATE_DIR, null, true);
-}
 
 Route::get ('docs{path?}', function ($path = "")
 {
