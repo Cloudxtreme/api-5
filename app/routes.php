@@ -1,6 +1,7 @@
 <?php
 
 use bmgroup\OAuth2\Verifier;
+use Neuron\MapperFactory;
 
 define ('APP_SECRET_KEY', 'bmgroup tickee catlab pineapple orange');
 
@@ -136,6 +137,9 @@ Route::any ('/proxy/{path?}', function ($path) {
 	array_shift ($segments);
 	
 	$request->setSegments ($segments);
+
+	$user = MapperFactory::getUserMapper ()->getFromId ($verifier->getUserID ());
+	$request->setUser ($user);
 
 	$client = new GearmanClient ();
 	$client->addServer ('devgearman.cloudwalkers.be', 4730);
