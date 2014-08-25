@@ -69,6 +69,7 @@ Route::get('/', function()
 
 Route::get ('loginstatus', function ()
 {
+	\Neuron\Session::getInstance ()->connect ();
 	$login = \Neuron\Session::getInstance ()->isLogin ();
 	return Response::json (array ('login' => $login));
 });
