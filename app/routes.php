@@ -122,8 +122,26 @@ define  ('DB_PASSWORD', $databasesettings['password']);
 define  ('DB_NAME', $databasesettings['database']);
 define  ('DB_CHARSET', $databasesettings['charset']);
 
-define ('TEMPLATE_DIR', dirname (__FILE__) . '/templates/');
+define ('TEMPLATE_DIR', dirname (dirname (__FILE__)) . '/templates/');
 define ('BASE_URL', URL::to('/') . '/');
+
+// Which templates to load (catlab code)
+$display = trim(\Neuron\Core\Tools::getInput('_GET', 'display', 'varchar'));
+
+if ((strlen($display) == 0) ||
+	($display == 'web'))
+{
+	$display = 'default';
+}
+
+if ($display == 'mobile')
+{
+	\Neuron\Core\Template::addTemplatePath (TEMPLATE_DIR . 'mobile', null, true);
+}
+else
+{
+	\Neuron\Core\Template::addTemplatePath (TEMPLATE_DIR, null, true);
+}
 
 Route::get ('version', function ()
 {
