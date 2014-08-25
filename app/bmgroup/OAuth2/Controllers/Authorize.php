@@ -118,6 +118,9 @@ class Authorize
 		if ($skipAuthorization)
 		{
 			$server->handleAuthorizeRequest($request, $response, true, $user_id);
+
+			Session::getInstance ()->destroy ();
+
 			$response->send ();
 			return;
 		}
@@ -146,14 +149,14 @@ class Authorize
 			$fields['u_id'] = $user_id;
 			$fields['authorization_date'] = array (time (), Query::PARAM_DATE);
 
+			// Destroy the session
+			Session::getInstance ()->destroy ();
+
 			if (defined('DB_OAUTH2_ENGINE') && DB_OAUTH2_ENGINE == 'sqlite3') {
 				QuerySQLite::replace ('oauth2_app_authorizations', $fields)->execute ();
 			} else {
 				Query::replace ('oauth2_app_authorizations', $fields)->execute ();
 			}
-
-			// Destroy the session
-			Session::getInstance ()->destroy ();
 
 		}
 		$response->send();
