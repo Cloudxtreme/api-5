@@ -155,7 +155,7 @@ if (!function_exists('http_response_code')) {
 Route::get ('docs{path?}', function ($path = "")
 {
 
-	return Redirect::to ('https://superadmin.cloudwalkers.be/docs' . urlencode ($path));
+	return Redirect::to ('https://superadmin.cloudwalkers.be/docs' . str_replace (" ", "+", $path));
 
 })->where ('path', '.+');
 
