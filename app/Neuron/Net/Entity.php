@@ -46,12 +46,10 @@ abstract class Entity {
 			throw new InvalidParameter ("All decoded requests must have a signature.");
 		}
 
-		/*
 		if ($data['signature'] != self::calculateSignature ($data))
 		{
 			throw new InvalidParameter ("Leave now, and Never come Back! *gollem, gollem* (Decoded request signature mismatch).");
 		}
-		*/
 
 		if (isset ($data['session']) && isset ($data['session']['user']))
 		{
