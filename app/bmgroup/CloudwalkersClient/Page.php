@@ -1,7 +1,7 @@
 <?php
 
 
-namespace bmgroup\Cloudwalkers;
+namespace bmgroup\CloudwalkersClient;
 
 use Neuron\Page as NeuronPage;
 use Neuron\Core\Tools;

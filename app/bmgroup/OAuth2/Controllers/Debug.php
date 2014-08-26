@@ -1,7 +1,7 @@
 <?php
 namespace bmgroup\OAuth2\Controllers;
 
-use bmgroup\Cloudwalkers\Models\User;
+use bmgroup\CloudwalkersClient\Models\User;
 use bmgroup\OAuth2\Verifier;
 use Neuron\Core\Template;
 use Neuron\DB\Query;

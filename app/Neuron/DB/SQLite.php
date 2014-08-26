@@ -1,7 +1,7 @@
 <?php
 namespace Neuron\DB;
 
-use bmgroup\Cloudwalkers\Models\Logger;
+use bmgroup\CloudwalkersClient\Models\Logger;
 use Exception;
 use mysqli;
 use MySQLi_Result;

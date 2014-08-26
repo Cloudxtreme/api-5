@@ -5,7 +5,7 @@ namespace Neuron;
 
 use Neuron\Models\User;
 use Neuron\SessionHandlers\SessionHandler;
-use bmgroup\Cloudwalkers\Models\Logger;
+use bmgroup\CloudwalkersClient\Models\Logger;
 
 class Session
 {

@@ -3,7 +3,7 @@
 
 namespace Neuron\Models;
 
-use bmgroup\Cloudwalkers\Models\Account;
+use bmgroup\CloudwalkersClient\Models\Account;
 use Neuron\Core\Tools;
 use Neuron\MapperFactory;
 use Neuron\Mappers\UserMapper;
@@ -27,7 +27,7 @@ class User
 	private $emails;
 
 	private $password;
-	private $admin;
+	private $admin = null;
 
 	private $name;
 	private $firstname;

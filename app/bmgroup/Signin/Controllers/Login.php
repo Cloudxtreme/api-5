@@ -3,6 +3,7 @@
 
 namespace bmgroup\Signin\Controllers;
 
+use bmgroup\CloudwalkersClient\CwGearmanClient;
 use bmgroup\Signin\Controllers\Base;
 use Neuron\Session;
 use Neuron\Core\Tools;
@@ -89,40 +90,30 @@ class Login
 		return $page->parse ('modules/signin/loginform.phpt');
 	}
 
-	private function getThirdPartyLogin ()
-	{		
-		$page = new Template ();
-
-		$page->set ('errors', $this->errors);
-
-		// Add all account types that provide auth capability.
-		$accounts = array ();
-		foreach (AccountsMapper::getAll () as $v)
-		{
-			if ($v->canAuth ())
-			{
-				$accounts[] = $v;
-			}
-		}
-		$page->set ('accounts', $accounts);
-
-		return $page->parse ('pages/login/thirdparty.phpt');
-	}
-
 	public function processInput ()
 	{
 		$email = Tools::getInput ('_POST', 'email', 'email');
 		$password = Tools::getInput ('_POST', 'password', 'varchar');
 
+		/*
 		$user = MapperFactory::getUserMapper ()->getFromLogin ($email, $password);
 		if ($user)
 		{
 			Session::getInstance ()->login ($user);
 			return true;
 		}
+		*/
+		$userdata = CwGearmanClient::getInstance ()->login ($email, $password);
+		if (isset ($userdata['error']) || !isset ($userdata['id']))
+		{
+			$this->errors[] = 'The email or password you have provided are incorrect.';
+			return false; 
+		}
 
-		$this->errors[] = 'The email or password you have provided are incorrect.';
-		return false;
+		$user = new User ($userdata['id']);
+		Session::getInstance ()->login ($user);
+		
+		return true;
 	}
 
 	private function getLostPassword ()

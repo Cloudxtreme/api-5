@@ -1,5 +1,6 @@
 <?php
 
+use bmgroup\CloudwalkersClient\CwGearmanClient;
 use bmgroup\OAuth2\Verifier;
 use Neuron\MapperFactory;
 
@@ -151,7 +152,6 @@ if (!function_exists('http_response_code')) {
 	}
 }
 
-
 Route::get ('docs{path?}', function ($path = "")
 {
 
@@ -193,7 +193,7 @@ Route::get ('1/version', function ()
 
 Route::any('login/{path?}', function()
 {
-	$page = new \bmgroup\Cloudwalkers\Page ();
+	$page = new \bmgroup\CloudwalkersClient\Page ();
 
 	$frontcontroller = new \Neuron\FrontController ();
 	$frontcontroller->setInput (Request::segments ());
@@ -215,7 +215,7 @@ Route::any('login/{path?}', function()
 
 Route::any('logout/{path?}', function()
 {
-	$page = new \bmgroup\Cloudwalkers\Page ();
+	$page = new \bmgroup\CloudwalkersClient\Page ();
 
 	$frontcontroller = new \Neuron\FrontController ();
 	$frontcontroller->setInput (Request::segments ());
@@ -237,7 +237,7 @@ Route::any('logout/{path?}', function()
 
 Route::any('oauth2/{path?}', function()
 {
-	$page = new \bmgroup\Cloudwalkers\Page ();
+	$page = new \bmgroup\CloudwalkersClient\Page ();
 
 	$frontcontroller = new \Neuron\FrontController ();
 	$frontcontroller->setInput (Request::segments ());
