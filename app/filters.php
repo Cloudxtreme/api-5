@@ -11,9 +11,21 @@
 |
 */
 
+// Catch the OPTIONS call.
 App::before(function($request)
 {
-	//
+	// Sent by the browser since request come in as cross-site AJAX
+	// The cross-site headers are sent via .htaccess
+	if (strtoupper ($request->getMethod()) == "OPTIONS")
+	{
+		header ('Access-Control-Allow-Origin: *');
+		header ('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, PATCH, OPTIONS');
+		header ('Access-Control-Allow-Headers: origin, x-requested-with, content-type, access_token, authorization');
+
+		echo 'These are not the droids you\'re looking for.';
+
+		exit;
+	}
 });
 
 
@@ -90,7 +102,6 @@ Route::filter('csrf', function()
 });
 
 
-/*
 Route::filter ('oauth2', function ()
 {
 	$verifier = \bmgroup\OAuth2\Verifier::getInstance ();
@@ -105,4 +116,3 @@ Route::filter ('oauth2', function ()
 		return Response::json (array ('error' => array ('message' => 'No valid oauth2 authentication found.')), 403);
 	}
 });
-*/

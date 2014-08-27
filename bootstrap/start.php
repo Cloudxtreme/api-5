@@ -75,6 +75,8 @@ $framework = $app['path.base'].
 
 require $framework.'/Illuminate/Foundation/start.php';
 
+require 'tools.php';
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application

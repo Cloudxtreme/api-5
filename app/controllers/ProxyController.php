@@ -14,8 +14,40 @@ class ProxyController extends BaseController {
 	|	Route::get('/', 'HomeController@showWelcome');
 	|
 	*/
+	
+	public function guest ()
+	{
+		$request = \Neuron\Net\Request::fromInput ('version');
 
-	public function proxy ($path)
+		//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
+		$segments = Request::segments ();
+
+		$request->setSegments (array ('version'));
+
+		$client = new GearmanClient ();
+
+		foreach (Config::get ('gearman.servers') as $server => $port)
+		{
+			$client->addServer ($server, $port);
+		}
+
+		$data = $client->doHigh ('apiDispatch', $request->toJSON ());
+		$response = \Neuron\Net\Response::fromJSON ($data);
+
+		// Hack the body for forms
+		if ($response->getBody ())
+		{
+			$body = $response->getBody ();
+			$body = str_replace ('action="http://cloudwalkers-api.local/', 'action="http://cloudwalkers-api.local/proxy/', $body);
+			$response->setBody ($body);
+		}
+
+		$response->output ();
+		//print_r ($response->toJSON ());
+		exit;
+	}
+
+	public function authenticated ($path)
 	{
 		$request = \Neuron\Net\Request::fromInput ($path);
 
