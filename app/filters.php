@@ -90,6 +90,7 @@ Route::filter('csrf', function()
 });
 
 
+/*
 Route::filter ('oauth2', function ()
 {
 	$verifier = \bmgroup\OAuth2\Verifier::getInstance ();
@@ -104,3 +105,4 @@ Route::filter ('oauth2', function ()
 		return Response::json (array ('error' => array ('message' => 'No valid oauth2 authentication found.')), 403);
 	}
 });
+*/

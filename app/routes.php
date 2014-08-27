@@ -458,8 +458,20 @@ Route::any('oauth2/{path?}', function()
 // The All Catching One
 Route::match (array ('GET', 'POST', 'PATCH', 'PUT', 'DELETE'), '{path?}', array ('before' => 'oauth2'), function ($path) {
 
+	$verifier = \bmgroup\OAuth2\Verifier::getInstance ();
+	if (!$verifier->isValid ())
+	{
+		header ('Access-Control-Allow-Origin: *');
+		header ('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, PATCH, OPTIONS');
+		header ('Access-Control-Allow-Headers: origin, x-requested-with, content-type, access_token, authorization');
 
+		http_response_code (403);
+
+		return Response::json (array ('error' => array ('message' => 'No valid oauth2 authentication found.')), 403);
+	}
+	
 	$request = \Neuron\Net\Request::fromInput ($path);
+	
 
 	//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
 	$segments = Request::segments ();
