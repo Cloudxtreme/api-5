@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"illuminate/support": "4.*",
-		"pafelin/gearman": "dev-master"
+		"pafelin/gearman": "dev-master",
+		"barryvdh/laravel-ide-helper": "1.*"
     },
 	"autoload": {
 		"classmap": [
@@ -30,6 +31,7 @@
 		],
 		"post-update-cmd": [
 			"php artisan clear-compiled",
+			"php artisan ide-helper:generate",
 			"php artisan optimize"
 		],
 		"post-create-project-cmd": [

@@ -124,6 +124,8 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+
+		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 		//'LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider'
 
 		//'LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider'
@@ -194,7 +196,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'AuthorizationServer' => 'LucaDegasperi\OAuth2Server\Facades\AuthorizationServerFacade',
-		'ResourceServer' => 'LucaDegasperi\OAuth2Server\Facades\ResourceServerFacade'
+		'ResourceServer' => 'LucaDegasperi\OAuth2Server\Facades\ResourceServerFacade',
 
 		// OAuth2 aliases
 		//'AuthorizationServer' => 'LucaDegasperi\OAuth2Server\Facades\AuthorizationServerFacade',
