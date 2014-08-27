@@ -16,7 +16,7 @@ use Neuron\MapperFactory;
 */
 //$namespace = Request::segment(2);
 
-Route::group (array ('prefix' => 'cw/{v}'), function ($v)
+Route::group (array ('prefix' => '1.1'), function ($v)
 {
 	Route::get ('version', 'ProxyController@guest');
 });
