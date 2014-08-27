@@ -219,6 +219,11 @@ Route::group(array('prefix' => '1.1', /*'namespace' => $namespace, */ 'before' =
 	Route::get('users/{userId}/subscriptions', 'ProxyController@authenticated');
 	Route::delete('users/{userId}/subscriptions', 'ProxyController@authenticated');
 	Route::post('users/{userId}/subscriptions', 'ProxyController@authenticated');
+	
+	Route::any ('{path?}', function ()
+	{
+		return Response::json (array ('error' => array ('message' => 'Endpoint not found in api routing file')), 404);
+	});
 });
 
 Route::get('/', function()
