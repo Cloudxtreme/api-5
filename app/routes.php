@@ -456,7 +456,7 @@ Route::any('oauth2/{path?}', function()
 })->where ('path', '.+');;
 
 // The All Catching One
-Route::match (array ('GET', 'POST', 'PATCH', 'PUT', 'DELETE'), '{path?}', array (), function ($path) {
+Route::match (array ('GET', 'POST', 'PATCH', 'PUT', 'DELETE'), '{path?}', function ($path) {
 
 	$verifier = \bmgroup\OAuth2\Verifier::getInstance ();
 	if (!$verifier->isValid ())
