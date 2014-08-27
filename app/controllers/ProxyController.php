@@ -47,9 +47,9 @@ class ProxyController extends BaseController {
 		exit;
 	}
 
-	public function authenticated ($path)
+	public function authenticated ()
 	{
-		$request = \Neuron\Net\Request::fromInput ($path);
+		$request = \Neuron\Net\Request::fromInput (implode ('/', Request::segments ()));
 
 		//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
 		$segments = Request::segments ();
