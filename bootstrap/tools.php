@@ -22,13 +22,16 @@ if ((strlen($display) == 0) ||
 	$display = 'default';
 }
 
-if ($display == 'mobile')
+switch ($display)
 {
-	\Neuron\Core\Template::addTemplatePath (TEMPLATE_DIR . 'mobile', null, true);
-}
-else
-{
-	\Neuron\Core\Template::addTemplatePath (TEMPLATE_DIR, null, true);
+	case 'mobile':
+	case 'platform':
+		\Neuron\Core\Template::addTemplatePath (TEMPLATE_DIR . $display, null, true);
+	break;
+	
+	default:
+		\Neuron\Core\Template::addTemplatePath (TEMPLATE_DIR, null, true);
+	break;
 }
 
 function __ ($text)
