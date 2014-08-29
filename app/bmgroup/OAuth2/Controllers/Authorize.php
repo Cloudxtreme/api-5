@@ -119,7 +119,7 @@ class Authorize
 		{
 			$server->handleAuthorizeRequest($request, $response, true, $user_id);
 
-			Session::getInstance ()->destroy ();
+			//Session::getInstance ()->destroy ();
 
 			$response->send ();
 			return;
@@ -150,7 +150,7 @@ class Authorize
 			$fields['authorization_date'] = array (time (), Query::PARAM_DATE);
 
 			// Destroy the session
-			Session::getInstance ()->destroy ();
+			//Session::getInstance ()->destroy ();
 
 			if (defined('DB_OAUTH2_ENGINE') && DB_OAUTH2_ENGINE == 'sqlite3') {
 				QuerySQLite::replace ('oauth2_app_authorizations', $fields)->execute ();
