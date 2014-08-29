@@ -120,9 +120,8 @@ class Authorize
 		// Should we skip authorization?
 		if ($skipAuthorization)
 		{
-			$server->handleAuthorizeRequest($request, $response, true, $user_id);
-
-			//Session::getInstance ()->destroy ();
+			$response = $server->handleAuthorizeRequest($request, $response, true, $user_id);
+			$this->storeAccessTokenInSession ($response);
 
 			$response->send ();
 			return;
@@ -138,9 +137,12 @@ class Authorize
 		// print the authorization code if the user has authorized your client
 		$is_authorized = ($_POST['authorized'] === 'yes');
 
-		$server->handleAuthorizeRequest($request, $response, $is_authorized, $user_id);
+		$response = $server->handleAuthorizeRequest($request, $response, $is_authorized, $user_id);
 		if ($is_authorized)
 		{
+			$response = $server->handleAuthorizeRequest($request, $response, true, $user_id);
+			$this->storeAccessTokenInSession ($response);
+			
 			// this is only here so that you get to see your code in the cURL request. Otherwise, we'd redirect back to the client
 			//$code = substr($response->getHttpHeader('Location'), strpos($response->getHttpHeader('Location'), 'code=')+5, 40);
 			//exit("SUCCESS! Authorization Code: $code");
@@ -165,12 +167,25 @@ class Authorize
 		$response->send();
 	}
 	
+	private function storeAccessTokenInSession (\OAuth2\ResponseInterface $response)
+	{
+		$location = $response->getHttpHeader ('Location');
+		$parsed = parse_url ($location);
+		$fragment = $parsed['fragment'];
+		
+		parse_str ($fragment, $attributes);
+		if (isset ($attributes['access_token']))
+		{
+			$_SESSION['oauth2_access_token'] = $attributes['access_token']; 
+		}
+	}
+	
 	private function checkForLogout (\OAuth2\Server $server)
 	{
 		if (isset ($_SESSION['oauth2_access_token']))
 		{
 			// Check if this access token is still valid
-			$storage = $server->getStorage ('accesstoken');
+			$storage = $server->getStorage ('access_token');
 			
 			$token = $storage->getAccessToken ($_SESSION['oauth2_access_token']);
 			if (! ($token && $token['expires'] > time ()))
