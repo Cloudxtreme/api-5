@@ -53,7 +53,7 @@ class Authorize
 			}
 		}
 		*/
-
+		
 		$server = Verifier::getInstance ()->getServer ();
 		$request = Verifier::getInstance ()->getRequest ();
 
@@ -70,6 +70,9 @@ class Authorize
 
 		$clientid = $server->getAuthorizeController ()->getClientId ();
 		$clientdata = $server->getStorage('client')->getClientDetails ($clientid);
+
+		// Check if we should log the user out (after a revoke)
+		$this->checkForLogout ();
 
 		$layout = $clientdata['login_layout'];
 		$skipAuthorization = $clientdata['skip_authorization'];
@@ -160,6 +163,22 @@ class Authorize
 
 		}
 		$response->send();
+	}
+	
+	private function checkForLogout (\OAuth2\Server $server)
+	{
+		if (isset ($_SESSION['oauth2_access_token']))
+		{
+			// Check if this access token is still valid
+			$storage = $server->getStorage ('accesstoken');
+			
+			$token = $storage->getAccessToken ($_SESSION['oauth2_access_token']);
+			if (! ($token && $token['expires'] > time ()))
+			{
+				// Logout the user.
+				Session::getInstance ()->logout ();
+			}
+		}
 	}
 
 	private function showAuthorizationDialog (Page $page, $clientdata)
