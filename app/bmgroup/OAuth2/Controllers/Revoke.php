@@ -36,7 +36,8 @@ class Revoke
 			if (defined('DB_OAUTH2_ENGINE') && DB_OAUTH2_ENGINE == 'sqlite3') {
 				$query = QuerySQLite::update ('oauth2_access_tokens', $fields, $where)->execute ();
 			} else {
-				$query = Query::update ('oauth2_access_tokens', $fields, $where)->execute ();
+				$query = Query::update ('oauth2_access_tokens', $fields, $where);
+				$query->execute ();
 			}
 
 			header ('Content-type: application/json');
