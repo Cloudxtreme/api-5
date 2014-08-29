@@ -12,6 +12,8 @@
 */
 
 // Catch the OPTIONS call.
+use bmgroup\CloudwalkersClient\CwGearmanClient;
+
 App::before(function($request)
 {
 	// Sent by the browser since request come in as cross-site AJAX
@@ -114,5 +116,30 @@ Route::filter ('oauth2', function ()
 		http_response_code (403);
 
 		return Response::json (array ('error' => array ('message' => 'No valid oauth2 authentication found.')), 403);
+	}
+});
+
+Route::filter ('resellersigned', function ()
+{
+	$time = Input::get ('time');
+	$random = Input::get ('random');
+	$resellerid = Input::get ('reseller');
+	$signature = Input::get ('signature');
+
+	$body = Request::instance ()->getContent();
+	
+	if ($time && $random && $resellerid && $signature)
+	{
+		$client = CwGearmanClient::getInstance ();
+		if (!$client->verifyopenssl ($resellerid, $signature, $random, $time, $body))
+		{
+			header ('Access-Control-Allow-Origin: *');
+			header ('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, PATCH, OPTIONS');
+			header ('Access-Control-Allow-Headers: origin, x-requested-with, content-type, access_token, authorization');
+
+			http_response_code (403);
+
+			return Response::json (array ('error' => array ('message' => 'No valid openssl authentication found.')), 403);
+		}
 	}
 });

@@ -251,5 +251,13 @@ Route::get ('1/version', 'ProxyController@guest');
 
 Route::any('oauth2/{path?}', 'Oauth2Controller@dispatch')->where ('path', '.+');;
 
+// Reseller endpoints
+Route::group(array('before' => 'resellersigned'), function($v)
+{
+
+	Route::get('1/resellers/{resellerId}/plans', 'ProxyController@openssl');
+
+});
+
 // The All Catching One
 Route::match (array ('GET', 'POST', 'PATCH', 'PUT', 'DELETE'), '{path?}', 'ProxyController@authenticated')->where ('path', '.+')->before (array ('before' => 'oauth2'));

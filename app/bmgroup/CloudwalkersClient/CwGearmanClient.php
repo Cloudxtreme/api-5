@@ -67,4 +67,18 @@ class CwGearmanClient {
 		return $this->doHigh ('authentication', $data);
 	}
 	
+	public function verifyopenssl ($resellerid, $signature, $random, $time, $body)
+	{
+		$data = array ();
+		$data['method'] = 'openssl';
+		$data['resellerid'] = $resellerid;
+		$data['signature'] = $signature;
+		$data['random'] = $random;
+		$data['time'] = $time;
+		$data['body'] = $body;
+
+		$data = $this->doHigh ('authentication', $data);
+		
+		return isset ($data['success']) && $data['success'];
+	}
 } 

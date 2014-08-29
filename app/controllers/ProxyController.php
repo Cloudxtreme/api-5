@@ -56,6 +56,9 @@ class ProxyController extends BaseController {
 		array_shift ($segments);
 
 		$request->setSegments ($segments);
+		
+		// Check for oauth2 signature
+		
 
 		$verifier = \bmgroup\OAuth2\Verifier::getInstance ();
 		//$user = MapperFactory::getUserMapper ()->getFromId ($verifier->getUserID ());
@@ -83,6 +86,14 @@ class ProxyController extends BaseController {
 		$response->output ();
 		//print_r ($response->toJSON ());
 		exit;
+	}
+
+	/**
+	 * Auth using signed ssl (for resellers)
+	 */
+	public function openssl ()
+	{
+		
 	}
 
 }
