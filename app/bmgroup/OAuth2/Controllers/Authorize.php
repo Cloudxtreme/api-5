@@ -192,7 +192,15 @@ class Authorize
 			{
 				// Logout the user.
 				Session::getInstance ()->logout ();
+				
+				echo 'logging out';
+				exit;
 			}
+		}
+		else 
+		{
+			echo 'no session data found';
+			exit;
 		}
 	}
 
