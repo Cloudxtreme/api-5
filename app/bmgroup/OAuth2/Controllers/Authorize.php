@@ -182,12 +182,15 @@ class Authorize
 	
 	private function checkForLogout (\OAuth2\Server $server)
 	{
+		var_dump ($_SESSION);
+		
 		if (isset ($_SESSION['oauth2_access_token']))
 		{
 			// Check if this access token is still valid
 			$storage = $server->getStorage ('access_token');
 			
 			$token = $storage->getAccessToken ($_SESSION['oauth2_access_token']);
+			
 			if (! ($token && $token['expires'] > time ()))
 			{
 				// Logout the user.
