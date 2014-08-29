@@ -192,7 +192,8 @@ class Authorize
 			if (! ($token && $token['expires'] > time ()))
 			{
 				// Logout the user.
-				Session::getInstance ()->logout ();
+				//Session::getInstance ()->logout ();
+				$_SESSION['user'] = null;
 			}
 		}
 	}
