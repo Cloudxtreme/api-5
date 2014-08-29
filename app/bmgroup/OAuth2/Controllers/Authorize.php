@@ -194,6 +194,7 @@ class Authorize
 				// Logout the user.
 				//Session::getInstance ()->logout ();
 				$_SESSION['user'] = null;
+				$_SESSION['oauth2_access_token'] = null;
 			}
 		}
 	}
