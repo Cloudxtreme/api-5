@@ -196,6 +196,12 @@ class Authorize
 				echo 'logging out';
 				exit;
 			}
+			
+			else 
+			{
+				echo 'token is still valid';
+				exit;
+			}
 		}
 		else 
 		{
