@@ -192,21 +192,7 @@ class Authorize
 			{
 				// Logout the user.
 				Session::getInstance ()->logout ();
-				
-				echo 'logging out';
-				exit;
 			}
-			
-			else 
-			{
-				echo 'token is still valid';
-				exit;
-			}
-		}
-		else 
-		{
-			echo 'no session data found';
-			exit;
 		}
 	}
 
