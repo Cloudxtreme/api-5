@@ -11,6 +11,15 @@
 		</li>
 
 		<li>
+			<label for="loginlayout">Login design:</label>
+			<select id="loginlayout" name="loginlayout">
+				<option value="default">default</option>
+				<option value="mobile">mobile</option>
+				<option value="platform">platform</option>
+			</select>
+		</li>
+
+		<li>
 			<button type="submit">Register OAuth2 app</button>
 		</li>
 	</ol>

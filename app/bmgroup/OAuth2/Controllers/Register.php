@@ -40,12 +40,14 @@ class Register
 			$clientid = uniqid ('oauth2', true);
 			$password = md5 (uniqid ('secret'));
 
+			$layout = Tools::getInput ($_POST, 'loginlayout', 'varchar', 'mobile');
+
 			$fields = array
 			(
 				'client_id' => $clientid,
 				'client_secret' => $password,
 				'redirect_uri' => $redirect,
-				'login_layout' => 'mobile',
+				'login_layout' => $layout,
 				'skip_authorization' => 0,
 				'user_id' => Session::getInstance ()->getUser ()->getId ()
 			);
