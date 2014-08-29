@@ -72,7 +72,7 @@ class Authorize
 		$clientdata = $server->getStorage('client')->getClientDetails ($clientid);
 
 		// Check if we should log the user out (after a revoke)
-		$this->checkForLogout ();
+		$this->checkForLogout ($server);
 
 		$layout = $clientdata['login_layout'];
 		$skipAuthorization = $clientdata['skip_authorization'];
