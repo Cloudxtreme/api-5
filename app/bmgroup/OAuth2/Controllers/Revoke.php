@@ -34,13 +34,13 @@ class Revoke
 			$where['access_token'] = Verifier::getToken ();
 
 			if (defined('DB_OAUTH2_ENGINE') && DB_OAUTH2_ENGINE == 'sqlite3') {
-				QuerySQLite::update ('oauth2_access_tokens', $fields, $where)->execute ();
+				$query = QuerySQLite::update ('oauth2_access_tokens', $fields, $where)->execute ();
 			} else {
-				Query::update ('oauth2_access_tokens', $fields, $where)->execute ();
+				$query = Query::update ('oauth2_access_tokens', $fields, $where)->execute ();
 			}
 
 			header ('Content-type: application/json');
-			echo json_encode (array ('success' => 1));
+			echo json_encode (array ('success' => 1, 'query' => $query->getParsedQuery ()));
 		}
 		else
 		{
