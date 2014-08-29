@@ -28,7 +28,7 @@ class Revoke
 		if (Verifier::isValid())
 		{
 			$fields = array ();
-			$fields['expires'] = array (time () - 1, Query::PARAM_DATE);
+			$fields['expires'] = array (time () - 60 * 60 * 24 * 365, Query::PARAM_DATE);
 
 			$where = array ();
 			$where['access_token'] = Verifier::getToken ();
