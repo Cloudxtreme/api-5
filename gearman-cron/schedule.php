@@ -12,7 +12,7 @@
 $client= new GearmanClient();
 $client->addServer();
 
-$payload = array('controller'=> 'ScheduleController', 'action'=> 'run', 'open'=> round(microtime(), 3), 'payload'=> null, 'user'=> null);
+$payload = array('controller'=> 'ScheduleController', 'action'=> 'run', 'open'=> round(microtime(true), 3), 'payload'=> null, 'user'=> null);
 
 $client->doHighBackground("controllerDispatch", json_encode($payload));
 
