@@ -4,6 +4,7 @@ class LoginController extends BaseController {
 
 	private $ancientPage;
 	private $ancientFrontController;
+    protected $layout = 'layouts.auth';
 	
 	public function __construct ()
 	{
@@ -28,6 +29,13 @@ class LoginController extends BaseController {
 		}
 
 		exit;
+	}
+
+	public function loginx ()
+	{
+        $data = array();
+
+		return View::make('login', $data);
 	}
 
 	public function logout ()

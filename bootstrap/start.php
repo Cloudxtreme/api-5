@@ -31,9 +31,11 @@ $env = $app->detectEnvironment(array(
 	// Load its respective settings from the following sub-folder
 	//
 	'local' => array(
+		'FRM_BEE_11@C:\xampp\htdocs\cloudwalkers-engine.local',                 // PMS - Desktop 
+		'FRM_BEE_11.bee-eng.CORP@C:\xampp\htdocs\cloudwalkers-engine.local',	  // PMS - Desktop 
 		'FRM_BEE_12',                 // RCS - Desktop 
 		'FRM_BEE_12.bee-eng.CORP',    // RCS - Desktop
-		'localhost.localdomain',       // RCS - Virtual Machine (Fedora)
+		'localhost.localdomain',      // RCS - Virtual Machine (Fedora)
 		'thijs-home-i7',
 		'daedeloth-N550LF'
 	),
