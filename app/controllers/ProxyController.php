@@ -20,7 +20,8 @@ class ProxyController extends BaseController {
 		$segments = Request::segments ();
 		//array_shift ($segments);
 		
-		$request = \Neuron\Net\Request::fromInput (implode ('/', $segments));
+		$request = \Neuron\Net\Request::fromInput ();
+		$request->setPath (implode ('/', $segments));
 
 		//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
 		$request->setSegments ($segments);
@@ -31,9 +32,6 @@ class ProxyController extends BaseController {
 		{
 			$client->addServer ($server, $port);
 		}
-		
-		var_dump ($request->toJSON ());
-		exit;
 
 		$data = $client->doHigh ('apiDispatch', $request->toJSON ());
 		$response = \Neuron\Net\Response::fromJSON ($data);
