@@ -17,12 +17,13 @@ class ProxyController extends BaseController {
 	
 	public function guest ()
 	{
-		$request = \Neuron\Net\Request::fromInput ('version');
+		$segments = Request::segments ();
+		array_shift ($segments);
+		
+		$request = \Neuron\Net\Request::fromInput (implode ('/', $segments));
 
 		//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
-		$segments = Request::segments ();
-
-		$request->setSegments (array ('version'));
+		$request->setSegments ($segments);
 
 		$client = new GearmanClient ();
 
@@ -49,11 +50,13 @@ class ProxyController extends BaseController {
 
 	public function authenticated ()
 	{
-		$request = \Neuron\Net\Request::fromInput (implode ('/', Request::segments ()));
-
-		//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
 		$segments = Request::segments ();
 		array_shift ($segments);
+		
+		$request = \Neuron\Net\Request::fromInput (implode ('/', $segments));
+
+		//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
+
 
 		$request->setSegments ($segments);
 		
