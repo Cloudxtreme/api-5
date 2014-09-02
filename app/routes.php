@@ -246,6 +246,7 @@ Route::get ('docs{path?}', function ($path = "")
 
 
 Route::any('login/{path?}', 'LoginController@login')->where ('path', '.+');
+Route::any('loginx/{path?}', 'LoginController@loginx')->where ('path', '.+');
 Route::any('logout/{path?}', 'LoginController@logout')->where ('path', '.+');
 Route::get ('1/version', 'ProxyController@guest');
 
