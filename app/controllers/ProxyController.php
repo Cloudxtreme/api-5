@@ -18,7 +18,7 @@ class ProxyController extends BaseController {
 	public function guest ()
 	{
 		$segments = Request::segments ();
-		array_shift ($segments);
+		//array_shift ($segments);
 		
 		$request = \Neuron\Net\Request::fromInput (implode ('/', $segments));
 
@@ -51,7 +51,7 @@ class ProxyController extends BaseController {
 	public function authenticated ()
 	{
 		$segments = Request::segments ();
-		array_shift ($segments);
+		//array_shift ($segments);
 		
 		$request = \Neuron\Net\Request::fromInput (implode ('/', $segments));
 
