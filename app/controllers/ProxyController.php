@@ -31,6 +31,9 @@ class ProxyController extends BaseController {
 		{
 			$client->addServer ($server, $port);
 		}
+		
+		var_dump ($request->toJSON ());
+		exit;
 
 		$data = $client->doHigh ('apiDispatch', $request->toJSON ());
 		$response = \Neuron\Net\Response::fromJSON ($data);
