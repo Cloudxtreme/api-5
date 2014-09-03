@@ -28,12 +28,13 @@ class CommunicationController extends BaseController {
 	public function sms ()
 	{
         $data = array();
-        Mail::send('emails.welcome', $data, function($message)
-        {
-            $message->to('pedrodee@gmail.com', 'John Smith')->subject('Welcome!');
-        });
+        $message = new Clickatell;
 
-		return 'sms sent!';
+        $status = $message->to(351966479598)
+            ->message('Hello world!')
+            ->send();
+
+		return print_r($status, true);
 	}
 
 
