@@ -31,22 +31,16 @@ class LoginController extends BaseController {
 		exit;
 	}
 
-	public function loginx ()
-	{
-        $data = array();
+    public function logout ()
+    {
+        $response = $this->ancientFrontController->dispatch ($this->ancientPage);
+        if ($response)
+        {
+            $response->output ();
+        }
 
-		return View::make('login', $data);
-	}
+        exit;
+    }
 
-	public function logout ()
-	{
-		$response = $this->ancientFrontController->dispatch ($this->ancientPage);
-		if ($response)
-		{
-			$response->output ();
-		}
-
-		exit;
-	}
 
 }
