@@ -15,8 +15,8 @@
         <?php } ?>
     <?php }
 
-    print_r($error,true);
-    print_r($message,true);
+    //print_r($error,true);
+    //print_r($message,true);
 
     ?>
 <hr>
