@@ -13,7 +13,7 @@ class CommunicationController extends BaseController {
 
         if(isset($data['email']) && isset($data['password'])){
             // send request to engine via gearman
-            return App::make('ProxyController')->guest($data);
+            return App::instance ('cwclient', $data)->login ();
         } else {
             return View::make('signin.login', $data);
         }
