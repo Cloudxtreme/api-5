@@ -11,7 +11,7 @@ class CommunicationController extends BaseController {
 	{
         $data = Input::all();
 
-        if($data['email'] && $data['password']){
+        if(isset($data['email']) && isset($data['password'])){
             // send request to engine via gearman
             return App::make('ProxyController')->guest($data);
         } else {
