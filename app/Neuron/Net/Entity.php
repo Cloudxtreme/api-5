@@ -15,6 +15,8 @@ use Neuron\Models\User;
 
 abstract class Entity {
 
+	const CHECK_SIGNATURE = false;
+
 	/** @var User */
 	private $user;
 	private $body;
@@ -24,7 +26,7 @@ abstract class Entity {
 	private $session;
 	private $data;
 	private $cookies;
-	
+
 	/** @var integer $status */
 	private $status;
 
@@ -41,12 +43,14 @@ abstract class Entity {
 		// Check signature
 		$model = $this;
 
-		if (!isset ($data['signature']))
+		$chk = self::CHECK_SIGNATURE;
+
+		if ($chk && !isset ($data['signature']))
 		{
 			throw new InvalidParameter ("All decoded requests must have a signature.");
 		}
 
-		if ($data['signature'] != self::calculateSignature ($data))
+		if ($chk && $data['signature'] != self::calculateSignature ($data))
 		{
 			throw new InvalidParameter ("Leave now, and Never come Back! *gollem, gollem* (Decoded request signature mismatch).");
 		}
@@ -87,7 +91,7 @@ abstract class Entity {
 		{
 			$model->setPost ($data['post']);
 		}
-		
+
 		if (isset ($data['status']))
 		{
 			$model->setStatus ($data['status']);
@@ -111,7 +115,7 @@ abstract class Entity {
 				$data['data'] = $this->getData ();
 			}
 		}
-		
+
 		$data['body'] = $this->getBody ();
 
 		$data['session'] = $this->getSession ();
