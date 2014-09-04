@@ -29,7 +29,7 @@
 		<div class="controls">
 			<div class="input-icon left">
 				<i class="icon-envelope"></i>
-				<input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email" value="<?php echo $_SESSION['invitation_email']; ?>"/>
+				<input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email" value="<?php echo (isset ($_SESSION['invitation_email']) ? $_SESSION['invitation_email'] : null); ?>"/>
 			</div>
 		</div>
 	</div>
