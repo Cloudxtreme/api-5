@@ -12,8 +12,10 @@ class CommunicationController extends BaseController {
         $data = Input::all();
 
         if(isset($data['email']) && isset($data['password'])){
+            $username = $data['email'];
+            $password = $data['password'];
             // send request to engine via gearman
-            return App::instance ('cwclient', $data)->login ();
+            return App::instance ('cwclient', $data)->login ($username, $password);
         } else {
             return View::make('signin.login', $data);
         }
