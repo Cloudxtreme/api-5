@@ -11,7 +11,7 @@ return array(
 
 	// Gearman Workers
 	'workers' => array(
-		'devgearman.cloudwalkers.be' => '4740'
+		'localhost' => '4730'
 	)
 
 );

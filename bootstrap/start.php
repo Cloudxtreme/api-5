@@ -90,4 +90,6 @@ require 'tools.php';
 |
 */
 
+require 'ioc.php';
+
 return $app;
