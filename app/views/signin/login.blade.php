@@ -20,7 +20,7 @@
 </article>
 
 <article>
-    <a href="/login/lostpassword" class="forgot-link">Forgot password?</a>
+    {{ HTML::linkAction('CommunicationController@lostPassword', 'Lost Password', array(), array('class' => 'forgot-link')) }}
 </article>
 
 @stop

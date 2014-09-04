@@ -9,9 +9,23 @@ class CommunicationController extends BaseController {
 
 	public function login ()
 	{
-        $data = array();
+        $data = Input::all();
 
-		return View::make('login', $data);
+        if($data['email'] && $data['password']){
+            // send request to engine via gearman
+            return App::make('ProxyController')->guest($data);
+        } else {
+            return View::make('signin.login', $data);
+        }
+
+	}
+
+	public function lostPassword ()
+	{
+        return 'did you?';
+
+        //$data = array();
+		//return View::make('signin.login', $data);
 	}
 
 	public function email ()
@@ -36,6 +50,5 @@ class CommunicationController extends BaseController {
 
 		return print_r($status, true);
 	}
-
 
 }
