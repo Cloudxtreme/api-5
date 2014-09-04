@@ -41,6 +41,18 @@ class LoginController extends BaseController {
 
         exit;
     }
+	
+	public function register ()
+	{
+		$response = $this->ancientFrontController->dispatch ($this->ancientPage);
+
+		if ($response)
+		{
+			$response->output ();
+		}
+
+		exit;
+	}
 
 
 }

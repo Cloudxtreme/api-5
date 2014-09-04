@@ -247,6 +247,7 @@ Route::get ('docs{path?}', function ($path = "")
 
 Route::any('login/{path?}', 'LoginController@login')->where ('path', '.+');
 Route::any('logout/{path?}', 'LoginController@logout')->where ('path', '.+');
+Route::any('register/{path?}', 'LoginController@register')->where ('path', '.+');
 Route::any('loginx/{path?}', 'CommunicationController@login')->where ('path', '.+');
 Route::any('email/{path?}', 'CommunicationController@email')->where ('path', '.+');
 Route::any('sms/{path?}', 'CommunicationController@sms')->where ('path', '.+');
