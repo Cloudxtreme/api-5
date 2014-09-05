@@ -6,7 +6,6 @@
 
     <h1 class="pull-left">{{ trans('login.login') }}</h1>
 
-<hr>
     @if ( !empty ($error) )
         <div class="alert alert-error">
             <button class="close" data-dismiss="alert"></button>
