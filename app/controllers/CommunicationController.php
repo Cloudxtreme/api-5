@@ -19,7 +19,11 @@ class CommunicationController extends BaseController {
             return print_r( $output, true );
 //            return View::make('signin.login', $output);
             // if ok redirect
-            // return Redirect::to('http://devplatform.cloudwalkers.be');
+            if(isset($output['success'])){
+                return Redirect::to('http://devplatform.cloudwalkers.be');
+            } else {
+                return View::make('signin.login', $output);
+            }
         } else {
             return View::make('signin.login', $data);
         }

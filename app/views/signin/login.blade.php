@@ -29,9 +29,9 @@
         I don't have any errors!
     @endif
 <hr>
- 
+
 <hr>
-    {{ $error->message }}
+    {{ $error['message'] }}
 
     <form class="form-signin pull-right" method="post" action="">
 
