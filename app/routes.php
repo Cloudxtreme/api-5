@@ -238,12 +238,10 @@ Route::get ('loginstatus', function ()
 	return Response::json (array ('login' => $login));
 });
 
-
 Route::get ('docs{path?}', function ($path = "")
 {
-	return Redirect::to ('https://superadmin.cloudwalkers.be/docs' . str_replace (" ", "+", $path));
+	return Redirect::to ('https://superadmin.cloudwalkers.be/docs/api/' . str_replace (" ", "+", $path));
 })->where ('path', '.+');
-
 
 Route::any('login/{path?}', 'LoginController@login')->where ('path', '.+');
 Route::any('logout/{path?}', 'LoginController@logout')->where ('path', '.+');
