@@ -16,10 +16,10 @@ class CommunicationController extends BaseController {
             $password = $data['password'];
             // send request to engine via gearman
             $output = App::make ('cwclient')->login ($username, $password);
-            return print_r( $output, true );
+//            return print_r( $output, true );
 //            return View::make('signin.login', $output);
             // if ok redirect
-            if(isset($output['success'])){
+            if(isset($output['id'])){
                 return Redirect::to('http://devplatform.cloudwalkers.be');
             } else {
                 return View::make('signin.login', $output);
