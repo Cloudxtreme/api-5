@@ -16,6 +16,8 @@ class CwGearmanClient {
 
 	private static $instance;
 	private $client;
+
+	private $resellerInfo = false;
 	
 	public static function getInstance ()
 	{
@@ -66,6 +68,11 @@ class CwGearmanClient {
 
 		return $this->doHigh ('authentication', $data);
 	}
+
+	public function getResellerInfo ()
+	{
+		return $this->resellerInfo;
+	}
 	
 	public function verifyopenssl ($resellerid, $signature, $random, $time, $body)
 	{
@@ -79,6 +86,12 @@ class CwGearmanClient {
 
 		$data = $this->doHigh ('authentication', $data);
 		
-		return isset ($data['success']) && $data['success'];
+		if (isset ($data['success']) && $data['success'])
+		{
+			$this->resellerInfo = $data['reseller'];
+
+			return true;
+		}
+		return false;
 	}
 } 

@@ -26,7 +26,7 @@ class Request
 
 		$model = new self ();
 
-		$model->setMethod ($_SERVER['REQUEST_METHOD']);
+		$model->setMethod (isset($_SERVER['REQUEST_METHOD'])? $_SERVER['REQUEST_METHOD']: null);
 		if (isset ($module))
 		{
 			$model->setPath ($module);

@@ -21,7 +21,18 @@ class JSON extends HTML {
 	public function outputContent (Response $response)
 	{
 		header ('Content-type: application/json');
-		echo json_encode ($response->getData ());
+
+		$out = json_encode ($response->getData ());
+		if ($out)
+		{
+			echo $out;
+		}
+
+		else if ($error = json_last_error())
+		{
+			http_response_code (500);
+			echo 'json_encode failed with error code ' . $error;
+		}
 	}
 	
 } 

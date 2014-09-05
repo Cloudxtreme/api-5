@@ -16,7 +16,7 @@ use Neuron\Models\User;
 abstract class Entity {
 
 	const CHECK_SIGNATURE = false;
-
+	
 	/** @var User */
 	private $user;
 	private $body;
@@ -26,7 +26,7 @@ abstract class Entity {
 	private $session;
 	private $data;
 	private $cookies;
-
+	
 	/** @var integer $status */
 	private $status;
 
@@ -42,7 +42,7 @@ abstract class Entity {
 	{
 		// Check signature
 		$model = $this;
-
+		
 		$chk = self::CHECK_SIGNATURE;
 
 		if ($chk && !isset ($data['signature']))
@@ -58,7 +58,10 @@ abstract class Entity {
 		if (isset ($data['session']) && isset ($data['session']['user']))
 		{
 			$user = MapperFactory::getUserMapper ()->getFromId ($data['session']['user']);
-			$model->setUser ($user);
+			if ($user)
+			{
+				$model->setUser ($user);
+			}
 		}
 
 		// The body. If data is found, body is not used.
@@ -91,7 +94,7 @@ abstract class Entity {
 		{
 			$model->setPost ($data['post']);
 		}
-
+		
 		if (isset ($data['status']))
 		{
 			$model->setStatus ($data['status']);
@@ -115,7 +118,7 @@ abstract class Entity {
 				$data['data'] = $this->getData ();
 			}
 		}
-
+		
 		$data['body'] = $this->getBody ();
 
 		$data['session'] = $this->getSession ();
