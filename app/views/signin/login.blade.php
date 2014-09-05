@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.mobile_index')
 
 @section('content')
 
