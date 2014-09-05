@@ -29,7 +29,7 @@ class HTML implements Output {
 		{
 			foreach ($response->getHeaders () as $k => $v)
 			{
-				header ($k . ':' . $v);
+				header ($k . ': ' . $v);
 			}
 		}
 

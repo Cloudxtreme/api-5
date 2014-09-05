@@ -264,6 +264,12 @@ Route::group(array('before' => 'resellersigned'), function($v)
 {
 
 	Route::get('1/resellers/{resellerId}/plans', 'ProxyController@openssl');
+	Route::get('1/resellers/{resellerId}/accounts', 'ProxyController@openssl');
+	Route::post('1/resellers/{resellerId}/accounts', 'ProxyController@openssl');
+	Route::post('1/accounts/{accountId}/licenses', 'ProxyController@openssl');
+	Route::get('1/accounts/{accountId}/licenses', 'ProxyController@openssl');
+	Route::post('1/accounts/{accountId}/users', 'ProxyController@openssl');
+	Route::get('1/accounts/{accountId}/users', 'ProxyController@openssl');
 
 });
 
