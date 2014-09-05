@@ -23,7 +23,7 @@
     @if ( !empty ($error) )
         <div class="alert alert-error">
             <button class="close" data-dismiss="alert"></button>
-            <span><p>{{ $error['message'] }}</p></span>
+            <span><p>{{ dd($error) }}</p></span>
         </div>
     @else
         I don't have any errors!
@@ -31,7 +31,6 @@
 <hr>
 
 <hr>
-    {{ dd($output) }}
 
     <form class="form-signin pull-right" method="post" action="">
 
