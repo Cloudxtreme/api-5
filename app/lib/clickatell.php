@@ -1,7 +1,5 @@
 <?php
 
-namespace Clickatell;
-
 class Clickatell
 {
     private static $to = array();
