@@ -1,4 +1,4 @@
-@extends('layouts.mobile_index')
+@extends('layouts.auth')
 
 @section('content')
 
@@ -12,7 +12,7 @@
             <span><p>{{ $error['message'] }}</p></span>
         </div>
     @else
-        I don't have any errors!
+  
     @endif
 
     <form class="form-signin pull-right" method="post" action="">
