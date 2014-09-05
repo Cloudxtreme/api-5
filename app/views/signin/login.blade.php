@@ -29,7 +29,7 @@
         I don't have any errors!
     @endif
 <hr>
-    {{ $error['message'] }}
+ 
 <hr>
     {{ $error->message }}
 
