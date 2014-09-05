@@ -228,7 +228,7 @@ Route::group(array('prefix' => '1.1', /*'namespace' => $namespace, */ 'before' =
 
 Route::get('/', function()
 {
-	return View::make('hello');
+    return Redirect::to ('https://superadmin.cloudwalkers.be/docs/api/');
 });
 
 Route::get ('loginstatus', function ()
