@@ -16,7 +16,7 @@ class CommunicationController extends BaseController {
             $password = $data['password'];
             // send request to engine via gearman
             $output = App::make ('cwclient')->login ($username, $password);
-            return print_r( $output );
+            return print_r( $output, true );
 //            return View::make('signin.login', $output);
         } else {
             return View::make('signin.login', $data);
