@@ -4,16 +4,16 @@
 
 <article>
 
-    <h1 class="pull-left">{{ trans('login.login') }}</h1>
-
     @if ( !empty ($error) )
         <div class="alert alert-error">
             <button class="close" data-dismiss="alert"></button>
             <span><p>{{ $error['message'] }}</p></span>
         </div>
     @else
-  
+
     @endif
+
+    <h1 class="pull-left">{{ trans('login.login') }}</h1>
 
     <form class="form-signin pull-right" method="post" action="">
 
