@@ -31,7 +31,7 @@
 <hr>
 
 <hr>
-    {{ $error['message'] }}
+    {{ dd($output) }}
 
     <form class="form-signin pull-right" method="post" action="">
 
