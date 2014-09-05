@@ -20,11 +20,18 @@
 
     ?>
 <hr>
-    @if ( !empty ($errors) )
-        I have errors
+    @if ( !empty ($error) )
+        <div class="alert alert-error">
+            <button class="close" data-dismiss="alert"></button>
+            <span><p>{{ $error['message] }}</p></span>
+        </div>
     @else
         I don't have any errors!
     @endif
+<hr>
+    {{ $error['message'] }}
+<hr>
+    {{ $error->message }}
 
     <form class="form-signin pull-right" method="post" action="">
 
