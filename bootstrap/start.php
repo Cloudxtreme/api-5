@@ -90,10 +90,6 @@ require 'tools.php';
 |
 */
 
-Autoloader::directories(array(
-    Bundle::path('clickatell') . 'lib',
-));
-
 require 'ioc.php';
 
 return $app;
