@@ -6,31 +6,15 @@
 
     <h1 class="pull-left">{{ trans('login.login') }}</h1>
 
-    <?php if (!empty ($errors)) { ?>
-        <?php foreach ($errors as $v) { ?>
-            <div class="alert alert-error">
-                <button class="close" data-dismiss="alert"></button>
-                <span><p><?php echo __ ($v); ?></p></span>
-            </div>
-        <?php } ?>
-    <?php }
-
-    //print_r($error,true);
-    //print_r($message,true);
-
-    ?>
 <hr>
     @if ( !empty ($error) )
         <div class="alert alert-error">
             <button class="close" data-dismiss="alert"></button>
-            <span><p>{{ dd($error) }}</p></span>
+            <span><p>{{ $error['message'] }}</p></span>
         </div>
     @else
         I don't have any errors!
     @endif
-<hr>
-
-<hr>
 
     <form class="form-signin pull-right" method="post" action="">
 
