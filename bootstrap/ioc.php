@@ -2,5 +2,12 @@
 
 use bmgroup\CloudwalkersClient\CwGearmanClient;
 
-$cwclient = CwGearmanClient::getInstance ();
-App::instance ('cwclient', $cwclient);
+try {
+
+	$cwclient = CwGearmanClient::getInstance ();
+	App::instance ('cwclient', $cwclient);
+
+} catch (GearmanException $e)
+{
+	echo "No running Gearmand.";
+}
