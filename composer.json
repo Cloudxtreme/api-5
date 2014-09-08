@@ -8,7 +8,8 @@
 		"illuminate/support": "4.*",
 		"pafelin/gearman": "dev-master",
 		"barryvdh/laravel-ide-helper": "1.*",
-        "catlabinteractive/neuron": "0.9.*"
+        "catlabinteractive/neuron": "dev-master",
+        "bshaffer/oauth2-server-php": "v1.5"
     },
 
     "repositories": [
