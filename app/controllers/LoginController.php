@@ -22,13 +22,30 @@ class LoginController extends BaseController {
 	
 	public function login ()
 	{
-		$response = $this->ancientFrontController->dispatch ($this->ancientPage);
-		if ($response)
-		{
-			$response->output ();
-		}
+//		$response = $this->ancientFrontController->dispatch ($this->ancientPage);
+//		if ($response)
+//		{
+//			$response->output ();
+//		}
+//
+//		exit;
+        
+        $data = Input::all();
 
-		exit;
+        if(isset($data['email']) && isset($data['password'])){
+            $username = $data['email'];
+            $password = $data['password'];
+            // send request to engine via gearman
+            $output = App::make ('cwclient')->login ($username, $password);
+            // if ok redirect
+            if(isset($output['id'])){
+                return Redirect::to('http://devplatform.cloudwalkers.be');
+            } else {
+                return View::make('signin.login', $output);
+            }
+        } else {
+            return View::make('signin.login', $data);
+        }
 	}
 
     public function logout ()
