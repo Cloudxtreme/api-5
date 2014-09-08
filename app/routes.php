@@ -254,7 +254,7 @@ Route::any('registerx/{path?}', 'CommunicationController@register')->where ('pat
 Route::any('lostpasswordx/{path?}', 'CommunicationController@lostPassword')->where ('path', '.+');
 Route::any('logoutx/{path?}', 'CommunicationController@logout')->where ('path', '.+');
 
-Route::get ('1/version', 'ProxyController@guest');
+Route::get ('1/version', 'NeuronProxyController@guest');
 
 Route::get ('authenticate/{path?}', 'ProxyController@guest')->where ('path', '.+');
 Route::get ('invitation/{path?}', 'ProxyController@guest')->where ('path', '.+');

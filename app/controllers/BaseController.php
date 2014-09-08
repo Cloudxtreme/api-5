@@ -22,7 +22,7 @@ class BaseController extends Controller
 	 *	Dispatch
 	 *	The basic controller action between API and Worker
 	 */
-	 public function jobdispatch($job, $payload)
+	 public static function jobdispatch($job, $payload)
 	 {
 		 global $app;
 		 

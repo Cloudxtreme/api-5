@@ -1,29 +1,54 @@
 <?php
 
-class ProxyController extends BaseController {
+use bmgroup\CloudwalkersClient\CwGearmanClient;
+
+class NeuronProxyController extends ProxyController {
 
 	/*
 	|--------------------------------------------------------------------------
-	| Proxy Controller
+	| Default Home Controller
 	|--------------------------------------------------------------------------
 	|
-	| Communication controller between workers and API.
-	| Specialized worker controllers should extend this one.
+	| You may wish to use controllers instead of, or in addition to, Closure
+	| based routes. That's great! Here is an example controller method to
+	| get you started. To route to this controller, just add the route:
+	|
+	|	Route::get('/', 'HomeController@showWelcome');
 	|
 	*/
 	
-	/**
-	 *	Guest dispatch
-	 */
 	public function guest ()
 	{
-		// Proxy payload
-		$payload = array('method'=> Request::method(), 'path'=> implode ('/', Request::segments()));
-	
-		echo json_decode
-		(
-			self::jobdispatch ('apiDispatch', $payload)
-		);
+		$segments = Request::segments ();
+		//array_shift ($segments);
+		
+		$request = \Neuron\Net\Request::fromInput ();
+		$request->setPath (implode ('/', $segments));
+
+		//return Response::make ($request->getJSON (), 200, array ('content-type' => 'application/json'));
+		$request->setSegments ($segments);
+
+		$client = new GearmanClient ();
+
+		foreach (Config::get ('gearman.servers') as $server => $port)
+		{
+			$client->addServer ($server, $port);
+		}
+		print_r($request);
+		$data = $client->doHigh ('apiDispatch', $request->toJSON ());
+		$response = \Neuron\Net\Response::fromJSON ($data);
+
+		// Hack the body for forms
+		if ($response->getBody ())
+		{
+			$body = $response->getBody ();
+			$body = str_replace ('action="http://cloudwalkers-api.local/', 'action="http://cloudwalkers-api.local/proxy/', $body);
+			$response->setBody ($body);
+		}
+
+		$response->output ();
+		//print_r ($response->toJSON ());
+		exit;
 	}
 
 	public function authenticated ()
