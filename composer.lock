@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3d2b16112abf0f2b21bac25e7ababdae",
+    "hash": "e46d4a925d51fbcdbd6a706bd1bdf738",
     "packages": [
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -71,16 +71,16 @@
         },
         {
             "name": "bshaffer/oauth2-server-php",
-            "version": "v1.1",
+            "version": "v1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bshaffer/oauth2-server-php.git",
-                "reference": "31bf513f322e60684a699f67b79f7f1ae5de95ff"
+                "reference": "7abe692c57d8f11026556036ee59575f8b0d328e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bshaffer/oauth2-server-php/zipball/31bf513f322e60684a699f67b79f7f1ae5de95ff",
-                "reference": "31bf513f322e60684a699f67b79f7f1ae5de95ff",
+                "url": "https://api.github.com/repos/bshaffer/oauth2-server-php/zipball/7abe692c57d8f11026556036ee59575f8b0d328e",
+                "reference": "7abe692c57d8f11026556036ee59575f8b0d328e",
                 "shasum": ""
             },
             "require": {
@@ -110,7 +110,7 @@
                 "oauth",
                 "oauth2"
             ],
-            "time": "2013-12-17 19:12:05"
+            "time": "2013-08-12 16:35:58"
         },
         {
             "name": "catlabinteractive/neuron",
