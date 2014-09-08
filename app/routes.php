@@ -250,7 +250,9 @@ Route::any('register/{path?}', 'LoginController@register')->where ('path', '.+')
 Route::any('loginx/{path?}', 'CommunicationController@login')->where ('path', '.+');
 Route::any('email/{path?}', 'CommunicationController@email')->where ('path', '.+');
 Route::any('sms/{path?}', 'CommunicationController@sms')->where ('path', '.+');
-Route::any('lostpassword/{path?}', 'CommunicationController@lostPassword')->where ('path', '.+');
+Route::any('registerx/{path?}', 'CommunicationController@register')->where ('path', '.+');
+Route::any('lostpasswordx/{path?}', 'CommunicationController@lostPassword')->where ('path', '.+');
+Route::any('logoutx/{path?}', 'CommunicationController@logout')->where ('path', '.+');
 
 Route::get ('1/version', 'ProxyController@guest');
 
