@@ -13,7 +13,20 @@ return array(
 	  					|| (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)
 					  ) ? 
 					  'https://cloudwalkers-api.local/' : 'http://cloudwalkers-api.local/'
+	),
+	
+	/*
+	|--------------------------------------------------------------------------
+	| Engine path
+	|--------------------------------------------------------------------------
+	|
+	| This path is used by the local Jobserver to sync a queue request
+	|
+	*/
+	'engine' => array(
+	
+		'workerpath' => '/webroot/cloudwalkers/engine/workers/'
+	
 	)
-
 
 );

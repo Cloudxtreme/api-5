@@ -5,10 +5,8 @@ class BaseController extends Controller
 
 	function __construct()
 	{
-
 		
 	}
-
 
 	/**
 	 * Setup the layout used by the controller.
@@ -19,5 +17,15 @@ class BaseController extends Controller
 	{
 
 	}
-
+	
+	/**
+	 *	Dispatch
+	 *	The basic controller action between API and Worker
+	 */
+	 public function dispatch($job, $payload)
+	 {
+		 global $app;
+		 
+		 return $app->jobserver->request($job, $payload);
+	 }
 }

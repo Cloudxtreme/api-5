@@ -37,7 +37,8 @@ $env = $app->detectEnvironment(array(
 		'FRM_BEE_12.bee-eng.CORP',    // RCS - Desktop
 		'localhost.localdomain',      // RCS - Virtual Machine (Fedora)
 		'thijs-home-i7',
-		'daedeloth-N550LF'
+		'daedeloth-N550LF',
+		'tickee-MBP-15.local'
 	),
 	'development' => array(
 		'vps601.serverpark.be'

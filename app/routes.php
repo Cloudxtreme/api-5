@@ -273,5 +273,8 @@ Route::group(array('before' => 'resellersigned'), function($v)
 
 });
 
+// Dispatch entry
+Route::get ('schedule', 'HomeController@schedule');
+
 // The All Catching One
 Route::match (array ('GET', 'POST', 'PATCH', 'PUT', 'DELETE'), '{path?}', 'ProxyController@authenticated')->where ('path', '.+')->before (array ('before' => 'oauth2'));

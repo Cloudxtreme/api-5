@@ -114,6 +114,7 @@ return array(
 		
 		//'Illuminate\Queue\QueueServiceProvider', // Replaced by 'Pafelin\Gearman\GearmanServiceProvider'
 		'Pafelin\Gearman\GearmanServiceProvider',
+		'lib\JobServer\JobServiceProvider',
 		
 		'Illuminate\Redis\RedisServiceProvider',
 		'Illuminate\Remote\RemoteServiceProvider',
