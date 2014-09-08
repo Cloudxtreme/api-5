@@ -1,8 +1,6 @@
-@extends('layouts.auth')
+@extends('layouts.master')
 
 @section('content')
-
-<?php // $this->setTextSection ('register', 'account'); ?>
 
 <!-- BEGIN REGISTRATION FORM -->
 <form class="form-vertical register-form" action="<?php // echo $action ?>" method="post">
@@ -26,6 +24,17 @@
         <?php } ?>
     <?php } */ ?>
 
+    @if ( !empty ($error) )
+        @foreach ($error as $message)
+            <div class="alert alert-error">
+                <button class="close" data-dismiss="alert"></button>
+                <span><p>{{ $error['message'] }}</p></span>
+            </div>
+        @endforeach
+    @else
+
+    @endif
+
     <p>Enter your account details below:</p>
     <div class="control-group">
         <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
@@ -33,7 +42,7 @@
         <div class="controls">
             <div class="input-icon left">
                 <i class="icon-envelope"></i>
-                <input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email" value="<?php echo $_SESSION['invitation_email']; ?>"/>
+                <input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email" value="<?php //echo $_SESSION['invitation_email']; ?>"/>
             </div>
         </div>
     </div>
@@ -85,7 +94,7 @@
         </div>
     </div>
     <div class="form-actions">
-        <a href="<?php // echo \Neuron\URLBuilder::getURL ('login'); ?>" id="register-back-btn" type="button" class="btn">
+        <a href="{{ URL::to('login') }}" id="register-back-btn" type="button" class="btn">
             <i class="m-icon-swapleft"></i>
             <?php /* if (isset ($_GET['invitation'])) { ?>To login<?php } else { ?>Back<?php } */ ?>
         </a>
@@ -95,68 +104,5 @@
     </div>
 </form>
 <!-- END REGISTRATION FORM -->
-
-<?php /*
-<!--
-<div class="registration-page">
-	<div class="column-container two">
-
-		<div class="column">
-			<h2><?php echo __('Register the old way'); ?></h2>
-
-			<?php if (!empty ($errors)) { ?>
-				<div class="errors">
-					<?php foreach ($errors as $v) { ?>
-						<p><?php echo __ ($v); ?></p>
-					<?php } ?>
-				</div>
-			<?php } ?>
-
-			<form method="post" action="<?php echo $action?>">
-				<fieldset>
-					<ol>
-						<li>
-							<label for="name"><?php echo __ ('Name'); ?></label>
-							<input type="text" name="name" id="name" value="<?php echo $name?>" />
-						</li>
-
-						<li>
-							<label for="firstname"><?php echo __ ('First name'); ?></label>
-							<input type="text" name="firstname" id="firstname" value="<?php echo $firstname?>" />
-						</li>
-
-						<li>
-							<label for="email"><?php echo __ ('Email'); ?></label>
-							<input type="text" name="email" id="email" value="<?php echo $email?>" />
-						</li>
-
-						<li>
-							<label for="password"><?php echo __ ('Password'); ?></label>
-							<input type="password" name="password" id="password" />
-						</li>
-
-						<li>
-							<label for="password2"><?php echo __ ('Confirm password'); ?></label>
-							<input type="password" name="password2" id="password2" />
-						</li>
-
-						<li class="buttons">
-							<button type="submit" name="register" value="1"><?php echo __ ('Register account'); ?></button>
-						</li>
-					</ol>
-				</fieldset>
-			</form>
-
-			<p>
-				<a href="<?php echo $login?>"><?php echo __ ('Already have an account? Login now'); ?></a>
-			</p>
-		</div>
-	</div>
-
-	<div class="clearer"></div>
-</div>
--->
-
-*/ ?>
 
 @stop

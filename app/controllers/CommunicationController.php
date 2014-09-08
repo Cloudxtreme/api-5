@@ -28,12 +28,36 @@ class CommunicationController extends BaseController {
 
 	}
 
+	public function logout ()
+	{
+        $data = array();
+        return View::make('signin.logout', $data);
+	}
+
+	public function register ()
+	{
+        $data = Input::all();
+
+        if(isset($data['email']) && isset($data['password'])){
+            $username = $data['email'];
+            $password = $data['password'];
+            // send request to engine via gearman
+            $output = App::make ('cwclient')->login ($username, $password);
+            // if ok redirect
+            if(isset($output['id'])){
+                return Redirect::to('http://devplatform.cloudwalkers.be');
+            } else {
+                return View::make('signin.login', $output);
+            }
+        } else {
+            return View::make('signin.register', $data);
+        }
+	}
+
 	public function lostPassword ()
 	{
-        return 'did you?';
-
-        //$data = array();
-		//return View::make('signin.login', $data);
+        $data = array();
+		return View::make('signin.lost_password', $data);
 	}
 
 	public function email ()

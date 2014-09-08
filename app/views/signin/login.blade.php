@@ -5,10 +5,12 @@
 <article>
 
     @if ( !empty ($error) )
+        @foreach ($error as $message)
         <div class="alert alert-error">
             <button class="close" data-dismiss="alert"></button>
             <span><p>{{ $error['message'] }}</p></span>
         </div>
+        @endforeach
     @else
 
     @endif
