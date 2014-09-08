@@ -2,7 +2,7 @@
 
 use bmgroup\CloudwalkersClient\CwGearmanClient;
 
-class NeuronProxyController extends ProxyController {
+class NeuronProxyController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ class NeuronProxyController extends ProxyController {
 		{
 			$client->addServer ($server, $port);
 		}
-		print_r($request);
+
 		$data = $client->doHigh ('apiDispatch', $request->toJSON ());
 		$response = \Neuron\Net\Response::fromJSON ($data);
 
