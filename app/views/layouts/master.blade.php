@@ -49,7 +49,7 @@
 
 <!-- BEGIN COPYRIGHT -->
 <div class="copyright">
-    2014 &copy; Cloudwalkers
+    {{ date('Y') }} &copy; Cloudwalkers
 </div>
 
 

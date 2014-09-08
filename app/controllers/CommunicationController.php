@@ -31,21 +31,19 @@ class CommunicationController extends BaseController {
 	public function logout ()
 	{
         $data = array();
-        return View::make('signin.logout', $data);
+        return Redirect::to('');
 	}
 
 	public function register ()
 	{
         $data = Input::all();
 
-        if(isset($data['email']) && isset($data['password'])){
-            $username = $data['email'];
-            $password = $data['password'];
+        if( !empty($data) ){
             // send request to engine via gearman
-            $output = App::make ('cwclient')->login ($username, $password);
+            $output = App::make ('cwclient')->register ($data['email'], $data['password'], $data['firstname'], $data['name']);
             // if ok redirect
-            if(isset($output['id'])){
-                return Redirect::to('http://devplatform.cloudwalkers.be');
+            if(isset($output['success'])){
+                return Redirect::to('');
             } else {
                 return View::make('signin.login', $output);
             }

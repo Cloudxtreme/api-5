@@ -3,26 +3,17 @@
 @section('content')
 
 <!-- BEGIN REGISTRATION FORM -->
-<form class="form-vertical register-form" action="<?php // echo $action ?>" method="post">
+<form class="form-vertical register-form" action="" method="post">
 
-    <?php /* if (isset ($_GET['invitation'])) { ?>
+    @if ( !empty ($invitation) )
         <h3>
             You are invited!
         </h3>
 
-        <p>If you already have a Cloudwalkers account, don't bother with this registration form and head straight to the <a href="<?php echo \Neuron\URLBuilder::getURL ('login'); ?>">login form</a>.</p>
-    <?php } ?>
+        <p>If you already have a Cloudwalkers account, don't bother with this registration form and head straight to the <a href="{{ URL::to('login') }}">login form</a>.</p>
+    @else
 
-    <h3 class="">Sign Up</h3>
-
-    <?php if (!empty ($errors)) { ?>
-        <?php foreach ($errors as $v) { ?>
-            <div class="alert alert-error">
-                <button class="close" data-dismiss="alert"></button>
-                <span><p><?php echo __ ($v); ?></p></span>
-            </div>
-        <?php } ?>
-    <?php } */ ?>
+    @endif
 
     @if ( !empty ($error) )
         @foreach ($error as $message)
@@ -42,7 +33,7 @@
         <div class="controls">
             <div class="input-icon left">
                 <i class="icon-envelope"></i>
-                <input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email" value="<?php //echo $_SESSION['invitation_email']; ?>"/>
+                <input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email" value="{{ Session::get('invitation_email') }}"/>
             </div>
         </div>
     </div>
@@ -96,7 +87,11 @@
     <div class="form-actions">
         <a href="{{ URL::to('login') }}" id="register-back-btn" type="button" class="btn">
             <i class="m-icon-swapleft"></i>
-            <?php /* if (isset ($_GET['invitation'])) { ?>To login<?php } else { ?>Back<?php } */ ?>
+            @if ( !empty ($invitation) )
+                To login
+            @else
+                Back
+            @endif
         </a>
         <button type="submit" id="register-submit-btn" class="btn green pull-right" name="register" value="1">
             Sign Up <i class="m-icon-swapright m-icon-white"></i>

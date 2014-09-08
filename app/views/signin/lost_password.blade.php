@@ -1,11 +1,9 @@
-@extends('layouts.auth')
+@extends('layouts.master')
 
 @section('content')
 
-<?php //$this->setTextSection ('login', 'account'); ?>
-
 <!-- BEGIN FORGOT PASSWORD FORM -->
-<form class="form-vertical forget-form" action="<?php //echo $action; ?>" method="post">
+<form class="form-vertical forget-form" action="" method="post">
     <h3 class="">Choose a new password</h3>
 
     <?php /* if (!empty ($errors)) { ?>
@@ -25,6 +23,28 @@
             </div>
         <?php } ?>
     <?php } */?>
+
+    @if ( !empty ($error) )
+    @foreach ($error as $message)
+    <div class="alert alert-error">
+        <button class="close" data-dismiss="alert"></button>
+        <span><p>{{ $message }}</p></span>
+    </div>
+    @endforeach
+    @else
+
+    @endif
+
+    @if ( !empty ($feedback) )
+    @foreach ($feedback as $message)
+    <div class="alert alert-error">
+        <button class="close" data-dismiss="alert"></button>
+        <span><p>{{ $message }}</p></span>
+    </div>
+    @endforeach
+    @else
+
+    @endif
 
     <p>Almost there. Please choose a new password.</p>
     <div class="control-group">
