@@ -6,42 +6,24 @@
 <form class="form-vertical forget-form" action="" method="post">
     <h3 class="">Choose a new password</h3>
 
-    <?php /* if (!empty ($errors)) { ?>
-        <?php foreach ($errors as $v) { ?>
-            <div class="alert alert-error">
-                <button class="close" data-dismiss="alert"></button>
-                <span><p><?php echo ($v); ?></p></span>
-            </div>
-        <?php } ?>
-    <?php } ?>
-
-    <?php if (!empty ($feedback)) { ?>
-        <?php foreach ($feedback as $v) { ?>
-            <div class="alert alert-error">
-                <button class="close" data-dismiss="alert"></button>
-                <span><p><?php echo ($v); ?></p></span>
-            </div>
-        <?php } ?>
-    <?php } */?>
-
     @if ( !empty ($error) )
-    @foreach ($error as $message)
-    <div class="alert alert-error">
-        <button class="close" data-dismiss="alert"></button>
-        <span><p>{{ $message }}</p></span>
-    </div>
-    @endforeach
+        @foreach ($error as $message)
+        <div class="alert alert-error">
+            <button class="close" data-dismiss="alert"></button>
+            <span><p>{{ $message }}</p></span>
+        </div>
+        @endforeach
     @else
 
     @endif
 
     @if ( !empty ($feedback) )
-    @foreach ($feedback as $message)
-    <div class="alert alert-error">
-        <button class="close" data-dismiss="alert"></button>
-        <span><p>{{ $message }}</p></span>
-    </div>
-    @endforeach
+        @foreach ($feedback as $message)
+        <div class="alert alert-error">
+            <button class="close" data-dismiss="alert"></button>
+            <span><p>{{ $message }}</p></span>
+        </div>
+        @endforeach
     @else
 
     @endif

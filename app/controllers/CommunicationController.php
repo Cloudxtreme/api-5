@@ -30,8 +30,11 @@ class CommunicationController extends BaseController {
 
 	public function logout ()
 	{
+        // method not defined in CwGearmanClient
         $data = array();
-        return Redirect::to('');
+        // send request to engine via gearman
+        $output = App::make ('cwclient')->logout ();
+        return View::make('signin.logout', $output);
 	}
 
 	public function register ()
