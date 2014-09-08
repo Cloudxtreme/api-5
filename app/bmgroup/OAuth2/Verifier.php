@@ -2,7 +2,6 @@
 
 namespace bmgroup\OAuth2;
 
-use OAuth2\Autoloader;
 use OAuth2\GrantType\AuthorizationCode;
 use OAuth2\GrantType\ClientCredentials;
 use OAuth2\GrantType\JwtBearer;
@@ -37,8 +36,6 @@ class Verifier
 
 	private function __construct ()
 	{
-		Autoloader::register ();
-
 		if (defined('DB_OAUTH2_ENGINE') && DB_OAUTH2_ENGINE == 'sqlite3') {
 			$dsn = DB_OAUTH2_DSN;
 			$username = DB_OAUTH2_USERNAME;

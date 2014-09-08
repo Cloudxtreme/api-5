@@ -9,7 +9,7 @@
 		"pafelin/gearman": "dev-master",
 		"barryvdh/laravel-ide-helper": "1.*",
         "catlabinteractive/neuron": "dev-master",
-        "bshaffer/oauth2-server-php": "v0.9"
+        "bshaffer/oauth2-server-php": "v1.1"
     },
 
     "repositories": [
