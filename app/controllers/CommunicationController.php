@@ -46,9 +46,9 @@ class CommunicationController extends BaseController {
             $output = App::make ('cwclient')->register ($data['email'], $data['password'], $data['firstname'], $data['name']);
             // if ok redirect
             if(isset($output['success'])){
-                return Redirect::to('');
+                return Redirect::to('login');
             } else {
-                return View::make('signin.login', $output);
+                return View::make('signin.register', $output);
             }
         } else {
             return View::make('signin.register', $data);

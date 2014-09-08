@@ -44,14 +44,30 @@ class LoginController extends BaseController {
 	
 	public function register ()
 	{
-		$response = $this->ancientFrontController->dispatch ($this->ancientPage);
+//		$response = $this->ancientFrontController->dispatch ($this->ancientPage);
+//
+//		if ($response)
+//		{
+//			$response->output ();
+//		}
+//
+//		exit;
 
-		if ($response)
-		{
-			$response->output ();
-		}
+        $data = Input::all();
 
-		exit;
+        if( !empty($data) ){
+            // send request to engine via gearman
+            $output = App::make ('cwclient')->register ($data['email'], $data['password'], $data['firstname'], $data['name']);
+            // if ok redirect
+            if(isset($output['success'])){
+                return Redirect::to('login');
+            } else {
+                return View::make('signin.register', $output);
+            }
+        } else {
+            return View::make('signin.register', $data);
+        }
+
 	}
 
 
