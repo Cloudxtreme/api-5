@@ -4,19 +4,9 @@ use bmgroup\CloudwalkersClient\CwGearmanClient;
 
 class NeuronProxyController extends BaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
-	
+	/**
+	 * Make an anonymous request to the worker chain.
+	 */
 	public function guest ()
 	{
 		$segments = Request::segments ();
@@ -51,6 +41,9 @@ class NeuronProxyController extends BaseController {
 		exit;
 	}
 
+	/**
+	 * Make a request based on the user.
+	 */
 	public function authenticated ()
 	{
 		$segments = Request::segments ();
