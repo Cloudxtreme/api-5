@@ -2,7 +2,7 @@
 
 use bmgroup\CloudwalkersClient\CwGearmanClient;
 
-class NeuronProxyController extends ProxyController {
+class NeuronProxyController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
