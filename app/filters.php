@@ -16,18 +16,22 @@ use bmgroup\CloudwalkersClient\CwGearmanClient;
 
 App::before(function($request)
 {
+	// Set headers
+	header ('Access-Control-Allow-Origin: *');
+	header ('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, PATCH, OPTIONS');
+	header ('Access-Control-Allow-Headers: origin, x-requested-with, content-type, access_token, authorization');	
+	
 	// Sent by the browser since request come in as cross-site AJAX
 	// The cross-site headers are sent via .htaccess
 	if (strtoupper ($request->getMethod()) == "OPTIONS")
 	{
-		header ('Access-Control-Allow-Origin: *');
-		header ('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, PATCH, OPTIONS');
-		header ('Access-Control-Allow-Headers: origin, x-requested-with, content-type, access_token, authorization');
-
 		echo 'These are not the droids you\'re looking for.';
 
 		exit;
 	}
+	
+	// Set NewRelic options
+	Newrelic::setAppName( Config::get('newrelic.appname'));
 });
 
 
@@ -49,16 +53,13 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest())
+	$bearer = Request::header('Authorization');
+	
+	if (!$bearer || strlen ($bearer) < 18)
 	{
-		if (Request::ajax())
-		{
-			return Response::make('Unauthorized', 401);
-		}
-		else
-		{
-			return Redirect::guest('login');
-		}
+		http_response_code (403);
+
+		return Response::json (array ('error' => array ('message' => 'No valid oauth2 authentication found.')), 403);
 	}
 });
 
@@ -109,10 +110,6 @@ Route::filter ('oauth2', function ()
 	$verifier = \bmgroup\OAuth2\Verifier::getInstance ();
 	if (!$verifier->isValid ())
 	{
-		header ('Access-Control-Allow-Origin: *');
-		header ('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, PATCH, OPTIONS');
-		header ('Access-Control-Allow-Headers: origin, x-requested-with, content-type, access_token, authorization');
-
 		http_response_code (403);
 
 		return Response::json (array ('error' => array ('message' => 'No valid oauth2 authentication found.')), 403);
@@ -133,10 +130,6 @@ Route::filter ('resellersigned', function ()
 		$client = CwGearmanClient::getInstance ();
 		if (!$client->verifyopenssl ($resellerid, $signature, $random, $time, $body))
 		{
-			header ('Access-Control-Allow-Origin: *');
-			header ('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, PATCH, OPTIONS');
-			header ('Access-Control-Allow-Headers: origin, x-requested-with, content-type, access_token, authorization');
-
 			http_response_code (403);
 
 			return Response::json (array ('error' => array ('message' => 'No valid openssl authentication found.')), 403);

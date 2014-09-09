@@ -2,7 +2,7 @@
 
 use bmgroup\CloudwalkersClient\CwGearmanClient;
 
-class NeuronProxyController extends ProxyController {
+class NeuronProxyController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -35,7 +35,7 @@ class NeuronProxyController extends ProxyController {
 			$client->addServer ($server, $port);
 		}
 
-		$data = $client->doHigh ('apiDispatch', $request->toJSON ());
+		$data = $client->doHigh ('neuronApiDispatch', $request->toJSON ());
 		$response = \Neuron\Net\Response::fromJSON ($data);
 
 		// Hack the body for forms
@@ -78,7 +78,7 @@ class NeuronProxyController extends ProxyController {
 			$client->addServer ($server, $port);
 		}
 
-		$data = $client->doHigh ('apiDispatch', $request->toJSON ());
+		$data = $client->doHigh ('neuronApiDispatch', $request->toJSON ());
 		$response = \Neuron\Net\Response::fromJSON ($data);
 
 		// Hack the body for forms
@@ -122,7 +122,7 @@ class NeuronProxyController extends ProxyController {
 			$client->addServer ($server, $port);
 		}
 
-		$data = $client->doHigh ('apiDispatch', $request->toJSON ());
+		$data = $client->doHigh ('neuronApiDispatch', $request->toJSON ());
 		$response = \Neuron\Net\Response::fromJSON ($data);
 
 		// Hack the body for forms

@@ -127,9 +127,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
-		//'LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider'
-
-		//'LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider'
+		'Intouch\LaravelNewrelic\LaravelNewrelicServiceProvider'
 	),
 
 	/*
@@ -179,6 +177,7 @@ return array(
 		'Lang'            => 'Illuminate\Support\Facades\Lang',
 		'Log'             => 'Illuminate\Support\Facades\Log',
 		'Mail'            => 'Illuminate\Support\Facades\Mail',
+		'Newrelic'        => 'Intouch\LaravelNewrelic\Facades\Newrelic',
 		'Paginator'       => 'Illuminate\Support\Facades\Paginator',
 		'Password'        => 'Illuminate\Support\Facades\Password',
 		'Queue'           => 'Illuminate\Support\Facades\Queue',
@@ -195,13 +194,7 @@ return array(
 		'Str'             => 'Illuminate\Support\Str',
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
-		'View'            => 'Illuminate\Support\Facades\View',
-		'AuthorizationServer' => 'LucaDegasperi\OAuth2Server\Facades\AuthorizationServerFacade',
-		'ResourceServer' => 'LucaDegasperi\OAuth2Server\Facades\ResourceServerFacade',
-
-		// OAuth2 aliases
-		//'AuthorizationServer' => 'LucaDegasperi\OAuth2Server\Facades\AuthorizationServerFacade',
-		//'ResourceServer' => 'LucaDegasperi\OAuth2Server\Facades\ResourceServerFacade'
+		'View'            => 'Illuminate\Support\Facades\View'
 	),
 
 );

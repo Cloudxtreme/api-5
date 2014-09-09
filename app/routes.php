@@ -21,7 +21,7 @@ Route::group (array ('prefix' => '1.1'), function ($v)
 	Route::get ('version', 'ProxyController@guest');
 });
 
-Route::group(array('prefix' => '1.1', /*'namespace' => $namespace, */ 'before' => 'oauth2'), function($v)
+Route::group(array('prefix' => '1.1', /*'namespace' => $namespace, */ 'before' => 'auth'), function($v)
 {
 	// THE NEW ONES
 	Route::get('accounts/{accountId}/ping', 'NeuronProxyController@authenticated');

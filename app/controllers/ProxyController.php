@@ -17,7 +17,6 @@ class ProxyController extends BaseController {
 	 */
 	public static function guest ()
 	{
-	
 		// Proxy payload
 		$payload = array('method'=> Request::method(), 'path'=> implode ('/', Request::segments()));
 	
@@ -32,8 +31,13 @@ class ProxyController extends BaseController {
 	 */
 	public function authenticated ()
 	{
-		// To be figured out
-		return self::guest();
+		// Proxy payload
+		$payload = array('method'=> Request::method(), 'path'=> implode ('/', Request::segments ()), 'access_token'=> Request::header('Authorization'));
+		
+		return json_decode
+		(
+			self::jobdispatch ('apiDispatch', $payload)
+		);
 	}
 
 }
