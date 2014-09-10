@@ -22,30 +22,30 @@ class LoginController extends BaseController {
 	
 	public function login ()
 	{
-		$response = $this->ancientFrontController->dispatch ($this->ancientPage);
-		if ($response)
-		{
-			$response->output ();
-		}
-
-		exit;
-
-//        $data = Input::all();
+//		$response = $this->ancientFrontController->dispatch ($this->ancientPage);
+//		if ($response)
+//		{
+//			$response->output ();
+//		}
 //
-//        if(isset($data['email']) && isset($data['password'])){
-//            $username = $data['email'];
-//            $password = $data['password'];
-//            // send request to engine via gearman
-//            $output = App::make ('cwclient')->login ($username, $password);
-//            // if ok redirect
-//            if(isset($output['id'])){
-//                return Redirect::to('http://devplatform.cloudwalkers.be');
-//            } else {
-//                return View::make('signin.login', $output);
-//            }
-//        } else {
-//            return View::make('signin.login', $data);
-//        }
+//		exit;
+
+        $data = Input::all();
+
+        if(isset($data['email']) && isset($data['password'])){
+            $username = $data['email'];
+            $password = $data['password'];
+            // send request to engine via gearman
+            $output = App::make ('cwclient')->login ($username, $password);
+            // if ok redirect
+            if(isset($output['id'])){
+                return Redirect::to('http://devplatform.cloudwalkers.be');
+            } else {
+                return View::make('signin.login', $output);
+            }
+        } else {
+            return View::make('signin.login', $data);
+        }
 	}
 
     public function logout ()
@@ -61,29 +61,29 @@ class LoginController extends BaseController {
 	
 	public function register ()
 	{
-		$response = $this->ancientFrontController->dispatch ($this->ancientPage);
-
-		if ($response)
-		{
-			$response->output ();
-		}
-
-		exit;
-
-//        $data = Input::all();
+//		$response = $this->ancientFrontController->dispatch ($this->ancientPage);
 //
-//        if( !empty($data) ){
-//            // send request to engine via gearman
-//            $output = App::make ('cwclient')->register ($data['email'], $data['password'], $data['firstname'], $data['name']);
-//            // if ok redirect
-//            if(isset($output['success'])){
-//                return Redirect::to('login');
-//            } else {
-//                return View::make('signin.register', $output);
-//            }
-//        } else {
-//            return View::make('signin.register', $data);
-//        }
+//		if ($response)
+//		{
+//			$response->output ();
+//		}
+//
+//		exit;
+
+        $data = Input::all();
+
+        if( !empty($data) ){
+            // send request to engine via gearman
+            $output = App::make ('cwclient')->register ($data['email'], $data['password'], $data['firstname'], $data['name']);
+            // if ok redirect
+            if(isset($output['success'])){
+                return Redirect::to('http://devplatform.cloudwalkers.be');
+            } else {
+                return View::make('signin.register', $output);
+            }
+        } else {
+            return View::make('signin.register', $data);
+        }
 
 	}
 
