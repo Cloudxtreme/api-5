@@ -27,26 +27,19 @@ $app = new Illuminate\Foundation\Application;
 $env = $app->detectEnvironment(array(
 
 	// "hostname" of the machine/server
-	//
-	// Load its respective settings from the following sub-folder
-	//
+
 	'local' => array(
-		'FRM_BEE_11@C:\xampp\htdocs\cloudwalkers-engine.local',                 // PMS - Desktop 
-		'FRM_BEE_11.bee-eng.CORP@C:\xampp\htdocs\cloudwalkers-engine.local',	  // PMS - Desktop 
-		'FRM_BEE_12',                 // RCS - Desktop 
-		'FRM_BEE_12.bee-eng.CORP',    // RCS - Desktop
-		'localhost.localdomain',      // RCS - Virtual Machine (Fedora)
 		'thijs-home-i7',
-		'daedeloth-N550LF',
+		'daedeloth-N550LF'
+	),
+	
+	'local-koen' => array(
 		'tickee-MBP-15.local'
 	),
+	
 	'development' => array(
 		'vps601.serverpark.be'
-	),
-	'production' => array(
-
-	),
-
+	)
 ));
 
 /*
@@ -79,6 +72,9 @@ $framework = $app['path.base'].
 require $framework.'/Illuminate/Foundation/start.php';
 
 require 'tools.php';
+
+// Set NewRelic options
+Newrelic::setAppName( Config::get('newrelic.appname'));
 
 /*
 |--------------------------------------------------------------------------

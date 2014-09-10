@@ -29,9 +29,6 @@ App::before(function($request)
 
 		exit;
 	}
-	
-	// Set NewRelic options
-	Newrelic::setAppName( Config::get('newrelic.appname'));
 });
 
 

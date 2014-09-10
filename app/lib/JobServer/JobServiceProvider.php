@@ -14,7 +14,7 @@ class JobServiceProvider extends ServiceProvider {
 
 		$this->app['jobserver'] = $this->app->share(function($app)
         {
-            return $this->app->environment('local')?
+            return $app->config->get('api.synchronized')?
             	
             	new JobLocalServer():
             	new JobServer();
