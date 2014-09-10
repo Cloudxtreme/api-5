@@ -30,8 +30,7 @@ $env = $app->detectEnvironment(array(
 
 	'local' => array(
 		'thijs-home-i7',
-		'daedeloth-N550LF',
-		'Gabriela'
+		'daedeloth-N550LF'
 	),
 	
 	'local-koen' => array(
