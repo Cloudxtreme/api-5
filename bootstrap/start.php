@@ -37,6 +37,10 @@ $env = $app->detectEnvironment(array(
 	'local-koen' => array(
 		'tickee-MBP-15.local'
 	),
+
+    'local-gaby' => array(
+        'Gabriela'
+    ),
 	
 	'development' => array(
 		'vps601.serverpark.be'
