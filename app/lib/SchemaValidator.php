@@ -9,7 +9,7 @@ class SchemaValidator
 		
 		$rules = file_exists ($schema)?
 		
-			json_decode( file_get_contents ($schema)):
+			json_decode( file_get_contents ($schema), true):
 			array();
 		
 		$return = Validator::make($input, $rules);
