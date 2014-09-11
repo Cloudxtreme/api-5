@@ -49,7 +49,28 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 
 App::error(function(Exception $exception, $code)
 {
-	Log::error($exception);
+	switch ($code)
+	{
+		// 1xx: Information
+		// 2xx: Successful
+		// 3xx: Redirection
+		// 4xx: Client Error
+		case 403:
+			return Response::view('404', array(), 403);
+
+		case 404:
+			return Response::view('404', array(), 404);
+
+		// 5xx: Server Error
+		case 500:
+			// internal server error
+			// custom this on production
+			Log::error($exception);
+//			return Response::view('404', array(), 500);
+
+		default:
+			Log::error($exception);
+	}
 });
 
 /*
