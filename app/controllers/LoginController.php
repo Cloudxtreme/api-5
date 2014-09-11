@@ -59,19 +59,40 @@ class LoginController extends BaseController {
         exit;
     }
 
-    public function changePassword ()
+    public function changePassword ($userId = null)
     {
-	    $data = Input::all();
 
-//	    Route::put('users/{userId}/password', 'UsersController@putUsersIdPassword');
-	    $payload = array('controller'=> 'UsersController', 'action'=> 'putUsersIdPassword', 'open'=> round(microtime(true), 3), 'payload'=> Input::all(), 'user'=> null);
+	    if(Input::has('oldpassword')){
+		    $test = Input::merge(array('userId'=> $userId));
 
-	    return json_decode
-	    (
-		    self::jobdispatch ('controllerDispatch', $payload)
-	    );
+//		    return print_r($test);
 
-	   //return View::make('signin.change_password', $data);
+		    $rules = array(
+//			    'userId' => 'required|integer',
+			    'oldpassword' => 'required',
+			    'newpassword' => 'required',
+			    'password_confirm' => 'required|same:newpassword'
+		    );
+
+		    $validator = Validator::make(Input::all(), $rules);
+		    $data = Input::all();
+
+		    if (true==false){//$validator->fails()){
+			    $error = array('error'=> 'something went wrong');
+			    return View::make('signin.change_password', $error);
+		    } else {
+			    $payload = array('controller'=> 'UsersController', 'action'=> 'putUsersIdPassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
+
+			    print_r( json_decode
+			    (
+				    self::jobdispatch ('controllerDispatch', $payload)
+			    ));
+			    exit;
+		    }
+	    } else {
+		    return View::make('signin.change_password');
+	    }
+
     }
 
     public function recoverPassword ()
