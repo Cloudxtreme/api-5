@@ -17,19 +17,27 @@ class ContactController extends BaseController {
             // TODO
             // return Redirect::to('<add page here>')->withErrors($validator);
         } else {
-            $payload = array('controller'=> 'ContactController', 'action'=> 'getAccountsIdContactsId', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key(Input::all(), $rules), 'user'=> null);
+            $payload = array(
+                'controller'=> 'ContactController',
+                'action'=> 'getAccountsIdContactsId',
+                'open'=> round(microtime(true), 3),
+                'payload'=> array_intersect_key(Input::all(), $rules),
+                'user'=> null
+            );
 
             $response = json_decode
             (
                 self::jobdispatch ('controllerDispatch', $payload)
             );
+
+            return $response;
             
             // DUMMY
-            $response = array("name"=> "Koen", "shoe-size"=> "46");
+            /*$response = array("name"=> "Koen", "shoe-size"=> "46");
             
 			$validator = SchemaValidator::validate ($response, 'contact');
 			
-			return $validator->intersect;
+			return $validator->intersect;*/
         }
     }
 
