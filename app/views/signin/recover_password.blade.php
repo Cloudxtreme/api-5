@@ -28,31 +28,24 @@
 
     @endif
 
-    <p>Almost there. Please choose a new password.</p>
-    <div class="control-group">
-        <div class="controls">
-            <div class="input-icon left">
-                <i class="icon-lock"></i>
-                <input class="m-wrap placeholder-no-fix" type="password" placeholder="New password" name="password1" />
-            </div>
-        </div>
-    </div>
+	<p>Enter your e-mail address below to reset your password.</p>
+	<div class="control-group">
+		<div class="controls">
+			<div class="input-icon left">
+				<i class="icon-envelope"></i>
+				<input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email" />
+			</div>
+		</div>
+	</div>
+	<div class="form-actions">
+		<a href="" id="register-back-btn" type="button" class="btn">
+			<i class="m-icon-swapleft"></i>  Back
+		</a>
+		<button type="submit" class="btn green pull-right">
+			Submit <i class="m-icon-swapright m-icon-white"></i>
+		</button>
+	</div>
 
-    <div class="control-group">
-        <div class="controls">
-            <div class="input-icon left">
-                <i class="icon-lock"></i>
-                <input class="m-wrap placeholder-no-fix" type="password" placeholder="Repeat password" name="password2" />
-            </div>
-        </div>
-    </div>
-
-    <div class="form-actions">
-        <input type="hidden" name="action" value="changepassword" />
-        <button type="submit" class="btn green pull-right">
-            Submit <i class="m-icon-swapright m-icon-white"></i>
-        </button>
-    </div>
 </form>
 <!-- END FORGOT PASSWORD FORM -->
 
