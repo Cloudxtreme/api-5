@@ -50,7 +50,12 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
+	// Default bearer
 	$bearer = Request::header('Authorization');
+	
+	// Get based bearer
+	if(!$bearer)
+		$bearer = Input::get('bearer');
 	
 	if (!$bearer || strlen ($bearer) < 18)
 	
