@@ -88,6 +88,7 @@ class LoginController extends BaseController {
 				    self::jobdispatch ('controllerDispatch', $payload)
 			    ));
 			    exit;
+			    exit;
 		    }
 	    } else {
 		    return View::make('signin.change_password');
@@ -99,12 +100,12 @@ class LoginController extends BaseController {
     {
 	    $data = Input::all();
 
-	    $payload = array('controller'=> 'ContactController', 'action'=> 'getAccountsIdContactsId', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key(Input::all(), $rules), 'user'=> null);
-
-	    return json_decode
-	    (
-		    self::jobdispatch ('controllerDispatch', $payload)
-	    );
+//	    $payload = array('controller'=> 'ContactController', 'action'=> 'getAccountsIdContactsId', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key(Input::all(), $rules), 'user'=> null);
+//
+//	    return json_decode
+//	    (
+//		    self::jobdispatch ('controllerDispatch', $payload)
+//	    );
 
 	    return View::make('signin.recover_password', $data);
     }
