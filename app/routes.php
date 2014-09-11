@@ -246,12 +246,12 @@ Route::get ('docs{path?}', function ($path = "")
 Route::any('login/{path?}', 'LoginController@login')->where ('path', '.+');
 Route::any('logout/{path?}', 'LoginController@logout')->where ('path', '.+');
 Route::any('register/{path?}', 'LoginController@register')->where ('path', '.+');
+Route::any('recoverpassword/{path?}', 'LoginController@recoverPassword')->where ('path', '.+');
 
 Route::any('loginx/{path?}', 'CommunicationController@login')->where ('path', '.+');
 Route::any('email/{path?}', 'CommunicationController@email')->where ('path', '.+');
 Route::any('sms/{path?}', 'CommunicationController@sms')->where ('path', '.+');
 Route::any('registerx/{path?}', 'CommunicationController@register')->where ('path', '.+');
-Route::any('lostpasswordx/{path?}', 'CommunicationController@lostPassword')->where ('path', '.+');
 Route::any('logoutx/{path?}', 'CommunicationController@logout')->where ('path', '.+');
 
 Route::get ('1/version', 'NeuronProxyController@guest');
