@@ -4,5 +4,5 @@
 
 return array(
 
-	'schemapath'=> __DIR__ . '../schemas/'
+	'schemapath'=> __DIR__ . '/../schemas/'
 );
