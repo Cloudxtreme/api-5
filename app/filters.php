@@ -53,11 +53,11 @@ Route::filter('auth', function()
 	$bearer = Request::header('Authorization');
 	
 	if (!$bearer || strlen ($bearer) < 18)
-	{
-		http_response_code (403);
-
-		return Response::json (array ('error' => array ('message' => 'No valid oauth2 authentication found.')), 403);
-	}
+	
+		App::abort(403);
+	
+	// Add Acces token to input
+	Input::merge( array('access_token'=> explode(' ', $bearer)[1]));
 });
 
 

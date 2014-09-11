@@ -25,6 +25,10 @@ class BaseController extends Controller
 	 public static function jobdispatch($job, $payload)
 	 {
 		 global $app;
+		 
+		 // Add general data
+		 $payload->open = round(microtime(true), 3);
+		 $payload->access_token = Input::get('access_token');
 
 		 return $app->jobserver->request($job, $payload);
 	 }

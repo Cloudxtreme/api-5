@@ -27,11 +27,10 @@ class JobLocalServer extends JobServer
 	{
 		$client = self::getServerClient();
 		
-		return json_encode( $priority?
+		return $priority?
 		
 			$client->doHigh ($job, json_encode($jobload)):
-			$client->doLow ($job, json_encode($jobload))
-		);
+			$client->doLow ($job, json_encode($jobload));
 	}
 	
 	/**
