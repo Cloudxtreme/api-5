@@ -42,7 +42,8 @@ $env = $app->detectEnvironment(array(
     ),
 
     'local-pedro' => array(
-        'psilva'
+        'psilva',
+	    'ubuntu'
     ),
 	
 	'development' => array(

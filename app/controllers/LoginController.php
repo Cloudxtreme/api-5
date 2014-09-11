@@ -63,14 +63,27 @@ class LoginController extends BaseController {
     {
 	    $data = Input::all();
 
-//	    $this->jobdispatch();
+//	    Route::put('users/{userId}/password', 'UsersController@putUsersIdPassword');
+	    $payload = array('controller'=> 'UsersController', 'action'=> 'putUsersIdPassword', 'open'=> round(microtime(true), 3), 'payload'=> Input::all(), 'user'=> null);
 
-	    return View::make('signin.change_password', $data);
+	    return json_decode
+	    (
+		    self::jobdispatch ('controllerDispatch', $payload)
+	    );
+
+	   //return View::make('signin.change_password', $data);
     }
 
     public function recoverPassword ()
     {
 	    $data = Input::all();
+
+	    $payload = array('controller'=> 'ContactController', 'action'=> 'getAccountsIdContactsId', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key(Input::all(), $rules), 'user'=> null);
+
+	    return json_decode
+	    (
+		    self::jobdispatch ('controllerDispatch', $payload)
+	    );
 
 	    return View::make('signin.recover_password', $data);
     }
