@@ -57,7 +57,8 @@ Route::filter('auth', function()
 		return App::abort(403);
 	
 	// Add Acces token to input
-	Input::merge( array('access_token'=> explode(' ', $bearer)[1]));
+	
+	Input::merge( array('access_token'=> array_pop(explode(' ', $bearer))));
 });
 
 
