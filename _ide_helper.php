@@ -1,7 +1,7 @@
 <?php
 /**
  * An helper file for Laravel 4, to provide autocomplete information to your IDE
- * Generated for Laravel 4.1.31 on 2014-09-09.
+ * Generated for Laravel 4.1.31 on 2014-09-10.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -2762,6 +2762,683 @@ namespace {
          */
         public static function getConnections(){
             return \Illuminate\Database\DatabaseManager::getConnections();
+        }
+        
+        /**
+         * Get a schema builder instance for the connection.
+         *
+         * @return \Illuminate\Database\Schema\MySqlBuilder 
+         * @static 
+         */
+        public static function getSchemaBuilder(){
+            return \Illuminate\Database\MySqlConnection::getSchemaBuilder();
+        }
+        
+        /**
+         * Set the query grammar to the default implementation.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function useDefaultQueryGrammar(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::useDefaultQueryGrammar();
+        }
+        
+        /**
+         * Set the schema grammar to the default implementation.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function useDefaultSchemaGrammar(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::useDefaultSchemaGrammar();
+        }
+        
+        /**
+         * Set the query post processor to the default implementation.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function useDefaultPostProcessor(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::useDefaultPostProcessor();
+        }
+        
+        /**
+         * Begin a fluent query against a database table.
+         *
+         * @param string $table
+         * @return \Illuminate\Database\Query\Builder 
+         * @static 
+         */
+        public static function table($table){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::table($table);
+        }
+        
+        /**
+         * Get a new raw query expression.
+         *
+         * @param mixed $value
+         * @return \Illuminate\Database\Query\Expression 
+         * @static 
+         */
+        public static function raw($value){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::raw($value);
+        }
+        
+        /**
+         * Run a select statement and return a single result.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return mixed 
+         * @static 
+         */
+        public static function selectOne($query, $bindings = array()){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::selectOne($query, $bindings);
+        }
+        
+        /**
+         * Run a select statement against the database.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return array 
+         * @static 
+         */
+        public static function select($query, $bindings = array()){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::select($query, $bindings);
+        }
+        
+        /**
+         * Run an insert statement against the database.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return bool 
+         * @static 
+         */
+        public static function insert($query, $bindings = array()){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::insert($query, $bindings);
+        }
+        
+        /**
+         * Run an update statement against the database.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return int 
+         * @static 
+         */
+        public static function update($query, $bindings = array()){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::update($query, $bindings);
+        }
+        
+        /**
+         * Run a delete statement against the database.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return int 
+         * @static 
+         */
+        public static function delete($query, $bindings = array()){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::delete($query, $bindings);
+        }
+        
+        /**
+         * Execute an SQL statement and return the boolean result.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return bool 
+         * @static 
+         */
+        public static function statement($query, $bindings = array()){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::statement($query, $bindings);
+        }
+        
+        /**
+         * Run an SQL statement and get the number of rows affected.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return int 
+         * @static 
+         */
+        public static function affectingStatement($query, $bindings = array()){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::affectingStatement($query, $bindings);
+        }
+        
+        /**
+         * Run a raw, unprepared query against the PDO connection.
+         *
+         * @param string $query
+         * @return bool 
+         * @static 
+         */
+        public static function unprepared($query){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::unprepared($query);
+        }
+        
+        /**
+         * Prepare the query bindings for execution.
+         *
+         * @param array $bindings
+         * @return array 
+         * @static 
+         */
+        public static function prepareBindings($bindings){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::prepareBindings($bindings);
+        }
+        
+        /**
+         * Execute a Closure within a transaction.
+         *
+         * @param \Closure $callback
+         * @return mixed 
+         * @throws \Exception
+         * @static 
+         */
+        public static function transaction($callback){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::transaction($callback);
+        }
+        
+        /**
+         * Start a new database transaction.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function beginTransaction(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::beginTransaction();
+        }
+        
+        /**
+         * Commit the active database transaction.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function commit(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::commit();
+        }
+        
+        /**
+         * Rollback the active database transaction.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function rollBack(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::rollBack();
+        }
+        
+        /**
+         * Get the number of active transactions.
+         *
+         * @return int 
+         * @static 
+         */
+        public static function transactionLevel(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::transactionLevel();
+        }
+        
+        /**
+         * Execute the given callback in "dry run" mode.
+         *
+         * @param \Closure $callback
+         * @return array 
+         * @static 
+         */
+        public static function pretend($callback){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::pretend($callback);
+        }
+        
+        /**
+         * Log a query in the connection's query log.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @param $time
+         * @return void 
+         * @static 
+         */
+        public static function logQuery($query, $bindings, $time = null){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::logQuery($query, $bindings, $time);
+        }
+        
+        /**
+         * Register a database query listener with the connection.
+         *
+         * @param \Closure $callback
+         * @return void 
+         * @static 
+         */
+        public static function listen($callback){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::listen($callback);
+        }
+        
+        /**
+         * Get a Doctrine Schema Column instance.
+         *
+         * @param string $table
+         * @param string $column
+         * @return \Doctrine\DBAL\Schema\Column 
+         * @static 
+         */
+        public static function getDoctrineColumn($table, $column){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getDoctrineColumn($table, $column);
+        }
+        
+        /**
+         * Get the Doctrine DBAL schema manager for the connection.
+         *
+         * @return \Doctrine\DBAL\Schema\AbstractSchemaManager 
+         * @static 
+         */
+        public static function getDoctrineSchemaManager(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getDoctrineSchemaManager();
+        }
+        
+        /**
+         * Get the Doctrine DBAL database connection instance.
+         *
+         * @return \Doctrine\DBAL\Connection 
+         * @static 
+         */
+        public static function getDoctrineConnection(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getDoctrineConnection();
+        }
+        
+        /**
+         * Get the current PDO connection.
+         *
+         * @return \Illuminate\Database\PDO 
+         * @static 
+         */
+        public static function getPdo(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getPdo();
+        }
+        
+        /**
+         * Get the current PDO connection used for reading.
+         *
+         * @return \Illuminate\Database\PDO 
+         * @static 
+         */
+        public static function getReadPdo(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getReadPdo();
+        }
+        
+        /**
+         * Set the PDO connection.
+         *
+         * @param \Illuminate\Database\PDO $pdo
+         * @return \Illuminate\Database\Connection 
+         * @static 
+         */
+        public static function setPdo($pdo){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::setPdo($pdo);
+        }
+        
+        /**
+         * Set the PDO connection used for reading.
+         *
+         * @param \Illuminate\Database\PDO $pdo
+         * @return \Illuminate\Database\Connection 
+         * @static 
+         */
+        public static function setReadPdo($pdo){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::setReadPdo($pdo);
+        }
+        
+        /**
+         * Get the database connection name.
+         *
+         * @return string|null 
+         * @static 
+         */
+        public static function getName(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getName();
+        }
+        
+        /**
+         * Get an option from the configuration options.
+         *
+         * @param string $option
+         * @return mixed 
+         * @static 
+         */
+        public static function getConfig($option){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getConfig($option);
+        }
+        
+        /**
+         * Get the PDO driver name.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getDriverName(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getDriverName();
+        }
+        
+        /**
+         * Get the query grammar used by the connection.
+         *
+         * @return \Illuminate\Database\Query\Grammars\Grammar 
+         * @static 
+         */
+        public static function getQueryGrammar(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getQueryGrammar();
+        }
+        
+        /**
+         * Set the query grammar used by the connection.
+         *
+         * @param \Illuminate\Database\Query\Grammars\Grammar
+         * @return void 
+         * @static 
+         */
+        public static function setQueryGrammar($grammar){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::setQueryGrammar($grammar);
+        }
+        
+        /**
+         * Get the schema grammar used by the connection.
+         *
+         * @return \Illuminate\Database\Query\Grammars\Grammar 
+         * @static 
+         */
+        public static function getSchemaGrammar(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getSchemaGrammar();
+        }
+        
+        /**
+         * Set the schema grammar used by the connection.
+         *
+         * @param \Illuminate\Database\Schema\Grammars\Grammar
+         * @return void 
+         * @static 
+         */
+        public static function setSchemaGrammar($grammar){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::setSchemaGrammar($grammar);
+        }
+        
+        /**
+         * Get the query post processor used by the connection.
+         *
+         * @return \Illuminate\Database\Query\Processors\Processor 
+         * @static 
+         */
+        public static function getPostProcessor(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getPostProcessor();
+        }
+        
+        /**
+         * Set the query post processor used by the connection.
+         *
+         * @param \Illuminate\Database\Query\Processors\Processor
+         * @return void 
+         * @static 
+         */
+        public static function setPostProcessor($processor){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::setPostProcessor($processor);
+        }
+        
+        /**
+         * Get the event dispatcher used by the connection.
+         *
+         * @return \Illuminate\Events\Dispatcher 
+         * @static 
+         */
+        public static function getEventDispatcher(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getEventDispatcher();
+        }
+        
+        /**
+         * Set the event dispatcher instance on the connection.
+         *
+         * @param \Illuminate\Events\Dispatcher
+         * @return void 
+         * @static 
+         */
+        public static function setEventDispatcher($events){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::setEventDispatcher($events);
+        }
+        
+        /**
+         * Get the paginator environment instance.
+         *
+         * @return \Illuminate\Pagination\Environment 
+         * @static 
+         */
+        public static function getPaginator(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getPaginator();
+        }
+        
+        /**
+         * Set the pagination environment instance.
+         *
+         * @param \Illuminate\Pagination\Environment|\Closure $paginator
+         * @return void 
+         * @static 
+         */
+        public static function setPaginator($paginator){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::setPaginator($paginator);
+        }
+        
+        /**
+         * Get the cache manager instance.
+         *
+         * @return \Illuminate\Cache\CacheManager 
+         * @static 
+         */
+        public static function getCacheManager(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getCacheManager();
+        }
+        
+        /**
+         * Set the cache manager instance on the connection.
+         *
+         * @param \Illuminate\Cache\CacheManager|\Closure $cache
+         * @return void 
+         * @static 
+         */
+        public static function setCacheManager($cache){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::setCacheManager($cache);
+        }
+        
+        /**
+         * Determine if the connection in a "dry run".
+         *
+         * @return bool 
+         * @static 
+         */
+        public static function pretending(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::pretending();
+        }
+        
+        /**
+         * Get the default fetch mode for the connection.
+         *
+         * @return int 
+         * @static 
+         */
+        public static function getFetchMode(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getFetchMode();
+        }
+        
+        /**
+         * Set the default fetch mode for the connection.
+         *
+         * @param int $fetchMode
+         * @return int 
+         * @static 
+         */
+        public static function setFetchMode($fetchMode){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::setFetchMode($fetchMode);
+        }
+        
+        /**
+         * Get the connection query log.
+         *
+         * @return array 
+         * @static 
+         */
+        public static function getQueryLog(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getQueryLog();
+        }
+        
+        /**
+         * Clear the query log.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function flushQueryLog(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::flushQueryLog();
+        }
+        
+        /**
+         * Enable the query log on the connection.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function enableQueryLog(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::enableQueryLog();
+        }
+        
+        /**
+         * Disable the query log on the connection.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function disableQueryLog(){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::disableQueryLog();
+        }
+        
+        /**
+         * Determine whether we're logging queries.
+         *
+         * @return bool 
+         * @static 
+         */
+        public static function logging(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::logging();
+        }
+        
+        /**
+         * Get the name of the connected database.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getDatabaseName(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getDatabaseName();
+        }
+        
+        /**
+         * Set the name of the connected database.
+         *
+         * @param string $database
+         * @return string 
+         * @static 
+         */
+        public static function setDatabaseName($database){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::setDatabaseName($database);
+        }
+        
+        /**
+         * Get the table prefix for the connection.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getTablePrefix(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getTablePrefix();
+        }
+        
+        /**
+         * Set the table prefix in use by the connection.
+         *
+         * @param string $prefix
+         * @return void 
+         * @static 
+         */
+        public static function setTablePrefix($prefix){
+            //Method inherited from \Illuminate\Database\Connection            
+            \Illuminate\Database\MySqlConnection::setTablePrefix($prefix);
+        }
+        
+        /**
+         * Set the table prefix and return the grammar.
+         *
+         * @param \Illuminate\Database\Grammar $grammar
+         * @return \Illuminate\Database\Grammar 
+         * @static 
+         */
+        public static function withTablePrefix($grammar){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::withTablePrefix($grammar);
         }
         
     }
@@ -7006,6 +7683,289 @@ namespace {
     }
 
 
+    class Newrelic extends \Intouch\LaravelNewrelic\Facades\Newrelic{
+        
+        /**
+         * Sets the name of the application to name. The string uses the same format as newrelic.appname and can set
+         * multiple application names by separating each with a semi-colon. However please be aware of the restriction on
+         * the application name ordering as described for that setting.
+         * 
+         * The first application name is the primary name, and up to two extra application names can be specified (however
+         * the same application name can only ever be used once as a primary name). This function should be called as early
+         * as possible, and will have no effect if called after the RUM footer has been sent. You may want to consider
+         * setting the application name in a file loaded by PHP's auto_prepend_file INI setting. This function returns true
+         * if it succeeded or false otherwise.
+         * 
+         * If you use multiple licenses you can also specify a license key along with the application name. An application
+         * can appear in more than one account and the license key controls which account you are changing the name in.
+         * If you do not wish to change the license and wish to use the third variant, simply set the license key to the
+         * empty string ("").
+         * 
+         * The xmit flag is new in version 3.1 of the agent. Usually, when you change an application name, the agent simply
+         * discards the current transaction and does not send any of the accumulated metrics to the daemon. However, if you
+         * want to record the metric and transaction data up to the point at which you called this function, you can specify
+         * a value of true for this argument to make the agent send the transaction to the daemon. This has a very slight
+         * performance impact as it takes a few milliseconds for the agent to dump its data. By default this parameter is
+         * false.
+         *
+         * @param string $name
+         * @param string $license
+         * @param bool $xmit
+         * @return bool 
+         * @static 
+         */
+        public static function setAppName($name, $license = '', $xmit = false){
+            return \Intouch\Newrelic\Newrelic::setAppName($name, $license, $xmit);
+        }
+        
+        /**
+         * Report an error at this line of code, with a complete stack trace. The third form of the call was added in agent
+         * version 2.6 and should be used for reporting exceptions. Only the exception for the last call is retained during
+         * the course of a transaction.
+         * 
+         * The exception parameter must be a valid PHP Exception class, and the stack frame recorded in that class will be
+         * the one reported, rather than the stack at the time this function was called. When using this form, if the error
+         * message is empty, a standard message in the same format as created by Exception::__toString() will be
+         * automatically generated.
+         * 
+         * NOTE: You should always pass an exception here if possible.
+         *
+         * @param string $message
+         * @param \Exception|null $exception
+         * @return mixed 
+         * @static 
+         */
+        public static function noticeError($message, $exception = null){
+            return \Intouch\Newrelic\Newrelic::noticeError($message, $exception);
+        }
+        
+        /**
+         * Sets the name of the transaction to the specified string. This can be useful if you have implemented your own
+         * dispatching scheme and wish to name transactions according to their purpose rather than their URL.
+         * 
+         * Avoid creating too many unique transaction names. For example, if you have /product/123 and /product/234, if you
+         * generate a separate transaction name for each, then New Relic will store separate information for these two
+         * transaction names. This will make your graphs less useful, and may run into limits we set on the number of unique
+         * transaction names per account. It also can slow down the performance of your application. Instead, store the
+         * transaction as /product/*, or use something significant about the code itself to name the transaction, such as
+         * /Product/view. The limit for the total number of transactions should be less than 1000 unique transaction
+         * names -- exceeding that is not recommended.
+         *
+         * @param string $name
+         * @return mixed 
+         * @static 
+         */
+        public static function nameTransaction($name){
+            return \Intouch\Newrelic\Newrelic::nameTransaction($name);
+        }
+        
+        /**
+         * Stop recording the web transaction immediately. Usually used when a page is done with all computation and is
+         * about to stream data (file download, audio or video streaming etc) and you don't want the time taken to stream to
+         * be counted as part of the transaction. This is especially relevant when the time taken to complete the operation
+         * is completely outside the bounds of your application. For example, a user on a very slow connection may take a
+         * very long time to download even small files, and you wouldn't want that download time to skew the real
+         * transaction time.
+         *
+         * @return mixed 
+         * @static 
+         */
+        public static function endOfTransaction(){
+            return \Intouch\Newrelic\Newrelic::endOfTransaction();
+        }
+        
+        /**
+         * Despite being similar in name to newrelic_end_of_transaction above, this call serves a very different purpose.
+         * 
+         * newrelic_end_of_transaction simply marks the end time of the transaction but takes no other action. The
+         * transaction is still only sent to the daemon when the PHP engine determines that the script is done executing and
+         * is shutting down. This function on the other hand, causes the current transaction to end immediately, and will
+         * ship all of the metrics gathered thus far to the daemon unless the ignore parameter is set to true. In effect
+         * this call simulates what would happen when PHP terminates the current transaction. This is most commonly used in
+         * command line scripts that do some form of job queue processing. You would use this call at the end of processing
+         * a single job task, and begin a new transaction (see below) when a new task is pulled off the queue.
+         * 
+         * Normally, when you end a transaction you want the metrics that have been gathered thus far to be recorded.
+         * However, there are times when you may want to end a transaction without doing so. In this case use the second
+         * form of the function and set ignore to true.
+         *
+         * @param bool $ignore
+         * @return mixed 
+         * @static 
+         */
+        public static function endTransaction($ignore = false){
+            return \Intouch\Newrelic\Newrelic::endTransaction($ignore);
+        }
+        
+        /**
+         * If you have ended a transaction before your script terminates (perhaps due to it just having finished a task in a
+         * job queue manager) and you want to start a new transaction, use this call. This will perform the same operations
+         * that occur when the script was first started. Of the two arguments, only the application name is mandatory.
+         * 
+         * However, if you are processing tasks for multiple accounts, you may also provide a license for the associated
+         * account. The license set for this API call will supersede all per-directory and global default licenses
+         * configured in INI files.
+         *
+         * @param string $name
+         * @param string $license
+         * @return mixed 
+         * @static 
+         */
+        public static function startTransaction($name, $license = ''){
+            return \Intouch\Newrelic\Newrelic::startTransaction($name, $license);
+        }
+        
+        /**
+         * Do not generate metrics for this transaction. This is useful when you have transactions that are particularly
+         * slow for known reasons and you do not want them always being reported as the transaction trace or skewing your
+         * site averages.
+         *
+         * @return mixed 
+         * @static 
+         */
+        public static function ignoreTransaction(){
+            return \Intouch\Newrelic\Newrelic::ignoreTransaction();
+        }
+        
+        /**
+         * Do not generate Apdex metrics for this transaction. This is useful when you have either very short or very long
+         * transactions (such as file downloads) that can skew your apdex score.
+         *
+         * @return mixed 
+         * @static 
+         */
+        public static function ignoreApdex(){
+            return \Intouch\Newrelic\Newrelic::ignoreApdex();
+        }
+        
+        /**
+         * If no argument or true as an argument is given, mark the current transaction as a background job. If false is
+         * passed as an argument, mark the transaction as a web transaction.
+         *
+         * @param bool $flag
+         * @return mixed 
+         * @static 
+         */
+        public static function backgroundJob($flag = true){
+            return \Intouch\Newrelic\Newrelic::backgroundJob($flag);
+        }
+        
+        /**
+         * If enable is omitted or set to on, enables the capturing of URL parameters for displaying in transaction traces.
+         * 
+         * In essence this overrides the newrelic.capture_params setting. In agents prior to 2.1.3 this was called
+         * newrelic_enable_params() but that name is now deprecated.
+         *
+         * @param bool $enable
+         * @return mixed 
+         * @static 
+         */
+        public static function captureParams($enable = true){
+            return \Intouch\Newrelic\Newrelic::captureParams($enable);
+        }
+        
+        /**
+         * Adds a custom metric with the specified name and value, which is of type double. Values saved are assumed to be
+         * milliseconds, so "4" will be stored as ".004" in our system. Your custom metrics can then be used in custom
+         * dashboards and custom views in the New Relic user interface. It's a best practice to name your custom metrics
+         * with a Custom/ prefix. This will make them easily usable in custom dashboards.
+         * 
+         * Note: Avoid creating too many unique custom metric names. New Relic limits the total number of custom metrics you
+         * can use (not the total you can report for each of these custom metrics). Exceeding more than 2000 unique custom
+         * metric names can cause automatic clamps that will affect other data.
+         *
+         * @param string $name
+         * @param mixed $value
+         * @return mixed 
+         * @static 
+         */
+        public static function customMetric($name, $value){
+            return \Intouch\Newrelic\Newrelic::customMetric($name, $value);
+        }
+        
+        /**
+         * Add a custom parameter to the current web transaction with the specified value. For example, you can add a
+         * customer's full name from your customer database. This parameter is shown in any transaction trace that results
+         * from this transaction.
+         *
+         * @param string $key
+         * @param mixed $value
+         * @return mixed 
+         * @static 
+         */
+        public static function addCustomParameter($key, $value){
+            return \Intouch\Newrelic\Newrelic::addCustomParameter($key, $value);
+        }
+        
+        /**
+         * API equivalent of the newrelic.transaction_tracer.custom setting. It allows you to add user defined functions or
+         * methods to the list to be instrumented. Internal PHP functions cannot have custom tracing.
+         * 
+         * NOTE: $function_name should be in the format 'foo' or 'Foo::Bar' as a string, not the PHP callable array format.
+         *
+         * @param string $function_name
+         * @return mixed 
+         * @static 
+         */
+        public static function addCustomTracer($function_name){
+            return \Intouch\Newrelic\Newrelic::addCustomTracer($function_name);
+        }
+        
+        /**
+         * Returns the JavaScript string to inject as part of the header for browser timing (real user monitoring). If flag
+         * is specified it must be a boolean, and if omitted, defaults to true. This indicates whether or not surrounding
+         * script tags should be returned as part of the string.
+         *
+         * @param bool $flag
+         * @return string 
+         * @static 
+         */
+        public static function getBrowserTimingHeader($flag = true){
+            return \Intouch\Newrelic\Newrelic::getBrowserTimingHeader($flag);
+        }
+        
+        /**
+         * Returns the JavaScript string to inject at the very end of the HTML output for browser timing (real user
+         * monitoring). If flag is specified it must be a boolean, and if omitted, defaults to true. This indicates whether
+         * or not surrounding script tags should be returned as part of the string.
+         *
+         * @param bool $flag
+         * @return string 
+         * @static 
+         */
+        public static function getBrowserTimingFooter($flag = true){
+            return \Intouch\Newrelic\Newrelic::getBrowserTimingFooter($flag);
+        }
+        
+        /**
+         * Prevents the output filter from attempting to insert RUM JavaScript for this current transaction. Useful for
+         * AJAX calls, for example.
+         *
+         * @return mixed 
+         * @static 
+         */
+        public static function disableAutoRUM(){
+            return \Intouch\Newrelic\Newrelic::disableAutoRUM();
+        }
+        
+        /**
+         * Adds the three parameter strings to collected browser traces. All three parameters are required, but may be empty
+         * strings. For more information please see the section on
+         * {@link https://newrelic.com/docs/features/browser-traces browser traces}.
+         *
+         * @param string $user
+         * @param string $account
+         * @param string $product
+         * @return mixed 
+         * @static 
+         */
+        public static function setUserAttributes($user = '', $account = '', $product = ''){
+            return \Intouch\Newrelic\Newrelic::setUserAttributes($user, $account, $product);
+        }
+        
+    }
+
+
     class Paginator extends \Illuminate\Support\Facades\Paginator{
         
         /**
@@ -7189,6 +8149,71 @@ namespace {
          */
         public static function getTranslator(){
             return \Illuminate\Pagination\Environment::getTranslator();
+        }
+        
+    }
+
+
+    class Password extends \Illuminate\Support\Facades\Password{
+        
+        /**
+         * Send a password reminder to a user.
+         *
+         * @param array $credentials
+         * @param \Closure $callback
+         * @return string 
+         * @static 
+         */
+        public static function remind($credentials, $callback = null){
+            return \Illuminate\Auth\Reminders\PasswordBroker::remind($credentials, $callback);
+        }
+        
+        /**
+         * Send the password reminder e-mail.
+         *
+         * @param \Illuminate\Auth\Reminders\RemindableInterface $user
+         * @param string $token
+         * @param \Closure $callback
+         * @return int 
+         * @static 
+         */
+        public static function sendReminder($user, $token, $callback = null){
+            return \Illuminate\Auth\Reminders\PasswordBroker::sendReminder($user, $token, $callback);
+        }
+        
+        /**
+         * Reset the password for the given token.
+         *
+         * @param array $credentials
+         * @param \Closure $callback
+         * @return mixed 
+         * @static 
+         */
+        public static function reset($credentials, $callback){
+            return \Illuminate\Auth\Reminders\PasswordBroker::reset($credentials, $callback);
+        }
+        
+        /**
+         * Set a custom password validator.
+         *
+         * @param \Closure $callback
+         * @return void 
+         * @static 
+         */
+        public static function validator($callback){
+            \Illuminate\Auth\Reminders\PasswordBroker::validator($callback);
+        }
+        
+        /**
+         * Get the user for the given credentials.
+         *
+         * @param array $credentials
+         * @return \Illuminate\Auth\Reminders\RemindableInterface 
+         * @throws \UnexpectedValueException
+         * @static 
+         */
+        public static function getUser($credentials){
+            return \Illuminate\Auth\Reminders\PasswordBroker::getUser($credentials);
         }
         
     }
@@ -9436,6 +10461,144 @@ namespace {
          */
         public static function handle($request, $type = 1, $catch = true){
             return \Illuminate\Routing\Router::handle($request, $type, $catch);
+        }
+        
+    }
+
+
+    class Schema extends \Illuminate\Support\Facades\Schema{
+        
+        /**
+         * Determine if the given table exists.
+         *
+         * @param string $table
+         * @return bool 
+         * @static 
+         */
+        public static function hasTable($table){
+            return \Illuminate\Database\Schema\MySqlBuilder::hasTable($table);
+        }
+        
+        /**
+         * Get the column listing for a given table.
+         *
+         * @param string $table
+         * @return array 
+         * @static 
+         */
+        public static function getColumnListing($table){
+            return \Illuminate\Database\Schema\MySqlBuilder::getColumnListing($table);
+        }
+        
+        /**
+         * Determine if the given table has a given column.
+         *
+         * @param string $table
+         * @param string $column
+         * @return bool 
+         * @static 
+         */
+        public static function hasColumn($table, $column){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::hasColumn($table, $column);
+        }
+        
+        /**
+         * Modify a table on the schema.
+         *
+         * @param string $table
+         * @param \Closure $callback
+         * @return \Illuminate\Database\Schema\Blueprint 
+         * @static 
+         */
+        public static function table($table, $callback){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::table($table, $callback);
+        }
+        
+        /**
+         * Create a new table on the schema.
+         *
+         * @param string $table
+         * @param \Closure $callback
+         * @return \Illuminate\Database\Schema\Blueprint 
+         * @static 
+         */
+        public static function create($table, $callback){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::create($table, $callback);
+        }
+        
+        /**
+         * Drop a table from the schema.
+         *
+         * @param string $table
+         * @return \Illuminate\Database\Schema\Blueprint 
+         * @static 
+         */
+        public static function drop($table){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::drop($table);
+        }
+        
+        /**
+         * Drop a table from the schema if it exists.
+         *
+         * @param string $table
+         * @return \Illuminate\Database\Schema\Blueprint 
+         * @static 
+         */
+        public static function dropIfExists($table){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::dropIfExists($table);
+        }
+        
+        /**
+         * Rename a table on the schema.
+         *
+         * @param string $from
+         * @param string $to
+         * @return \Illuminate\Database\Schema\Blueprint 
+         * @static 
+         */
+        public static function rename($from, $to){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::rename($from, $to);
+        }
+        
+        /**
+         * Get the database connection instance.
+         *
+         * @return \Illuminate\Database\Connection 
+         * @static 
+         */
+        public static function getConnection(){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::getConnection();
+        }
+        
+        /**
+         * Set the database connection instance.
+         *
+         * @param \Illuminate\Database\Connection
+         * @return \Illuminate\Database\Schema\Builder 
+         * @static 
+         */
+        public static function setConnection($connection){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::setConnection($connection);
+        }
+        
+        /**
+         * Set the Schema Blueprint resolver callback.
+         *
+         * @param \Closure $resolver
+         * @return void 
+         * @static 
+         */
+        public static function blueprintResolver($resolver){
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            \Illuminate\Database\Schema\MySqlBuilder::blueprintResolver($resolver);
         }
         
     }

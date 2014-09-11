@@ -280,5 +280,7 @@ Route::group(array('before' => 'resellersigned'), function($v)
 // Dispatch entry
 Route::get ('schedule', 'HomeController@schedule');
 
+Route::get('local/accounts/{accountId}/contacts/{contactId}', 'ContactController@get');
+
 // The All Catching One
 Route::match (array ('GET', 'POST', 'PATCH', 'PUT', 'DELETE'), '{path?}', 'NeuronProxyController@authenticated')->where ('path', '.+')->before (array ('before' => 'oauth2'));
