@@ -7,12 +7,10 @@
 	<h3 class="">Choose a new password</h3>
 
 	@if ( !empty ($error) )
-	@foreach ($error as $message)
 	<div class="alert alert-error">
 		<button class="close" data-dismiss="alert"></button>
-		<span><p>{{ $message }}</p></span>
+		<span><p>{{ $error }}</p></span>
 	</div>
-	@endforeach
 	@else
 
 	@endif
@@ -33,7 +31,7 @@
 		<div class="controls">
 			<div class="input-icon left">
 				<i class="icon-lock"></i>
-				<input class="m-wrap placeholder-no-fix" type="password" placeholder="New password" name="password1" />
+				<input class="m-wrap placeholder-no-fix" type="password" placeholder="Old password" name="oldpassword" />
 			</div>
 		</div>
 	</div>
@@ -42,7 +40,16 @@
 		<div class="controls">
 			<div class="input-icon left">
 				<i class="icon-lock"></i>
-				<input class="m-wrap placeholder-no-fix" type="password" placeholder="Repeat password" name="password2" />
+				<input class="m-wrap placeholder-no-fix" type="password" placeholder="New password" name="newpassword" />
+			</div>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<div class="controls">
+			<div class="input-icon left">
+				<i class="icon-lock"></i>
+				<input class="m-wrap placeholder-no-fix" type="password" placeholder="Repeat password" name="newpassword_confirm" />
 			</div>
 		</div>
 	</div>

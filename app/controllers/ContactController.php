@@ -1,7 +1,7 @@
 <?php
 
 class ContactController extends BaseController {
-	
+
 	/**
 	 *	Get Contact
 	 *	Based on ID

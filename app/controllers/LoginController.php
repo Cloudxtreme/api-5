@@ -59,31 +59,54 @@ class LoginController extends BaseController {
         exit;
     }
 
-    public function changePassword ()
+    public function changePassword ($userId = 1)
     {
-	    $data = Input::all();
 
-//	    Route::put('users/{userId}/password', 'UsersController@putUsersIdPassword');
-	    $payload = array('controller'=> 'UsersController', 'action'=> 'putUsersIdPassword', 'open'=> round(microtime(true), 3), 'payload'=> Input::all(), 'user'=> null);
+	    if(Input::has('oldpassword')){
+		    Input::merge(array('userId'=> $userId));
 
-	    return json_decode
-	    (
-		    self::jobdispatch ('controllerDispatch', $payload)
-	    );
+		    $rules = array(
+			    'userId' => 'required|integer',
+			    'oldpassword' => 'required',
+			    'newpassword' => 'required',
+			    'newpassword_confirm' => 'required|same:newpassword'
+		    );
 
-	   //return View::make('signin.change_password', $data);
+//		    print_r($rules);
+//		    echo '<br>';
+//		    print_r(Input::all());
+//		    exit;
+
+		    $validator = Validator::make(Input::all(), $rules);
+		    $data = Input::all();
+
+		    if ($validator->fails()){
+			    $error = array('error'=> 'something went wrong');
+			    return View::make('signin.change_password', $error);
+		    } else {
+			    $payload = array('controller'=> 'UsersController', 'action'=> 'putUsersIdPassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
+
+			    return json_decode
+			    (
+				    self::jobdispatch ('controllerDispatch', $payload)
+			    );
+		    }
+	    } else {
+		    return View::make('signin.change_password');
+	    }
+
     }
 
     public function recoverPassword ()
     {
 	    $data = Input::all();
 
-	    $payload = array('controller'=> 'ContactController', 'action'=> 'getAccountsIdContactsId', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key(Input::all(), $rules), 'user'=> null);
-
-	    return json_decode
-	    (
-		    self::jobdispatch ('controllerDispatch', $payload)
-	    );
+//	    $payload = array('controller'=> 'ContactController', 'action'=> 'getAccountsIdContactsId', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key(Input::all(), $rules), 'user'=> null);
+//
+//	    return json_decode
+//	    (
+//		    self::jobdispatch ('controllerDispatch', $payload)
+//	    );
 
 	    return View::make('signin.recover_password', $data);
     }

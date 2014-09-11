@@ -215,8 +215,8 @@ Route::group(array('prefix' => '1.1', /*'namespace' => $namespace, */ 'before' =
 	//////////////////////////////////////   USERS   /////////////////////////////////////
 	Route::get('users/{userId}', 'NeuronProxyController@authenticated');
 	Route::put('users/{userId}', 'NeuronProxyController@authenticated');
-//	Route::put('users/{userId}/password', 'NeuronProxyController@authenticated');
-	Route::put('users/{userId}/password', 'LoginController@changePassword');
+	Route::put('users/{userId}/password', 'NeuronProxyController@authenticated');
+//	Route::put('users/{userId}/password', 'LoginController@changePassword');
 	Route::get('users/{userId}/subscriptions', 'NeuronProxyController@authenticated');
 	Route::delete('users/{userId}/subscriptions', 'NeuronProxyController@authenticated');
 	Route::post('users/{userId}/subscriptions', 'NeuronProxyController@authenticated');
