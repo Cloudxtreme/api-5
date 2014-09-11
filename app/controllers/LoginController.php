@@ -59,25 +59,28 @@ class LoginController extends BaseController {
         exit;
     }
 
-    public function changePassword ($userId = null)
+    public function changePassword ($userId = 1)
     {
 
 	    if(Input::has('oldpassword')){
-		    $test = Input::merge(array('userId'=> $userId));
-
-//		    return print_r($test);
+		    Input::merge(array('userId'=> $userId));
 
 		    $rules = array(
-//			    'userId' => 'required|integer',
+			    'userId' => 'required|integer',
 			    'oldpassword' => 'required',
 			    'newpassword' => 'required',
-			    'password_confirm' => 'required|same:newpassword'
+			    'newpassword_confirm' => 'required|same:newpassword'
 		    );
+
+//		    print_r($rules);
+//		    echo '<br>';
+//		    print_r(Input::all());
+//		    exit;
 
 		    $validator = Validator::make(Input::all(), $rules);
 		    $data = Input::all();
 
-		    if (true==false){//$validator->fails()){
+		    if ($validator->fails()){
 			    $error = array('error'=> 'something went wrong');
 			    return View::make('signin.change_password', $error);
 		    } else {
