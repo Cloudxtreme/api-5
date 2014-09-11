@@ -63,6 +63,8 @@ class LoginController extends BaseController {
     {
 	    $data = Input::all();
 
+//	    $this->jobdispatch();
+
 	    return View::make('signin.change_password', $data);
     }
 

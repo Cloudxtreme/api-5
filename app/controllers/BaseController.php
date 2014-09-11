@@ -25,7 +25,7 @@ class BaseController extends Controller
 	 public static function jobdispatch($job, $payload)
 	 {
 		 global $app;
-		 
+
 		 return $app->jobserver->request($job, $payload);
 	 }
 }

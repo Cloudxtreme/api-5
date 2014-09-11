@@ -40,6 +40,10 @@ $env = $app->detectEnvironment(array(
     'local-gaby' => array(
         'Gabriela'
     ),
+
+    'local-pedro' => array(
+        'psilva'
+    ),
 	
 	'development' => array(
 		'vps601.serverpark.be'
