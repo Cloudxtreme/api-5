@@ -72,6 +72,13 @@ class LoginController extends BaseController {
 
 	    return View::make('signin.recover_password', $data);
     }
+
+    public function error404 ()
+    {
+	    $data = Input::all();
+
+	    return View::make('404', $data);
+    }
 	
 	public function register ()
 	{

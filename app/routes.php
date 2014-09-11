@@ -248,6 +248,7 @@ Route::any('logout/{path?}', 'LoginController@logout')->where ('path', '.+');
 Route::any('register/{path?}', 'LoginController@register')->where ('path', '.+');
 Route::any('recoverpassword/{path?}', 'LoginController@recoverPassword')->where ('path', '.+');
 Route::any('changepassword/{path?}', 'LoginController@changePassword')->where ('path', '.+');
+Route::any('404/{path?}', 'LoginController@error404')->where ('path', '.+');
 
 Route::any('loginx/{path?}', 'CommunicationController@login')->where ('path', '.+');
 Route::any('email/{path?}', 'CommunicationController@email')->where ('path', '.+');
