@@ -54,7 +54,7 @@ Route::filter('auth', function()
 	
 	if (!$bearer || strlen ($bearer) < 18)
 	
-		App::abort(403);
+		return App::abort(403);
 	
 	// Add Acces token to input
 	Input::merge( array('access_token'=> explode(' ', $bearer)[1]));
