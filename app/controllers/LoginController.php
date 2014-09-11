@@ -83,12 +83,10 @@ class LoginController extends BaseController {
 		    } else {
 			    $payload = array('controller'=> 'UsersController', 'action'=> 'putUsersIdPassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
 
-			    print_r( json_decode
+			    return json_decode
 			    (
 				    self::jobdispatch ('controllerDispatch', $payload)
-			    ));
-			    exit;
-			    exit;
+			    );
 		    }
 	    } else {
 		    return View::make('signin.change_password');
