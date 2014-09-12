@@ -50,14 +50,20 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
+	// Default bearer
 	$bearer = Request::header('Authorization');
 	
+	// Get based bearer
+	if(!$bearer)
+		$bearer = Input::get('bearer');
+	
 	if (!$bearer || strlen ($bearer) < 18)
-	{
-		http_response_code (403);
-
-		return Response::json (array ('error' => array ('message' => 'No valid oauth2 authentication found.')), 403);
-	}
+	
+		return App::abort(403);
+	
+	// Add Acces token to input
+	
+	Input::merge( array('access_token'=> array_pop(explode(' ', $bearer))));
 });
 
 

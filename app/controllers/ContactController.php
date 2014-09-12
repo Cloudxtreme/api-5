@@ -2,43 +2,39 @@
 
 class ContactController extends BaseController {
 
-    public function get($accountId = null, $contactId = null){
-        Input::merge(array('accountId'=> $accountId, 'contactId'=> $contactId));
+	/**
+	 *	Get Contact by id.
+	 *	The response validation is set in schemas.
+	 *
+	 *	@return array
+	 */
+	public function get($accountId = null, $contactId = null)
+	{
+		// Add path attributes
+		$input = self::prepInput(array('id'=> $contactId, 'accountId'=> $accountId));
+		
+		// Validation rules
+		$rules = array('id'=> 'required|integer');
+		
+		// Validate
+		$validator = Validator::make($input, array_merge(self::$inputRules, $rules));
 
-        $rules = array(
-            'accountId' => 'required|integer',
-            'contactId' => 'required|integer'
-        );
-
-        $validator = Validator::make(Input::all(), $rules);
-
-        // check if the validator failed
-        if ($validator->fails()){
-            // TODO
-            // return Redirect::to('<add page here>')->withErrors($validator);
-        } else {
-            $payload = array(
-                'controller'=> 'ContactController',
-                'action'=> 'getAccountsIdContactsId',
-                'open'=> round(microtime(true), 3),
-                'payload'=> array_intersect_key(Input::all(), $rules),
-                'user'=> null
-            );
-
-            $response = json_decode
-            (
-                self::jobdispatch ('controllerDispatch', $payload)
-            );
-
-            return $response;
-            
-            // DUMMY
-            /*$response = array("name"=> "Koen", "shoe-size"=> "46");
-            
-			$validator = SchemaValidator::validate ($response, 'contact');
-			
-			return $validator->intersect;*/
-        }
-    }
+		//return $validator->getValidated();
+		
+		// Check if the validator failed
+		if ($validator->fails())
+		
+			return Redirect::to(400)->withErrors($validator);
+		
+		
+		// Request jobload
+		$jobload = (object) array('controller'=> 'ContactController', 'action'=> 'get', 'payload'=> array_intersect_key(Input::all(), $rules));
+		
+		// Request Foreground Job
+		$response = self::jobdispatch ('controllerDispatch', $jobload);
+		
+		// Return schema based response
+		return SchemaValidator::validate (json_decode($response, true), 'contact')->intersect;
+	}
 
 }

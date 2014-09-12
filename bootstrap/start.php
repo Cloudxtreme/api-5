@@ -82,8 +82,20 @@ require $framework.'/Illuminate/Foundation/start.php';
 
 require 'tools.php';
 
+/*
+|--------------------------------------------------------------------------
+| Extend Classes
+|--------------------------------------------------------------------------
+|
+| Some classes need personal tweaking. That happens here.
+|
+*/
+
 // Set NewRelic options
-Newrelic::setAppName( Config::get('newrelic.appname'));
+Newrelic::setAppName (Config::get('newrelic.appname'));
+
+// Validator extends
+Validator::extend('getValidated', 'SchemaValidator@getValidated');
 
 /*
 |--------------------------------------------------------------------------

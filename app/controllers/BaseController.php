@@ -2,20 +2,34 @@
 
 class BaseController extends Controller 
 {
+	/**
+	 * Defaults
+	 */
+	const format = 'full';
+	
+	protected static $inputRules = array
+	(
+		'format'=> '',
+		'access_token'=> ''
+	);
 
-	function __construct()
-	{
-		
-	}
 
 	/**
-	 * Setup the layout used by the controller.
+	 * Provide all required parameters to Input
+	 * Returns all input attibutes in array
 	 *
-	 * @return void
+	 * @return array
 	 */
-	protected function setupLayout()
+	protected static function prepInput($attributes)
 	{
-
+		
+		if(!Input::get('format') && !isset($attributes['format']))
+			
+			$attributes['format'] = self::format;
+		
+		Input::merge($attributes);
+		
+		return Input::all();
 	}
 	
 	/**
@@ -25,6 +39,10 @@ class BaseController extends Controller
 	 public static function jobdispatch($job, $payload)
 	 {
 		 global $app;
+		 
+		 // Add general data
+		 $payload->open = round(microtime(true), 3);
+		 $payload->access_token = Input::get('access_token');
 
 		 return $app->jobserver->request($job, $payload);
 	 }
