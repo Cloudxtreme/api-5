@@ -19,6 +19,6 @@ return array(
 	*/
 	'engine' => array(
 	
-		'workerpath' => '/home/psilva/websites/cloudwalkers-engine.local/public_html/workers/'
+		'workerpath' => '/home/psilva/websites/cloudwalkers-engine.local/workers/'
 	)
 );

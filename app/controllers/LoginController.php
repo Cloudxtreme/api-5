@@ -62,6 +62,15 @@ class LoginController extends BaseController {
     public function changePassword ($userId = 1)
     {
 
+//	    $bearer = Request::header('Authorization');
+//
+//	    if (!$bearer || strlen ($bearer) < 18)
+//	    {
+//		    http_response_code (403);
+//
+//		    return Response::json (array ('error' => array ('message' => 'No valid oauth2 authentication found.')), 403);
+//	    }
+
 	    if(Input::has('oldpassword')){
 		    Input::merge(array('userId'=> $userId));
 
@@ -84,7 +93,7 @@ class LoginController extends BaseController {
 			    $error = array('error'=> 'something went wrong');
 			    return View::make('signin.change_password', $error);
 		    } else {
-			    $payload = array('controller'=> 'UsersController', 'action'=> 'putUsersIdPassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
+			    $payload = array('controller'=> 'UserController', 'action'=> 'changePassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
 
 			    return json_decode
 			    (
@@ -100,15 +109,27 @@ class LoginController extends BaseController {
     public function recoverPassword ()
     {
 	    $data = Input::all();
+	    if(!empty($data)){
 
-//	    $payload = array('controller'=> 'ContactController', 'action'=> 'getAccountsIdContactsId', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key(Input::all(), $rules), 'user'=> null);
-//
-//	    return json_decode
-//	    (
-//		    self::jobdispatch ('controllerDispatch', $payload)
-//	    );
+		    $rules = array(
+			    'email' => 'required|email'
+		    );
 
-	    return View::make('signin.recover_password', $data);
+		    $validator = Validator::make(Input::all(), $rules);
+
+		    if ($validator->fails()){
+			    $error = array('error'=> 'you should input a valid email!');
+			    return View::make('signin.recover_password', $error);
+		    } else {
+			    $payload = array('controller'=> 'UserController', 'action'=> 'recoverPassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
+
+			    $output = json_decode (json_decode ( self::jobdispatch ('controllerDispatch', $payload)), true);
+
+			    return View::make('signin.recover_password', $output);
+		    }
+	    } else {
+		    return View::make('signin.recover_password');
+	    }
     }
 
     public function error404 ()

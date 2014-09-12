@@ -7,23 +7,19 @@
     <h3 class="">Choose a new password</h3>
 
     @if ( !empty ($error) )
-        @foreach ($error as $message)
         <div class="alert alert-error">
             <button class="close" data-dismiss="alert"></button>
-            <span><p>{{ $message }}</p></span>
+            <span><p>{{ $error }}</p></span>
         </div>
-        @endforeach
     @else
 
     @endif
 
-    @if ( !empty ($feedback) )
-        @foreach ($feedback as $message)
+    @if ( !empty ($msg) )
         <div class="alert alert-error">
             <button class="close" data-dismiss="alert"></button>
-            <span><p>{{ $message }}</p></span>
+            <span><p>{{ $msg }}</p></span>
         </div>
-        @endforeach
     @else
 
     @endif
