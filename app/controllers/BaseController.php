@@ -5,11 +5,11 @@ class BaseController extends Controller
 	/**
 	 * Defaults
 	 */
-	const format = 'full';
+	const display = 'full';
 	
 	protected static $inputRules = array
 	(
-		'format'=> '',
+		'display'=> '',
 		'access_token'=> ''
 	);
 
@@ -22,10 +22,10 @@ class BaseController extends Controller
 	 */
 	protected static function prepInput($attributes)
 	{
-		
-		if(!Input::get('format') && !isset($attributes['format']))
+
+		if(!Input::get('display') && !isset($attributes['display']))
 			
-			$attributes['format'] = self::format;
+			$attributes['display'] = self::display;
 		
 		Input::merge($attributes);
 		
