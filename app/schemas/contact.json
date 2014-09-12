@@ -1,3 +1,13 @@
 {
-	"name": "required|string"
+	"name": "required|string",
+	"id": "required|integer",
+	"uniqueId": "required",
+	"type": "required",
+	"displayname": "required",
+	"username": "*",
+	"avatar": "required",
+	"url": "required",
+	"network": "required",
+	"following": "required|boolean",
+	"statistics": "required"
 }
