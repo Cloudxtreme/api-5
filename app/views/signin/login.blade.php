@@ -31,7 +31,7 @@
 </article>
 
 <article>
-    {{ HTML::linkAction('CommunicationController@lostPassword', 'Lost Password', array(), array('class' => 'forgot-link')) }}
+    {{ HTML::linkAction('LoginController@recoverPassword', 'Lost Password', array(), array('class' => 'forgot-link')) }}
 </article>
 
 @stop
