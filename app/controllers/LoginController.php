@@ -56,11 +56,16 @@ class LoginController extends BaseController {
             $response->output ();
         }
 
-        exit;
+	    exit;
     }
 
-    public function changePassword ($userId = 1)
+    public function changePassword ()
     {
+	    $payload = (object) array('controller'=> 'UserController', 'action'=> 'changePassword', 'open'=> round(microtime(true), 3), 'payload'=> array(), 'user'=> null);
+
+	    $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
+
+	    print_r($output); exit;
 
 //	    $bearer = Request::header('Authorization');
 //
@@ -93,12 +98,15 @@ class LoginController extends BaseController {
 			    $error = array('error'=> 'something went wrong');
 			    return View::make('signin.change_password', $error);
 		    } else {
-			    $payload = array('controller'=> 'UserController', 'action'=> 'changePassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
+			    $payload = (object) array('controller'=> 'UserController', 'action'=> 'changePassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
 
-			    return json_decode
-			    (
-				    self::jobdispatch ('controllerDispatch', $payload)
-			    );
+			    print_r(array(45,43));
+			    print_r(Input::all(), true); exit;
+
+				$output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
+
+			    return print_r($output,true);
+
 		    }
 	    } else {
 		    return View::make('signin.change_password');
@@ -109,6 +117,7 @@ class LoginController extends BaseController {
     public function recoverPassword ()
     {
 	    $data = Input::all();
+//	    return var_dump($data);
 	    if(!empty($data)){
 
 		    $rules = array(
@@ -121,9 +130,9 @@ class LoginController extends BaseController {
 			    $error = array('error'=> 'you should input a valid email!');
 			    return View::make('signin.recover_password', $error);
 		    } else {
-			    $payload = array('controller'=> 'UserController', 'action'=> 'recoverPassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
+			    $payload = (object) array('controller'=> 'UserController', 'action'=> 'recoverPassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules));
 
-			    $output = json_decode (json_decode ( self::jobdispatch ('controllerDispatch', $payload)), true);
+			    $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
 
 			    return View::make('signin.recover_password', $output);
 		    }
@@ -136,43 +145,37 @@ class LoginController extends BaseController {
     {
 	    $data = Input::all();
 
-	    return View::make('404', $data);
+	    App::abort(403, 'Unauthorized action.');
     }
 	
 	public function register ()
 	{
-		$response = $this->ancientFrontController->dispatch ($this->ancientPage);
+		// todo validation (very important - critical)
+        $form_data = Input::all();
+		$invitation_id = Request::segment(2);
+		$invitation_token = Request::segment(3);
 
-		if ($response)
-		{
-			$response->output ();
+		$data = array(
+			'form' => $form_data,
+			'invitation_id' => $invitation_id,
+			'invitation_token' => $invitation_token
+		);
+
+		// call engine with input data & invite info
+		$payload = (object) array('controller'=> 'UserController', 'action'=> 'register', 'open'=> round(microtime(true), 3), 'payload'=> $data);
+		$output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
+
+		if( !empty($output['action']) && $output['action']=='form'){
+			return View::make('signin.register', $output);
 		}
 
-		exit;
+		if( !empty($output['action']) && $output['action']=='invalid'){
+			App::abort(403, 'Unauthorized action.');
+		}
 
-//        $data = Input::all();
-//		$param = Request::segment(2);
-//		$invitation = Request::segment(3);
-
-//		return $param . ' - ' . $invitation; exit;
-//
-//        if( !empty($data) || isset($data['invitation'])){
-//            // send request to engine via gearman
-//            $output = App::make ('cwclient')->register ($data['email'], $data['password'], $data['firstname'], $data['name']);
-//            // if ok redirect
-//            if(isset($output['success'])){
-//                return Redirect::to('http://devplatform.cloudwalkers.be/login.html');
-//            } else {
-//                return View::make('signin.register', $output);
-//            }
-//        } else {
-//	        if($data['email']){
-//                return View::make('signin.register', $data);
-//	        } else {
-//		        App::abort(403, 'Unauthorized action.');
-//	        }
-//        }
-
+		if( !empty($output['action']) && $output['action']=='msg'){
+			return View::make('signin.register', $output);
+		}
 	}
 
 
