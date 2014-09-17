@@ -150,22 +150,72 @@ class LoginController extends BaseController {
 	
 	public function register ()
 	{
-		// todo validation (very important - critical)
-        $form_data = Input::all();
-		$invitation_id = Request::segment(2);
+		$invitation_id = (int) Request::segment(2);
 		$invitation_token = Request::segment(3);
 
-		$data = array(
-			'form' => $form_data,
+		// validation for post data
+		if(Request::isMethod('post')){
+			$data = Input::all();
+			$rules = array(
+				'email' => 'required|email',
+				'name' => 'required',
+				'firstname' => 'required',
+				'password' => 'required',
+				'password2' => 'required|same:password'
+			);
+			$validator = Validator::make($data, $rules);
+			if ($validator->fails()){
+				if(Input::get('password') != Input::get('password2')){
+					$data['error'] ='Password fields must match.';
+				}
+				if(count(Input::all())<6){
+					$data['error'] = 'All fields are required.';
+				}
+
+				return View::make('signin.register', $data);
+			}
+		}
+
+		// validation url parameters
+		if(Request::isMethod('post')){
+			$rules1 = array(
+				'invitation_id' => 'required|integer',
+				'invitation_token' => 'required|string'
+			);
+
+			$data1 = array(
+				'invitation_id' => $invitation_id,
+				'invitation_token' => $invitation_token
+			);
+
+			$validator = Validator::make($data1, $rules1);
+			if ($validator->fails()){
+				App::abort(403, 'Unauthorized action.');
+			}
+		}
+
+		$input_data = array(
+			'form' => Input::all(),
 			'invitation_id' => $invitation_id,
 			'invitation_token' => $invitation_token
 		);
 
 		// call engine with input data & invite info
-		$payload = (object) array('controller'=> 'UserController', 'action'=> 'register', 'open'=> round(microtime(true), 3), 'payload'=> $data);
+		$payload = (object) array('controller'=> 'UserController', 'action'=> 'register', 'open'=> round(microtime(true), 3), 'payload'=> $input_data);
 		$output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
 
-		if( !empty($output['action']) && $output['action']=='form'){
+//		return var_dump($output['data']);
+
+		// output render
+		if( !empty($output['action']) && $output['action']=='success'){
+			return View::make('signin.login', $output);
+		}
+
+		if( !empty($output['action']) && $output['action']=='register_form'){
+			return View::make('signin.register', $output);
+		}
+
+		if( !empty($output['action']) && $output['action']=='error'){
 			return View::make('signin.register', $output);
 		}
 
@@ -173,9 +223,8 @@ class LoginController extends BaseController {
 			App::abort(403, 'Unauthorized action.');
 		}
 
-		if( !empty($output['action']) && $output['action']=='msg'){
-			return View::make('signin.register', $output);
-		}
+		App::abort(404, 'Woops.');
+
 	}
 
 

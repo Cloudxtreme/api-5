@@ -4,16 +4,25 @@
 
 <article>
 
-    @if ( !empty ($error) )
-        @foreach ($error as $message)
-        <div class="alert alert-error">
-            <button class="close" data-dismiss="alert"></button>
-            <span><p>{{ $message }}</p></span>
-        </div>
-        @endforeach
-    @else
+	@if ( !empty ($error) )
+	@foreach ($error as $message)
+	<div class="alert alert-error">
+		<button class="close" data-dismiss="alert"></button>
+		<span><p>{{ $message }}</p></span>
+	</div>
+	@endforeach
+	@else
 
-    @endif
+	@endif
+
+	@if ( !empty ($msg) )
+	<div class="alert alert-error">
+		<button class="close" data-dismiss="alert"></button>
+		<span><p>{{ $msg }}</p></span>
+	</div>
+	@else
+
+	@endif
 
     <h1 class="pull-left">{{ trans('login.login') }}</h1>
 

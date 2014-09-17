@@ -260,7 +260,8 @@ Route::any('logoutx/{path?}', 'CommunicationController@logout')->where ('path', 
 Route::get ('1/version', 'NeuronProxyController@guest');
 
 Route::get ('authenticate/{path?}', 'NeuronProxyController@guest')->where ('path', '.+');
-Route::get ('invitation/{path?}', 'NeuronProxyController@guest')->where ('path', '.+');
+//Route::get ('invitation/{path?}', array('before'=>'auth','uses'=>'LoginController@register'))->where ('path', '.+');
+Route::any ('invitation/{path?}', 'LoginController@register')->where ('path', '.+');
 
 Route::any('oauth2/{path?}', 'Oauth2Controller@dispatch')->where ('path', '.+');;
 

@@ -16,15 +16,22 @@
     @endif
 
     @if ( !empty ($error) )
-        @foreach ($error as $message)
-            <div class="alert alert-error">
-                <!-- <button class="close" data-dismiss="alert"></button> -->
-                <span><p>{{ $error['message'] }}</p></span>
-            </div>
-        @endforeach
+        <div class="alert alert-error">
+            <!-- <button class="close" data-dismiss="alert"></button> -->
+            <span><p>{{ $error }}</p></span>
+        </div>
     @else
 
     @endif
+
+	@if ( !empty ($msg) )
+	<div class="alert alert-error">
+		<button class="close" data-dismiss="alert"></button>
+		<span><p>{{ $msg }}</p></span>
+	</div>
+	@else
+
+	@endif
 
     <p>Enter your account details below:</p>
     <div class="control-group">
@@ -33,7 +40,7 @@
         <div class="controls">
             <div class="input-icon left">
                 <i class="icon-envelope"></i>
-                <input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email" value="{{ Session::get('invitation_email') }}"/>
+                <input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email" value="{{ $email }}" readonly />
             </div>
         </div>
     </div>
@@ -43,7 +50,7 @@
         <div class="controls">
             <div class="input-icon left">
                 <i class="icon-user"></i>
-                <input class="m-wrap placeholder-no-fix" type="text" placeholder="Name" name="name"/>
+                <input class="m-wrap placeholder-no-fix" type="text" placeholder="Name" name="name" value="{{ $name or "" }}" required/>
             </div>
         </div>
     </div>
@@ -53,7 +60,7 @@
         <div class="controls">
             <div class="input-icon left">
                 <i class="icon-user"></i>
-                <input class="m-wrap placeholder-no-fix" type="text" placeholder="First name" name="firstname"/>
+                <input class="m-wrap placeholder-no-fix" type="text" placeholder="First name" name="firstname" value="{{ $firstname or "" }}" required/>
             </div>
         </div>
     </div>
@@ -63,7 +70,7 @@
         <div class="controls">
             <div class="input-icon left">
                 <i class="icon-lock"></i>
-                <input class="m-wrap placeholder-no-fix" type="password" id="register_password" placeholder="Password" name="password"/>
+                <input class="m-wrap placeholder-no-fix" type="password" id="register_password" placeholder="Password" name="password" required/>
             </div>
         </div>
     </div>
@@ -72,7 +79,7 @@
         <div class="controls">
             <div class="input-icon left">
                 <i class="icon-ok"></i>
-                <input class="m-wrap placeholder-no-fix" type="password" placeholder="Re-type Your Password" name="password2"/>
+                <input class="m-wrap placeholder-no-fix" type="password" placeholder="Re-type Your Password" name="password2" required/>
             </div>
         </div>
     </div>
@@ -87,11 +94,7 @@
     <div class="form-actions">
         <a href="{{ URL::to('login') }}" id="register-back-btn" type="button" class="btn">
             <i class="m-icon-swapleft"></i>
-            @if ( !empty ($invitation) )
-                To login
-            @else
-                Back
-            @endif
+            To login
         </a>
         <button type="submit" id="register-submit-btn" class="btn green pull-right" name="register" value="1">
             Sign Up <i class="m-icon-swapright m-icon-white"></i>
