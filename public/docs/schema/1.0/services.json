@@ -1,0 +1,560 @@
+{
+    "basePath": "https://devapi.cloudwalkers.be",
+    "swaggerVersion": "1.2",
+    "apiVersion": "1",
+    "resourcePath": "/services",
+    "apis": [
+        {
+            "path": "/services/{id}",
+            "description": "Get all information about a service",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get all information about a service",
+                    "nickname": "getServiceDataArray_0",
+                    "type": "ServiceOutput"
+                },
+                {
+                    "method": "DELETE",
+                    "summary": "Remove a service",
+                    "nickname": "getServiceDataArray_1"
+                },
+                {
+                    "method": "PUT",
+                    "summary": "Update service settings",
+                    "nickname": "getServiceDataArray_2",
+                    "type": "ServiceOutput",
+                    "parameters": [
+                        {
+                            "paramType": "body",
+                            "type": "ServiceInput"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/services/{id}/profiles",
+            "description": "Get all information about a service",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return all profiles",
+                    "nickname": "profiles",
+                    "type": "ServiceContactsOutput"
+                }
+            ]
+        },
+        {
+            "path": "/services/{id}/profiles/{profileId}",
+            "description": "Get all information about a service",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return a profile",
+                    "nickname": "getProfile_0",
+                    "type": "ContactOutput"
+                },
+                {
+                    "method": "PUT",
+                    "summary": "",
+                    "nickname": "getProfile_1",
+                    "type": "ContactOutput"
+                }
+            ]
+        },
+        {
+            "path": "/services/{id}/setup",
+            "description": "Get all information about a service",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Set up the service and link the correct (selected) pages and profiles.",
+                    "nickname": "setup",
+                    "parameters": [
+                        {
+                            "paramType": "body",
+                            "type": "ServiceSetup"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "The service id"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "ServiceContactsOutput": {
+            "id": "ServiceContactsOutput",
+            "properties": {
+                "service": {
+                    "$ref": "ServiceContacts"
+                }
+            },
+            "required": [
+                "service"
+            ]
+        },
+        "ServiceContacts": {
+            "id": "ServiceContacts",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "profiles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Contact"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "profiles"
+            ]
+        },
+        "Contact": {
+            "id": "Contact",
+            "properties": {
+                "following": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "displayname": {
+                    "description": "The full name of the user that should be used in general clients.",
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Full name OR last name (if firstname is not null)",
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "description": "URL to the avatar of this contact.",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "URL to the public profile of this contact.",
+                    "type": "string"
+                },
+                "network": {
+                    "description": "Social network this specific contact comes from",
+                    "$ref": "Network"
+                }
+            },
+            "required": [
+                "avatar",
+                "displayname",
+                "following",
+                "id",
+                "name",
+                "network"
+            ]
+        },
+        "Network": {
+            "id": "Network",
+            "description": "Class Base",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "limitations": {
+                    "$ref": "NetworkLimitations"
+                }
+            },
+            "required": [
+                "icon",
+                "name",
+                "token"
+            ]
+        },
+        "NetworkLimitations": {
+            "id": "NetworkLimitations",
+            "properties": {
+                "max-length": {
+                    "description": "Maximum length of a message.",
+                    "$ref": "NetworkLimitation"
+                },
+                "max-length-hardlimit": {
+                    "description": "Absolute maximum length of a message, including attachments.",
+                    "$ref": "NetworkLimitation"
+                },
+                "picture-url-length": {
+                    "description": "Amount of characters an image url will take up.",
+                    "$ref": "NetworkLimitation"
+                },
+                "url-length": {
+                    "description": "Amount of characters a link will take up.",
+                    "$ref": "NetworkLimitation"
+                },
+                "include-title-in-max-length": {
+                    "description": "TRUE if the subject will be added to the body.",
+                    "$ref": "NetworkLimitationBoolean"
+                },
+                "title-spacing-length": {
+                    "description": "Amount of characters that will be added to the subject.",
+                    "$ref": "NetworkLimitation"
+                },
+                "images": {
+                    "description": "Amount of images you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                },
+                "link": {
+                    "description": "Amount of links you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                },
+                "video": {
+                    "description": "Amount of videos you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                }
+            }
+        },
+        "NetworkLimitation": {
+            "id": "NetworkLimitation",
+            "properties": {
+                "limit": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "MAXIMUM",
+                        "MINIMUM"
+                    ]
+                }
+            },
+            "required": [
+                "limit"
+            ]
+        },
+        "NetworkLimitationBoolean": {
+            "id": "NetworkLimitationBoolean",
+            "properties": {
+                "limit": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "limit"
+            ]
+        },
+        "ContactOutput": {
+            "id": "ContactOutput",
+            "properties": {
+                "contact": {
+                    "$ref": "Contact"
+                }
+            },
+            "required": [
+                "contact"
+            ]
+        },
+        "ServiceOutput": {
+            "id": "ServiceOutput",
+            "properties": {
+                "service": {
+                    "$ref": "Service"
+                }
+            },
+            "required": [
+                "service"
+            ]
+        },
+        "ServiceInput": {
+            "id": "ServiceInput",
+            "properties": {
+                "settings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "ServiceSettingsInput"
+                    }
+                },
+                "streams": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "StreamInput"
+                    }
+                }
+            }
+        },
+        "Service": {
+            "id": "Service",
+            "description": "Class Base\r \r Class services as a base for a service.\r A service is the gateway between our system and a social network.\r Services provide methods to get, update and send messages.",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "authenticateUrl": {
+                    "description": "Authentication URL where the user must be redirected to to authenticate the user.",
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "DEPRECATED. Icon token for this service.",
+                    "type": "string"
+                },
+                "valid": {
+                    "description": "TRUE if all settings are valid and the service is linked to a social network. FALSE if invalid settings or not authenticated.",
+                    "type": "boolean"
+                },
+                "errors": {
+                    "description": "If account is not valid, contains an array of strings describing the problems with the service",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "account": {
+                    "description": "Name of the currently authenticated user",
+                    "type": "string"
+                },
+                "network": {
+                    "description": "Network that this service connects to",
+                    "$ref": "Network"
+                },
+                "settings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "ServiceSettings"
+                    }
+                },
+                "streams": {
+                    "description": "Contain all streams that are provided by this service.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "Stream"
+                    }
+                },
+                "profiles": {
+                    "description": "A list of all profiles (or pages / companies) that are linked to this service.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "Contact"
+                    }
+                }
+            },
+            "required": [
+                "account",
+                "id",
+                "name",
+                "network",
+                "valid"
+            ]
+        },
+        "ServiceSettingsInput": {
+            "id": "ServiceSettingsInput",
+            "properties": {
+                "{token}": {
+                    "description": "An object with token => setting-value values.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "{token}"
+            ]
+        },
+        "StreamInput": {
+            "id": "StreamInput",
+            "properties": {
+                "channels": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "ServiceSettings": {
+            "id": "ServiceSettings",
+            "properties": {
+                "key": {
+                    "description": "Key for this specific setting",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Human readable description of this setting.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "What does this setting represent? An input field (string), a message to the user (message), a checkbox (boolean), or a link the user must click (link)?",
+                    "type": "string",
+                    "enum": [
+                        "message",
+                        "string",
+                        "link",
+                        "boolean"
+                    ]
+                },
+                "value": {
+                    "description": "The current value (or the message that needs to be displayed)",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "For settings with type link, contains the url the user should visit.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "key",
+                "name",
+                "type",
+                "value"
+            ]
+        },
+        "Stream": {
+            "id": "Stream",
+            "description": "Class Stream",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of this stream. Can be SOCIAL, MONITORING or COWORKER",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A humran readable english description of what is contained in the stream.",
+                    "type": "string"
+                },
+                "canHaveChildren": {
+                    "description": "TRUE if this stream can contain children",
+                    "type": "boolean"
+                },
+                "canHaveChildstreams": {
+                    "description": "TRUE if this stream can contain childstreams (childstreams contain comments)",
+                    "type": "boolean"
+                },
+                "canSetChannels": {
+                    "description": "TRUE if this stream can be assigned to (additional) channels.",
+                    "type": "boolean"
+                },
+                "priority": {
+                    "description": "A numeric priority to order streams. Clients should order streams descending on priority.",
+                    "type": "integer"
+                },
+                "incoming": {
+                    "description": "Does this stream contain incoming messages?",
+                    "type": "boolean"
+                },
+                "outgoing": {
+                    "description": "Can we send messages trough this stream?",
+                    "type": "boolean"
+                },
+                "available": {
+                    "description": "If set to false, this stream has been disabled. A service validation is required to reenable it.",
+                    "type": "boolean"
+                },
+                "lastRefresh": {
+                    "description": "Date of when this stream was last refreshed.",
+                    "type": "string"
+                },
+                "nextRefresh": {
+                    "description": "Date of when the next refresh is planned.",
+                    "type": "string"
+                },
+                "hasNotifications": {
+                    "description": "Can this stream contain notifications?",
+                    "type": "boolean"
+                },
+                "hasMessages": {
+                    "description": "Can this stream contain messages?",
+                    "type": "boolean"
+                },
+                "averageDailyMessages": {
+                    "description": "The average amount of incoming messages trough this stream.",
+                    "type": "float"
+                },
+                "service": {
+                    "description": "The service id this stream belongs to.",
+                    "type": "integer"
+                },
+                "channels": {
+                    "description": "The ids of the channels this stream has been assigned to.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "network": {
+                    "description": "The network this stream represents.",
+                    "$ref": "Network"
+                },
+                "childtypes": {
+                    "description": "An array of strings of entities this stream contains. This replaces hasNotifications and hasMessages.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "profile": {
+                    "description": "The contact this stream represents.",
+                    "$ref": "Contact"
+                }
+            },
+            "required": [
+                "available",
+                "averageDailyMessages",
+                "canHaveChildren",
+                "canHaveChildstreams",
+                "canSetChannels",
+                "channels",
+                "childtypes",
+                "description",
+                "hasMessages",
+                "hasNotifications",
+                "id",
+                "incoming",
+                "lastRefresh",
+                "name",
+                "network",
+                "nextRefresh",
+                "outgoing",
+                "priority",
+                "service",
+                "type"
+            ]
+        },
+        "ServiceSetup": {
+            "id": "ServiceSetup",
+            "properties": {
+                "profiles": {
+                    "description": "The ids of the profiles (= contacts) that should be enabled in Cloudwalkers.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        }
+    }
+}

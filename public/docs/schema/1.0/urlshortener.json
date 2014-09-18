@@ -1,0 +1,101 @@
+{
+    "basePath": "https://devapi.cloudwalkers.be",
+    "swaggerVersion": "1.2",
+    "apiVersion": "1",
+    "resourcePath": "/urlshortener",
+    "apis": [
+        {
+            "path": "/urlshortener/shorten",
+            "description": "Shorten an URL",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Shorten an URL",
+                    "nickname": "shorten",
+                    "type": "ShortenedURLOutputPrivate",
+                    "parameters": [
+                        {
+                            "paramType": "body",
+                            "name": "url",
+                            "type": "string",
+                            "required": true,
+                            "description": "URL to be shortened"
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "source",
+                            "type": "string",
+                            "required": false,
+                            "description": "The Source parameter for google analytics"
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "campaign",
+                            "type": "string",
+                            "required": false,
+                            "description": "The Campaign parameter for google analytics"
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "medium",
+                            "type": "string",
+                            "required": false,
+                            "description": "The Medium parameter for google analytics"
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "content",
+                            "type": "string",
+                            "required": false,
+                            "description": "The Content parameter for google analytics"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "ShortenedURLOutputPrivate": {
+            "id": "ShortenedURLOutputPrivate",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "updateToken": {
+                    "type": "string"
+                },
+                "shortUrl": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "medium": {
+                    "type": "string"
+                },
+                "campaign": {
+                    "type": "string"
+                },
+                "term": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "shortUrl",
+                "token",
+                "updateToken",
+                "url"
+            ]
+        }
+    }
+}

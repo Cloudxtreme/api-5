@@ -1,0 +1,2249 @@
+{
+    "basePath": "https://devapi.cloudwalkers.be",
+    "swaggerVersion": "1.2",
+    "apiVersion": "1",
+    "resourcePath": "/streams",
+    "apis": [
+        {
+            "path": "/streams",
+            "description": "Operation on streams",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get a set of streams. ids must be provided.",
+                    "nickname": "getStreamsFromIdsAction",
+                    "type": "StreamsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "ids",
+                            "type": "string",
+                            "required": true,
+                            "description": "Comma separate list of stream ids"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/streams/{streamId}",
+            "description": "Operation on stream",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get a stream.",
+                    "nickname": "getInformation",
+                    "type": "StreamOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "streamId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Stream id - can be any stream id, including ids of coworkers (coworkers wall messages), draft (messages saved as draft), submitted (submitted messages), scheduled (scheduled messages), sent (sent messages), failed (messages that failed), canned (canned responses), removed (messages that were removed)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/streams/{streamId}/actions",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return all possible actions for a given stream",
+                    "nickname": "getActions",
+                    "type": "StreamActionsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "streamId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Stream id - can be any stream id, including ids of coworkers (coworkers wall messages), draft (messages saved as draft), submitted (submitted messages), scheduled (scheduled messages), sent (sent messages), failed (messages that failed), canned (canned responses), removed (messages that were removed)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/streams/{streamId}/besttimetopost",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return the best time to post a message",
+                    "nickname": "getBestTimeToPost",
+                    "type": "StreamBesttimetopostOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "streamId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Stream id - can be any stream id, including ids of coworkers (coworkers wall messages), draft (messages saved as draft), submitted (submitted messages), scheduled (scheduled messages), sent (sent messages), failed (messages that failed), canned (canned responses), removed (messages that were removed)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/streams/{streamId}/contacts/uniqueid/{uniqueid}",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Search for contact based on uniqueId",
+                    "nickname": "getContacts",
+                    "type": "ContactOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "streamId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Stream id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "uniqueid",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Contact unique id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/streams/{streamId}/count",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return messages counters",
+                    "nickname": "getCounters",
+                    "type": "StreamCountersOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "streamId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Stream id - can be any stream id, including ids of coworkers (coworkers wall messages), draft (messages saved as draft), submitted (submitted messages), scheduled (scheduled messages), sent (sent messages), failed (messages that failed), canned (canned responses), removed (messages that were removed)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/streams/{streamId}/followers",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return a list of all contacts that are following this profile.",
+                    "nickname": "getFollowers",
+                    "type": "StreamFollowersOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "streamId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Stream id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/streams/{streamId}/following",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return a list of all contacts that we follow from this profile.",
+                    "nickname": "getFollowing",
+                    "type": "StreamFollowingOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "streamId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Stream id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/streams/{streamId}/live/messages",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return a live list of all messages. Messages do not have ids.",
+                    "nickname": "getMessagesLive",
+                    "type": "StreamMessageOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "streamId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Stream id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/streams/{streamId}/live/statistics",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return a live list of statistics.",
+                    "nickname": "getStatisticsLive",
+                    "type": "StreamStatisticsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "streamId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Stream id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/streams/{streamId}/messageids",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return all message ids from a specific stream",
+                    "nickname": "getMessageIds",
+                    "type": "StreamMessageIdsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "streamId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Stream id - can be any stream id, including ids of coworkers (coworkers wall messages), draft (messages saved as draft), submitted (submitted messages), scheduled (scheduled messages), sent (sent messages), failed (messages that failed), canned (canned responses), removed (messages that were removed)"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "contacts",
+                            "type": "string",
+                            "required": false,
+                            "description": "Comma separated list of contact ids - return messages ids from contact ids"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "users",
+                            "type": "string",
+                            "required": false,
+                            "description": "Comma separated list of user ids - return messages ids from user ids"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "tags",
+                            "type": "string",
+                            "required": false,
+                            "description": "Comma separated list of tag ids - return messages ids from tag ids"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "since",
+                            "type": "string",
+                            "required": false,
+                            "description": "Return all messages ids since given timestamp"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "until",
+                            "type": "string",
+                            "required": false,
+                            "description": "Return all messages ids until given timestamp"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "read",
+                            "type": "integer",
+                            "required": false,
+                            "description": "Return all messages ids that are read (1) or unread (0)"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "sort",
+                            "type": "string",
+                            "required": false,
+                            "description": "Return messages ids sorted by engagement|date"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/streams/{streamId}/messages",
+            "description": "Operation on stream",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Post message to stream.",
+                    "nickname": "writeMessageStream",
+                    "type": "StreamMessageOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "streamId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Stream id - can be any stream id, including ids of coworkers (coworkers wall messages), draft (messages saved as draft), submitted (submitted messages), scheduled (scheduled messages), sent (sent messages), failed (messages that failed), canned (canned responses), removed (messages that were removed)"
+                        },
+                        {
+                            "paramType": "body",
+                            "type": "MessageInput",
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "method": "GET",
+                    "summary": "Get messages from a stream.",
+                    "nickname": "getMessagesV2",
+                    "type": "StreamMessagesOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "streamId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Stream id - can be any stream id, including ids of coworkers (coworkers wall messages), draft (messages saved as draft), submitted (submitted messages), scheduled (scheduled messages), sent (sent messages), failed (messages that failed), canned (canned responses), removed (messages that were removed)"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "ids",
+                            "type": "string",
+                            "required": false,
+                            "description": "Comma separated list of message ids - return messages with ids"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "contacts",
+                            "type": "string",
+                            "required": false,
+                            "description": "Comma separated list of contact ids - return messages from contact ids"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "users",
+                            "type": "string",
+                            "required": false,
+                            "description": "Comma separated list of user ids - return messages from user ids"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "tags",
+                            "type": "string",
+                            "required": false,
+                            "description": "Comma separated list of tag ids - return messages from tag ids"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "since",
+                            "type": "string",
+                            "required": false,
+                            "description": "Return all messages since given timestamp"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "until",
+                            "type": "string",
+                            "required": false,
+                            "description": "Return all messages until given timestamp"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "read",
+                            "type": "integer",
+                            "required": false,
+                            "description": "Return all messages that are read (1) or unread (0)"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "sort",
+                            "type": "string",
+                            "required": false,
+                            "description": "Return messages sorted by engagement|date"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/streams/{streamId}/read",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Set all messages of the stream to read.",
+                    "nickname": "read",
+                    "type": "SuccessResult",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "streamId",
+                            "type": "int|string",
+                            "required": true,
+                            "description": "Stream ID"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/streams/{streamId}/reportids",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return all report ids from a specific stream",
+                    "nickname": "getReportIds"
+                }
+            ]
+        },
+        {
+            "path": "/streams/{streamId}/reports",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return all reports from a specific stream",
+                    "nickname": "getReportsNew",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "complete",
+                            "type": "string",
+                            "required": false,
+                            "description": "Set to 1 to receive full reports, including values"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/streams/{streamId}/validate",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Determine if the underlying service of this stream is valid. DEBUG CALL.",
+                    "nickname": "validate",
+                    "type": "StreamValidateOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "streamId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Stream id"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "StreamsOutput": {
+            "id": "StreamsOutput",
+            "properties": {
+                "streams": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Stream"
+                    }
+                }
+            },
+            "required": [
+                "streams"
+            ]
+        },
+        "Stream": {
+            "id": "Stream",
+            "description": "Class Stream",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of this stream. Can be SOCIAL, MONITORING or COWORKER",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A humran readable english description of what is contained in the stream.",
+                    "type": "string"
+                },
+                "canHaveChildren": {
+                    "description": "TRUE if this stream can contain children",
+                    "type": "boolean"
+                },
+                "canHaveChildstreams": {
+                    "description": "TRUE if this stream can contain childstreams (childstreams contain comments)",
+                    "type": "boolean"
+                },
+                "canSetChannels": {
+                    "description": "TRUE if this stream can be assigned to (additional) channels.",
+                    "type": "boolean"
+                },
+                "priority": {
+                    "description": "A numeric priority to order streams. Clients should order streams descending on priority.",
+                    "type": "integer"
+                },
+                "incoming": {
+                    "description": "Does this stream contain incoming messages?",
+                    "type": "boolean"
+                },
+                "outgoing": {
+                    "description": "Can we send messages trough this stream?",
+                    "type": "boolean"
+                },
+                "available": {
+                    "description": "If set to false, this stream has been disabled. A service validation is required to reenable it.",
+                    "type": "boolean"
+                },
+                "lastRefresh": {
+                    "description": "Date of when this stream was last refreshed.",
+                    "type": "string"
+                },
+                "nextRefresh": {
+                    "description": "Date of when the next refresh is planned.",
+                    "type": "string"
+                },
+                "hasNotifications": {
+                    "description": "Can this stream contain notifications?",
+                    "type": "boolean"
+                },
+                "hasMessages": {
+                    "description": "Can this stream contain messages?",
+                    "type": "boolean"
+                },
+                "averageDailyMessages": {
+                    "description": "The average amount of incoming messages trough this stream.",
+                    "type": "float"
+                },
+                "service": {
+                    "description": "The service id this stream belongs to.",
+                    "type": "integer"
+                },
+                "channels": {
+                    "description": "The ids of the channels this stream has been assigned to.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "network": {
+                    "description": "The network this stream represents.",
+                    "$ref": "Network"
+                },
+                "childtypes": {
+                    "description": "An array of strings of entities this stream contains. This replaces hasNotifications and hasMessages.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "profile": {
+                    "description": "The contact this stream represents.",
+                    "$ref": "Contact"
+                }
+            },
+            "required": [
+                "available",
+                "averageDailyMessages",
+                "canHaveChildren",
+                "canHaveChildstreams",
+                "canSetChannels",
+                "channels",
+                "childtypes",
+                "description",
+                "hasMessages",
+                "hasNotifications",
+                "id",
+                "incoming",
+                "lastRefresh",
+                "name",
+                "network",
+                "nextRefresh",
+                "outgoing",
+                "priority",
+                "service",
+                "type"
+            ]
+        },
+        "Network": {
+            "id": "Network",
+            "description": "Class Base",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "limitations": {
+                    "$ref": "NetworkLimitations"
+                }
+            },
+            "required": [
+                "icon",
+                "name",
+                "token"
+            ]
+        },
+        "Contact": {
+            "id": "Contact",
+            "properties": {
+                "following": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "displayname": {
+                    "description": "The full name of the user that should be used in general clients.",
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Full name OR last name (if firstname is not null)",
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "description": "URL to the avatar of this contact.",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "URL to the public profile of this contact.",
+                    "type": "string"
+                },
+                "network": {
+                    "description": "Social network this specific contact comes from",
+                    "$ref": "Network"
+                }
+            },
+            "required": [
+                "avatar",
+                "displayname",
+                "following",
+                "id",
+                "name",
+                "network"
+            ]
+        },
+        "NetworkLimitations": {
+            "id": "NetworkLimitations",
+            "properties": {
+                "max-length": {
+                    "description": "Maximum length of a message.",
+                    "$ref": "NetworkLimitation"
+                },
+                "max-length-hardlimit": {
+                    "description": "Absolute maximum length of a message, including attachments.",
+                    "$ref": "NetworkLimitation"
+                },
+                "picture-url-length": {
+                    "description": "Amount of characters an image url will take up.",
+                    "$ref": "NetworkLimitation"
+                },
+                "url-length": {
+                    "description": "Amount of characters a link will take up.",
+                    "$ref": "NetworkLimitation"
+                },
+                "include-title-in-max-length": {
+                    "description": "TRUE if the subject will be added to the body.",
+                    "$ref": "NetworkLimitationBoolean"
+                },
+                "title-spacing-length": {
+                    "description": "Amount of characters that will be added to the subject.",
+                    "$ref": "NetworkLimitation"
+                },
+                "images": {
+                    "description": "Amount of images you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                },
+                "link": {
+                    "description": "Amount of links you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                },
+                "video": {
+                    "description": "Amount of videos you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                }
+            }
+        },
+        "NetworkLimitation": {
+            "id": "NetworkLimitation",
+            "properties": {
+                "limit": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "MAXIMUM",
+                        "MINIMUM"
+                    ]
+                }
+            },
+            "required": [
+                "limit"
+            ]
+        },
+        "NetworkLimitationBoolean": {
+            "id": "NetworkLimitationBoolean",
+            "properties": {
+                "limit": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "limit"
+            ]
+        },
+        "StreamOutput": {
+            "id": "StreamOutput",
+            "properties": {
+                "stream": {
+                    "$ref": "Stream"
+                }
+            },
+            "required": [
+                "stream"
+            ]
+        },
+        "StreamMessageOutput": {
+            "id": "StreamMessageOutput",
+            "properties": {
+                "stream": {
+                    "$ref": "StreamMessage"
+                }
+            },
+            "required": [
+                "stream"
+            ]
+        },
+        "MessageInput": {
+            "id": "MessageInput",
+            "properties": {
+                "body": {
+                    "$ref": "MessageBody"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "attachments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "AttachmentInput"
+                    }
+                },
+                "streams": {
+                    "description": "Set the stream ids of the streams where this message will be sent. Can be left empty if variations are provided.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "variations": {
+                    "description": "Provide variations on the original message. If streams array is not set, you can use this array to define where this message should be sent.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "MessageVariation"
+                    }
+                },
+                "schedule": {
+                    "description": "Set schedule for this message.",
+                    "$ref": "Schedule"
+                },
+                "originalMessage": {
+                    "description": "Set this to notify the system that this is a reply on an existing message",
+                    "type": "integer"
+                },
+                "campaign": {
+                    "description": "Campaign id. If set, the message will be added to the specified campaign.",
+                    "type": "integer"
+                },
+                "campaignName": {
+                    "description": "If set, a campaign with given name will be created and the message will be added to this new campaign.",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "body"
+            ]
+        },
+        "StreamMessagesOutput": {
+            "id": "StreamMessagesOutput",
+            "properties": {
+                "stream": {
+                    "$ref": "StreamMessages"
+                }
+            },
+            "required": [
+                "stream"
+            ]
+        },
+        "StreamMessage": {
+            "id": "StreamMessage",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "message": {
+                    "$ref": "Message"
+                }
+            },
+            "required": [
+                "id",
+                "message"
+            ]
+        },
+        "MessageBody": {
+            "id": "MessageBody",
+            "properties": {
+                "plaintext": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                }
+            }
+        },
+        "AttachmentInput": {
+            "id": "AttachmentInput",
+            "properties": {
+                "type": {
+                    "description": "The type of the attachment",
+                    "type": "string",
+                    "enum": [
+                        "image",
+                        "link"
+                    ]
+                },
+                "url": {
+                    "description": "URL to the publicly available content",
+                    "type": "string"
+                },
+                "data": {
+                    "description": "Base64 data representation of the content",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "MessageVariation": {
+            "id": "MessageVariation",
+            "properties": {
+                "stream": {
+                    "description": "Stream id",
+                    "type": "integer"
+                },
+                "body": {
+                    "$ref": "MessageBody"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "attachments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "AttachmentInput"
+                    }
+                },
+                "excludes": {
+                    "description": "If provided, ignore the attachments with array indexes provided in this array.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "MessageExclude"
+                    }
+                },
+                "schedule": {
+                    "description": "If provided, overwrite the schedule for this variation of the message.",
+                    "$ref": "Schedule"
+                }
+            },
+            "required": [
+                "stream"
+            ]
+        },
+        "Schedule": {
+            "id": "Schedule",
+            "properties": {
+                "date": {
+                    "description": "UNIX timestamp of the first/next scheduled item. Can be UNIX timestamp or ISO 8601 date",
+                    "$ref": "integer|string"
+                },
+                "repeat": {
+                    "$ref": "ScheduleRepeat"
+                }
+            },
+            "required": [
+                "date"
+            ]
+        },
+        "StreamMessages": {
+            "id": "StreamMessages",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "messages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Message"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "messages"
+            ]
+        },
+        "Message": {
+            "id": "Message",
+            "description": "Class Message",
+            "properties": {
+                "attachments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Attachment"
+                    }
+                },
+                "body": {
+                    "$ref": "MessageBody"
+                },
+                "schedule": {
+                    "description": "Schedule for this message.",
+                    "$ref": "Schedule"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "from": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Contact"
+                    }
+                },
+                "to": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Contact"
+                    }
+                },
+                "lang": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "body"
+            ]
+        },
+        "MessageExclude": {
+            "id": "MessageExclude",
+            "properties": {
+                "attachments": {
+                    "description": "Indexes of attachments of the base message that will be excluded in this variation.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "ScheduleRepeat": {
+            "id": "ScheduleRepeat",
+            "properties": {
+                "interval": {
+                    "description": "The minimal amount of seconds between 2 repeating posts",
+                    "type": "integer"
+                },
+                "until": {
+                    "description": "UNIX timestamp of the last scheduled item. Can be UNIX timestamp or ISO 8601 date",
+                    "$ref": "integer|string"
+                },
+                "amount": {
+                    "description": "Amount of times we want to repeat this message. If combined with until, the lowest value will be used.",
+                    "type": "integer"
+                },
+                "weekdays": {
+                    "description": "Contains an array of uppercase english weekdays. If provided, only send if the schedule date falls in one of the provided dates.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "string<MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY>"
+                    }
+                },
+                "hours": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided dates.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "minutes": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided minutes.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "days": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided month days.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "months": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided months.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "years": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided years.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "interval"
+            ]
+        },
+        "Attachment": {
+            "id": "Attachment",
+            "description": "Class Attachment\r \r Represent an attachment that will be sent with the message.\r (Or is received from a message.)",
+            "properties": {
+                "type": {
+                    "description": "The type of the attachment",
+                    "type": "string",
+                    "enum": [
+                        "image",
+                        "link"
+                    ]
+                },
+                "url": {
+                    "description": "URL to the publicly available content",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "StreamMessageIdsOutput": {
+            "id": "StreamMessageIdsOutput",
+            "properties": {
+                "stream": {
+                    "$ref": "StreamMessageIds"
+                }
+            },
+            "required": [
+                "stream"
+            ]
+        },
+        "StreamMessageIds": {
+            "id": "StreamMessageIds",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "messages": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "messages"
+            ]
+        },
+        "StreamActionsOutput": {
+            "id": "StreamActionsOutput",
+            "properties": {
+                "stream": {
+                    "$ref": "StreamActions"
+                }
+            },
+            "required": [
+                "stream"
+            ]
+        },
+        "StreamActions": {
+            "id": "StreamActions",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "actions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Action"
+                    }
+                }
+            },
+            "required": [
+                "actions",
+                "id"
+            ]
+        },
+        "Action": {
+            "id": "Action",
+            "description": "Represent an action that a user can execute on a given message\r \r Class Action",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "parameters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Parameter"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "stream": {
+                    "$ref": "Stream"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "parameters",
+                "stream",
+                "token",
+                "type"
+            ]
+        },
+        "Parameter": {
+            "id": "Parameter",
+            "description": "Represents a parameter in a message\r \r Class Parameter",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "required",
+                "token",
+                "type",
+                "value"
+            ]
+        },
+        "StreamCountersOutput": {
+            "id": "StreamCountersOutput",
+            "properties": {
+                "stream": {
+                    "$ref": "StreamCounters"
+                }
+            },
+            "required": [
+                "stream"
+            ]
+        },
+        "StreamCounters": {
+            "id": "StreamCounters",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "counters": {
+                    "$ref": "Counter"
+                }
+            },
+            "required": [
+                "counters",
+                "id"
+            ]
+        },
+        "Counter": {
+            "id": "Counter",
+            "properties": {
+                "total": {
+                    "$ref": "CounterTotal"
+                },
+                "intervals": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "CountInterval"
+                    }
+                }
+            },
+            "required": [
+                "intervals",
+                "total"
+            ]
+        },
+        "CounterTotal": {
+            "id": "CounterTotal",
+            "properties": {
+                "incoming": {
+                    "type": "integer"
+                },
+                "unread": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "incoming",
+                "unread"
+            ]
+        },
+        "CountInterval": {
+            "id": "CountInterval",
+            "description": "Class CountInterval",
+            "properties": {
+                "entities": {
+                    "type": "array"
+                },
+                "interval": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "entities",
+                "interval"
+            ]
+        },
+        "ContactOutput": {
+            "id": "ContactOutput",
+            "properties": {
+                "contact": {
+                    "$ref": "Contact"
+                }
+            },
+            "required": [
+                "contact"
+            ]
+        },
+        "SuccessResult": {
+            "id": "SuccessResult",
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "success"
+            ]
+        },
+        "StreamValidateOutput": {
+            "id": "StreamValidateOutput",
+            "properties": {
+                "stream": {
+                    "type": "integer"
+                },
+                "valid": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "stream",
+                "valid"
+            ]
+        },
+        "StreamFollowingOutput": {
+            "id": "StreamFollowingOutput",
+            "properties": {
+                "stream": {
+                    "$ref": "StreamFollowing"
+                }
+            },
+            "required": [
+                "stream"
+            ]
+        },
+        "StreamFollowing": {
+            "id": "StreamFollowing",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "followers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Contact"
+                    }
+                }
+            },
+            "required": [
+                "followers",
+                "id"
+            ]
+        },
+        "StreamFollowersOutput": {
+            "id": "StreamFollowersOutput",
+            "properties": {
+                "stream": {
+                    "$ref": "StreamFollowers"
+                }
+            },
+            "required": [
+                "stream"
+            ]
+        },
+        "StreamFollowers": {
+            "id": "StreamFollowers",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "followers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Contact"
+                    }
+                }
+            },
+            "required": [
+                "followers",
+                "id"
+            ]
+        },
+        "StreamStatisticsOutput": {
+            "id": "StreamStatisticsOutput",
+            "properties": {
+                "stream": {
+                    "$ref": "StreamStatistics"
+                }
+            }
+        },
+        "StreamStatistics": {
+            "id": "StreamStatistics",
+            "properties": {
+                "id": {
+                    "description": "Stream id of the corresponding stream",
+                    "type": "integer"
+                },
+                "contacts": {
+                    "description": "Information about the contacts. Can be StatisticsEntityContacts or integer.",
+                    "$ref": "StatisticsEntityContacts"
+                },
+                "messages": {
+                    "description": "Information about the messages. Can be StatisticsEntityMessages or integer.",
+                    "$ref": "StatisticsEntityMessages"
+                },
+                "notifications": {
+                    "description": "Information about all incoming notifications. Can be StatisticsEntityNotifications or integer.",
+                    "$ref": "StatisticsEntityNotifications"
+                },
+                "activities": {
+                    "description": "Information about all outgoing activities. Can be StatisticsEntityActivities or integer.",
+                    "$ref": "StatisticsEntityActivities"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "activities",
+                "contacts",
+                "id",
+                "messages",
+                "notifications"
+            ]
+        },
+        "StatisticsEntityContacts": {
+            "id": "StatisticsEntityContacts",
+            "properties": {
+                "total": {
+                    "description": "The most general total amount of followers",
+                    "type": "integer"
+                },
+                "types": {
+                    "$ref": "StatisticsContactsTypes"
+                },
+                "age": {
+                    "description": "If no information is available for a given interval, 0 is given.",
+                    "$ref": "StatisticsContactsAge"
+                },
+                "gender": {
+                    "$ref": "StatisticsContactsGender"
+                },
+                "geo": {
+                    "$ref": "StatisticsContactsGeo"
+                },
+                "professional": {
+                    "$ref": "StatisticsContactsProfessional"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "total"
+            ]
+        },
+        "StatisticsEntityMessages": {
+            "id": "StatisticsEntityMessages",
+            "properties": {
+                "total": {
+                    "description": "The most general total amount of messages / posts / tweets we have sent.",
+                    "type": "integer"
+                },
+                "types": {
+                    "$ref": "StatisticsMessageTypes"
+                },
+                "bestTimeToPost": {
+                    "$ref": "StatisticsMessageBestTimeToPost"
+                },
+                "impressions": {
+                    "description": "Total amount of impressions (lifetime or cloudwalkers lifetime) of all your posts summed up.",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "total"
+            ]
+        },
+        "StatisticsEntityNotifications": {
+            "id": "StatisticsEntityNotifications",
+            "properties": {
+                "total": {
+                    "description": "Total amount of incoming notifications (+1's, likes, comments, shares, mentions, retweets, ...).",
+                    "type": "integer"
+                },
+                "types": {
+                    "$ref": "StatisticsNotificationsTypes"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "total"
+            ]
+        },
+        "StatisticsEntityActivities": {
+            "id": "StatisticsEntityActivities",
+            "properties": {
+                "total": {
+                    "description": "Total amount of activities (= outgoing notifications) (+1's, likes, comments, shares of third party messages)",
+                    "type": "integer"
+                },
+                "types": {
+                    "$ref": "StatisticsNotificationsTypes"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "total"
+            ]
+        },
+        "StatisticsEntityGroup": {
+            "id": "StatisticsEntityGroup",
+            "properties": {
+                "{Attribute}": {
+                    "type": "integer"
+                }
+            }
+        },
+        "StatisticsContactsTypes": {
+            "id": "StatisticsContactsTypes",
+            "properties": {
+                "followers": {
+                    "description": "Total amount of people that are following me",
+                    "type": "integer"
+                },
+                "following": {
+                    "description": "Total amount of people that you are following",
+                    "type": "integer"
+                },
+                "listed": {
+                    "description": "Total amount of lists that your account is mentioned in.",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            }
+        },
+        "StatisticsContactsAge": {
+            "id": "StatisticsContactsAge",
+            "properties": {
+                "0-12": {
+                    "description": "Total amount of contacts aged 0-12",
+                    "type": "integer"
+                },
+                "13-17": {
+                    "description": "Total amount of contacts aged 13-17",
+                    "type": "integer"
+                },
+                "18-24": {
+                    "description": "Total amount of contacts aged 18-24",
+                    "type": "integer"
+                },
+                "25-34": {
+                    "description": "Total amount of contacts aged 25-34",
+                    "type": "integer"
+                },
+                "35-44": {
+                    "description": "Total amount of contacts aged 35-44",
+                    "type": "integer"
+                },
+                "44-54": {
+                    "description": "Total amount of contacts aged 44-54",
+                    "type": "integer"
+                },
+                "55-64": {
+                    "description": "Total amount of contacts aged 55-64",
+                    "type": "integer"
+                },
+                "65-74": {
+                    "description": "Total amount of contacts aged 65-74",
+                    "type": "integer"
+                },
+                "75+": {
+                    "description": "Total amount of contacts aged 75+",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "0-12",
+                "13-17",
+                "18-24",
+                "25-34",
+                "35-44",
+                "44-54",
+                "55-64",
+                "65-74",
+                "75+"
+            ]
+        },
+        "StatisticsContactsGender": {
+            "id": "StatisticsContactsGender",
+            "properties": {
+                "male": {
+                    "description": "Total amount of male contacts",
+                    "type": "integer"
+                },
+                "female": {
+                    "description": "Total amount of female contacts",
+                    "type": "integer"
+                },
+                "other": {
+                    "description": "Total amount of other contacts",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "female",
+                "male"
+            ]
+        },
+        "StatisticsContactsGeo": {
+            "id": "StatisticsContactsGeo",
+            "properties": {
+                "countries": {
+                    "description": "Users grouped by countries",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsContactsCountries"
+                    }
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "countries"
+            ]
+        },
+        "StatisticsContactsProfessional": {
+            "id": "StatisticsContactsProfessional",
+            "properties": {
+                "functions": {
+                    "description": "Total amount of contacts grouped by their function.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsContactsFunctions"
+                    }
+                },
+                "industries": {
+                    "description": "Total amount of contacts grouped by their industry.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsContactsIndustries"
+                    }
+                },
+                "senorities": {
+                    "description": "Total amount of contacts grouped by their senorities.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsContactsSenorities"
+                    }
+                },
+                "companySizes": {
+                    "description": "Total amount of contacts grouped by the size of the company they work for.",
+                    "$ref": "StatisticsContactsCompanySizes"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            }
+        },
+        "StatisticsMessageTypes": {
+            "id": "StatisticsMessageTypes",
+            "properties": {
+                "shares": {
+                    "description": "Total amount of messages (tweets, shares, etc) of third party users we have shared (or retweeted) on our profile.",
+                    "type": "integer"
+                },
+                "posts": {
+                    "description": "Total amount of regular posts (tweets, shares, etc) we've done.",
+                    "type": "integer"
+                },
+                "dms": {
+                    "description": "Total amount of direct messages we have sent.",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "dms",
+                "posts",
+                "shares"
+            ]
+        },
+        "StatisticsMessageBestTimeToPost": {
+            "id": "StatisticsMessageBestTimeToPost",
+            "properties": {
+                "0": {
+                    "description": "Probability percentage for activity between 00:00 and 01:00 GMT",
+                    "type": "integer"
+                },
+                "1": {
+                    "description": "Probability percentage for activity between 01:00 and 02:00 GMT",
+                    "type": "integer"
+                },
+                "2": {
+                    "description": "Probability percentage for activity between 02:00 and 03:00 GMT",
+                    "type": "integer"
+                },
+                "3": {
+                    "description": "Probability percentage for activity between 03:00 and 04:00 GMT",
+                    "type": "integer"
+                },
+                "4": {
+                    "description": "Probability percentage for activity between 04:00 and 05:00 GMT",
+                    "type": "integer"
+                },
+                "5": {
+                    "description": "Probability percentage for activity between 05:00 and 06:00 GMT",
+                    "type": "integer"
+                },
+                "6": {
+                    "description": "Probability percentage for activity between 06:00 and 07:00 GMT",
+                    "type": "integer"
+                },
+                "7": {
+                    "description": "Probability percentage for activity between 07:00 and 08:00 GMT",
+                    "type": "integer"
+                },
+                "8": {
+                    "description": "Probability percentage for activity between 08:00 and 09:00 GMT",
+                    "type": "integer"
+                },
+                "9": {
+                    "description": "Probability percentage for activity between 09:00 and 10:00 GMT",
+                    "type": "integer"
+                },
+                "10": {
+                    "description": "Probability percentage for activity between 10:00 and 11:00 GMT",
+                    "type": "integer"
+                },
+                "11": {
+                    "description": "Probability percentage for activity between 11:00 and 12:00 GMT",
+                    "type": "integer"
+                },
+                "12": {
+                    "description": "Probability percentage for activity between 12:00 and 13:00 GMT",
+                    "type": "integer"
+                },
+                "13": {
+                    "description": "Probability percentage for activity between 13:00 and 14:00 GMT",
+                    "type": "integer"
+                },
+                "14": {
+                    "description": "Probability percentage for activity between 14:00 and 15:00 GMT",
+                    "type": "integer"
+                },
+                "15": {
+                    "description": "Probability percentage for activity between 15:00 and 16:00 GMT",
+                    "type": "integer"
+                },
+                "16": {
+                    "description": "Probability percentage for activity between 16:00 and 17:00 GMT",
+                    "type": "integer"
+                },
+                "17": {
+                    "description": "Probability percentage for activity between 17:00 and 18:00 GMT",
+                    "type": "integer"
+                },
+                "18": {
+                    "description": "Probability percentage for activity between 18:00 and 19:00 GMT",
+                    "type": "integer"
+                },
+                "19": {
+                    "description": "Probability percentage for activity between 19:00 and 20:00 GMT",
+                    "type": "integer"
+                },
+                "20": {
+                    "description": "Probability percentage for activity between 20:00 and 21:00 GMT",
+                    "type": "integer"
+                },
+                "21": {
+                    "description": "Probability percentage for activity between 21:00 and 22:00 GMT",
+                    "type": "integer"
+                },
+                "22": {
+                    "description": "Probability percentage for activity between 22:00 and 23:00 GMT",
+                    "type": "integer"
+                },
+                "23": {
+                    "description": "Probability percentage for activity between 23:00 and 00:00 GMT",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16",
+                "17",
+                "18",
+                "19",
+                "20",
+                "21",
+                "22",
+                "23"
+            ]
+        },
+        "StatisticsNotificationsTypes": {
+            "id": "StatisticsNotificationsTypes",
+            "properties": {
+                "favourites": {
+                    "description": "Total amount of favourites (likes, ...) we have received on all our posts.",
+                    "type": "integer"
+                },
+                "comments": {
+                    "description": "Total amount of all comments (mentions, ...) we have received on all our posts.",
+                    "type": "integer"
+                },
+                "shares": {
+                    "description": "Total amount of times any of our messages have been shared (retweets, ...).",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "comments",
+                "favourites"
+            ]
+        },
+        "StatisticsContactsCountries": {
+            "id": "StatisticsContactsCountries",
+            "properties": {
+                "name": {
+                    "description": "Country name",
+                    "type": "string"
+                },
+                "total": {
+                    "description": "Total amount of contacts from this country",
+                    "type": "integer"
+                },
+                "cities": {
+                    "description": "Contacts grouped by city",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsContactsCities"
+                    }
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "total"
+            ]
+        },
+        "StatisticsContactsFunctions": {
+            "id": "StatisticsContactsFunctions",
+            "properties": {
+                "name": {
+                    "description": "Function of the contacts",
+                    "type": "string"
+                },
+                "total": {
+                    "description": "Total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "total"
+            ]
+        },
+        "StatisticsContactsIndustries": {
+            "id": "StatisticsContactsIndustries",
+            "properties": {
+                "name": {
+                    "description": "Industry the contacts work in",
+                    "type": "string"
+                },
+                "total": {
+                    "description": "Total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "total"
+            ]
+        },
+        "StatisticsContactsSenorities": {
+            "id": "StatisticsContactsSenorities",
+            "properties": {
+                "name": {
+                    "description": "Seniority of the contacts",
+                    "type": "string"
+                },
+                "total": {
+                    "description": "Total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "total"
+            ]
+        },
+        "StatisticsContactsCompanySizes": {
+            "id": "StatisticsContactsCompanySizes",
+            "properties": {
+                "1": {
+                    "description": "1 employee",
+                    "type": "integer"
+                },
+                "2-10": {
+                    "description": "2-10 employees",
+                    "type": "integer"
+                },
+                "11-50": {
+                    "description": "11-50 employees",
+                    "type": "integer"
+                },
+                "51-200": {
+                    "description": "51-200 employees",
+                    "type": "integer"
+                },
+                "201-500": {
+                    "description": "201-500 employees",
+                    "type": "integer"
+                },
+                "501-1000": {
+                    "description": "501-1000 employees",
+                    "type": "integer"
+                },
+                "1001-5000": {
+                    "description": "1001-5000 employees",
+                    "type": "integer"
+                },
+                "5001-10000": {
+                    "description": "5001-10000 employees",
+                    "type": "integer"
+                },
+                "10000+": {
+                    "description": "More then 10000 employees",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "1",
+                "10000+",
+                "1001-5000",
+                "11-50",
+                "2-10",
+                "201-500",
+                "5001-10000",
+                "501-1000",
+                "51-200"
+            ]
+        },
+        "StatisticsContactsCities": {
+            "id": "StatisticsContactsCities",
+            "properties": {
+                "name": {
+                    "description": "City name",
+                    "type": "string"
+                },
+                "total": {
+                    "description": "Total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "total"
+            ]
+        },
+        "StreamBesttimetopostOutput": {
+            "id": "StreamBesttimetopostOutput",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "besttimetopost": {
+                    "$ref": "StatisticsMessageBestTimeToPost"
+                }
+            },
+            "required": [
+                "besttimetopost",
+                "id"
+            ]
+        }
+    }
+}

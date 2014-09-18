@@ -1,0 +1,116 @@
+{
+    "authorizations": {
+        "oauth2": {
+            "type": "oauth2",
+            "scopes": [
+                {
+                    "scope": "users",
+                    "description": "Access to user endpoint"
+                },
+                {
+                    "scope": "write:users",
+                    "description": "Access to user write endpoint"
+                }
+            ],
+            "grantTypes": {
+                "implicit": {
+                    "loginEndpoint": {
+                        "url": "https://devapi.cloudwalkers.be/oauth2/register"
+                    },
+                    "tokenName": "access_token"
+                },
+                "authorization_code": {
+                    "tokenRequestEndpoint": {
+                        "url": "https://devapi.cloudwalkers.be/oauth2/authorize",
+                        "clientIdName": "client_id",
+                        "clientSecretName": "client_secret"
+                    },
+                    "tokenEndpoint": {
+                        "url": "https://devapi.cloudwalkers.be/oauth2/token",
+                        "tokenName": "access_code"
+                    }
+                }
+            }
+        }
+    },
+    "apiVersion": "1",
+    "swaggerVersion": "1.2",
+    "apis": [
+        {
+            "path": "/accounts.{format}",
+            "description": "Account information"
+        },
+        {
+            "path": "/admin.{format}",
+            "description": "Admin management endpoint"
+        },
+        {
+            "path": "/campaigns.{format}",
+            "description": "Account campaign information"
+        },
+        {
+            "path": "/channels.{format}",
+            "description": "Operation on channels"
+        },
+        {
+            "path": "/contacts.{format}",
+            "description": "Account contact information"
+        },
+        {
+            "path": "/group.{format}",
+            "description": "Group management"
+        },
+        {
+            "path": "/log.{format}",
+            "description": "Log errors"
+        },
+        {
+            "path": "/mailer.{format}",
+            "description": "Mailer bounces and emails management"
+        },
+        {
+            "path": "/messages.{format}",
+            "description": "Return message tags"
+        },
+        {
+            "path": "/notes.{format}",
+            "description": "Operations on notes"
+        },
+        {
+            "path": "/notifications.{format}",
+            "description": "Operation on notifications"
+        },
+        {
+            "path": "/reports.{format}",
+            "description": "Operation on reports"
+        },
+        {
+            "path": "/reseller.{format}",
+            "description": "Reseller account area. Only available to resellers"
+        },
+        {
+            "path": "/services.{format}",
+            "description": "Get all information about a service"
+        },
+        {
+            "path": "/streams.{format}",
+            "description": "Operation on streams"
+        },
+        {
+            "path": "/tags.{format}",
+            "description": "Tags information"
+        },
+        {
+            "path": "/triggers.{format}",
+            "description": "Operations on triggers"
+        },
+        {
+            "path": "/urlshortener.{format}",
+            "description": "Shorten an URL"
+        },
+        {
+            "path": "/users.{format}",
+            "description": "Operations on users"
+        }
+    ]
+}

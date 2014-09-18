@@ -1,0 +1,1186 @@
+{
+    "basePath": "https://devapi.cloudwalkers.be",
+    "swaggerVersion": "1.2",
+    "apiVersion": "1",
+    "resourcePath": "/contacts",
+    "apis": [
+        {
+            "path": "/accounts/{accountId}/contactids",
+            "description": "Account contact information",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Search for contacts and return ids",
+                    "nickname": "getSearchContactIds",
+                    "type": "AccountContactIdsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "q",
+                            "type": "string",
+                            "description": "The query string to filter contacts."
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "string",
+                            "description": "Account ID"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/contactids/following",
+            "description": "Get all contact ids that we are following",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get all contact ids that this account is following",
+                    "nickname": "getContactIdsFollowing",
+                    "type": "AccountContactIdsOutput"
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/contacts",
+            "description": "Account contact information",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Look for a contact with a given profile URL and add to following list",
+                    "nickname": "addContact",
+                    "type": "Contact",
+                    "parameters": [
+                        {
+                            "paramType": "body",
+                            "type": "ContactUrlInput"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Acount id"
+                        }
+                    ]
+                },
+                {
+                    "method": "GET",
+                    "summary": "Search for contacts",
+                    "nickname": "getSearchContacts",
+                    "type": "AccountContactsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "q",
+                            "type": "string",
+                            "description": "The query string to filter contacts."
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "string",
+                            "description": "Account ID"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/contacts/following",
+            "description": "Get all contacts that we are following",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get all contacts that this account is following",
+                    "nickname": "getContactsFollowing",
+                    "type": "AccountContactsOutput"
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/contacts/search/{network}",
+            "description": "Do a public search on the social network.",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get all contacts that this account is following",
+                    "nickname": "getPublicContactSearch",
+                    "type": "AccountContactsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "q",
+                            "type": "string",
+                            "required": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/contacts/{contactId}",
+            "description": "Account contact information",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get account specific information about a contact.",
+                    "nickname": "dispatch_0",
+                    "type": "ContactOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Acount id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "contactId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Contact id"
+                        }
+                    ]
+                },
+                {
+                    "method": "PUT",
+                    "summary": "Set account specific settings for a contact",
+                    "nickname": "dispatch_1",
+                    "type": "ContactOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Acount id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "contactId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Contact id"
+                        },
+                        {
+                            "paramType": "body",
+                            "type": "ContactInput"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/contacts/{contactId}/conversationids",
+            "description": "Return relevant conversation ids between this account and the contact.",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return relevant conversation ids between this account and the contact.",
+                    "nickname": "getContactConversationIds",
+                    "type": "ContactConversationIds",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Acount id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "contactId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Contact id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/contacts/{contactId}/conversations",
+            "description": "Return relevant conversations between this account and the contact.",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return relevant conversations between this account and the contact.",
+                    "nickname": "getContactConversations_0",
+                    "type": "ContactMessagesOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Acount id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "contactId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Contact id"
+                        }
+                    ]
+                },
+                {
+                    "method": "GET",
+                    "summary": "For given ids, return conversations between this account and the contact.",
+                    "nickname": "getContactConversations_1",
+                    "type": "ContactMessagesOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Acount id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "contactId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Contact id"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "ids",
+                            "type": "string",
+                            "required": true,
+                            "description": "Ids of requested messages"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/contacts/{contactId}/messages",
+            "description": "Return the last messages that this contact have posted.",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return the last messages that this contact have posted.",
+                    "nickname": "getContactMessages",
+                    "type": "ContactMessagesOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Acount id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "contactId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Contact id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/contacts/{contactId}/noteids",
+            "description": "Return all notes ids posted on this contact.",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return all notes ids posted on this contact.",
+                    "nickname": "getNotesIds",
+                    "type": "ContactNotesIdsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Acount id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "contactId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Contact id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/contacts/{contactId}/notes",
+            "description": "Account contact information",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Create a note",
+                    "nickname": "createNote",
+                    "type": "NoteOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Acount id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "contactId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Contact id"
+                        },
+                        {
+                            "paramType": "body",
+                            "type": "NoteInput",
+                            "required": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/contacts/{contactId}/notes",
+            "description": "Return all notes posted on this contact or notes for given ids.",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return all notes posted on this contact or notes for given ids.",
+                    "nickname": "getNotes",
+                    "type": "ContactNotesOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Acount id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "contactId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Contact id"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "ids",
+                            "type": "string",
+                            "required": false,
+                            "description": "Only get the notes with given ids (comma separated list)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/contacts/{contactId}/tagids",
+            "description": "Get account contact tags ids",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get message tags from ids",
+                    "nickname": "getmessagetagids",
+                    "type": "MessageTagIdsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "contactId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Contact id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/contacts/{contactId}/tags",
+            "description": "Return account contact tags",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return account contact tags",
+                    "nickname": "getaccountcontact",
+                    "type": "MessageTagsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "contactId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Contact id"
+                        }
+                    ]
+                },
+                {
+                    "method": "POST",
+                    "summary": "Tag account contact",
+                    "nickname": "postcontact",
+                    "type": "TagSingleOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "contactId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Contact id"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "id",
+                            "type": "integer",
+                            "required": false,
+                            "description": "id of tag to associate"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "name",
+                            "type": "string",
+                            "required": false,
+                            "description": "name of the new tag to associate"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/contacts/{contactId}/tags/{tagId}",
+            "description": "Delete tag from account contact",
+            "operations": [
+                {
+                    "method": "DELETE",
+                    "summary": "Delete tag from account contact",
+                    "nickname": "deletecontacttag",
+                    "type": "TagSuccess",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "contactId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Contact id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "tagId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Tag id"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "ContactOutput": {
+            "id": "ContactOutput",
+            "properties": {
+                "contact": {
+                    "$ref": "Contact"
+                }
+            },
+            "required": [
+                "contact"
+            ]
+        },
+        "ContactInput": {
+            "id": "ContactInput",
+            "properties": {
+                "following": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "Contact": {
+            "id": "Contact",
+            "properties": {
+                "following": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "displayname": {
+                    "description": "The full name of the user that should be used in general clients.",
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Full name OR last name (if firstname is not null)",
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "description": "URL to the avatar of this contact.",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "URL to the public profile of this contact.",
+                    "type": "string"
+                },
+                "network": {
+                    "description": "Social network this specific contact comes from",
+                    "$ref": "Network"
+                }
+            },
+            "required": [
+                "avatar",
+                "displayname",
+                "following",
+                "id",
+                "name",
+                "network"
+            ]
+        },
+        "Network": {
+            "id": "Network",
+            "description": "Class Base",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "limitations": {
+                    "$ref": "NetworkLimitations"
+                }
+            },
+            "required": [
+                "icon",
+                "name",
+                "token"
+            ]
+        },
+        "NetworkLimitations": {
+            "id": "NetworkLimitations",
+            "properties": {
+                "max-length": {
+                    "description": "Maximum length of a message.",
+                    "$ref": "NetworkLimitation"
+                },
+                "max-length-hardlimit": {
+                    "description": "Absolute maximum length of a message, including attachments.",
+                    "$ref": "NetworkLimitation"
+                },
+                "picture-url-length": {
+                    "description": "Amount of characters an image url will take up.",
+                    "$ref": "NetworkLimitation"
+                },
+                "url-length": {
+                    "description": "Amount of characters a link will take up.",
+                    "$ref": "NetworkLimitation"
+                },
+                "include-title-in-max-length": {
+                    "description": "TRUE if the subject will be added to the body.",
+                    "$ref": "NetworkLimitationBoolean"
+                },
+                "title-spacing-length": {
+                    "description": "Amount of characters that will be added to the subject.",
+                    "$ref": "NetworkLimitation"
+                },
+                "images": {
+                    "description": "Amount of images you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                },
+                "link": {
+                    "description": "Amount of links you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                },
+                "video": {
+                    "description": "Amount of videos you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                }
+            }
+        },
+        "NetworkLimitation": {
+            "id": "NetworkLimitation",
+            "properties": {
+                "limit": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "MAXIMUM",
+                        "MINIMUM"
+                    ]
+                }
+            },
+            "required": [
+                "limit"
+            ]
+        },
+        "NetworkLimitationBoolean": {
+            "id": "NetworkLimitationBoolean",
+            "properties": {
+                "limit": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "limit"
+            ]
+        },
+        "ContactMessagesOutput": {
+            "id": "ContactMessagesOutput",
+            "properties": {
+                "contact": {
+                    "$ref": "ContactMessages"
+                }
+            },
+            "required": [
+                "contact"
+            ]
+        },
+        "ContactMessages": {
+            "id": "ContactMessages",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "messages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Message"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "messages"
+            ]
+        },
+        "Message": {
+            "id": "Message",
+            "description": "Class Message",
+            "properties": {
+                "attachments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Attachment"
+                    }
+                },
+                "body": {
+                    "$ref": "MessageBody"
+                },
+                "schedule": {
+                    "description": "Schedule for this message.",
+                    "$ref": "Schedule"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "from": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Contact"
+                    }
+                },
+                "to": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Contact"
+                    }
+                },
+                "lang": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "body"
+            ]
+        },
+        "Attachment": {
+            "id": "Attachment",
+            "description": "Class Attachment\r \r Represent an attachment that will be sent with the message.\r (Or is received from a message.)",
+            "properties": {
+                "type": {
+                    "description": "The type of the attachment",
+                    "type": "string",
+                    "enum": [
+                        "image",
+                        "link"
+                    ]
+                },
+                "url": {
+                    "description": "URL to the publicly available content",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "MessageBody": {
+            "id": "MessageBody",
+            "properties": {
+                "plaintext": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                }
+            }
+        },
+        "Schedule": {
+            "id": "Schedule",
+            "properties": {
+                "date": {
+                    "description": "UNIX timestamp of the first/next scheduled item. Can be UNIX timestamp or ISO 8601 date",
+                    "$ref": "integer|string"
+                },
+                "repeat": {
+                    "$ref": "ScheduleRepeat"
+                }
+            },
+            "required": [
+                "date"
+            ]
+        },
+        "ScheduleRepeat": {
+            "id": "ScheduleRepeat",
+            "properties": {
+                "interval": {
+                    "description": "The minimal amount of seconds between 2 repeating posts",
+                    "type": "integer"
+                },
+                "until": {
+                    "description": "UNIX timestamp of the last scheduled item. Can be UNIX timestamp or ISO 8601 date",
+                    "$ref": "integer|string"
+                },
+                "amount": {
+                    "description": "Amount of times we want to repeat this message. If combined with until, the lowest value will be used.",
+                    "type": "integer"
+                },
+                "weekdays": {
+                    "description": "Contains an array of uppercase english weekdays. If provided, only send if the schedule date falls in one of the provided dates.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "string<MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY>"
+                    }
+                },
+                "hours": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided dates.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "minutes": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided minutes.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "days": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided month days.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "months": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided months.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "years": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided years.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "interval"
+            ]
+        },
+        "ContactConversationIds": {
+            "id": "ContactConversationIds",
+            "properties": {
+                "contact": {
+                    "$ref": "ContactMessagesIds"
+                }
+            },
+            "required": [
+                "contact"
+            ]
+        },
+        "ContactMessagesIds": {
+            "id": "ContactMessagesIds",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "messages": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "messages"
+            ]
+        },
+        "ContactNotesOutput": {
+            "id": "ContactNotesOutput",
+            "properties": {
+                "contact": {
+                    "$ref": "ContactNotes"
+                }
+            },
+            "required": [
+                "contact"
+            ]
+        },
+        "ContactNotes": {
+            "id": "ContactNotes",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "notes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Note"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "notes"
+            ]
+        },
+        "Note": {
+            "id": "Note",
+            "description": "Class Note",
+            "properties": {
+                "user": {
+                    "$ref": "UserSimple"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "identifier": {
+                    "$ref": "Identifier"
+                }
+            },
+            "required": [
+                "date",
+                "id",
+                "text"
+            ]
+        },
+        "UserSimple": {
+            "id": "UserSimple",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "displayname": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "avatar",
+                "displayname",
+                "email",
+                "firstname",
+                "id",
+                "name"
+            ]
+        },
+        "Identifier": {
+            "id": "Identifier",
+            "description": "Class Identifier\r \r This class acts like a model, but is actually just a placeholder.\r It is used to identify models without loading them completely.",
+            "properties": {
+                "objectType": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "ContactNotesIdsOutput": {
+            "id": "ContactNotesIdsOutput",
+            "properties": {
+                "contact": {
+                    "$ref": "ContactNotesIds"
+                }
+            },
+            "required": [
+                "contact"
+            ]
+        },
+        "ContactNotesIds": {
+            "id": "ContactNotesIds",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "notes": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "notes"
+            ]
+        },
+        "NoteOutput": {
+            "id": "NoteOutput",
+            "properties": {
+                "note": {
+                    "$ref": "Note"
+                }
+            },
+            "required": [
+                "note"
+            ]
+        },
+        "NoteInput": {
+            "id": "NoteInput",
+            "properties": {
+                "text": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "text"
+            ]
+        },
+        "ContactUrlInput": {
+            "id": "ContactUrlInput",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "following": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "url"
+            ]
+        },
+        "AccountContactsOutput": {
+            "id": "AccountContactsOutput",
+            "properties": {
+                "account": {
+                    "$ref": "AccountContacts"
+                }
+            },
+            "required": [
+                "account"
+            ]
+        },
+        "AccountContacts": {
+            "id": "AccountContacts",
+            "properties": {
+                "id": {
+                    "description": "Account ID",
+                    "type": "integer"
+                },
+                "contacts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Contact"
+                    }
+                }
+            },
+            "required": [
+                "contacts",
+                "id"
+            ]
+        },
+        "AccountContactIdsOutput": {
+            "id": "AccountContactIdsOutput",
+            "properties": {
+                "id": {
+                    "description": "Account ID",
+                    "type": "integer"
+                },
+                "contacts": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "contacts",
+                "id"
+            ]
+        },
+        "MessageTagsOutput": {
+            "id": "MessageTagsOutput",
+            "properties": {
+                "message": {
+                    "$ref": "MessageTags"
+                }
+            }
+        },
+        "TagSingleOutput": {
+            "id": "TagSingleOutput",
+            "properties": {
+                "tag": {
+                    "$ref": "TagSimple"
+                }
+            }
+        },
+        "MessageTags": {
+            "id": "MessageTags",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "TagSimple"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "tags"
+            ]
+        },
+        "TagSimple": {
+            "id": "TagSimple",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "MessageTagIdsOutput": {
+            "id": "MessageTagIdsOutput",
+            "properties": {
+                "message": {
+                    "$ref": "MessageTagIds"
+                }
+            },
+            "required": [
+                "message"
+            ]
+        },
+        "MessageTagIds": {
+            "id": "MessageTagIds",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "tags"
+            ]
+        },
+        "TagSuccess": {
+            "id": "TagSuccess",
+            "properties": {
+                "success": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "success"
+            ]
+        }
+    }
+}

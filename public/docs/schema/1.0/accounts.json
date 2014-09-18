@@ -1,0 +1,3402 @@
+{
+    "basePath": "https://devapi.cloudwalkers.be",
+    "swaggerVersion": "1.2",
+    "apiVersion": "1",
+    "resourcePath": "/accounts",
+    "apis": [
+        {
+            "path": "/accounts/{accountId}",
+            "description": "Account information",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get information about a specific account",
+                    "nickname": "getAccountInformation_0",
+                    "type": "AccountOutput"
+                },
+                {
+                    "method": "PUT",
+                    "summary": "Update information about a specific account",
+                    "nickname": "getAccountInformation_1",
+                    "type": "AccountOutput",
+                    "parameters": [
+                        {
+                            "paramType": "body",
+                            "type": "AccountInput",
+                            "required": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/alerts",
+            "description": "Get all alerts (errors) of a specific acccount",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get all alerts (errors) of a specific acccount",
+                    "nickname": "getAlerts",
+                    "type": "AlertsOutput"
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/filteroptions",
+            "description": "Account campaign information",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get filter options for account",
+                    "nickname": "getRegionalValues",
+                    "type": "FilterOptionsOutput"
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/licenses",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Set plan to account",
+                    "nickname": "licenses_0",
+                    "type": "PlanSetter",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
+                },
+                {
+                    "method": "GET",
+                    "summary": "Get account licenses",
+                    "nickname": "licenses_1",
+                    "type": "AccountLicenses",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/messages",
+            "description": "Operation on messages",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Create a new message",
+                    "nickname": "getMessages",
+                    "type": "MessageOutput",
+                    "parameters": [
+                        {
+                            "paramType": "body",
+                            "type": "MessageInput"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "canned",
+                            "type": "integer",
+                            "required": false,
+                            "description": "Also create a canned message"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/noteids",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get all notes ids for account",
+                    "nickname": "getNoteIds",
+                    "type": "AccountNotesIds",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "all",
+                            "type": "integer",
+                            "required": false,
+                            "description": "Set to 1 to also show all linked notes."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/notes",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get all notes for account or notes for given ids",
+                    "nickname": "getNotes",
+                    "type": "AccountNotes",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "all",
+                            "type": "integer",
+                            "required": false,
+                            "description": "Set to 1 to also show all linked notes."
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "ids",
+                            "type": "string",
+                            "required": false,
+                            "description": "Only get the notes with given ids (comma separated list)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/notes",
+            "description": "Account information",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Create a note",
+                    "nickname": "createNote",
+                    "type": "NoteOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Acount id"
+                        },
+                        {
+                            "paramType": "body",
+                            "type": "NoteInput",
+                            "required": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/ping",
+            "description": "Account updates",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get account updates",
+                    "nickname": "getPing",
+                    "type": "pong"
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/read",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Set all messages of given account to read.",
+                    "nickname": "read",
+                    "type": "SuccessResult",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "int|string",
+                            "description": "ID of the account that will have all messages set to read"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/reportids",
+            "description": "Get all reports from a certain account",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get all report ids from a certain account",
+                    "nickname": "getReportIds",
+                    "type": "ReportIdsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "streams",
+                            "type": "string",
+                            "required": false,
+                            "description": "Only get reports from given stream ids (comma seperated list)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/reports",
+            "description": "Get all reports from a certain account",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get all reports from a certain account",
+                    "nickname": "getReports",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "complete",
+                            "type": "string",
+                            "required": false,
+                            "description": "Set to 1 to receive full reports, including values"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "ids",
+                            "type": "string",
+                            "required": false,
+                            "description": "Only get reports with given ids (comma seperated list)"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "streams",
+                            "type": "string",
+                            "required": false,
+                            "description": "Only get reports from given stream ids (comma seperated list)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/rolegroups",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get account role groups and auth tokens",
+                    "nickname": "rolegroups",
+                    "type": "AccountsRoleGroups",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/serviceids",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return all services that can be managed by the current user.",
+                    "nickname": "getServiceIds",
+                    "type": "AccountServiceIdsOutput"
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/services",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return all services that can be managed by the current user.",
+                    "nickname": "getServices",
+                    "type": "AccountServicesOutput"
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/services/available",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return all services that can be added by the current user.",
+                    "nickname": "getAvailableServices",
+                    "type": "AccountServiceAvailableOutput"
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/services/{serviceToken}",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Add a new service to the account",
+                    "nickname": "addService",
+                    "type": "ServiceOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "string",
+                            "description": "Account ID"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "serviceToken",
+                            "type": "string",
+                            "description": "serviceToken must contain a token as received by /accounts/{accountId}/services/available"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/statisticids[/day|week|28days]",
+            "description": "Get all statistics from a certain account",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get all statistics from a certain account",
+                    "nickname": "getStatisticIds",
+                    "type": "AccountStatisticIdsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "streams",
+                            "type": "string",
+                            "required": false,
+                            "description": "Only get statistics from given stream ids (comma seperated list)"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "since",
+                            "type": "integer",
+                            "required": false,
+                            "description": "Unix timestamp. Get records since date."
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "until",
+                            "type": "integer",
+                            "required": false,
+                            "description": "Unix timestamp. Get records until date"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/statistics",
+            "description": "Get all statistics from a certain account",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Load statistics from given ids",
+                    "nickname": "getStatisticsFromIds",
+                    "type": "AccountStatisticsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "ids",
+                            "type": "string",
+                            "required": false,
+                            "description": "Get statistics with provided ids"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/statistics[/day|week|28days]",
+            "description": "Get all statistics from a certain account",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get all statistics from a certain account",
+                    "nickname": "getStatistics",
+                    "type": "AccountStatisticsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "streams",
+                            "type": "string",
+                            "required": false,
+                            "description": "Only get statistics from given stream ids (comma seperated list)"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "ids",
+                            "type": "string",
+                            "required": false,
+                            "description": "Only get statistics with provided ids"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/tagids/{tagId}",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "return all tag ids created in the account",
+                    "nickname": "getAccountTagIds",
+                    "type": "AccountTagIds",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/tags",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "return all tags created in the account",
+                    "nickname": "getAccountTagIds",
+                    "type": "AccountTagsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
+                },
+                {
+                    "method": "GET",
+                    "summary": "return tags from the requested id's",
+                    "nickname": "getAccountTagIds",
+                    "type": "AccountTagsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "ids",
+                            "type": "string",
+                            "required": true,
+                            "description": "comma sepparated ids"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/triggerids",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get all trigger ids for account",
+                    "nickname": "getTriggersIds",
+                    "type": "AccountTriggersIds",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/triggers",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Create a trigger",
+                    "nickname": "createTrigger",
+                    "type": "TriggerOutput",
+                    "parameters": [
+                        {
+                            "paramType": "body",
+                            "type": "TriggerInput"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
+                },
+                {
+                    "method": "GET",
+                    "summary": "Get triggers for account or triggers for given ids",
+                    "nickname": "getTriggers",
+                    "type": "AccountTriggers",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "ids",
+                            "type": "string",
+                            "required": false,
+                            "description": "Only get the notes with given ids (comma separated list)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/urlshortener/shorten",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Shorten an URL",
+                    "nickname": "shortenURL",
+                    "type": "ShortenedURLOutputPrivate",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "url",
+                            "type": "string",
+                            "required": true,
+                            "description": "URL to be shortened"
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "source",
+                            "type": "string",
+                            "required": false,
+                            "description": "The Source parameter for google analytics"
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "campaign",
+                            "type": "string",
+                            "required": false,
+                            "description": "The Campaign parameter for google analytics"
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "medium",
+                            "type": "string",
+                            "required": false,
+                            "description": "The Medium parameter for google analytics"
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "content",
+                            "type": "string",
+                            "required": false,
+                            "description": "The Content parameter for google analytics"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/urlshortener/{token}",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get a previously shortened URL. Link must be generated by this account.",
+                    "nickname": "getShortenedUrl",
+                    "type": "ShortenedURLOutputPrivate",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "token",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Shorten URL token"
+                        }
+                    ]
+                },
+                {
+                    "method": "PUT",
+                    "summary": "Shorten an URL",
+                    "nickname": "putShortenedURL",
+                    "type": "ShortenedURLOutputPrivate",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "token",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Shorten URL token"
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "source",
+                            "type": "string",
+                            "required": false,
+                            "description": "The Source parameter for google analytics"
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "campaign",
+                            "type": "string",
+                            "required": false,
+                            "description": "The Campaign parameter for google analytics"
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "medium",
+                            "type": "string",
+                            "required": false,
+                            "description": "The Medium parameter for google analytics"
+                        },
+                        {
+                            "paramType": "body",
+                            "name": "content",
+                            "type": "string",
+                            "required": false,
+                            "description": "The Content parameter for google analytics"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/users",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Add user to account, <b>Only available to resellers!</b>",
+                    "nickname": "getUserData",
+                    "type": "UserReseller",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/users/{userId}",
+            "description": "Account information",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get the user roles information",
+                    "nickname": "getUserData_0",
+                    "type": "UserRoleTokens"
+                },
+                {
+                    "method": "PUT",
+                    "summary": "Update user role",
+                    "nickname": "getUserData_1",
+                    "type": "UserRoleTokens",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "rolegroup",
+                            "type": "integer",
+                            "required": false,
+                            "description": "can use level instead"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "level",
+                            "type": "integer",
+                            "required": false,
+                            "description": "can use rolegroup instead"
+                        }
+                    ]
+                },
+                {
+                    "method": "PATCH",
+                    "summary": "Update user role",
+                    "nickname": "getUserData_2",
+                    "type": "UserRoleTokens",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "rolegroup",
+                            "type": "integer",
+                            "required": false,
+                            "description": "can use level instead"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "level",
+                            "type": "integer",
+                            "required": false,
+                            "description": "can use rolegroup instead"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/validate",
+            "description": "Account contact information",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Validate the account, make sure all streams exist.",
+                    "nickname": "validate",
+                    "type": "ValidResult"
+                }
+            ]
+        }
+    ],
+    "models": {
+        "AccountTagIds": {
+            "id": "AccountTagIds",
+            "properties": {
+                "account": {
+                    "$ref": "TagIds"
+                }
+            },
+            "required": [
+                "account"
+            ]
+        },
+        "TagIds": {
+            "id": "TagIds",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "tags"
+            ]
+        },
+        "AccountTagsOutput": {
+            "id": "AccountTagsOutput",
+            "properties": {
+                "account": {
+                    "$ref": "TagsOutput"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "account",
+                "tags"
+            ]
+        },
+        "TagsOutput": {
+            "id": "TagsOutput",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "TagOutput"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "TagOutput": {
+            "id": "TagOutput",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "TagSimple"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "TagSimple": {
+            "id": "TagSimple",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "ShortenedURLOutputPrivate": {
+            "id": "ShortenedURLOutputPrivate",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "updateToken": {
+                    "type": "string"
+                },
+                "shortUrl": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "medium": {
+                    "type": "string"
+                },
+                "campaign": {
+                    "type": "string"
+                },
+                "term": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "shortUrl",
+                "token",
+                "updateToken",
+                "url"
+            ]
+        },
+        "AccountsRoleGroups": {
+            "id": "AccountsRoleGroups",
+            "properties": {
+                "account": {
+                    "type": "integer"
+                },
+                "role": {
+                    "$ref": "RoleTokens"
+                }
+            },
+            "required": [
+                "account",
+                "role"
+            ]
+        },
+        "RoleTokens": {
+            "id": "RoleTokens",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "tokens": {
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "tokens"
+            ]
+        },
+        "PlanSetter": {
+            "id": "PlanSetter",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "start": {
+                    "type": "string"
+                },
+                "end": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "end",
+                "id",
+                "start"
+            ]
+        },
+        "AccountLicenses": {
+            "id": "AccountLicenses",
+            "properties": {
+                "account": {
+                    "$ref": "LicensesBulk"
+                }
+            },
+            "required": [
+                "account"
+            ]
+        },
+        "LicensesBulk": {
+            "id": "LicensesBulk",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "licenses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "PlanSetter"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "licenses",
+                "name"
+            ]
+        },
+        "UserRoleTokens": {
+            "id": "UserRoleTokens",
+            "properties": {
+                "user": {
+                    "$ref": "RoleTokens"
+                }
+            },
+            "required": [
+                "user"
+            ]
+        },
+        "UserReseller": {
+            "id": "UserReseller",
+            "properties": {
+                "user": {
+                    "$ref": "UserResume"
+                }
+            },
+            "required": [
+                "user"
+            ]
+        },
+        "UserResume": {
+            "id": "UserResume",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "email"
+            ]
+        },
+        "AccountOutput": {
+            "id": "AccountOutput",
+            "properties": {
+                "account": {
+                    "$ref": "Account"
+                }
+            }
+        },
+        "AccountInput": {
+            "id": "AccountInput",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "campaigns": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Campaign"
+                    }
+                }
+            }
+        },
+        "Account": {
+            "id": "Account",
+            "description": "Class Account",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "reseller": {
+                    "$ref": "Reseller"
+                },
+                "campaigns": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Campaign"
+                    }
+                },
+                "plan": {
+                    "$ref": "Plan"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "plan",
+                "reseller"
+            ]
+        },
+        "Campaign": {
+            "id": "Campaign",
+            "description": "Class Campaign",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "Reseller": {
+            "id": "Reseller",
+            "description": "Class Reseller",
+            "properties": {
+                "id": {
+                    "$ref": null
+                },
+                "name": {
+                    "type": "string"
+                },
+                "plan": {
+                    "$ref": "Plan"
+                },
+                "reseller_plans": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Plan"
+                    }
+                },
+                "users": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "User"
+                    }
+                }
+            }
+        },
+        "Plan": {
+            "id": "Plan",
+            "description": "Account limits and payment plan.",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "parent_plan": {
+                    "type": "string"
+                },
+                "limits": {
+                    "$ref": "PlanLimits"
+                }
+            },
+            "required": [
+                "id",
+                "limits",
+                "name"
+            ]
+        },
+        "User": {
+            "id": "User",
+            "description": "Class User",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "displayname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "type": "string"
+                },
+                "accounts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Account"
+                    }
+                },
+                "locale": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "accounts",
+                "avatar",
+                "displayname",
+                "firstname",
+                "id",
+                "name"
+            ]
+        },
+        "PlanLimits": {
+            "id": "PlanLimits",
+            "properties": {
+                "admins": {
+                    "type": "integer"
+                },
+                "users": {
+                    "type": "integer"
+                },
+                "services": {
+                    "type": "integer"
+                },
+                "keywords": {
+                    "type": "integer"
+                },
+                "following": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "admins",
+                "following",
+                "keywords",
+                "services",
+                "users"
+            ]
+        },
+        "pong": {
+            "id": "pong",
+            "description": "Class PongUpdate",
+            "properties": {
+                "update": {
+                    "description": "Types that require updates",
+                    "$ref": "complex"
+                },
+                "add": {
+                    "description": "Types that require updates",
+                    "$ref": "complex"
+                },
+                "remove": {
+                    "description": "Types that require updates",
+                    "$ref": "complex"
+                }
+            }
+        },
+        "FilterOptionsOutput": {
+            "id": "FilterOptionsOutput",
+            "properties": {
+                "account": {
+                    "$ref": "AccountFilterOptions"
+                }
+            },
+            "required": [
+                "account"
+            ]
+        },
+        "AccountFilterOptions": {
+            "id": "AccountFilterOptions",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "filteroptions": {
+                    "$ref": "FilterOptions"
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "FilterOptions": {
+            "id": "FilterOptions",
+            "properties": {
+                "countries": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Country"
+                    }
+                },
+                "languages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Language"
+                    }
+                }
+            },
+            "required": [
+                "countries",
+                "languages"
+            ]
+        },
+        "Country": {
+            "id": "Country",
+            "description": "Class Country",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "latitude": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "longitude": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "radius": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "languages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Language"
+                    }
+                }
+            },
+            "required": [
+                "languages",
+                "latitude",
+                "longitude",
+                "name",
+                "radius",
+                "token"
+            ]
+        },
+        "Language": {
+            "id": "Language",
+            "description": "Class Language",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "token"
+            ]
+        },
+        "ValidResult": {
+            "id": "ValidResult",
+            "properties": {
+                "valid": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "valid"
+            ]
+        },
+        "ReportIdsOutput": {
+            "id": "ReportIdsOutput",
+            "properties": {
+                "reports": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "reports"
+            ]
+        },
+        "AccountStatisticsOutput": {
+            "id": "AccountStatisticsOutput",
+            "properties": {
+                "account": {
+                    "$ref": "AccountStatistics"
+                }
+            }
+        },
+        "AccountStatistics": {
+            "id": "AccountStatistics",
+            "properties": {
+                "id": {
+                    "description": "Account ID",
+                    "type": "integer"
+                },
+                "statistics": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "StreamStatisticsDate"
+                    }
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "StreamStatisticsDate": {
+            "id": "StreamStatisticsDate",
+            "properties": {
+                "id": {
+                    "description": "Unique identifier for this date and interval",
+                    "type": "integer"
+                },
+                "date": {
+                    "description": "Date of the corresponding statistisc",
+                    "type": "string"
+                },
+                "streams": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "StreamStatistics"
+                    }
+                }
+            },
+            "required": [
+                "date",
+                "id"
+            ]
+        },
+        "StreamStatistics": {
+            "id": "StreamStatistics",
+            "properties": {
+                "id": {
+                    "description": "Stream id of the corresponding stream",
+                    "type": "integer"
+                },
+                "contacts": {
+                    "description": "Information about the contacts. Can be StatisticsEntityContacts or integer.",
+                    "$ref": "StatisticsEntityContacts"
+                },
+                "messages": {
+                    "description": "Information about the messages. Can be StatisticsEntityMessages or integer.",
+                    "$ref": "StatisticsEntityMessages"
+                },
+                "notifications": {
+                    "description": "Information about all incoming notifications. Can be StatisticsEntityNotifications or integer.",
+                    "$ref": "StatisticsEntityNotifications"
+                },
+                "activities": {
+                    "description": "Information about all outgoing activities. Can be StatisticsEntityActivities or integer.",
+                    "$ref": "StatisticsEntityActivities"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "activities",
+                "contacts",
+                "id",
+                "messages",
+                "notifications"
+            ]
+        },
+        "StatisticsEntityContacts": {
+            "id": "StatisticsEntityContacts",
+            "properties": {
+                "total": {
+                    "description": "The most general total amount of followers",
+                    "type": "integer"
+                },
+                "types": {
+                    "$ref": "StatisticsContactsTypes"
+                },
+                "age": {
+                    "description": "If no information is available for a given interval, 0 is given.",
+                    "$ref": "StatisticsContactsAge"
+                },
+                "gender": {
+                    "$ref": "StatisticsContactsGender"
+                },
+                "geo": {
+                    "$ref": "StatisticsContactsGeo"
+                },
+                "professional": {
+                    "$ref": "StatisticsContactsProfessional"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "total"
+            ]
+        },
+        "StatisticsEntityMessages": {
+            "id": "StatisticsEntityMessages",
+            "properties": {
+                "total": {
+                    "description": "The most general total amount of messages / posts / tweets we have sent.",
+                    "type": "integer"
+                },
+                "types": {
+                    "$ref": "StatisticsMessageTypes"
+                },
+                "bestTimeToPost": {
+                    "$ref": "StatisticsMessageBestTimeToPost"
+                },
+                "impressions": {
+                    "description": "Total amount of impressions (lifetime or cloudwalkers lifetime) of all your posts summed up.",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "total"
+            ]
+        },
+        "StatisticsEntityNotifications": {
+            "id": "StatisticsEntityNotifications",
+            "properties": {
+                "total": {
+                    "description": "Total amount of incoming notifications (+1's, likes, comments, shares, mentions, retweets, ...).",
+                    "type": "integer"
+                },
+                "types": {
+                    "$ref": "StatisticsNotificationsTypes"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "total"
+            ]
+        },
+        "StatisticsEntityActivities": {
+            "id": "StatisticsEntityActivities",
+            "properties": {
+                "total": {
+                    "description": "Total amount of activities (= outgoing notifications) (+1's, likes, comments, shares of third party messages)",
+                    "type": "integer"
+                },
+                "types": {
+                    "$ref": "StatisticsNotificationsTypes"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "total"
+            ]
+        },
+        "StatisticsEntityGroup": {
+            "id": "StatisticsEntityGroup",
+            "properties": {
+                "{Attribute}": {
+                    "type": "integer"
+                }
+            }
+        },
+        "StatisticsContactsTypes": {
+            "id": "StatisticsContactsTypes",
+            "properties": {
+                "followers": {
+                    "description": "Total amount of people that are following me",
+                    "type": "integer"
+                },
+                "following": {
+                    "description": "Total amount of people that you are following",
+                    "type": "integer"
+                },
+                "listed": {
+                    "description": "Total amount of lists that your account is mentioned in.",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            }
+        },
+        "StatisticsContactsAge": {
+            "id": "StatisticsContactsAge",
+            "properties": {
+                "0-12": {
+                    "description": "Total amount of contacts aged 0-12",
+                    "type": "integer"
+                },
+                "13-17": {
+                    "description": "Total amount of contacts aged 13-17",
+                    "type": "integer"
+                },
+                "18-24": {
+                    "description": "Total amount of contacts aged 18-24",
+                    "type": "integer"
+                },
+                "25-34": {
+                    "description": "Total amount of contacts aged 25-34",
+                    "type": "integer"
+                },
+                "35-44": {
+                    "description": "Total amount of contacts aged 35-44",
+                    "type": "integer"
+                },
+                "44-54": {
+                    "description": "Total amount of contacts aged 44-54",
+                    "type": "integer"
+                },
+                "55-64": {
+                    "description": "Total amount of contacts aged 55-64",
+                    "type": "integer"
+                },
+                "65-74": {
+                    "description": "Total amount of contacts aged 65-74",
+                    "type": "integer"
+                },
+                "75+": {
+                    "description": "Total amount of contacts aged 75+",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "0-12",
+                "13-17",
+                "18-24",
+                "25-34",
+                "35-44",
+                "44-54",
+                "55-64",
+                "65-74",
+                "75+"
+            ]
+        },
+        "StatisticsContactsGender": {
+            "id": "StatisticsContactsGender",
+            "properties": {
+                "male": {
+                    "description": "Total amount of male contacts",
+                    "type": "integer"
+                },
+                "female": {
+                    "description": "Total amount of female contacts",
+                    "type": "integer"
+                },
+                "other": {
+                    "description": "Total amount of other contacts",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "female",
+                "male"
+            ]
+        },
+        "StatisticsContactsGeo": {
+            "id": "StatisticsContactsGeo",
+            "properties": {
+                "countries": {
+                    "description": "Users grouped by countries",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsContactsCountries"
+                    }
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "countries"
+            ]
+        },
+        "StatisticsContactsProfessional": {
+            "id": "StatisticsContactsProfessional",
+            "properties": {
+                "functions": {
+                    "description": "Total amount of contacts grouped by their function.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsContactsFunctions"
+                    }
+                },
+                "industries": {
+                    "description": "Total amount of contacts grouped by their industry.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsContactsIndustries"
+                    }
+                },
+                "senorities": {
+                    "description": "Total amount of contacts grouped by their senorities.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsContactsSenorities"
+                    }
+                },
+                "companySizes": {
+                    "description": "Total amount of contacts grouped by the size of the company they work for.",
+                    "$ref": "StatisticsContactsCompanySizes"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            }
+        },
+        "StatisticsMessageTypes": {
+            "id": "StatisticsMessageTypes",
+            "properties": {
+                "shares": {
+                    "description": "Total amount of messages (tweets, shares, etc) of third party users we have shared (or retweeted) on our profile.",
+                    "type": "integer"
+                },
+                "posts": {
+                    "description": "Total amount of regular posts (tweets, shares, etc) we've done.",
+                    "type": "integer"
+                },
+                "dms": {
+                    "description": "Total amount of direct messages we have sent.",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "dms",
+                "posts",
+                "shares"
+            ]
+        },
+        "StatisticsMessageBestTimeToPost": {
+            "id": "StatisticsMessageBestTimeToPost",
+            "properties": {
+                "0": {
+                    "description": "Probability percentage for activity between 00:00 and 01:00 GMT",
+                    "type": "integer"
+                },
+                "1": {
+                    "description": "Probability percentage for activity between 01:00 and 02:00 GMT",
+                    "type": "integer"
+                },
+                "2": {
+                    "description": "Probability percentage for activity between 02:00 and 03:00 GMT",
+                    "type": "integer"
+                },
+                "3": {
+                    "description": "Probability percentage for activity between 03:00 and 04:00 GMT",
+                    "type": "integer"
+                },
+                "4": {
+                    "description": "Probability percentage for activity between 04:00 and 05:00 GMT",
+                    "type": "integer"
+                },
+                "5": {
+                    "description": "Probability percentage for activity between 05:00 and 06:00 GMT",
+                    "type": "integer"
+                },
+                "6": {
+                    "description": "Probability percentage for activity between 06:00 and 07:00 GMT",
+                    "type": "integer"
+                },
+                "7": {
+                    "description": "Probability percentage for activity between 07:00 and 08:00 GMT",
+                    "type": "integer"
+                },
+                "8": {
+                    "description": "Probability percentage for activity between 08:00 and 09:00 GMT",
+                    "type": "integer"
+                },
+                "9": {
+                    "description": "Probability percentage for activity between 09:00 and 10:00 GMT",
+                    "type": "integer"
+                },
+                "10": {
+                    "description": "Probability percentage for activity between 10:00 and 11:00 GMT",
+                    "type": "integer"
+                },
+                "11": {
+                    "description": "Probability percentage for activity between 11:00 and 12:00 GMT",
+                    "type": "integer"
+                },
+                "12": {
+                    "description": "Probability percentage for activity between 12:00 and 13:00 GMT",
+                    "type": "integer"
+                },
+                "13": {
+                    "description": "Probability percentage for activity between 13:00 and 14:00 GMT",
+                    "type": "integer"
+                },
+                "14": {
+                    "description": "Probability percentage for activity between 14:00 and 15:00 GMT",
+                    "type": "integer"
+                },
+                "15": {
+                    "description": "Probability percentage for activity between 15:00 and 16:00 GMT",
+                    "type": "integer"
+                },
+                "16": {
+                    "description": "Probability percentage for activity between 16:00 and 17:00 GMT",
+                    "type": "integer"
+                },
+                "17": {
+                    "description": "Probability percentage for activity between 17:00 and 18:00 GMT",
+                    "type": "integer"
+                },
+                "18": {
+                    "description": "Probability percentage for activity between 18:00 and 19:00 GMT",
+                    "type": "integer"
+                },
+                "19": {
+                    "description": "Probability percentage for activity between 19:00 and 20:00 GMT",
+                    "type": "integer"
+                },
+                "20": {
+                    "description": "Probability percentage for activity between 20:00 and 21:00 GMT",
+                    "type": "integer"
+                },
+                "21": {
+                    "description": "Probability percentage for activity between 21:00 and 22:00 GMT",
+                    "type": "integer"
+                },
+                "22": {
+                    "description": "Probability percentage for activity between 22:00 and 23:00 GMT",
+                    "type": "integer"
+                },
+                "23": {
+                    "description": "Probability percentage for activity between 23:00 and 00:00 GMT",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16",
+                "17",
+                "18",
+                "19",
+                "20",
+                "21",
+                "22",
+                "23"
+            ]
+        },
+        "StatisticsNotificationsTypes": {
+            "id": "StatisticsNotificationsTypes",
+            "properties": {
+                "favourites": {
+                    "description": "Total amount of favourites (likes, ...) we have received on all our posts.",
+                    "type": "integer"
+                },
+                "comments": {
+                    "description": "Total amount of all comments (mentions, ...) we have received on all our posts.",
+                    "type": "integer"
+                },
+                "shares": {
+                    "description": "Total amount of times any of our messages have been shared (retweets, ...).",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "comments",
+                "favourites"
+            ]
+        },
+        "StatisticsContactsCountries": {
+            "id": "StatisticsContactsCountries",
+            "properties": {
+                "name": {
+                    "description": "Country name",
+                    "type": "string"
+                },
+                "total": {
+                    "description": "Total amount of contacts from this country",
+                    "type": "integer"
+                },
+                "cities": {
+                    "description": "Contacts grouped by city",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsContactsCities"
+                    }
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "total"
+            ]
+        },
+        "StatisticsContactsFunctions": {
+            "id": "StatisticsContactsFunctions",
+            "properties": {
+                "name": {
+                    "description": "Function of the contacts",
+                    "type": "string"
+                },
+                "total": {
+                    "description": "Total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "total"
+            ]
+        },
+        "StatisticsContactsIndustries": {
+            "id": "StatisticsContactsIndustries",
+            "properties": {
+                "name": {
+                    "description": "Industry the contacts work in",
+                    "type": "string"
+                },
+                "total": {
+                    "description": "Total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "total"
+            ]
+        },
+        "StatisticsContactsSenorities": {
+            "id": "StatisticsContactsSenorities",
+            "properties": {
+                "name": {
+                    "description": "Seniority of the contacts",
+                    "type": "string"
+                },
+                "total": {
+                    "description": "Total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "total"
+            ]
+        },
+        "StatisticsContactsCompanySizes": {
+            "id": "StatisticsContactsCompanySizes",
+            "properties": {
+                "1": {
+                    "description": "1 employee",
+                    "type": "integer"
+                },
+                "2-10": {
+                    "description": "2-10 employees",
+                    "type": "integer"
+                },
+                "11-50": {
+                    "description": "11-50 employees",
+                    "type": "integer"
+                },
+                "51-200": {
+                    "description": "51-200 employees",
+                    "type": "integer"
+                },
+                "201-500": {
+                    "description": "201-500 employees",
+                    "type": "integer"
+                },
+                "501-1000": {
+                    "description": "501-1000 employees",
+                    "type": "integer"
+                },
+                "1001-5000": {
+                    "description": "1001-5000 employees",
+                    "type": "integer"
+                },
+                "5001-10000": {
+                    "description": "5001-10000 employees",
+                    "type": "integer"
+                },
+                "10000+": {
+                    "description": "More then 10000 employees",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The most general total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "1",
+                "10000+",
+                "1001-5000",
+                "11-50",
+                "2-10",
+                "201-500",
+                "5001-10000",
+                "501-1000",
+                "51-200"
+            ]
+        },
+        "StatisticsContactsCities": {
+            "id": "StatisticsContactsCities",
+            "properties": {
+                "name": {
+                    "description": "City name",
+                    "type": "string"
+                },
+                "total": {
+                    "description": "Total amount",
+                    "type": "integer"
+                },
+                "{GroupName}": {
+                    "description": "If more detailed information is available, it will be grouped in these groups. The GroupName is a human readable description of what is in the group.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                },
+                "{AnotherGroupName}": {
+                    "description": "And there can be multiple Groupes in one Entity of course...",
+                    "type": "array",
+                    "items": {
+                        "$ref": "StatisticsEntityGroup"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "total"
+            ]
+        },
+        "AccountStatisticIdsOutput": {
+            "id": "AccountStatisticIdsOutput",
+            "properties": {
+                "account": {
+                    "$ref": "AccountStatisticIds"
+                }
+            }
+        },
+        "AccountStatisticIds": {
+            "id": "AccountStatisticIds",
+            "properties": {
+                "id": {
+                    "description": "Account ID",
+                    "type": "integer"
+                },
+                "statistics": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "AlertsOutput": {
+            "id": "AlertsOutput",
+            "properties": {
+                "alerts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Alert"
+                    }
+                }
+            },
+            "required": [
+                "alerts"
+            ]
+        },
+        "Alert": {
+            "id": "Alert",
+            "properties": {
+                "event": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "service": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "event",
+                "message",
+                "service"
+            ]
+        },
+        "MessageOutput": {
+            "id": "MessageOutput",
+            "properties": {
+                "message": {
+                    "$ref": "Message"
+                }
+            }
+        },
+        "MessageInput": {
+            "id": "MessageInput",
+            "properties": {
+                "body": {
+                    "$ref": "MessageBody"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "attachments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "AttachmentInput"
+                    }
+                },
+                "streams": {
+                    "description": "Set the stream ids of the streams where this message will be sent. Can be left empty if variations are provided.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "variations": {
+                    "description": "Provide variations on the original message. If streams array is not set, you can use this array to define where this message should be sent.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "MessageVariation"
+                    }
+                },
+                "schedule": {
+                    "description": "Set schedule for this message.",
+                    "$ref": "Schedule"
+                },
+                "originalMessage": {
+                    "description": "Set this to notify the system that this is a reply on an existing message",
+                    "type": "integer"
+                },
+                "campaign": {
+                    "description": "Campaign id. If set, the message will be added to the specified campaign.",
+                    "type": "integer"
+                },
+                "campaignName": {
+                    "description": "If set, a campaign with given name will be created and the message will be added to this new campaign.",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "body"
+            ]
+        },
+        "Message": {
+            "id": "Message",
+            "description": "Class Message",
+            "properties": {
+                "attachments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Attachment"
+                    }
+                },
+                "body": {
+                    "$ref": "MessageBody"
+                },
+                "schedule": {
+                    "description": "Schedule for this message.",
+                    "$ref": "Schedule"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "from": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Contact"
+                    }
+                },
+                "to": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Contact"
+                    }
+                },
+                "lang": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "body"
+            ]
+        },
+        "MessageBody": {
+            "id": "MessageBody",
+            "properties": {
+                "plaintext": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                }
+            }
+        },
+        "AttachmentInput": {
+            "id": "AttachmentInput",
+            "properties": {
+                "type": {
+                    "description": "The type of the attachment",
+                    "type": "string",
+                    "enum": [
+                        "image",
+                        "link"
+                    ]
+                },
+                "url": {
+                    "description": "URL to the publicly available content",
+                    "type": "string"
+                },
+                "data": {
+                    "description": "Base64 data representation of the content",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "MessageVariation": {
+            "id": "MessageVariation",
+            "properties": {
+                "stream": {
+                    "description": "Stream id",
+                    "type": "integer"
+                },
+                "body": {
+                    "$ref": "MessageBody"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "attachments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "AttachmentInput"
+                    }
+                },
+                "excludes": {
+                    "description": "If provided, ignore the attachments with array indexes provided in this array.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "MessageExclude"
+                    }
+                },
+                "schedule": {
+                    "description": "If provided, overwrite the schedule for this variation of the message.",
+                    "$ref": "Schedule"
+                }
+            },
+            "required": [
+                "stream"
+            ]
+        },
+        "Schedule": {
+            "id": "Schedule",
+            "properties": {
+                "date": {
+                    "description": "UNIX timestamp of the first/next scheduled item. Can be UNIX timestamp or ISO 8601 date",
+                    "$ref": "integer|string"
+                },
+                "repeat": {
+                    "$ref": "ScheduleRepeat"
+                }
+            },
+            "required": [
+                "date"
+            ]
+        },
+        "Attachment": {
+            "id": "Attachment",
+            "description": "Class Attachment\r \r Represent an attachment that will be sent with the message.\r (Or is received from a message.)",
+            "properties": {
+                "type": {
+                    "description": "The type of the attachment",
+                    "type": "string",
+                    "enum": [
+                        "image",
+                        "link"
+                    ]
+                },
+                "url": {
+                    "description": "URL to the publicly available content",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "Contact": {
+            "id": "Contact",
+            "properties": {
+                "following": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "displayname": {
+                    "description": "The full name of the user that should be used in general clients.",
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Full name OR last name (if firstname is not null)",
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "description": "URL to the avatar of this contact.",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "URL to the public profile of this contact.",
+                    "type": "string"
+                },
+                "network": {
+                    "description": "Social network this specific contact comes from",
+                    "$ref": "Network"
+                }
+            },
+            "required": [
+                "avatar",
+                "displayname",
+                "following",
+                "id",
+                "name",
+                "network"
+            ]
+        },
+        "MessageExclude": {
+            "id": "MessageExclude",
+            "properties": {
+                "attachments": {
+                    "description": "Indexes of attachments of the base message that will be excluded in this variation.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "ScheduleRepeat": {
+            "id": "ScheduleRepeat",
+            "properties": {
+                "interval": {
+                    "description": "The minimal amount of seconds between 2 repeating posts",
+                    "type": "integer"
+                },
+                "until": {
+                    "description": "UNIX timestamp of the last scheduled item. Can be UNIX timestamp or ISO 8601 date",
+                    "$ref": "integer|string"
+                },
+                "amount": {
+                    "description": "Amount of times we want to repeat this message. If combined with until, the lowest value will be used.",
+                    "type": "integer"
+                },
+                "weekdays": {
+                    "description": "Contains an array of uppercase english weekdays. If provided, only send if the schedule date falls in one of the provided dates.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "string<MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY>"
+                    }
+                },
+                "hours": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided dates.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "minutes": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided minutes.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "days": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided month days.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "months": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided months.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "years": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided years.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "interval"
+            ]
+        },
+        "Network": {
+            "id": "Network",
+            "description": "Class Base",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "limitations": {
+                    "$ref": "NetworkLimitations"
+                }
+            },
+            "required": [
+                "icon",
+                "name",
+                "token"
+            ]
+        },
+        "NetworkLimitations": {
+            "id": "NetworkLimitations",
+            "properties": {
+                "max-length": {
+                    "description": "Maximum length of a message.",
+                    "$ref": "NetworkLimitation"
+                },
+                "max-length-hardlimit": {
+                    "description": "Absolute maximum length of a message, including attachments.",
+                    "$ref": "NetworkLimitation"
+                },
+                "picture-url-length": {
+                    "description": "Amount of characters an image url will take up.",
+                    "$ref": "NetworkLimitation"
+                },
+                "url-length": {
+                    "description": "Amount of characters a link will take up.",
+                    "$ref": "NetworkLimitation"
+                },
+                "include-title-in-max-length": {
+                    "description": "TRUE if the subject will be added to the body.",
+                    "$ref": "NetworkLimitationBoolean"
+                },
+                "title-spacing-length": {
+                    "description": "Amount of characters that will be added to the subject.",
+                    "$ref": "NetworkLimitation"
+                },
+                "images": {
+                    "description": "Amount of images you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                },
+                "link": {
+                    "description": "Amount of links you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                },
+                "video": {
+                    "description": "Amount of videos you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                }
+            }
+        },
+        "NetworkLimitation": {
+            "id": "NetworkLimitation",
+            "properties": {
+                "limit": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "MAXIMUM",
+                        "MINIMUM"
+                    ]
+                }
+            },
+            "required": [
+                "limit"
+            ]
+        },
+        "NetworkLimitationBoolean": {
+            "id": "NetworkLimitationBoolean",
+            "properties": {
+                "limit": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "limit"
+            ]
+        },
+        "SuccessResult": {
+            "id": "SuccessResult",
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "success"
+            ]
+        },
+        "AccountServiceAvailableOutput": {
+            "id": "AccountServiceAvailableOutput",
+            "properties": {
+                "services": {
+                    "$ref": "AccountServiceAvailable"
+                }
+            },
+            "required": [
+                "services"
+            ]
+        },
+        "AccountServiceAvailable": {
+            "id": "AccountServiceAvailable",
+            "properties": {
+                "available": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "AvailableService"
+                    }
+                }
+            },
+            "required": [
+                "available"
+            ]
+        },
+        "AvailableService": {
+            "id": "AvailableService",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "network": {
+                    "$ref": "Network"
+                },
+                "info": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "info",
+                "name",
+                "network"
+            ]
+        },
+        "AccountServicesOutput": {
+            "id": "AccountServicesOutput",
+            "properties": {
+                "account": {
+                    "$ref": "AccountServices"
+                }
+            }
+        },
+        "AccountServices": {
+            "id": "AccountServices",
+            "properties": {
+                "id": {
+                    "description": "Account ID",
+                    "type": "integer"
+                },
+                "services": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Service"
+                    }
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "Service": {
+            "id": "Service",
+            "description": "Class Base\r \r Class services as a base for a service.\r A service is the gateway between our system and a social network.\r Services provide methods to get, update and send messages.",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "authenticateUrl": {
+                    "description": "Authentication URL where the user must be redirected to to authenticate the user.",
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "DEPRECATED. Icon token for this service.",
+                    "type": "string"
+                },
+                "valid": {
+                    "description": "TRUE if all settings are valid and the service is linked to a social network. FALSE if invalid settings or not authenticated.",
+                    "type": "boolean"
+                },
+                "errors": {
+                    "description": "If account is not valid, contains an array of strings describing the problems with the service",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "account": {
+                    "description": "Name of the currently authenticated user",
+                    "type": "string"
+                },
+                "network": {
+                    "description": "Network that this service connects to",
+                    "$ref": "Network"
+                },
+                "settings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "ServiceSettings"
+                    }
+                },
+                "streams": {
+                    "description": "Contain all streams that are provided by this service.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "Stream"
+                    }
+                },
+                "profiles": {
+                    "description": "A list of all profiles (or pages / companies) that are linked to this service.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "Contact"
+                    }
+                }
+            },
+            "required": [
+                "account",
+                "id",
+                "name",
+                "network",
+                "valid"
+            ]
+        },
+        "ServiceSettings": {
+            "id": "ServiceSettings",
+            "properties": {
+                "key": {
+                    "description": "Key for this specific setting",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Human readable description of this setting.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "What does this setting represent? An input field (string), a message to the user (message), a checkbox (boolean), or a link the user must click (link)?",
+                    "type": "string",
+                    "enum": [
+                        "message",
+                        "string",
+                        "link",
+                        "boolean"
+                    ]
+                },
+                "value": {
+                    "description": "The current value (or the message that needs to be displayed)",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "For settings with type link, contains the url the user should visit.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "key",
+                "name",
+                "type",
+                "value"
+            ]
+        },
+        "Stream": {
+            "id": "Stream",
+            "description": "Class Stream",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of this stream. Can be SOCIAL, MONITORING or COWORKER",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A humran readable english description of what is contained in the stream.",
+                    "type": "string"
+                },
+                "canHaveChildren": {
+                    "description": "TRUE if this stream can contain children",
+                    "type": "boolean"
+                },
+                "canHaveChildstreams": {
+                    "description": "TRUE if this stream can contain childstreams (childstreams contain comments)",
+                    "type": "boolean"
+                },
+                "canSetChannels": {
+                    "description": "TRUE if this stream can be assigned to (additional) channels.",
+                    "type": "boolean"
+                },
+                "priority": {
+                    "description": "A numeric priority to order streams. Clients should order streams descending on priority.",
+                    "type": "integer"
+                },
+                "incoming": {
+                    "description": "Does this stream contain incoming messages?",
+                    "type": "boolean"
+                },
+                "outgoing": {
+                    "description": "Can we send messages trough this stream?",
+                    "type": "boolean"
+                },
+                "available": {
+                    "description": "If set to false, this stream has been disabled. A service validation is required to reenable it.",
+                    "type": "boolean"
+                },
+                "lastRefresh": {
+                    "description": "Date of when this stream was last refreshed.",
+                    "type": "string"
+                },
+                "nextRefresh": {
+                    "description": "Date of when the next refresh is planned.",
+                    "type": "string"
+                },
+                "hasNotifications": {
+                    "description": "Can this stream contain notifications?",
+                    "type": "boolean"
+                },
+                "hasMessages": {
+                    "description": "Can this stream contain messages?",
+                    "type": "boolean"
+                },
+                "averageDailyMessages": {
+                    "description": "The average amount of incoming messages trough this stream.",
+                    "type": "float"
+                },
+                "service": {
+                    "description": "The service id this stream belongs to.",
+                    "type": "integer"
+                },
+                "channels": {
+                    "description": "The ids of the channels this stream has been assigned to.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "network": {
+                    "description": "The network this stream represents.",
+                    "$ref": "Network"
+                },
+                "childtypes": {
+                    "description": "An array of strings of entities this stream contains. This replaces hasNotifications and hasMessages.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "profile": {
+                    "description": "The contact this stream represents.",
+                    "$ref": "Contact"
+                }
+            },
+            "required": [
+                "available",
+                "averageDailyMessages",
+                "canHaveChildren",
+                "canHaveChildstreams",
+                "canSetChannels",
+                "channels",
+                "childtypes",
+                "description",
+                "hasMessages",
+                "hasNotifications",
+                "id",
+                "incoming",
+                "lastRefresh",
+                "name",
+                "network",
+                "nextRefresh",
+                "outgoing",
+                "priority",
+                "service",
+                "type"
+            ]
+        },
+        "ServiceOutput": {
+            "id": "ServiceOutput",
+            "properties": {
+                "service": {
+                    "$ref": "Service"
+                }
+            },
+            "required": [
+                "service"
+            ]
+        },
+        "AccountServiceIdsOutput": {
+            "id": "AccountServiceIdsOutput",
+            "properties": {
+                "account": {
+                    "$ref": "AccountServiceIds"
+                }
+            }
+        },
+        "AccountServiceIds": {
+            "id": "AccountServiceIds",
+            "properties": {
+                "id": {
+                    "description": "Account ID",
+                    "type": "integer"
+                },
+                "services": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "NoteOutput": {
+            "id": "NoteOutput",
+            "properties": {
+                "note": {
+                    "$ref": "Note"
+                }
+            },
+            "required": [
+                "note"
+            ]
+        },
+        "NoteInput": {
+            "id": "NoteInput",
+            "properties": {
+                "text": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "text"
+            ]
+        },
+        "Note": {
+            "id": "Note",
+            "description": "Class Note",
+            "properties": {
+                "user": {
+                    "$ref": "UserSimple"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "identifier": {
+                    "$ref": "Identifier"
+                }
+            },
+            "required": [
+                "date",
+                "id",
+                "text"
+            ]
+        },
+        "UserSimple": {
+            "id": "UserSimple",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "displayname": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "avatar",
+                "displayname",
+                "email",
+                "firstname",
+                "id",
+                "name"
+            ]
+        },
+        "Identifier": {
+            "id": "Identifier",
+            "description": "Class Identifier\r \r This class acts like a model, but is actually just a placeholder.\r It is used to identify models without loading them completely.",
+            "properties": {
+                "objectType": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "AccountNotes": {
+            "id": "AccountNotes",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "notes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Note"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "notes"
+            ]
+        },
+        "AccountNotesIds": {
+            "id": "AccountNotesIds",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "notes": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "notes"
+            ]
+        },
+        "AccountTriggersIds": {
+            "id": "AccountTriggersIds",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "triggers": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "TriggerOutput": {
+            "id": "TriggerOutput",
+            "properties": {
+                "trigger": {
+                    "$ref": "Trigger"
+                }
+            }
+        },
+        "TriggerInput": {
+            "id": "TriggerInput",
+            "properties": {
+                "event": {
+                    "type": "string"
+                },
+                "condition": {
+                    "type": "string"
+                },
+                "actions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "ActionInput"
+                    }
+                },
+                "streams": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "event",
+                "streams"
+            ]
+        },
+        "AccountTriggers": {
+            "id": "AccountTriggers",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "triggers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Trigger"
+                    }
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "Trigger": {
+            "id": "Trigger",
+            "description": "Class Trigger",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "account": {
+                    "$ref": "Account"
+                },
+                "event": {
+                    "type": "string"
+                },
+                "condition": {
+                    "type": "string"
+                },
+                "actions": {
+                    "$ref": null
+                },
+                "streams": {
+                    "type": "array"
+                }
+            },
+            "required": [
+                "account",
+                "actions",
+                "condition",
+                "event",
+                "id",
+                "streams"
+            ]
+        },
+        "ActionInput": {
+            "id": "ActionInput",
+            "properties": {
+                "action": {
+                    "type": "string"
+                },
+                "parameter": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "action"
+            ]
+        }
+    }
+}

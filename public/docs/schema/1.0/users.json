@@ -1,0 +1,486 @@
+{
+    "basePath": "https://devapi.cloudwalkers.be",
+    "swaggerVersion": "1.2",
+    "apiVersion": "1",
+    "resourcePath": "/users",
+    "apis": [
+        {
+            "path": "/users/{userId}",
+            "description": "Operations on users",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get a user with a given id",
+                    "nickname": "getUserData_0",
+                    "type": "UserOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "userId",
+                            "type": "int|string",
+                            "required": true,
+                            "description": "ID of the user that needs to be fetch. Use 'me' to get the information of the currently logged in user."
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 400,
+                            "message": "Account not found"
+                        }
+                    ],
+                    "notes": "You can use me instead of userId, this will return your user info.<br>Usage: <b>/users/me</b>"
+                },
+                {
+                    "method": "PUT",
+                    "summary": "Change user information",
+                    "nickname": "getUserData_1",
+                    "type": "UserOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "userId",
+                            "type": "int|string",
+                            "required": true,
+                            "description": "ID of the user that needs to be fetch. Use 'me' to get the information of the currently logged in user."
+                        },
+                        {
+                            "paramType": "body",
+                            "type": "UserInput"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 400,
+                            "message": "Account not found"
+                        },
+                        {
+                            "code": 403,
+                            "message": "Forbidden access"
+                        }
+                    ],
+                    "notes": "You can use me instead of userId, this will change logged user info.<br>Usage: <b>/users/me</b>"
+                }
+            ]
+        },
+        {
+            "path": "/users/{userId}/password",
+            "description": "Operations on users",
+            "operations": [
+                {
+                    "method": "PUT",
+                    "summary": "Change user password",
+                    "nickname": "changePassword",
+                    "type": "SuccessResult",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "userId",
+                            "type": "int|string",
+                            "required": true,
+                            "description": "ID of the user that needs to be fetch. Use 'me' to get the information of the currently logged in user."
+                        },
+                        {
+                            "paramType": "body",
+                            "type": "UserPasswordInput"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 400,
+                            "message": "Account not found"
+                        },
+                        {
+                            "code": 400,
+                            "message": "Your old password is not correct"
+                        },
+                        {
+                            "code": 400,
+                            "message": "Your password is too short. Please pick a password of at least 6 characters"
+                        },
+                        {
+                            "code": 400,
+                            "message": "Method not supported. Only PUT requests are accepted"
+                        },
+                        {
+                            "code": 403,
+                            "message": "Forbidden access"
+                        }
+                    ],
+                    "notes": "You can use me instead of userId, this will change user password.<br>Usage: <b>/users/me/password</b>"
+                }
+            ]
+        },
+        {
+            "path": "/users/{userId}/subscriptions",
+            "description": "Operations on users",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get or set the debug mode for a given user. Only available for superusers.",
+                    "nickname": "debug",
+                    "type": "SubscriptionOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "userId",
+                            "type": "int|string",
+                            "required": true,
+                            "description": "ID of the user that needs to be fetch. Use 'me' to get the information of the currently logged in user."
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "debug",
+                            "type": "integer",
+                            "required": false,
+                            "description": "1 to enable debug mode, 0 to disable debug mode."
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 400,
+                            "message": "Account not found"
+                        },
+                        {
+                            "code": 403,
+                            "message": "Forbidden access"
+                        }
+                    ],
+                    "notes": "You can use me instead of userId, this will output your subscriptions.<br>Usage: <b>/users/me/subscriptions</b>"
+                },
+                {
+                    "method": "GET",
+                    "summary": "Get all subscriptions for this user for this application.",
+                    "nickname": "getSubscriptions_0",
+                    "type": "SubscriptionOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "userId",
+                            "type": "int|string",
+                            "required": true,
+                            "description": "ID of the user that needs to be fetch. Use 'me' to get the information of the currently logged in user."
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 400,
+                            "message": "Account not found"
+                        },
+                        {
+                            "code": 403,
+                            "message": "Forbidden access"
+                        }
+                    ],
+                    "notes": "You can use me instead of userId, this will output your subscriptions.<br>Usage: <b>/users/me/subscriptions</b>"
+                },
+                {
+                    "method": "DELETE",
+                    "summary": "Delete all subscriptions for this user for this application.",
+                    "nickname": "getSubscriptions_1",
+                    "type": "SubscriptionOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "userId",
+                            "type": "int|string",
+                            "required": true,
+                            "description": "ID of the user that needs to be fetch. Use 'me' to get the information of the currently logged in user."
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 400,
+                            "message": "Account not found"
+                        },
+                        {
+                            "code": 403,
+                            "message": "Forbidden access"
+                        }
+                    ],
+                    "notes": "You can use me instead of userId, this delete all user subscriptions for this application.<br>Usage: <b>/users/me/subscriptions</b>"
+                },
+                {
+                    "method": "POST",
+                    "summary": "Create a new subscription for this user for this application. All previous subscriptions will be removed.",
+                    "nickname": "getSubscriptions_2",
+                    "type": "SubscriptionOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "userId",
+                            "type": "int|string",
+                            "required": true,
+                            "description": "ID of the user that needs to be fetch. Use 'me' to get the information of the currently logged in user."
+                        },
+                        {
+                            "paramType": "body",
+                            "type": "Subscription"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 400,
+                            "message": "Account not found"
+                        },
+                        {
+                            "code": 403,
+                            "message": "Forbidden access"
+                        }
+                    ],
+                    "notes": "You can use me instead of userId, this will create a new subscription for this user for this application. All previous subscriptions will be removed.<br>Usage: <b>/users/me/subscriptions</b>"
+                }
+            ]
+        }
+    ],
+    "models": {
+        "SubscriptionOutput": {
+            "id": "SubscriptionOutput",
+            "properties": {
+                "subscriptions": {
+                    "description": "Subscriptions are URL endpoints that will be called on certain methods.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "Subscription"
+                    }
+                }
+            },
+            "required": [
+                "subscriptions"
+            ]
+        },
+        "Subscription": {
+            "id": "Subscription",
+            "properties": {
+                "callback_url": {
+                    "description": "The URL that will be notified on certain actions.",
+                    "type": "string"
+                }
+            }
+        },
+        "UserOutput": {
+            "id": "UserOutput",
+            "properties": {
+                "user": {
+                    "$ref": "User"
+                }
+            }
+        },
+        "UserInput": {
+            "id": "UserInput",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "description": "URI to user avatar. Can be an URL to a publicily available image or a base64 data url.",
+                    "type": "string"
+                },
+                "settings": {
+                    "description": "Set application specific settings.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "avatar",
+                "firstname",
+                "name"
+            ]
+        },
+        "User": {
+            "id": "User",
+            "description": "Class User",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "displayname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "type": "string"
+                },
+                "accounts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Account"
+                    }
+                },
+                "locale": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "accounts",
+                "avatar",
+                "displayname",
+                "firstname",
+                "id",
+                "name"
+            ]
+        },
+        "Account": {
+            "id": "Account",
+            "description": "Class Account",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "reseller": {
+                    "$ref": "Reseller"
+                },
+                "campaigns": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Campaign"
+                    }
+                },
+                "plan": {
+                    "$ref": "Plan"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "plan",
+                "reseller"
+            ]
+        },
+        "Reseller": {
+            "id": "Reseller",
+            "description": "Class Reseller",
+            "properties": {
+                "id": {
+                    "$ref": null
+                },
+                "name": {
+                    "type": "string"
+                },
+                "plan": {
+                    "$ref": "Plan"
+                },
+                "reseller_plans": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Plan"
+                    }
+                },
+                "users": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "User"
+                    }
+                }
+            }
+        },
+        "Campaign": {
+            "id": "Campaign",
+            "description": "Class Campaign",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "Plan": {
+            "id": "Plan",
+            "description": "Account limits and payment plan.",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "parent_plan": {
+                    "type": "string"
+                },
+                "limits": {
+                    "$ref": "PlanLimits"
+                }
+            },
+            "required": [
+                "id",
+                "limits",
+                "name"
+            ]
+        },
+        "PlanLimits": {
+            "id": "PlanLimits",
+            "properties": {
+                "admins": {
+                    "type": "integer"
+                },
+                "users": {
+                    "type": "integer"
+                },
+                "services": {
+                    "type": "integer"
+                },
+                "keywords": {
+                    "type": "integer"
+                },
+                "following": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "admins",
+                "following",
+                "keywords",
+                "services",
+                "users"
+            ]
+        },
+        "SuccessResult": {
+            "id": "SuccessResult",
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "success"
+            ]
+        },
+        "UserPasswordInput": {
+            "id": "UserPasswordInput",
+            "properties": {
+                "oldpassword": {
+                    "type": "string"
+                },
+                "newpassword": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "newpassword",
+                "oldpassword"
+            ]
+        }
+    }
+}

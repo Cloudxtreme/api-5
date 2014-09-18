@@ -1,0 +1,1112 @@
+{
+    "basePath": "https://devapi.cloudwalkers.be",
+    "swaggerVersion": "1.2",
+    "apiVersion": "1",
+    "resourcePath": "/channels",
+    "apis": [
+        {
+            "path": "/channels",
+            "description": "Operation on channels",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get a set of channels. ids must be provided.",
+                    "nickname": "getChannelFromIds",
+                    "type": "ChannelsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "ids",
+                            "type": "string",
+                            "required": true,
+                            "description": "Comma separated list of channel ids"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/channels/{channelId}",
+            "description": "Operation on channels",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get channel information",
+                    "nickname": "getChannelInformation",
+                    "type": "ChannelOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "channelId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Channel id"
+                        }
+                    ]
+                },
+                {
+                    "method": "DELETE",
+                    "summary": "Remove a channel, can only be called on subchannels.",
+                    "nickname": "getChannelDelete",
+                    "type": "SuccessResult",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "channelId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Channel id"
+                        }
+                    ]
+                },
+                {
+                    "method": "PUT",
+                    "summary": "Update channel information",
+                    "nickname": "getChannelUpdate",
+                    "type": "ChannelOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "channelId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Channel id"
+                        },
+                        {
+                            "paramType": "body",
+                            "type": "ChannelInput",
+                            "required": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/channels/{channelId}/channels",
+            "description": "Operation on subchannels",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Create a new subchannel",
+                    "nickname": "getSubchannelCreate",
+                    "type": "ChannelOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "channelId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Channel id"
+                        },
+                        {
+                            "paramType": "body",
+                            "type": "ChannelInput",
+                            "required": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/channels/{channelId}/count",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Count all messages in channel",
+                    "nickname": "getCounters",
+                    "type": "ChannelCountersOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "channelId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Channel id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/channels/{channelId}/messageids",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return all message ids from a specific channel",
+                    "nickname": "getMessageIdsFromChannel",
+                    "type": "ChannelMessageIdsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "channelId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Channel id"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "streams",
+                            "type": "string",
+                            "required": false,
+                            "description": "Comma separated list of stream ids - return messages ids from stream ids"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "contacts",
+                            "type": "string",
+                            "required": false,
+                            "description": "Comma separated list of contact ids - return messages ids from contact ids"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "users",
+                            "type": "string",
+                            "required": false,
+                            "description": "Comma separated list of user ids - return messages ids from user ids"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "tags",
+                            "type": "string",
+                            "required": false,
+                            "description": "Comma separated list of tag ids - return messages ids from tag ids"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "since",
+                            "type": "string",
+                            "required": false,
+                            "description": "Return all messages ids since given timestamp"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "until",
+                            "type": "string",
+                            "required": false,
+                            "description": "Return all messages ids until given timestamp"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "read",
+                            "type": "integer",
+                            "required": false,
+                            "description": "Return all messages ids that are read (1) or unread (0)"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "sort",
+                            "type": "string",
+                            "required": false,
+                            "description": "Return messages ids sorted by engagement|date"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/channels/{channelId}/messages",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return all messages from a specific channel",
+                    "nickname": "getMessagesFromChannel",
+                    "type": "ChannelMessagesOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "channelId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Channel id"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "ids",
+                            "type": "string",
+                            "required": false,
+                            "description": "Comma separated list of message ids - return messages with ids"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "streams",
+                            "type": "string",
+                            "required": false,
+                            "description": "Comma separated list of stream ids - return messages from stream ids"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "contacts",
+                            "type": "string",
+                            "required": false,
+                            "description": "Comma separated list of contact ids - return messages from contact ids"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "users",
+                            "type": "string",
+                            "required": false,
+                            "description": "Comma separated list of user ids - return messages from user ids"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "tags",
+                            "type": "string",
+                            "required": false,
+                            "description": "Comma separated list of tag ids - return messages from tag ids"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "since",
+                            "type": "string",
+                            "required": false,
+                            "description": "Return all messages since given timestamp"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "until",
+                            "type": "string",
+                            "required": false,
+                            "description": "Return all messages until given timestamp"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "read",
+                            "type": "integer",
+                            "required": false,
+                            "description": "Return all messages that are read (1) or unread (0)"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "sort",
+                            "type": "string",
+                            "required": false,
+                            "description": "Return messages sorted by engagement|date"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/channels/{channelId}/notificationids",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return all notifications ids from a specific channel",
+                    "nickname": "getNotificationIdsFromChannel",
+                    "type": "ChannelNotificationsIdsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "channelId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Channel id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/channels/{channelId}/read",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Set all messages of given channel to read.",
+                    "nickname": "read",
+                    "type": "SuccessResult",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "channelId",
+                            "type": "int|string",
+                            "required": true,
+                            "description": "Channel ID"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/channels/{channelId}/streamids",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return all stream ids from a specific channel",
+                    "nickname": "getStreamIds",
+                    "type": "ChannelStreamsIdsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "channelId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Channel id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/channels/{channelId}/streams",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return all streams from a specific channel",
+                    "nickname": "getStreams",
+                    "type": "ChannelStreamsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "channelId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Channel id"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "ChannelsOutput": {
+            "id": "ChannelsOutput",
+            "properties": {
+                "streams": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Channel"
+                    }
+                }
+            },
+            "required": [
+                "streams"
+            ]
+        },
+        "Channel": {
+            "id": "Channel",
+            "description": "Class Channel",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "unread": {
+                    "type": "integer"
+                },
+                "countInterval": {
+                    "type": "string"
+                },
+                "count": {
+                    "$ref": "ChannelCount"
+                },
+                "streams": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Stream"
+                    }
+                },
+                "messages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Message"
+                    }
+                },
+                "settings": {
+                    "type": "array"
+                },
+                "childtypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "childtypes",
+                "count",
+                "countInterval",
+                "id",
+                "messages",
+                "name",
+                "settings",
+                "streams",
+                "type",
+                "unread"
+            ]
+        },
+        "ChannelCount": {
+            "id": "ChannelCount",
+            "properties": {
+                "incoming": {
+                    "type": "integer"
+                },
+                "incomingUnread": {
+                    "type": "integer"
+                },
+                "incomingInterval": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "incoming",
+                "incomingInterval",
+                "incomingUnread"
+            ]
+        },
+        "Stream": {
+            "id": "Stream",
+            "description": "Class Stream",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of this stream. Can be SOCIAL, MONITORING or COWORKER",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A humran readable english description of what is contained in the stream.",
+                    "type": "string"
+                },
+                "canHaveChildren": {
+                    "description": "TRUE if this stream can contain children",
+                    "type": "boolean"
+                },
+                "canHaveChildstreams": {
+                    "description": "TRUE if this stream can contain childstreams (childstreams contain comments)",
+                    "type": "boolean"
+                },
+                "canSetChannels": {
+                    "description": "TRUE if this stream can be assigned to (additional) channels.",
+                    "type": "boolean"
+                },
+                "priority": {
+                    "description": "A numeric priority to order streams. Clients should order streams descending on priority.",
+                    "type": "integer"
+                },
+                "incoming": {
+                    "description": "Does this stream contain incoming messages?",
+                    "type": "boolean"
+                },
+                "outgoing": {
+                    "description": "Can we send messages trough this stream?",
+                    "type": "boolean"
+                },
+                "available": {
+                    "description": "If set to false, this stream has been disabled. A service validation is required to reenable it.",
+                    "type": "boolean"
+                },
+                "lastRefresh": {
+                    "description": "Date of when this stream was last refreshed.",
+                    "type": "string"
+                },
+                "nextRefresh": {
+                    "description": "Date of when the next refresh is planned.",
+                    "type": "string"
+                },
+                "hasNotifications": {
+                    "description": "Can this stream contain notifications?",
+                    "type": "boolean"
+                },
+                "hasMessages": {
+                    "description": "Can this stream contain messages?",
+                    "type": "boolean"
+                },
+                "averageDailyMessages": {
+                    "description": "The average amount of incoming messages trough this stream.",
+                    "type": "float"
+                },
+                "service": {
+                    "description": "The service id this stream belongs to.",
+                    "type": "integer"
+                },
+                "channels": {
+                    "description": "The ids of the channels this stream has been assigned to.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "network": {
+                    "description": "The network this stream represents.",
+                    "$ref": "Network"
+                },
+                "childtypes": {
+                    "description": "An array of strings of entities this stream contains. This replaces hasNotifications and hasMessages.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "profile": {
+                    "description": "The contact this stream represents.",
+                    "$ref": "Contact"
+                }
+            },
+            "required": [
+                "available",
+                "averageDailyMessages",
+                "canHaveChildren",
+                "canHaveChildstreams",
+                "canSetChannels",
+                "channels",
+                "childtypes",
+                "description",
+                "hasMessages",
+                "hasNotifications",
+                "id",
+                "incoming",
+                "lastRefresh",
+                "name",
+                "network",
+                "nextRefresh",
+                "outgoing",
+                "priority",
+                "service",
+                "type"
+            ]
+        },
+        "Message": {
+            "id": "Message",
+            "description": "Class Message",
+            "properties": {
+                "attachments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Attachment"
+                    }
+                },
+                "body": {
+                    "$ref": "MessageBody"
+                },
+                "schedule": {
+                    "description": "Schedule for this message.",
+                    "$ref": "Schedule"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "from": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Contact"
+                    }
+                },
+                "to": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Contact"
+                    }
+                },
+                "lang": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "body"
+            ]
+        },
+        "Network": {
+            "id": "Network",
+            "description": "Class Base",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "limitations": {
+                    "$ref": "NetworkLimitations"
+                }
+            },
+            "required": [
+                "icon",
+                "name",
+                "token"
+            ]
+        },
+        "Contact": {
+            "id": "Contact",
+            "properties": {
+                "following": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "displayname": {
+                    "description": "The full name of the user that should be used in general clients.",
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Full name OR last name (if firstname is not null)",
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "description": "URL to the avatar of this contact.",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "URL to the public profile of this contact.",
+                    "type": "string"
+                },
+                "network": {
+                    "description": "Social network this specific contact comes from",
+                    "$ref": "Network"
+                }
+            },
+            "required": [
+                "avatar",
+                "displayname",
+                "following",
+                "id",
+                "name",
+                "network"
+            ]
+        },
+        "Attachment": {
+            "id": "Attachment",
+            "description": "Class Attachment\r \r Represent an attachment that will be sent with the message.\r (Or is received from a message.)",
+            "properties": {
+                "type": {
+                    "description": "The type of the attachment",
+                    "type": "string",
+                    "enum": [
+                        "image",
+                        "link"
+                    ]
+                },
+                "url": {
+                    "description": "URL to the publicly available content",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "MessageBody": {
+            "id": "MessageBody",
+            "properties": {
+                "plaintext": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                }
+            }
+        },
+        "Schedule": {
+            "id": "Schedule",
+            "properties": {
+                "date": {
+                    "description": "UNIX timestamp of the first/next scheduled item. Can be UNIX timestamp or ISO 8601 date",
+                    "$ref": "integer|string"
+                },
+                "repeat": {
+                    "$ref": "ScheduleRepeat"
+                }
+            },
+            "required": [
+                "date"
+            ]
+        },
+        "NetworkLimitations": {
+            "id": "NetworkLimitations",
+            "properties": {
+                "max-length": {
+                    "description": "Maximum length of a message.",
+                    "$ref": "NetworkLimitation"
+                },
+                "max-length-hardlimit": {
+                    "description": "Absolute maximum length of a message, including attachments.",
+                    "$ref": "NetworkLimitation"
+                },
+                "picture-url-length": {
+                    "description": "Amount of characters an image url will take up.",
+                    "$ref": "NetworkLimitation"
+                },
+                "url-length": {
+                    "description": "Amount of characters a link will take up.",
+                    "$ref": "NetworkLimitation"
+                },
+                "include-title-in-max-length": {
+                    "description": "TRUE if the subject will be added to the body.",
+                    "$ref": "NetworkLimitationBoolean"
+                },
+                "title-spacing-length": {
+                    "description": "Amount of characters that will be added to the subject.",
+                    "$ref": "NetworkLimitation"
+                },
+                "images": {
+                    "description": "Amount of images you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                },
+                "link": {
+                    "description": "Amount of links you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                },
+                "video": {
+                    "description": "Amount of videos you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                }
+            }
+        },
+        "ScheduleRepeat": {
+            "id": "ScheduleRepeat",
+            "properties": {
+                "interval": {
+                    "description": "The minimal amount of seconds between 2 repeating posts",
+                    "type": "integer"
+                },
+                "until": {
+                    "description": "UNIX timestamp of the last scheduled item. Can be UNIX timestamp or ISO 8601 date",
+                    "$ref": "integer|string"
+                },
+                "amount": {
+                    "description": "Amount of times we want to repeat this message. If combined with until, the lowest value will be used.",
+                    "type": "integer"
+                },
+                "weekdays": {
+                    "description": "Contains an array of uppercase english weekdays. If provided, only send if the schedule date falls in one of the provided dates.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "string<MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY>"
+                    }
+                },
+                "hours": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided dates.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "minutes": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided minutes.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "days": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided month days.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "months": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided months.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "years": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided years.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "interval"
+            ]
+        },
+        "NetworkLimitation": {
+            "id": "NetworkLimitation",
+            "properties": {
+                "limit": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "MAXIMUM",
+                        "MINIMUM"
+                    ]
+                }
+            },
+            "required": [
+                "limit"
+            ]
+        },
+        "NetworkLimitationBoolean": {
+            "id": "NetworkLimitationBoolean",
+            "properties": {
+                "limit": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "limit"
+            ]
+        },
+        "ChannelOutput": {
+            "id": "ChannelOutput",
+            "properties": {
+                "channel": {
+                    "$ref": "Channel"
+                }
+            },
+            "required": [
+                "channel"
+            ]
+        },
+        "SuccessResult": {
+            "id": "SuccessResult",
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "success"
+            ]
+        },
+        "ChannelInput": {
+            "id": "ChannelInput",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "settings": {
+                    "type": "array"
+                },
+                "parent": {
+                    "type": "integer"
+                }
+            }
+        },
+        "ChannelStreamsOutput": {
+            "id": "ChannelStreamsOutput",
+            "properties": {
+                "streams": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Stream"
+                    }
+                }
+            },
+            "required": [
+                "streams"
+            ]
+        },
+        "ChannelStreamsIdsOutput": {
+            "id": "ChannelStreamsIdsOutput",
+            "properties": {
+                "channel": {
+                    "$ref": "ChannelStreamsIds"
+                }
+            },
+            "required": [
+                "channel"
+            ]
+        },
+        "ChannelStreamsIds": {
+            "id": "ChannelStreamsIds",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "streams": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "streams"
+            ]
+        },
+        "ChannelMessagesOutput": {
+            "id": "ChannelMessagesOutput",
+            "properties": {
+                "channel": {
+                    "$ref": "ChannelMessages"
+                }
+            },
+            "required": [
+                "channel"
+            ]
+        },
+        "ChannelMessages": {
+            "id": "ChannelMessages",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "messages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Message"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "messages"
+            ]
+        },
+        "ChannelCountersOutput": {
+            "id": "ChannelCountersOutput",
+            "properties": {
+                "channel": {
+                    "$ref": "ChannelCounters"
+                }
+            },
+            "required": [
+                "channel"
+            ]
+        },
+        "ChannelCounters": {
+            "id": "ChannelCounters",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "counters": {
+                    "$ref": "Counter"
+                }
+            },
+            "required": [
+                "counters",
+                "id"
+            ]
+        },
+        "Counter": {
+            "id": "Counter",
+            "properties": {
+                "total": {
+                    "$ref": "CounterTotal"
+                },
+                "intervals": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "CountInterval"
+                    }
+                }
+            },
+            "required": [
+                "intervals",
+                "total"
+            ]
+        },
+        "CounterTotal": {
+            "id": "CounterTotal",
+            "properties": {
+                "incoming": {
+                    "type": "integer"
+                },
+                "unread": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "incoming",
+                "unread"
+            ]
+        },
+        "CountInterval": {
+            "id": "CountInterval",
+            "description": "Class CountInterval",
+            "properties": {
+                "entities": {
+                    "type": "array"
+                },
+                "interval": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "entities",
+                "interval"
+            ]
+        },
+        "ChannelMessageIdsOutput": {
+            "id": "ChannelMessageIdsOutput",
+            "properties": {
+                "channel": {
+                    "$ref": "ChannelMessageIds"
+                }
+            },
+            "required": [
+                "channel"
+            ]
+        },
+        "ChannelMessageIds": {
+            "id": "ChannelMessageIds",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "messages": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "messages"
+            ]
+        },
+        "ChannelNotificationsIdsOutput": {
+            "id": "ChannelNotificationsIdsOutput",
+            "properties": {
+                "channel": {
+                    "$ref": "ChannelNotificationsIds"
+                }
+            },
+            "required": [
+                "channel"
+            ]
+        },
+        "ChannelNotificationsIds": {
+            "id": "ChannelNotificationsIds",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "notifications": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "notifications"
+            ]
+        }
+    }
+}

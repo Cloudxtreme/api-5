@@ -1,0 +1,908 @@
+{
+    "basePath": "https://devapi.cloudwalkers.be",
+    "swaggerVersion": "1.2",
+    "apiVersion": "1",
+    "resourcePath": "/admin",
+    "apis": [
+        {
+            "path": "/admin/accountplans",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "List of account plans",
+                    "nickname": "Accounts",
+                    "type": "Plan",
+                    "notes": "List of all plans created by accounts"
+                },
+                {
+                    "method": "POST",
+                    "summary": "Create plan",
+                    "nickname": "Accounts",
+                    "type": "Plan",
+                    "notes": "Create plan details and limits"
+                }
+            ]
+        },
+        {
+            "path": "/admin/accountplans/{planId}",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get plan details",
+                    "nickname": "Accounts",
+                    "type": "Plan",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Id of the plan"
+                        }
+                    ],
+                    "notes": "Get plan details by id"
+                },
+                {
+                    "method": "PUT",
+                    "summary": "Update plan info and limits",
+                    "nickname": "Accounts",
+                    "type": "Plan",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Id of the plan"
+                        }
+                    ],
+                    "notes": "Update plan details and limits by id"
+                },
+                {
+                    "method": "DELETE",
+                    "summary": "Delete Reseller Plan",
+                    "nickname": "Accounts",
+                    "type": "DeleteResult",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Id of the Plan"
+                        }
+                    ],
+                    "notes": "Delete Reseller Plan<br>Attencion: Validation of plan usage required!"
+                }
+            ]
+        },
+        {
+            "path": "/admin/accounts",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Create Reseller account",
+                    "nickname": "Accounts",
+                    "type": "Reseller",
+                    "parameters": [
+                        {
+                            "paramType": "body",
+                            "type": "AccountInput",
+                            "required": true
+                        }
+                    ],
+                    "notes": "Create new reseller client"
+                }
+            ]
+        },
+        {
+            "path": "/admin/accounts",
+            "description": "Admin management endpoint",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "List of all accounts",
+                    "nickname": "Accounts",
+                    "type": "Account",
+                    "notes": "Returns all child accounts"
+                }
+            ]
+        },
+        {
+            "path": "/admin/accounts/{accountId}",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get account details",
+                    "nickname": "Accounts",
+                    "type": "Account",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Id of the account"
+                        }
+                    ],
+                    "notes": "Returns account by id"
+                },
+                {
+                    "method": "PUT",
+                    "summary": "Update account info",
+                    "nickname": "Accounts",
+                    "type": "Account",
+                    "parameters": [
+                        {
+                            "paramType": "body",
+                            "type": "AccountInput",
+                            "required": true
+                        }
+                    ],
+                    "notes": "Update account info by id"
+                },
+                {
+                    "method": "DELETE",
+                    "summary": "Delete Reseller account",
+                    "nickname": "Accounts",
+                    "type": "DeleteResult",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Id of the account"
+                        }
+                    ],
+                    "notes": "Delete reseller account from system, please be careful"
+                }
+            ]
+        },
+        {
+            "path": "/admin/bounces",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "List bounces",
+                    "nickname": "Accounts",
+                    "type": "Bounce",
+                    "notes": "List of all email bounces from this server."
+                }
+            ]
+        },
+        {
+            "path": "/admin/bounces/{bounceId}",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get bounce details",
+                    "nickname": "Accounts",
+                    "type": "Bounce",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Id of the bounce"
+                        }
+                    ],
+                    "notes": "Get all the details of a sepcific bounce by id."
+                }
+            ]
+        },
+        {
+            "path": "/admin/performance",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "API performance",
+                    "nickname": "Accounts",
+                    "notes": "Legacy from the old admin area. Returns few stats."
+                }
+            ]
+        },
+        {
+            "path": "/admin/procedures",
+            "description": "Return the proper procedures for the applied filter.",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return the proper procedures for the applied filter.",
+                    "nickname": "Procedures",
+                    "type": "ProcedureOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "user",
+                            "type": "integer",
+                            "required": false,
+                            "description": "User id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "account",
+                            "type": "integer",
+                            "required": false,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "service",
+                            "type": "integer",
+                            "required": false,
+                            "description": "Service id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "stream",
+                            "type": "integer",
+                            "required": false,
+                            "description": "Stream id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "message",
+                            "type": "integer",
+                            "required": false,
+                            "description": "Message id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "result",
+                            "type": "string",
+                            "required": false,
+                            "description": "Result"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "order",
+                            "type": "string",
+                            "required": false,
+                            "description": "Order"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/admin/streams",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "List of all streams",
+                    "nickname": "Accounts",
+                    "type": "Stream",
+                    "notes": "Get list of all streams"
+                }
+            ]
+        },
+        {
+            "path": "/admin/streams/refresh/{streamId}",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Refresh stream",
+                    "nickname": "Accounts",
+                    "type": "Stream",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Id of the Stream"
+                        }
+                    ],
+                    "notes": "Refresh specific stream by id"
+                }
+            ]
+        },
+        {
+            "path": "/admin/users",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "List of all users",
+                    "nickname": "Accounts",
+                    "type": "User",
+                    "notes": "List of all users"
+                },
+                {
+                    "method": "POST",
+                    "summary": "Create user",
+                    "nickname": "Accounts",
+                    "type": "User",
+                    "notes": "Create new user"
+                }
+            ]
+        },
+        {
+            "path": "/admin/users/{userId}",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get user details",
+                    "nickname": "Accounts",
+                    "type": "User",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Id of the user"
+                        }
+                    ],
+                    "notes": "Get user details by id"
+                },
+                {
+                    "method": "PUT",
+                    "summary": "Update user info",
+                    "nickname": "Accounts",
+                    "type": "User",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Id of the user"
+                        }
+                    ],
+                    "notes": "Update user info"
+                },
+                {
+                    "method": "DELETE",
+                    "summary": "Delete User",
+                    "nickname": "Accounts",
+                    "type": "DeleteResult",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Id of the user"
+                        }
+                    ],
+                    "notes": "Delete user, please be careful"
+                }
+            ]
+        }
+    ],
+    "models": {
+        "Account": {
+            "id": "Account",
+            "description": "Class Account",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "reseller": {
+                    "$ref": "Reseller"
+                },
+                "campaigns": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Campaign"
+                    }
+                },
+                "plan": {
+                    "$ref": "Plan"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "plan",
+                "reseller"
+            ]
+        },
+        "Reseller": {
+            "id": "Reseller",
+            "description": "Class Reseller",
+            "properties": {
+                "id": {
+                    "$ref": null
+                },
+                "name": {
+                    "type": "string"
+                },
+                "plan": {
+                    "$ref": "Plan"
+                },
+                "reseller_plans": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Plan"
+                    }
+                },
+                "users": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "User"
+                    }
+                }
+            }
+        },
+        "Campaign": {
+            "id": "Campaign",
+            "description": "Class Campaign",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "Plan": {
+            "id": "Plan",
+            "description": "Account limits and payment plan.",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "parent_plan": {
+                    "type": "string"
+                },
+                "limits": {
+                    "$ref": "PlanLimits"
+                }
+            },
+            "required": [
+                "id",
+                "limits",
+                "name"
+            ]
+        },
+        "User": {
+            "id": "User",
+            "description": "Class User",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "displayname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "type": "string"
+                },
+                "accounts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Account"
+                    }
+                },
+                "locale": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "accounts",
+                "avatar",
+                "displayname",
+                "firstname",
+                "id",
+                "name"
+            ]
+        },
+        "PlanLimits": {
+            "id": "PlanLimits",
+            "properties": {
+                "admins": {
+                    "type": "integer"
+                },
+                "users": {
+                    "type": "integer"
+                },
+                "services": {
+                    "type": "integer"
+                },
+                "keywords": {
+                    "type": "integer"
+                },
+                "following": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "admins",
+                "following",
+                "keywords",
+                "services",
+                "users"
+            ]
+        },
+        "AccountInput": {
+            "id": "AccountInput",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "campaigns": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Campaign"
+                    }
+                }
+            }
+        },
+        "DeleteResult": {
+            "id": "DeleteResult",
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "success"
+            ]
+        },
+        "Stream": {
+            "id": "Stream",
+            "description": "Class Stream",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of this stream. Can be SOCIAL, MONITORING or COWORKER",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A humran readable english description of what is contained in the stream.",
+                    "type": "string"
+                },
+                "canHaveChildren": {
+                    "description": "TRUE if this stream can contain children",
+                    "type": "boolean"
+                },
+                "canHaveChildstreams": {
+                    "description": "TRUE if this stream can contain childstreams (childstreams contain comments)",
+                    "type": "boolean"
+                },
+                "canSetChannels": {
+                    "description": "TRUE if this stream can be assigned to (additional) channels.",
+                    "type": "boolean"
+                },
+                "priority": {
+                    "description": "A numeric priority to order streams. Clients should order streams descending on priority.",
+                    "type": "integer"
+                },
+                "incoming": {
+                    "description": "Does this stream contain incoming messages?",
+                    "type": "boolean"
+                },
+                "outgoing": {
+                    "description": "Can we send messages trough this stream?",
+                    "type": "boolean"
+                },
+                "available": {
+                    "description": "If set to false, this stream has been disabled. A service validation is required to reenable it.",
+                    "type": "boolean"
+                },
+                "lastRefresh": {
+                    "description": "Date of when this stream was last refreshed.",
+                    "type": "string"
+                },
+                "nextRefresh": {
+                    "description": "Date of when the next refresh is planned.",
+                    "type": "string"
+                },
+                "hasNotifications": {
+                    "description": "Can this stream contain notifications?",
+                    "type": "boolean"
+                },
+                "hasMessages": {
+                    "description": "Can this stream contain messages?",
+                    "type": "boolean"
+                },
+                "averageDailyMessages": {
+                    "description": "The average amount of incoming messages trough this stream.",
+                    "type": "float"
+                },
+                "service": {
+                    "description": "The service id this stream belongs to.",
+                    "type": "integer"
+                },
+                "channels": {
+                    "description": "The ids of the channels this stream has been assigned to.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "network": {
+                    "description": "The network this stream represents.",
+                    "$ref": "Network"
+                },
+                "childtypes": {
+                    "description": "An array of strings of entities this stream contains. This replaces hasNotifications and hasMessages.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "profile": {
+                    "description": "The contact this stream represents.",
+                    "$ref": "Contact"
+                }
+            },
+            "required": [
+                "available",
+                "averageDailyMessages",
+                "canHaveChildren",
+                "canHaveChildstreams",
+                "canSetChannels",
+                "channels",
+                "childtypes",
+                "description",
+                "hasMessages",
+                "hasNotifications",
+                "id",
+                "incoming",
+                "lastRefresh",
+                "name",
+                "network",
+                "nextRefresh",
+                "outgoing",
+                "priority",
+                "service",
+                "type"
+            ]
+        },
+        "Network": {
+            "id": "Network",
+            "description": "Class Base",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "limitations": {
+                    "$ref": "NetworkLimitations"
+                }
+            },
+            "required": [
+                "icon",
+                "name",
+                "token"
+            ]
+        },
+        "Contact": {
+            "id": "Contact",
+            "properties": {
+                "following": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "displayname": {
+                    "description": "The full name of the user that should be used in general clients.",
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Full name OR last name (if firstname is not null)",
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "description": "URL to the avatar of this contact.",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "URL to the public profile of this contact.",
+                    "type": "string"
+                },
+                "network": {
+                    "description": "Social network this specific contact comes from",
+                    "$ref": "Network"
+                }
+            },
+            "required": [
+                "avatar",
+                "displayname",
+                "following",
+                "id",
+                "name",
+                "network"
+            ]
+        },
+        "NetworkLimitations": {
+            "id": "NetworkLimitations",
+            "properties": {
+                "max-length": {
+                    "description": "Maximum length of a message.",
+                    "$ref": "NetworkLimitation"
+                },
+                "max-length-hardlimit": {
+                    "description": "Absolute maximum length of a message, including attachments.",
+                    "$ref": "NetworkLimitation"
+                },
+                "picture-url-length": {
+                    "description": "Amount of characters an image url will take up.",
+                    "$ref": "NetworkLimitation"
+                },
+                "url-length": {
+                    "description": "Amount of characters a link will take up.",
+                    "$ref": "NetworkLimitation"
+                },
+                "include-title-in-max-length": {
+                    "description": "TRUE if the subject will be added to the body.",
+                    "$ref": "NetworkLimitationBoolean"
+                },
+                "title-spacing-length": {
+                    "description": "Amount of characters that will be added to the subject.",
+                    "$ref": "NetworkLimitation"
+                },
+                "images": {
+                    "description": "Amount of images you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                },
+                "link": {
+                    "description": "Amount of links you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                },
+                "video": {
+                    "description": "Amount of videos you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                }
+            }
+        },
+        "NetworkLimitation": {
+            "id": "NetworkLimitation",
+            "properties": {
+                "limit": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "MAXIMUM",
+                        "MINIMUM"
+                    ]
+                }
+            },
+            "required": [
+                "limit"
+            ]
+        },
+        "NetworkLimitationBoolean": {
+            "id": "NetworkLimitationBoolean",
+            "properties": {
+                "limit": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "limit"
+            ]
+        },
+        "ProcedureOutput": {
+            "id": "ProcedureOutput",
+            "properties": {
+                "procedures": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Procedure"
+                    }
+                }
+            },
+            "required": [
+                "procedures"
+            ]
+        },
+        "Procedure": {
+            "id": "Procedure",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "process": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "integer"
+                },
+                "accountId": {
+                    "type": "integer"
+                },
+                "serviceId": {
+                    "type": "integer"
+                },
+                "streamId": {
+                    "type": "integer"
+                },
+                "messageId": {
+                    "type": "integer"
+                },
+                "result": {
+                    "type": "string"
+                },
+                "start": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "end": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "totalTime": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "totalQueries": {
+                    "type": "integer"
+                },
+                "logs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "accountId",
+                "end",
+                "id",
+                "logs",
+                "messageId",
+                "process",
+                "result",
+                "serviceId",
+                "start",
+                "streamId",
+                "totalQueries",
+                "totalTime",
+                "userId"
+            ]
+        }
+    }
+}

@@ -1,0 +1,1330 @@
+{
+    "basePath": "https://devapi.cloudwalkers.be",
+    "swaggerVersion": "1.2",
+    "apiVersion": "1",
+    "resourcePath": "/messages",
+    "apis": [
+        {
+            "path": "/messages",
+            "description": "Operation on messages",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Create a new message",
+                    "nickname": "createMessage",
+                    "type": "MessageOutput",
+                    "parameters": [
+                        {
+                            "paramType": "body",
+                            "type": "MessageInput"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 400,
+                            "message": "Account not found"
+                        }
+                    ]
+                },
+                {
+                    "method": "GET",
+                    "summary": "Get a set of messages. ids must be provided.",
+                    "nickname": "getMessagesFromIdsAction",
+                    "type": "MessagesOutput",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "ids",
+                            "type": "string",
+                            "required": true,
+                            "description": "Comma seperate list of message ids"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 400,
+                            "message": "Bad request"
+                        },
+                        {
+                            "code": 400,
+                            "message": "Not Found"
+                        },
+                        {
+                            "code": 403,
+                            "message": "Not authorized"
+                        },
+                        {
+                            "code": 404,
+                            "message": "Invalid endpoint"
+                        },
+                        {
+                            "code": 500,
+                            "message": "Deprecated"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/messages/{messageId}",
+            "description": "Operation on a message",
+            "operations": [
+                {
+                    "method": "DELETE",
+                    "summary": "Remove a message",
+                    "nickname": "deleteMessage",
+                    "type": "ActionResult"
+                },
+                {
+                    "method": "PUT",
+                    "nickname": "processUpdate",
+                    "type": "MessageOutput",
+                    "parameters": [
+                        {
+                            "paramType": "body",
+                            "type": "MessageInput"
+                        }
+                    ]
+                },
+                {
+                    "method": "GET",
+                    "summary": "Get all message data",
+                    "nickname": "getMessageData",
+                    "type": "MessageOutput"
+                }
+            ]
+        },
+        {
+            "path": "/messages/{messageId}/actions",
+            "description": "Message Operations available",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get all actions that are possible on given message",
+                    "nickname": "listActions",
+                    "type": "MessageActionsOutput",
+                    "responseMessages": [
+                        {
+                            "code": 400,
+                            "message": "Bad request"
+                        },
+                        {
+                            "code": 403,
+                            "message": "Not authorized"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/messages/{messageId}/actions/{actionToken}",
+            "description": "Operation on messages",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Execute an action and create a canned message if marked as canned and message attribute is provided",
+                    "nickname": "actAction",
+                    "type": "ActionResult",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "canned",
+                            "type": "integer",
+                            "required": false,
+                            "description": "Also create a canned message"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 400,
+                            "message": "Bad request"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/messages/{messageId}/noteids",
+            "description": "Operation on messages",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return all notes ids posted on this message.",
+                    "nickname": "getNotesIds",
+                    "type": "MessageNoteIdsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Acount id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/messages/{messageId}/notes",
+            "description": "Operation on messages",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Create a note",
+                    "nickname": "createNote",
+                    "type": "NoteOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Acount id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        },
+                        {
+                            "paramType": "body",
+                            "type": "NoteInput",
+                            "required": true
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 400,
+                            "message": "Message not found"
+                        },
+                        {
+                            "code": 403,
+                            "message": "Forbidden access"
+                        }
+                    ]
+                },
+                {
+                    "method": "GET",
+                    "summary": "Return all notes posted on this message or notes for given ids.",
+                    "nickname": "getNotes",
+                    "type": "MessageNotesOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Acount id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "ids",
+                            "type": "string",
+                            "required": false,
+                            "description": "Only get the notes with given ids (comma separated list)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/messages/{messageId}/original",
+            "description": "Operation on a message",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get the message in the form it was sent to us, including the default text.",
+                    "nickname": "getOriginal",
+                    "type": "MessageOutput"
+                },
+                {
+                    "method": "PUT",
+                    "summary": "Edit the original message",
+                    "nickname": "updateOriginal",
+                    "type": "MessageOutput",
+                    "parameters": [
+                        {
+                            "paramType": "body",
+                            "type": "MessageInput"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/messages/{messageId}/read",
+            "description": "Operation on a message",
+            "operations": [
+                {
+                    "method": "PUT",
+                    "summary": "Set message to READ",
+                    "nickname": "setRead",
+                    "type": "MessageReadResult"
+                }
+            ]
+        },
+        {
+            "path": "/messages/{messageId}/sendlog",
+            "description": "Operation on messages",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get the sendlog of this (outgoing) message",
+                    "nickname": "getSendlog"
+                }
+            ]
+        },
+        {
+            "path": "/messages/{messageId}/skip",
+            "description": "Operation on a message",
+            "operations": [
+                {
+                    "method": "PUT",
+                    "summary": "A skipped message is just a message that is edited with a matched next date",
+                    "nickname": "processUpdate",
+                    "type": "MessageOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        },
+                        {
+                            "paramType": "body",
+                            "type": "MessageInput"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/messages/{messageId}/statistics",
+            "description": "Operation on messages",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Message statistics management",
+                    "nickname": "statistics"
+                }
+            ]
+        },
+        {
+            "path": "/messages/{messageId}/statistics/{statistic.token}",
+            "description": "Operation on messages",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Message statistics management",
+                    "nickname": "statistics_0"
+                },
+                {
+                    "method": "PUT",
+                    "summary": "my summary",
+                    "nickname": "statistics_1",
+                    "parameters": [
+                        {
+                            "paramType": "body",
+                            "type": "integer",
+                            "required": true
+                        }
+                    ],
+                    "notes": "endpoint notes"
+                }
+            ]
+        },
+        {
+            "path": "/messages/{messageId}/tagids",
+            "description": "Get message tags from ids",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get message tags from ids",
+                    "nickname": "tags",
+                    "type": "MessageTagIdsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/messages/{messageId}/tags",
+            "description": "Return message tags",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Return message tags",
+                    "nickname": "tags_0",
+                    "type": "MessageTagsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        }
+                    ]
+                },
+                {
+                    "method": "POST",
+                    "summary": "Tag a message",
+                    "nickname": "tags_1",
+                    "type": "TagSingleOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "id",
+                            "type": "integer",
+                            "required": false,
+                            "description": "id of tag to associate"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "name",
+                            "type": "string",
+                            "required": false,
+                            "description": "name of the new tag to associate"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/messages/{messageId}/tags/{tagId}",
+            "description": "Delete tag from message",
+            "operations": [
+                {
+                    "method": "DELETE",
+                    "summary": "Delete tag from message",
+                    "nickname": "tags",
+                    "type": "TagSuccess",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "tagId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Tag id"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "MessageTagsOutput": {
+            "id": "MessageTagsOutput",
+            "properties": {
+                "message": {
+                    "$ref": "MessageTags"
+                }
+            }
+        },
+        "TagSingleOutput": {
+            "id": "TagSingleOutput",
+            "properties": {
+                "tag": {
+                    "$ref": "TagSimple"
+                }
+            }
+        },
+        "MessageTags": {
+            "id": "MessageTags",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "TagSimple"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "tags"
+            ]
+        },
+        "TagSimple": {
+            "id": "TagSimple",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "MessageTagIdsOutput": {
+            "id": "MessageTagIdsOutput",
+            "properties": {
+                "message": {
+                    "$ref": "MessageTagIds"
+                }
+            },
+            "required": [
+                "message"
+            ]
+        },
+        "MessageTagIds": {
+            "id": "MessageTagIds",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "tags"
+            ]
+        },
+        "TagSuccess": {
+            "id": "TagSuccess",
+            "properties": {
+                "success": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "success"
+            ]
+        },
+        "NoteOutput": {
+            "id": "NoteOutput",
+            "properties": {
+                "note": {
+                    "$ref": "Note"
+                }
+            },
+            "required": [
+                "note"
+            ]
+        },
+        "NoteInput": {
+            "id": "NoteInput",
+            "properties": {
+                "text": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "text"
+            ]
+        },
+        "MessageNotesOutput": {
+            "id": "MessageNotesOutput",
+            "properties": {
+                "message": {
+                    "$ref": "MessageNotes"
+                }
+            },
+            "required": [
+                "message"
+            ]
+        },
+        "Note": {
+            "id": "Note",
+            "description": "Class Note",
+            "properties": {
+                "user": {
+                    "$ref": "UserSimple"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "identifier": {
+                    "$ref": "Identifier"
+                }
+            },
+            "required": [
+                "date",
+                "id",
+                "text"
+            ]
+        },
+        "MessageNotes": {
+            "id": "MessageNotes",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "notes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Note"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "notes"
+            ]
+        },
+        "UserSimple": {
+            "id": "UserSimple",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "displayname": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "avatar",
+                "displayname",
+                "email",
+                "firstname",
+                "id",
+                "name"
+            ]
+        },
+        "Identifier": {
+            "id": "Identifier",
+            "description": "Class Identifier\r \r This class acts like a model, but is actually just a placeholder.\r It is used to identify models without loading them completely.",
+            "properties": {
+                "objectType": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "MessageNoteIdsOutput": {
+            "id": "MessageNoteIdsOutput",
+            "properties": {
+                "message": {
+                    "$ref": "MessageNoteIds"
+                }
+            },
+            "required": [
+                "message"
+            ]
+        },
+        "MessageNoteIds": {
+            "id": "MessageNoteIds",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "notes": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "notes"
+            ]
+        },
+        "MessageOutput": {
+            "id": "MessageOutput",
+            "properties": {
+                "message": {
+                    "$ref": "Message"
+                }
+            }
+        },
+        "MessageInput": {
+            "id": "MessageInput",
+            "properties": {
+                "body": {
+                    "$ref": "MessageBody"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "attachments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "AttachmentInput"
+                    }
+                },
+                "streams": {
+                    "description": "Set the stream ids of the streams where this message will be sent. Can be left empty if variations are provided.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "variations": {
+                    "description": "Provide variations on the original message. If streams array is not set, you can use this array to define where this message should be sent.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "MessageVariation"
+                    }
+                },
+                "schedule": {
+                    "description": "Set schedule for this message.",
+                    "$ref": "Schedule"
+                },
+                "originalMessage": {
+                    "description": "Set this to notify the system that this is a reply on an existing message",
+                    "type": "integer"
+                },
+                "campaign": {
+                    "description": "Campaign id. If set, the message will be added to the specified campaign.",
+                    "type": "integer"
+                },
+                "campaignName": {
+                    "description": "If set, a campaign with given name will be created and the message will be added to this new campaign.",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "body"
+            ]
+        },
+        "MessagesOutput": {
+            "id": "MessagesOutput",
+            "properties": {
+                "messages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Message"
+                    }
+                }
+            },
+            "required": [
+                "messages"
+            ]
+        },
+        "Message": {
+            "id": "Message",
+            "description": "Class Message",
+            "properties": {
+                "attachments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Attachment"
+                    }
+                },
+                "body": {
+                    "$ref": "MessageBody"
+                },
+                "schedule": {
+                    "description": "Schedule for this message.",
+                    "$ref": "Schedule"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "from": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Contact"
+                    }
+                },
+                "to": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Contact"
+                    }
+                },
+                "lang": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "body"
+            ]
+        },
+        "MessageBody": {
+            "id": "MessageBody",
+            "properties": {
+                "plaintext": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                }
+            }
+        },
+        "AttachmentInput": {
+            "id": "AttachmentInput",
+            "properties": {
+                "type": {
+                    "description": "The type of the attachment",
+                    "type": "string",
+                    "enum": [
+                        "image",
+                        "link"
+                    ]
+                },
+                "url": {
+                    "description": "URL to the publicly available content",
+                    "type": "string"
+                },
+                "data": {
+                    "description": "Base64 data representation of the content",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "MessageVariation": {
+            "id": "MessageVariation",
+            "properties": {
+                "stream": {
+                    "description": "Stream id",
+                    "type": "integer"
+                },
+                "body": {
+                    "$ref": "MessageBody"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "attachments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "AttachmentInput"
+                    }
+                },
+                "excludes": {
+                    "description": "If provided, ignore the attachments with array indexes provided in this array.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "MessageExclude"
+                    }
+                },
+                "schedule": {
+                    "description": "If provided, overwrite the schedule for this variation of the message.",
+                    "$ref": "Schedule"
+                }
+            },
+            "required": [
+                "stream"
+            ]
+        },
+        "Schedule": {
+            "id": "Schedule",
+            "properties": {
+                "date": {
+                    "description": "UNIX timestamp of the first/next scheduled item. Can be UNIX timestamp or ISO 8601 date",
+                    "$ref": "integer|string"
+                },
+                "repeat": {
+                    "$ref": "ScheduleRepeat"
+                }
+            },
+            "required": [
+                "date"
+            ]
+        },
+        "Attachment": {
+            "id": "Attachment",
+            "description": "Class Attachment\r \r Represent an attachment that will be sent with the message.\r (Or is received from a message.)",
+            "properties": {
+                "type": {
+                    "description": "The type of the attachment",
+                    "type": "string",
+                    "enum": [
+                        "image",
+                        "link"
+                    ]
+                },
+                "url": {
+                    "description": "URL to the publicly available content",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "Contact": {
+            "id": "Contact",
+            "properties": {
+                "following": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "displayname": {
+                    "description": "The full name of the user that should be used in general clients.",
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Full name OR last name (if firstname is not null)",
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "description": "URL to the avatar of this contact.",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "URL to the public profile of this contact.",
+                    "type": "string"
+                },
+                "network": {
+                    "description": "Social network this specific contact comes from",
+                    "$ref": "Network"
+                }
+            },
+            "required": [
+                "avatar",
+                "displayname",
+                "following",
+                "id",
+                "name",
+                "network"
+            ]
+        },
+        "MessageExclude": {
+            "id": "MessageExclude",
+            "properties": {
+                "attachments": {
+                    "description": "Indexes of attachments of the base message that will be excluded in this variation.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "ScheduleRepeat": {
+            "id": "ScheduleRepeat",
+            "properties": {
+                "interval": {
+                    "description": "The minimal amount of seconds between 2 repeating posts",
+                    "type": "integer"
+                },
+                "until": {
+                    "description": "UNIX timestamp of the last scheduled item. Can be UNIX timestamp or ISO 8601 date",
+                    "$ref": "integer|string"
+                },
+                "amount": {
+                    "description": "Amount of times we want to repeat this message. If combined with until, the lowest value will be used.",
+                    "type": "integer"
+                },
+                "weekdays": {
+                    "description": "Contains an array of uppercase english weekdays. If provided, only send if the schedule date falls in one of the provided dates.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "string<MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY>"
+                    }
+                },
+                "hours": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided dates.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "minutes": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided minutes.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "days": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided month days.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "months": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided months.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "years": {
+                    "description": "If provided, only send if the schedule date falls in one of the provided years.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": [
+                "interval"
+            ]
+        },
+        "Network": {
+            "id": "Network",
+            "description": "Class Base",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "limitations": {
+                    "$ref": "NetworkLimitations"
+                }
+            },
+            "required": [
+                "icon",
+                "name",
+                "token"
+            ]
+        },
+        "NetworkLimitations": {
+            "id": "NetworkLimitations",
+            "properties": {
+                "max-length": {
+                    "description": "Maximum length of a message.",
+                    "$ref": "NetworkLimitation"
+                },
+                "max-length-hardlimit": {
+                    "description": "Absolute maximum length of a message, including attachments.",
+                    "$ref": "NetworkLimitation"
+                },
+                "picture-url-length": {
+                    "description": "Amount of characters an image url will take up.",
+                    "$ref": "NetworkLimitation"
+                },
+                "url-length": {
+                    "description": "Amount of characters a link will take up.",
+                    "$ref": "NetworkLimitation"
+                },
+                "include-title-in-max-length": {
+                    "description": "TRUE if the subject will be added to the body.",
+                    "$ref": "NetworkLimitationBoolean"
+                },
+                "title-spacing-length": {
+                    "description": "Amount of characters that will be added to the subject.",
+                    "$ref": "NetworkLimitation"
+                },
+                "images": {
+                    "description": "Amount of images you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                },
+                "link": {
+                    "description": "Amount of links you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                },
+                "video": {
+                    "description": "Amount of videos you can add to this network.",
+                    "$ref": "NetworkLimitation"
+                }
+            }
+        },
+        "NetworkLimitation": {
+            "id": "NetworkLimitation",
+            "properties": {
+                "limit": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "MAXIMUM",
+                        "MINIMUM"
+                    ]
+                }
+            },
+            "required": [
+                "limit"
+            ]
+        },
+        "NetworkLimitationBoolean": {
+            "id": "NetworkLimitationBoolean",
+            "properties": {
+                "limit": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "limit"
+            ]
+        },
+        "ActionResult": {
+            "id": "ActionResult",
+            "properties": {
+                "actionresult": {
+                    "$ref": "ActionResult"
+                }
+            }
+        },
+        "MessageActionsOutput": {
+            "id": "MessageActionsOutput",
+            "properties": {
+                "id": {
+                    "description": "Message ID",
+                    "type": "integer"
+                },
+                "actions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Action"
+                    }
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "Action": {
+            "id": "Action",
+            "description": "Represent an action that a user can execute on a given message\r \r Class Action",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "parameters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Parameter"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "stream": {
+                    "$ref": "Stream"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "parameters",
+                "stream",
+                "token",
+                "type"
+            ]
+        },
+        "Parameter": {
+            "id": "Parameter",
+            "description": "Represents a parameter in a message\r \r Class Parameter",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "required",
+                "token",
+                "type",
+                "value"
+            ]
+        },
+        "Stream": {
+            "id": "Stream",
+            "description": "Class Stream",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of this stream. Can be SOCIAL, MONITORING or COWORKER",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A humran readable english description of what is contained in the stream.",
+                    "type": "string"
+                },
+                "canHaveChildren": {
+                    "description": "TRUE if this stream can contain children",
+                    "type": "boolean"
+                },
+                "canHaveChildstreams": {
+                    "description": "TRUE if this stream can contain childstreams (childstreams contain comments)",
+                    "type": "boolean"
+                },
+                "canSetChannels": {
+                    "description": "TRUE if this stream can be assigned to (additional) channels.",
+                    "type": "boolean"
+                },
+                "priority": {
+                    "description": "A numeric priority to order streams. Clients should order streams descending on priority.",
+                    "type": "integer"
+                },
+                "incoming": {
+                    "description": "Does this stream contain incoming messages?",
+                    "type": "boolean"
+                },
+                "outgoing": {
+                    "description": "Can we send messages trough this stream?",
+                    "type": "boolean"
+                },
+                "available": {
+                    "description": "If set to false, this stream has been disabled. A service validation is required to reenable it.",
+                    "type": "boolean"
+                },
+                "lastRefresh": {
+                    "description": "Date of when this stream was last refreshed.",
+                    "type": "string"
+                },
+                "nextRefresh": {
+                    "description": "Date of when the next refresh is planned.",
+                    "type": "string"
+                },
+                "hasNotifications": {
+                    "description": "Can this stream contain notifications?",
+                    "type": "boolean"
+                },
+                "hasMessages": {
+                    "description": "Can this stream contain messages?",
+                    "type": "boolean"
+                },
+                "averageDailyMessages": {
+                    "description": "The average amount of incoming messages trough this stream.",
+                    "type": "float"
+                },
+                "service": {
+                    "description": "The service id this stream belongs to.",
+                    "type": "integer"
+                },
+                "channels": {
+                    "description": "The ids of the channels this stream has been assigned to.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "network": {
+                    "description": "The network this stream represents.",
+                    "$ref": "Network"
+                },
+                "childtypes": {
+                    "description": "An array of strings of entities this stream contains. This replaces hasNotifications and hasMessages.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "profile": {
+                    "description": "The contact this stream represents.",
+                    "$ref": "Contact"
+                }
+            },
+            "required": [
+                "available",
+                "averageDailyMessages",
+                "canHaveChildren",
+                "canHaveChildstreams",
+                "canSetChannels",
+                "channels",
+                "childtypes",
+                "description",
+                "hasMessages",
+                "hasNotifications",
+                "id",
+                "incoming",
+                "lastRefresh",
+                "name",
+                "network",
+                "nextRefresh",
+                "outgoing",
+                "priority",
+                "service",
+                "type"
+            ]
+        }
+    }
+}
