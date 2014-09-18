@@ -9,8 +9,16 @@ class ApiDocsController extends BaseController {
 
 	public function index ($version)
 	{
-		// @todo check if version exists else 404
-		// $version = in_array();
+		// atention json files are cached
+		// @todo put versions in config
+		$available_versions = array(
+			'1.0'
+		);
+		// check if version exists else 404
+		if( !in_array($version, $available_versions) ){
+			App::abort(404, 'Woops.');
+		}
+
 //		$token = 'Bearer '.Session::get('_token');
 		$url = URL::to('/').'/docs/schema/'.$version;
 
@@ -23,8 +31,6 @@ class ApiDocsController extends BaseController {
 //			'token'=>$token,
 			'version'=>$version
 		);
-
-
 
 		return View::make('swagger.swagger', $data);
 	}

@@ -12,7 +12,16 @@
                     "method": "GET",
                     "summary": "Get information about a specific account",
                     "nickname": "getAccountInformation_0",
-                    "type": "AccountOutput"
+                    "type": "AccountOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
                 },
                 {
                     "method": "PUT",

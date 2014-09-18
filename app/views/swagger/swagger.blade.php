@@ -59,8 +59,12 @@
 					window.authorizations.add("key", new ApiKeyAuthorization("api_key", key, "query"));
 				}
 			})
-			var bearer = window.localStorage.getItem('token');
-			window.authorizations.add("key", new ApiKeyAuthorization("Authorization", "Bearer "+bearer, "header"));
+
+			$('#bearer').change(function() {
+				var bearer = $('#bearer').val();
+				window.authorizations.add("key", new ApiKeyAuthorization("Authorization", "Bearer "+bearer, "header"));
+			})
+
 			window.swaggerUi.load();
 		});
 	</script>
@@ -78,8 +82,9 @@
 				<img id="show-wordnik-dev-icon" src="images/wordnik_api.png" title="Show Wordnik Developer Apis">
 			</div>
 			<div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text" value="{{$url}}"/></div>
-			<div class='input'><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>
-			<div class='input'><a id="explore" href="#">Explore</a></div>
+			<div class='input' style="display: none;"><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>
+			<div class='input'><input placeholder="bearer token" id="bearer" name="bearer" type="text" value=""/></div>
+<!--			<div class='input'><a id="explore" href="#">Explore</a></div>-->
 		</form>
 	</div>
 </div>
