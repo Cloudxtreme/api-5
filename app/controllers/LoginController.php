@@ -61,23 +61,33 @@ class LoginController extends BaseController {
 
     public function changePassword ()
     {
-	    $payload = (object) array('controller'=> 'UserController', 'action'=> 'changePassword', 'open'=> round(microtime(true), 3), 'payload'=> array(), 'user'=> null);
 
-	    $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
+	    $bearer = Request::header('Authorization');
+	    $token  = Request::segment(2);
 
-	    print_r($output); exit;
+	    if(!$bearer || !$token){
+		    App::abort(404, 'Woops.');
+	    }
 
-//	    $bearer = Request::header('Authorization');
-//
+	    if($bearer){
+		    // check user in engine and set headers in response
+		    $contents = View::make('signin.recover_password', array('data'));
+		    $response = Response::make($contents, 200);
+		    $response->header('Authorization', 'Bearer 123456789012345678');
+		    return $response;
+	    }
+
+
+
 //	    if (!$bearer || strlen ($bearer) < 18)
 //	    {
 //		    http_response_code (403);
 //
 //		    return Response::json (array ('error' => array ('message' => 'No valid oauth2 authentication found.')), 403);
 //	    }
-
+//
 	    if(Input::has('oldpassword')){
-		    Input::merge(array('userId'=> $userId));
+		    //Input::merge(array('userId'=> $userId));
 
 		    $rules = array(
 			    'userId' => 'required|integer',
@@ -86,10 +96,10 @@ class LoginController extends BaseController {
 			    'newpassword_confirm' => 'required|same:newpassword'
 		    );
 
-//		    print_r($rules);
-//		    echo '<br>';
-//		    print_r(Input::all());
-//		    exit;
+		    print_r($rules);
+		    echo '<br>';
+		    print_r(Input::all());
+		    exit;
 
 		    $validator = Validator::make(Input::all(), $rules);
 		    $data = Input::all();
@@ -108,11 +118,13 @@ class LoginController extends BaseController {
 			    return print_r($output,true);
 
 		    }
-	    } else {
-		    return View::make('signin.change_password');
 	    }
-
     }
+//else {
+//		    return View::make('signin.change_password');
+//	    }
+
+//    }
 
     public function recoverPassword ()
     {
@@ -139,13 +151,6 @@ class LoginController extends BaseController {
 	    } else {
 		    return View::make('signin.recover_password');
 	    }
-    }
-
-    public function error404 ()
-    {
-	    $data = Input::all();
-
-	    App::abort(403, 'Unauthorized action.');
     }
 	
 	public function register ()
