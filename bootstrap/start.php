@@ -24,6 +24,7 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
+/*
 $env = $app->detectEnvironment(array(
 
 	// "hostname" of the machine/server
@@ -50,6 +51,75 @@ $env = $app->detectEnvironment(array(
 		'vps601.serverpark.be'
 	)
 ));
+*/
+
+$env = $app->detectEnvironment(function () {
+
+	// The environment name is a combination of your hostname
+	// and the location where this app is installed.
+
+	// Please add your environemtn in the switch case.
+	$hostname = gethostname ();
+	$path = dirname (__DIR__);
+
+	$environmentname = $hostname . '@' . $path;
+
+	switch ($environmentname)
+	{
+		case 'thijs-home-i7@/home/daedeloth/Workbench/cloudwalkers-engine':
+		case 'daedeloth-N550LF@/home/daedeloth/Workbench/cloudwalkers-engine':
+		case 'thijs-home-i7@/home/daedeloth/Workbench/cloudwalkers-api':
+			return 'local';
+			break;
+
+		case 'FRM_BEE_11.bee-eng.CORP@C:\xampp\htdocs\cloudwalkers-engine.local':
+			return 'local';
+			break;
+
+		case 'FRM_BEE_11@C:\xampp\htdocs\cloudwalkers-engine.local':
+			return 'local';
+			break;
+
+		case 'newstorage.serverpark.be@/var/www/workers/development':
+		case 'db.cloudwalkers.be@/home/cloudwalkers-development/cloudwalkers':
+		case 'newstorage.serverpark.be@/var/www/html/workers002.cloudwalkers.be':
+			return 'development';
+			break;
+
+		case 'vps601.serverpark.be@/var/www/html/stagingapi.cloudwalkers.be':
+		case 'newstorage.serverpark.be@/var/www/workers/staging':
+			return 'staging';
+			break;
+
+		case 'newstorage.serverpark.be@/var/www/html/superadmin.cloudwalkers.be':
+			return 'superadmin';
+			break;
+
+		case 'tickee-MBP-15.local@/webroot/cloudwalkers/engine':
+			return 'dummy';
+			break;
+
+		case 'Gabriela@/var/www/cloudwalkers-engine.local/public_html':
+			return 'local';
+			break;
+
+		case 'api.cloudwalkers.be@/var/www/html/api.cloudwalkers.be':
+		case 'vps602.serverpark.be@/var/www/processes/production':
+		case 'workers.serverpark.be@/var/www/html/workers.serverpark.be':
+		case 'newstorage.serverpark.be@/var/www/workers/stable':
+			return 'stable';
+			break;
+
+		default:
+
+			echo "Please set your environment in boostrap/start.php\n";
+			echo $environmentname . "\n\n";
+			header ('Content-type: text/text');
+			exit;
+			break;
+	}
+
+});
 
 /*
 |--------------------------------------------------------------------------
