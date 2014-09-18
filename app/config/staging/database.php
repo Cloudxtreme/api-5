@@ -8,11 +8,11 @@ return array(
 		'mysqlcw' => array(
 
 			'driver'    => 'mysql',
-			'host'      => 'db.cloudwalkers.be',
+			'host'      => 'stagingdb.cloudwalkers.be',
 			'port'      => '3306',
-			'database'  => 'cloudwalkers_dev',
-			'username'  => 'workers',
-			'password'  => 'dj99Pze!Ueh',
+			'database'  => 'cloudwalkers_staging',
+			'username'  => 'cwstaging',
+			'password'  => '!.^$3Lt;NVahvg2$/7>zMF5)pXN.Bf-<',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
