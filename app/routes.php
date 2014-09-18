@@ -227,11 +227,6 @@ Route::group(array('prefix' => '1.1', /*'namespace' => $namespace, */ 'before' =
 	});
 });
 
-Route::get('/', function()
-{
-    return Redirect::to ('https://superadmin.cloudwalkers.be/docs/api/');
-});
-
 Route::get ('loginstatus', function ()
 {
 	\Neuron\Session::getInstance ()->connect ();
@@ -239,10 +234,22 @@ Route::get ('loginstatus', function ()
 	return Response::json (array ('login' => $login));
 });
 
+// route to documentation and version control
+Route::any('docs/{version?}', function($version=null) {
+	if ($version) {
+		return App::make('ApiDocsController')->index($version);
+	}
+});
+
 Route::get ('docs{path?}', function ($path = "")
 {
 	return Redirect::to ('https://superadmin.cloudwalkers.be/docs/api/' . str_replace (" ", "+", $path));
 })->where ('path', '.+');
+
+Route::get('/', function()
+{
+	return Redirect::to ('https://superadmin.cloudwalkers.be/docs/api/');
+});
 
 Route::any('login/{path?}', 'LoginController@login')->where ('path', '.+');
 Route::any('logout/{path?}', 'LoginController@logout')->where ('path', '.+');
