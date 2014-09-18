@@ -25,7 +25,7 @@
 	<script type="text/javascript">
 		$(function () {
 			window.swaggerUi = new SwaggerUi({
-				url: "http://cloudwalkers-api.local/docs/schema/{{$version}}",
+				url: "{{$url}}",
 				dom_id: "swagger-ui-container",
 				supportedSubmitMethods: ['get', 'post', 'put', 'patch', 'delete'],
 				onComplete: function(swaggerApi, swaggerUi){
