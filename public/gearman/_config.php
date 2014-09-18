@@ -21,11 +21,24 @@
 
 error_reporting (E_ERROR);
 
-define ('GEARMAN_SERVER', 'devgearman.cloudwalkers.be:4730');
+//define ('GEARMAN_SERVER', 'devgearman.cloudwalkers.be:4730');
+require_once '../../bootstrap/autoload.php';
+require_once '../../bootstrap/start.php';
+
+//define ('GEARMAN_SERVER', 'devgearman.cloudwalkers.be:4730');
+
+$servers = "";
+foreach (Config::get ('gearman.servers') as $server => $port)
+{
+	$servers .= $server . ':' . $port . '|';
+}
+$servers = substr ($servers, 0, -1);
+
+define('GEARMAN_SERVER', $servers); // gearman.cloudwalkers.be:4730|backupgearman.cloudwalkers.be:4730
 
 if (!defined ('GEARMAN_SERVER'))
 {
-	echo 'No memcache devices found.';
+	echo 'No gearman devices found.';
 }
 
 $i = 0;
