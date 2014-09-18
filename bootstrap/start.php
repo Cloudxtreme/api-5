@@ -83,6 +83,7 @@ $env = $app->detectEnvironment(function () {
 		case 'newstorage.serverpark.be@/var/www/workers/development':
 		case 'db.cloudwalkers.be@/home/cloudwalkers-development/cloudwalkers':
 		case 'newstorage.serverpark.be@/var/www/html/workers002.cloudwalkers.be':
+		case 'vps601.serverpark.be@/var/www/html/devapi.cloudwalkers.be':
 			return 'development';
 			break;
 

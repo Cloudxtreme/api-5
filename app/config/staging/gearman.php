@@ -6,7 +6,7 @@ return array(
 
 	// Gearman Servers
 	'servers' => array(
-		//'localhost' => '4730'
+		'staginggearman.cloudwalkers.be' => '4740'
 	)
 
 );
