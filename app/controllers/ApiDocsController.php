@@ -11,7 +11,7 @@ class ApiDocsController extends BaseController {
 	{
 		// @todo check if version exists else 404
 		// $version = in_array();
-		$token = 'Bearer '.Session::get('_token');
+//		$token = 'Bearer '.Session::get('_token');
 		$url = URL::to('/').'/docs/schema/'.$version;
 
 		// local config
@@ -20,7 +20,7 @@ class ApiDocsController extends BaseController {
 
 		$data = array(
 			'url'=>$url,
-			'token'=>$token,
+//			'token'=>$token,
 			'version'=>$version
 		);
 
