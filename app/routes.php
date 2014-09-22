@@ -241,15 +241,16 @@ Route::any('docs/{version?}', function($version=null) {
 	}
 });
 
+Route::get('/', function()
+{
+//    return Redirect::to ('https://superadmin.cloudwalkers.be/docs/api/');
+    return App::make('ApiDocsController')->index('1.0');
+});
+
 Route::get ('docs{path?}', function ($path = "")
 {
 	return Redirect::to ('https://superadmin.cloudwalkers.be/docs/api/' . str_replace (" ", "+", $path));
 })->where ('path', '.+');
-
-Route::get('/', function()
-{
-	return Redirect::to ('https://superadmin.cloudwalkers.be/docs/api/');
-});
 
 Route::any('login/{path?}', 'LoginController@login')->where ('path', '.+');
 Route::any('logout/{path?}', 'LoginController@logout')->where ('path', '.+');
