@@ -295,3 +295,8 @@ Route::get('local/accounts/{accountId}/contacts/{contactId}', 'ContactController
 
 // The All Catching One
 Route::match (array ('GET', 'POST', 'PATCH', 'PUT', 'DELETE'), '{path?}', 'NeuronProxyController@authenticated')->where ('path', '.+')->before (array ('before' => 'oauth2'));
+
+Route::any('{all}', function($uri)
+{
+    return 'yeah, right!';
+})->where('all', '.*');

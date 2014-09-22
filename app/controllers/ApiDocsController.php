@@ -23,6 +23,7 @@ class ApiDocsController extends BaseController {
 //		$token = 'Bearer '.Session::get('_token');
 		$url = URL::to('/').'/docs/schema/'.$version;
 
+//URL::to('/')
 		// local config
 		// $token = 'Bearer '.'7abb47eade4847e75e42bf2bf7b1e7cca5ffd3c8';
 		// $url = http://cloudwalkers-api.local/docs/schema/{{$version}}

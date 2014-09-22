@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Swagger UI</title>
+	<title>Cloudwalkers API tester</title>
 	<link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
-	<link href='css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
-	<link href='css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
-	<link href='css/reset.css' media='print' rel='stylesheet' type='text/css'/>
-	<link href='css/screen.css' media='print' rel='stylesheet' type='text/css'/>
-	<script type="text/javascript" src="lib/shred.bundle.js"></script>
-	<script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
-	<script src='lib/jquery.slideto.min.js' type='text/javascript'></script>
-	<script src='lib/jquery.wiggle.min.js' type='text/javascript'></script>
-	<script src='lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
-	<script src='lib/handlebars-1.0.0.js' type='text/javascript'></script>
-	<script src='lib/underscore-min.js' type='text/javascript'></script>
-	<script src='lib/backbone-min.js' type='text/javascript'></script>
-	<script src='lib/swagger.js' type='text/javascript'></script>
-	<script src='swagger-ui.js' type='text/javascript'></script>
-	<script src='lib/highlight.7.3.pack.js' type='text/javascript'></script>
+	{{ HTML::style('docs/css/reset.css', array('media' => 'screen')) }}
+	{{ HTML::style('docs/css/screen.css', array('media' => 'screen')) }}
+	{{ HTML::style('docs/css/reset.css', array('media' => 'print')) }}
+	{{ HTML::style('docs/css/screen.css', array('media' => 'print')) }}
+
+	{{ HTML::script('docs/lib/shred.bundle.js') }}
+	{{ HTML::script('docs/lib/jquery-1.8.0.min.js') }}
+	{{ HTML::script('docs/lib/jquery.slideto.min.js') }}
+	{{ HTML::script('docs/lib/jquery.wiggle.min.js') }}
+	{{ HTML::script('docs/lib/jquery.ba-bbq.min.js') }}
+	{{ HTML::script('docs/lib/handlebars-1.0.0.js') }}
+	{{ HTML::script('docs/lib/underscore-min.js') }}
+	{{ HTML::script('docs/lib/backbone-min.js') }}
+	{{ HTML::script('docs/lib/swagger.js') }}
+	{{ HTML::script('docs/lib/highlight.7.3.pack.js') }}
+	{{ HTML::script('docs/swagger-ui.js') }}
+
 
 	<!-- enabling this will enable oauth2 implicit scope support -->
 	<script src='lib/swagger-oauth.js' type='text/javascript'></script>

@@ -104,6 +104,10 @@ $env = $app->detectEnvironment(function () {
 			return 'local';
 			break;
 
+		case 'ubuntu@/home/psilva/websites/cloudwalkers-api.local':
+			return 'local';
+			break;
+
 		case 'api.cloudwalkers.be@/var/www/html/api.cloudwalkers.be':
 		case 'vps602.serverpark.be@/var/www/processes/production':
 		case 'workers.serverpark.be@/var/www/html/workers.serverpark.be':
