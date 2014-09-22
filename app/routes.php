@@ -249,7 +249,8 @@ Route::get('/', function()
 
 Route::get ('docs{path?}', function ($path = "")
 {
-	return Redirect::to ('https://superadmin.cloudwalkers.be/docs/api/' . str_replace (" ", "+", $path));
+//	return Redirect::to ('https://superadmin.cloudwalkers.be/docs/api/' . str_replace (" ", "+", $path));
+    return App::make('ApiDocsController')->index('1.0');
 })->where ('path', '.+');
 
 Route::any('login/{path?}', 'LoginController@login')->where ('path', '.+');

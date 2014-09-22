@@ -11,6 +11,7 @@ class ApiDocsController extends BaseController {
 	{
 		// atention json files are cached
 		// @todo put versions in config
+		// @todo get bearer from localstorage
 		$available_versions = array(
 			'1.0'
 		);
