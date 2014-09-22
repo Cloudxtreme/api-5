@@ -1,7 +1,7 @@
 {
 	"name": "required|string",
 	"id": "required|integer",
-	"uniqueId": "required",
+	"uniqueid": "required",
 	"type": "required",
 	"displayname": "required",
 	"username": "*",
