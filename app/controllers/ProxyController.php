@@ -18,7 +18,7 @@ class ProxyController extends BaseController {
 	public static function guest ()
 	{
 		// Proxy payload
-		$payload = array('method'=> Request::method(), 'path'=> implode ('/', Request::segments()));
+		$payload = (object) array('method'=> Request::method(), 'path'=> implode ('/', Request::segments()));
 	
 		return json_decode
 		(
@@ -32,7 +32,7 @@ class ProxyController extends BaseController {
 	public function authenticated ()
 	{
 		// Proxy payload
-		$payload = array('method'=> Request::method(), 'path'=> implode ('/', Request::segments ()), 'access_token'=> Request::header('Authorization'));
+		$payload = (object) array('method'=> Request::method(), 'path'=> implode ('/', Request::segments ()));
 		
 		return json_decode
 		(
