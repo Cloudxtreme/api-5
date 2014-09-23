@@ -30,6 +30,13 @@
                     "type": "AccountOutput",
                     "parameters": [
                         {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
                             "paramType": "body",
                             "type": "AccountInput",
                             "required": true

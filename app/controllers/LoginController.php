@@ -213,6 +213,8 @@ class LoginController extends BaseController {
 
 		// output render
 		if( !empty($output['action']) && $output['action']=='success'){
+            // trigger a notification to admin (for example)
+            Event::fire('user.registration', array('msg', 'one more user registered in cloudwalkers'));
 			return View::make('signin.login', $output);
 		}
 
