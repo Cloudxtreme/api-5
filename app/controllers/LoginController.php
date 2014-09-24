@@ -62,22 +62,61 @@ class LoginController extends BaseController {
     public function changePassword ()
     {
 
-	    $bearer = Request::header('Authorization');
+//	    $bearer = Request::header('Authorization');
+	    $bearer = '123456789012345678';
 	    $token  = Request::segment(2);
 
-	    if(!$bearer || !$token){
-		    App::abort(404, 'Woops.');
-	    }
+        // 2 entry points: with bearer (authenticated) or with access_token sent by email
+//	    if(!$bearer && !$token){
+//		    App::abort(404, 'Woops.');
+//	    }
 
 	    if($bearer){
+            return View::make('signin.change_password', array('auth'=>1));
+            // access_token used - old password not needed
 		    // check user in engine and set headers in response
 		    $contents = View::make('signin.recover_password', array('data'));
 		    $response = Response::make($contents, 200);
 		    $response->header('Authorization', 'Bearer 123456789012345678');
 		    return $response;
-	    }
+	    } elseif($token) {
+            // token used - old password is required
+            if(Input::has('oldpassword') && Input::has('newpassword') && Input::has('newpassword_confirm')){
+                $rules = array(
+                    'userId' => 'required|integer',
+                    'oldpassword' => 'required',
+                    'newpassword' => 'required',
+                    'newpassword_confirm' => 'required|same:newpassword'
+                );
 
+                print_r($rules);
+                echo '<br>';
+                print_r(Input::all());
+                exit;
 
+                $validator = Validator::make(Input::all(), $rules);
+                $data = Input::all();
+
+                if ($validator->fails()){
+                    $errors = $validator->messages();
+                    $error = $errors->getMessages();
+                    return View::make('signin.change_password', $error);
+                } else {
+                    $payload = (object) array('controller'=> 'UserController', 'action'=> 'changePassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
+
+                    print_r(array(45,43));
+                    print_r(Input::all(), true); exit;
+
+                    $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
+
+                    return print_r($output,true);
+
+                }
+            }
+            return View::make('signin.change_password');
+        } else {
+            App::abort(404, 'Woops.');
+        }
 
 //	    if (!$bearer || strlen ($bearer) < 18)
 //	    {
@@ -85,40 +124,8 @@ class LoginController extends BaseController {
 //
 //		    return Response::json (array ('error' => array ('message' => 'No valid oauth2 authentication found.')), 403);
 //	    }
-//
-	    if(Input::has('oldpassword')){
-		    //Input::merge(array('userId'=> $userId));
 
-		    $rules = array(
-			    'userId' => 'required|integer',
-			    'oldpassword' => 'required',
-			    'newpassword' => 'required',
-			    'newpassword_confirm' => 'required|same:newpassword'
-		    );
 
-		    print_r($rules);
-		    echo '<br>';
-		    print_r(Input::all());
-		    exit;
-
-		    $validator = Validator::make(Input::all(), $rules);
-		    $data = Input::all();
-
-		    if ($validator->fails()){
-			    $error = array('error'=> 'something went wrong');
-			    return View::make('signin.change_password', $error);
-		    } else {
-			    $payload = (object) array('controller'=> 'UserController', 'action'=> 'changePassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
-
-			    print_r(array(45,43));
-			    print_r(Input::all(), true); exit;
-
-				$output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
-
-			    return print_r($output,true);
-
-		    }
-	    }
     }
 //else {
 //		    return View::make('signin.change_password');
@@ -129,7 +136,7 @@ class LoginController extends BaseController {
     public function recoverPassword ()
     {
 	    $data = Input::all();
-//	    return var_dump($data);
+
 	    if(!empty($data)){
 
 		    $rules = array(
@@ -155,6 +162,7 @@ class LoginController extends BaseController {
 	
 	public function register ()
 	{
+
 		$invitation_id = (int) Request::segment(2);
 		$invitation_token = Request::segment(3);
 
