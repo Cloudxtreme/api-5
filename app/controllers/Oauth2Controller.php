@@ -29,7 +29,7 @@ class OAuth2Controller extends BaseController {
 	/**
 	 *	Allowed paths
 	 */
-	static $paths = array('authorize', 'login', 'status', 'revoke');
+	static $paths = array('authorize', 'approve', 'login', 'status', 'revoke');
 	
 	/**
 	 *	Dispatch
@@ -62,6 +62,13 @@ class OAuth2Controller extends BaseController {
 			Session::put('last_url', Input::all());
 			App::abort(303, $status->redirect);
 		}
+		
+		// Check for view
+		if (isset ($status->view))
+		{
+			return App::make('ViewController')->{$status->view}($status);
+		}
+		
 		
 		return json_encode($status);
 	}
@@ -103,16 +110,6 @@ class OAuth2Controller extends BaseController {
 		
 		// Request from server
 		return self::e_dispatch ('status');	
-		
-		// Second check
-		/*$jobload = (object) array('controller'=> 'AuthController', 'action'=> 'status', 'payload'=> null);
-
-		$status = self::jobdispatch('controllerDispatch', $jobload);
-		 
-		print_r($status);
-		exit();
-		 
-		return null;*/
 	}
 	
 	/**

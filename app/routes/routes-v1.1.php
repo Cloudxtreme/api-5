@@ -8,9 +8,12 @@
 /**	
  *	Engine-based Oauth2
  */
-Route::any('oauth2-e/{path?}', 'Oauth2Controller@e_dispatch')->where ('path', '.+');
 Route::any('login-e', 'ViewController@login');
 Route::any('revoke', 'ViewController@logout');
+Route::any('oauth2-e/approve', 'ViewController@approve');
+Route::any('oauth2-e/{path?}', 'Oauth2Controller@e_dispatch')->where ('path', '.+');
+
+
 
 
 /**

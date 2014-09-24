@@ -28,7 +28,25 @@ class ViewController extends BaseController {
 		// Default view
 		return View::make('signin.login', Input::all());
 	}
+	
+	public function approve ($response = array())
+	{
+		// App is approved
+		if (($auth = Input::get ('authorized')) && $auth == 'yes')
 
+			return App::make('Oauth2Controller')->e_dispatch('approve');
+			
+		// App is not approved	
+		else if($auth)
+		{
+			App::make ('Oauth2Controller')->revoke();
+			App::abort (303, '/oauth2-e/authorize');
+		}
+		
+		// Call Oauth
+		return View::make('signin.authorize', (array) $response);
+	}
+	
 	public function logout ()
 	{
 		// Call Oauth
