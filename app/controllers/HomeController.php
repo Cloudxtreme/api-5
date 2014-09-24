@@ -13,8 +13,8 @@ class HomeController extends BaseController {
 	 public function schedule()
 	 {
 		 // The job
-		 $payload = array('controller'=> 'ScheduleController', 'action'=> 'run', 'open'=> round(microtime(true), 3), 'payload'=> null, 'user'=> null);
+		 $jobload = (object) array('controller'=> 'ScheduleController', 'action'=> 'run', 'payload'=> null);
 
-		 return self::jobdispatch('controllerDispatch', $payload);
+		 return self::jobdispatch('controllerDispatch', $jobload);
 	 }
 }

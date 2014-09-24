@@ -54,6 +54,8 @@ App::error(function(Exception $exception, $code)
 		// 1xx: Information
 		// 2xx: Successful
 		// 3xx: Redirection
+		case 303:
+			return Redirect::to ($exception->getMessage ());
 		// 4xx: Client Error
 		case 403:
 			return Response::view('404', array(), 403);

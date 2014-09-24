@@ -77,9 +77,10 @@ return array(
 	| will not be safe. Please do this before deploying an application!
 	|
 	*/
+	'secret' => 'bmgroup tickee catlab pineapple orange',
 
 	'key' => 'Z5yrrZH34XvvNRKgHjfWqb8tfzasZuUe',
-
+	
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
 	/*

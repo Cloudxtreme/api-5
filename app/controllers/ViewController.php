@@ -1,6 +1,6 @@
 <?php
 
-class CommunicationController extends BaseController {
+class ViewController extends BaseController {
 	
 	public function __construct ()
 	{
@@ -9,32 +9,32 @@ class CommunicationController extends BaseController {
 
 	public function login ()
 	{
-        $data = Input::all();
-
-        if(isset($data['email']) && isset($data['password'])){
-            $username = $data['email'];
-            $password = $data['password'];
-            // send request to engine via gearman
-            $output = App::make ('cwclient')->login ($username, $password);
-            // if ok redirect
-            if(isset($output['id'])){
-                return Redirect::to('http://devplatform.cloudwalkers.be');
-            } else {
-                return View::make('signin.login', $output);
-            }
-        } else {
-            return View::make('signin.login', $data);
-        }
-
+		// Are e-mail and password set
+		if(Input::get ('email') && Input::get ('password'))
+		{
+			// Oauth2 request
+			$response = App::make('Oauth2Controller')->login();
+			
+			// If successful
+			if (isset ($response->redirect))
+				
+				App::abort(303, $response->redirect);
+			
+			// Else rebuild login
+			return View::make('signin.login', array('error'=> array($response->error)));
+		
+		}
+		
+		// Default view
+		return View::make('signin.login', Input::all());
 	}
 
 	public function logout ()
 	{
-        // method not defined in CwGearmanClient
-        $data = array();
-        // send request to engine via gearman
-        $output = App::make ('cwclient')->logout ();
-        return View::make('signin.logout', $output);
+		// Call Oauth
+		$response = App::make('Oauth2Controller')->revoke();
+		
+		return View::make('signin.logout', (array) $response);
 	}
 
 	public function register ()
