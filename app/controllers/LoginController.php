@@ -62,22 +62,74 @@ class LoginController extends BaseController {
     public function changePassword ()
     {
 
-	    $bearer = Request::header('Authorization');
+//	    $bearer = Request::header('Authorization');
+	    $bearer = '123456789012345678';
 	    $token  = Request::segment(2);
+        $data = Input::all();
 
-	    if(!$bearer || !$token){
-		    App::abort(404, 'Woops.');
-	    }
+        // 2 entry points: with bearer (authenticated) or with access_token sent by email
+//	    if(!$bearer && !$token){
+//		    App::abort(404, 'Woops.');
+//	    }
 
 	    if($bearer){
-		    // check user in engine and set headers in response
-		    $contents = View::make('signin.recover_password', array('data'));
-		    $response = Response::make($contents, 200);
-		    $response->header('Authorization', 'Bearer 123456789012345678');
-		    return $response;
-	    }
+            // access_token used - old password not needed
+            if(!empty($data)) {
+                if(!Input::has('newpassword') || !Input::has('newpassword_confirm'))
+                    return View::make('signin.change_password', array('auth'=>1, 'error'=>'All fields required!'));
 
+                $rules = array(
+                    'newpassword' => 'required|min:5',
+                    'newpassword_confirm' => 'required|min:5|same:newpassword'
+                );
 
+                $validator = Validator::make($data, $rules);
+
+                if ($validator->fails()){
+                    $errors = $validator->messages();
+                    $error = $errors->first();
+                    return View::make('signin.change_password', array('auth'=>1, 'error'=>$error));
+                } else {
+                    return 'connecting with engine';
+                }
+            } else {
+                return View::make('signin.change_password', array('auth'=>1));
+            }
+	    } elseif($token) {
+            // token used - old password is required
+            if(!empty($data)){
+                if(!Input::has('oldpassword') || !Input::has('newpassword') || !Input::has('newpassword_confirm'))
+                    return View::make('signin.change_password', array('error'=>'All fields required!'));
+
+                $rules = array(
+                    'oldpassword' => 'required',
+                    'newpassword' => 'required',
+                    'newpassword_confirm' => 'required|same:newpassword'
+                );
+
+                $validator = Validator::make($data, $rules);
+
+                if ($validator->fails()){
+                    $errors = $validator->messages();
+                    $error = $errors->first();
+                    return View::make('signin.change_password', array('error'=>$error));
+                } else {
+                    $payload = (object) array('controller'=> 'UserController', 'action'=> 'changePassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
+
+                    $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
+
+                    if($output['action']=='success'){
+                        return View::make('signin.change_password', array('msg'=>'You have a new password!'));
+                    } else {
+                        return View::make('signin.change_password', array('error'=>'Engine Error!'));
+                    }
+
+                }
+            }
+            return View::make('signin.change_password');
+        } else {
+            App::abort(404, 'Woops.');
+        }
 
 //	    if (!$bearer || strlen ($bearer) < 18)
 //	    {
@@ -85,40 +137,8 @@ class LoginController extends BaseController {
 //
 //		    return Response::json (array ('error' => array ('message' => 'No valid oauth2 authentication found.')), 403);
 //	    }
-//
-	    if(Input::has('oldpassword')){
-		    //Input::merge(array('userId'=> $userId));
 
-		    $rules = array(
-			    'userId' => 'required|integer',
-			    'oldpassword' => 'required',
-			    'newpassword' => 'required',
-			    'newpassword_confirm' => 'required|same:newpassword'
-		    );
 
-		    print_r($rules);
-		    echo '<br>';
-		    print_r(Input::all());
-		    exit;
-
-		    $validator = Validator::make(Input::all(), $rules);
-		    $data = Input::all();
-
-		    if ($validator->fails()){
-			    $error = array('error'=> 'something went wrong');
-			    return View::make('signin.change_password', $error);
-		    } else {
-			    $payload = (object) array('controller'=> 'UserController', 'action'=> 'changePassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
-
-			    print_r(array(45,43));
-			    print_r(Input::all(), true); exit;
-
-				$output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
-
-			    return print_r($output,true);
-
-		    }
-	    }
     }
 //else {
 //		    return View::make('signin.change_password');
@@ -129,7 +149,7 @@ class LoginController extends BaseController {
     public function recoverPassword ()
     {
 	    $data = Input::all();
-//	    return var_dump($data);
+
 	    if(!empty($data)){
 
 		    $rules = array(
@@ -155,6 +175,7 @@ class LoginController extends BaseController {
 	
 	public function register ()
 	{
+
 		$invitation_id = (int) Request::segment(2);
 		$invitation_token = Request::segment(3);
 
@@ -213,6 +234,8 @@ class LoginController extends BaseController {
 
 		// output render
 		if( !empty($output['action']) && $output['action']=='success'){
+            // trigger a notification to admin (for example)
+            Event::fire('user.registration', array('msg', 'one more user registered in cloudwalkers'));
 			return View::make('signin.login', $output);
 		}
 

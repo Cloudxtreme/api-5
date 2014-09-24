@@ -29,23 +29,6 @@ Route::get ('loginstatus', function ()
 	return Response::json (array ('login' => $login));
 });
 
-// route to documentation and version control
-Route::any('docs/{version?}', function($version=null) {
-	if ($version) {
-		return App::make('ApiDocsController')->index($version);
-	}
-});
-
-Route::get ('docs{path?}', function ($path = "")
-{
-	return Redirect::to ('https://superadmin.cloudwalkers.be/docs/api/' . str_replace (" ", "+", $path));
-})->where ('path', '.+');
-
-Route::get('/', function()
-{
-	return Redirect::to ('https://superadmin.cloudwalkers.be/docs/api/');
-});
-
 Route::any('login/{path?}', 'LoginController@login')->where ('path', '.+');
 Route::any('logout/{path?}', 'LoginController@logout')->where ('path', '.+');
 Route::any('register/{path?}', 'LoginController@register')->where ('path', '.+');
@@ -70,5 +53,32 @@ Route::get ('schedule', 'HomeController@schedule');
 
 Route::get('local/accounts/{accountId}/contacts/{contactId}', 'ContactController@get');
 
+
+/////////////////// docs //////////////////////
+// route to documentation and version control
+Route::any('docs/{version?}', function($version=null) {
+    if ($version) {
+        return App::make('ApiDocsController')->index($version);
+    }
+});
+
+//Route::get('/', function()
+//{
+////    return Redirect::to ('https://superadmin.cloudwalkers.be/docs/api/');
+//    return App::make('ApiDocsController')->index('1.0');
+//});
+
+Route::get ('docs{path?}', function ($path = "")
+{
+    return Redirect::to ('https://superadmin.cloudwalkers.be/docs/api/' . str_replace (" ", "+", $path));
+//    return App::make('ApiDocsController')->index('1.0');
+})->where ('path', '.+');
+
+
 // The All Catching One
 Route::match (array ('GET', 'POST', 'PATCH', 'PUT', 'DELETE'), '{path?}', 'NeuronProxyController@authenticated')->where ('path', '.+')->before (array ('before' => 'oauth2'));
+
+Route::any('{all}', function($uri)
+{
+    return 'yeah, right!';
+})->where('all', '.*');

@@ -30,6 +30,13 @@
                     "type": "AccountOutput",
                     "parameters": [
                         {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
                             "paramType": "body",
                             "type": "AccountInput",
                             "required": true
@@ -46,7 +53,16 @@
                     "method": "GET",
                     "summary": "Get all alerts (errors) of a specific acccount",
                     "nickname": "getAlerts",
-                    "type": "AlertsOutput"
+                    "type": "AlertsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
                 }
             ]
         },
@@ -58,7 +74,16 @@
                     "method": "GET",
                     "summary": "Get filter options for account",
                     "nickname": "getRegionalValues",
-                    "type": "FilterOptionsOutput"
+                    "type": "FilterOptionsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
                 }
             ]
         },
@@ -71,6 +96,13 @@
                     "nickname": "licenses_0",
                     "type": "PlanSetter",
                     "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
                         {
                             "paramType": "path",
                             "name": "accountId",
@@ -107,6 +139,13 @@
                     "nickname": "getMessages",
                     "type": "MessageOutput",
                     "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
                         {
                             "paramType": "body",
                             "type": "MessageInput"
@@ -198,7 +237,7 @@
                             "name": "accountId",
                             "type": "integer",
                             "required": true,
-                            "description": "Acount id"
+                            "description": "Account id"
                         },
                         {
                             "paramType": "body",
@@ -217,7 +256,16 @@
                     "method": "GET",
                     "summary": "Get account updates",
                     "nickname": "getPing",
-                    "type": "pong"
+                    "type": "pong",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
                 }
             ]
         },
@@ -230,6 +278,13 @@
                     "nickname": "read",
                     "type": "SuccessResult",
                     "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
                         {
                             "paramType": "path",
                             "name": "accountId",
@@ -251,6 +306,13 @@
                     "type": "ReportIdsOutput",
                     "parameters": [
                         {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
                             "paramType": "query",
                             "name": "streams",
                             "type": "string",
@@ -270,6 +332,13 @@
                     "summary": "Get all reports from a certain account",
                     "nickname": "getReports",
                     "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
                         {
                             "paramType": "query",
                             "name": "complete",
@@ -322,7 +391,16 @@
                     "method": "GET",
                     "summary": "Return all services that can be managed by the current user.",
                     "nickname": "getServiceIds",
-                    "type": "AccountServiceIdsOutput"
+                    "type": "AccountServiceIdsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
                 }
             ]
         },
@@ -333,7 +411,16 @@
                     "method": "GET",
                     "summary": "Return all services that can be managed by the current user.",
                     "nickname": "getServices",
-                    "type": "AccountServicesOutput"
+                    "type": "AccountServicesOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
                 }
             ]
         },
@@ -344,7 +431,16 @@
                     "method": "GET",
                     "summary": "Return all services that can be added by the current user.",
                     "nickname": "getAvailableServices",
-                    "type": "AccountServiceAvailableOutput"
+                    "type": "AccountServiceAvailableOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
                 }
             ]
         },
@@ -361,7 +457,7 @@
                             "paramType": "path",
                             "name": "accountId",
                             "type": "string",
-                            "description": "Account ID"
+                            "description": "Account id"
                         },
                         {
                             "paramType": "path",
@@ -383,6 +479,12 @@
                     "nickname": "getStatisticIds",
                     "type": "AccountStatisticIdsOutput",
                     "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "string",
+                            "description": "Account id"
+                        },
                         {
                             "paramType": "query",
                             "name": "streams",
@@ -419,6 +521,12 @@
                     "type": "AccountStatisticsOutput",
                     "parameters": [
                         {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "string",
+                            "description": "Account id"
+                        },
+                        {
                             "paramType": "query",
                             "name": "ids",
                             "type": "string",
@@ -439,6 +547,12 @@
                     "nickname": "getStatistics",
                     "type": "AccountStatisticsOutput",
                     "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "string",
+                            "description": "Account id"
+                        },
                         {
                             "paramType": "query",
                             "name": "streams",
@@ -745,7 +859,23 @@
                     "method": "GET",
                     "summary": "Get the user roles information",
                     "nickname": "getUserData_0",
-                    "type": "UserRoleTokens"
+                    "type": "UserRoleTokens",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "userId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "User id"
+                        }
+                    ]
                 },
                 {
                     "method": "PUT",
@@ -753,6 +883,20 @@
                     "nickname": "getUserData_1",
                     "type": "UserRoleTokens",
                     "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "userId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "User id"
+                        },
                         {
                             "paramType": "path",
                             "name": "rolegroup",
@@ -775,6 +919,20 @@
                     "nickname": "getUserData_2",
                     "type": "UserRoleTokens",
                     "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "userId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "User id"
+                        },
                         {
                             "paramType": "query",
                             "name": "rolegroup",
@@ -801,7 +959,16 @@
                     "method": "GET",
                     "summary": "Validate the account, make sure all streams exist.",
                     "nickname": "validate",
-                    "type": "ValidResult"
+                    "type": "ValidResult",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
                 }
             ]
         }

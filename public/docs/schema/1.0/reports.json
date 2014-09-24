@@ -31,7 +31,16 @@
                 {
                     "method": "GET",
                     "summary": "Get a specific report",
-                    "nickname": "getFromId"
+                    "nickname": "getFromId",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Report id"
+                        }
+                    ]
                 }
             ]
         }

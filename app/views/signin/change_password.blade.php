@@ -27,6 +27,8 @@
 	@endif
 
 	<p>Almost there. Please choose a new password.</p>
+
+	@if (!isset($auth))
 	<div class="control-group">
 		<div class="controls">
 			<div class="input-icon left">
@@ -35,6 +37,7 @@
 			</div>
 		</div>
 	</div>
+	@endif
 
 	<div class="control-group">
 		<div class="controls">

@@ -15,7 +15,7 @@
                     "type": "MyResellerOutput",
                     "parameters": [
                         {
-                            "paramType": "query",
+                            "paramType": "path",
                             "name": "resellerId",
                             "type": "integer",
                             "required": true,
@@ -36,7 +36,7 @@
                     "type": "Account",
                     "parameters": [
                         {
-                            "paramType": "query",
+                            "paramType": "path",
                             "name": "resellerId",
                             "type": "integer",
                             "required": true,
@@ -52,7 +52,7 @@
                     "type": "Account",
                     "parameters": [
                         {
-                            "paramType": "query",
+                            "paramType": "path",
                             "name": "resellerId",
                             "type": "integer",
                             "required": true,
@@ -73,14 +73,14 @@
                     "type": "Account",
                     "parameters": [
                         {
-                            "paramType": "query",
+                            "paramType": "path",
                             "name": "resellerId",
                             "type": "integer",
                             "required": true,
                             "description": "Id of the reseller"
                         },
                         {
-                            "paramType": "query",
+                            "paramType": "path",
                             "name": "accountId",
                             "type": "integer",
                             "required": true,
@@ -101,7 +101,7 @@
                     "type": "Plan",
                     "parameters": [
                         {
-                            "paramType": "query",
+                            "paramType": "path",
                             "name": "resellerId",
                             "type": "integer",
                             "required": true,
@@ -117,7 +117,7 @@
                     "type": "Plan",
                     "parameters": [
                         {
-                            "paramType": "query",
+                            "paramType": "path",
                             "name": "resellerId",
                             "type": "integer",
                             "required": true,
@@ -138,14 +138,14 @@
                     "type": "Plan",
                     "parameters": [
                         {
-                            "paramType": "query",
+                            "paramType": "path",
                             "name": "resellerId",
                             "type": "integer",
                             "required": true,
                             "description": "Id of the reseller"
                         },
                         {
-                            "paramType": "query",
+                            "paramType": "path",
                             "name": "planId",
                             "type": "integer",
                             "required": true,

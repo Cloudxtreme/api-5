@@ -73,13 +73,29 @@
                     "method": "DELETE",
                     "summary": "Remove a message",
                     "nickname": "deleteMessage",
-                    "type": "ActionResult"
+                    "type": "ActionResult",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        }
+                    ]
                 },
                 {
                     "method": "PUT",
                     "nickname": "processUpdate",
                     "type": "MessageOutput",
                     "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        },
                         {
                             "paramType": "body",
                             "type": "MessageInput"
@@ -90,7 +106,16 @@
                     "method": "GET",
                     "summary": "Get all message data",
                     "nickname": "getMessageData",
-                    "type": "MessageOutput"
+                    "type": "MessageOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        }
+                    ]
                 }
             ]
         },
@@ -103,6 +128,15 @@
                     "summary": "Get all actions that are possible on given message",
                     "nickname": "listActions",
                     "type": "MessageActionsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        }
+                    ],
                     "responseMessages": [
                         {
                             "code": 400,
@@ -126,6 +160,20 @@
                     "nickname": "actAction",
                     "type": "ActionResult",
                     "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "actionToken",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Token id"
+                        },
                         {
                             "paramType": "query",
                             "name": "canned",
@@ -155,13 +203,6 @@
                     "parameters": [
                         {
                             "paramType": "path",
-                            "name": "accountId",
-                            "type": "integer",
-                            "required": true,
-                            "description": "Acount id"
-                        },
-                        {
-                            "paramType": "path",
                             "name": "messageId",
                             "type": "integer",
                             "required": true,
@@ -181,13 +222,6 @@
                     "nickname": "createNote",
                     "type": "NoteOutput",
                     "parameters": [
-                        {
-                            "paramType": "path",
-                            "name": "accountId",
-                            "type": "integer",
-                            "required": true,
-                            "description": "Acount id"
-                        },
                         {
                             "paramType": "path",
                             "name": "messageId",
@@ -220,13 +254,6 @@
                     "parameters": [
                         {
                             "paramType": "path",
-                            "name": "accountId",
-                            "type": "integer",
-                            "required": true,
-                            "description": "Acount id"
-                        },
-                        {
-                            "paramType": "path",
                             "name": "messageId",
                             "type": "integer",
                             "required": true,
@@ -251,7 +278,16 @@
                     "method": "GET",
                     "summary": "Get the message in the form it was sent to us, including the default text.",
                     "nickname": "getOriginal",
-                    "type": "MessageOutput"
+                    "type": "MessageOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        }
+                    ]
                 },
                 {
                     "method": "PUT",
@@ -259,6 +295,13 @@
                     "nickname": "updateOriginal",
                     "type": "MessageOutput",
                     "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        },
                         {
                             "paramType": "body",
                             "type": "MessageInput"
@@ -275,7 +318,16 @@
                     "method": "PUT",
                     "summary": "Set message to READ",
                     "nickname": "setRead",
-                    "type": "MessageReadResult"
+                    "type": "MessageReadResult",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        }
+                    ]
                 }
             ]
         },
@@ -286,7 +338,16 @@
                 {
                     "method": "GET",
                     "summary": "Get the sendlog of this (outgoing) message",
-                    "nickname": "getSendlog"
+                    "nickname": "getSendlog",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        }
+                    ]
                 }
             ]
         },
@@ -322,7 +383,16 @@
                 {
                     "method": "GET",
                     "summary": "Message statistics management",
-                    "nickname": "statistics"
+                    "nickname": "statistics",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        }
+                    ]
                 }
             ]
         },
@@ -333,13 +403,43 @@
                 {
                     "method": "GET",
                     "summary": "Message statistics management",
-                    "nickname": "statistics_0"
+                    "nickname": "statistics_0",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "statistic.token",
+                            "type": "integer",
+                            "required": true,
+                            "description": "statistics token"
+                        }
+                    ]
                 },
                 {
                     "method": "PUT",
                     "summary": "my summary",
                     "nickname": "statistics_1",
                     "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "messageId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Message id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "statistic.token",
+                            "type": "integer",
+                            "required": true,
+                            "description": "statistics token"
+                        },
                         {
                             "paramType": "body",
                             "type": "integer",

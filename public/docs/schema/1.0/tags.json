@@ -64,14 +64,14 @@
                             "description": "Tag id"
                         },
                         {
-                            "paramType": "path",
+                            "paramType": "body",
                             "name": "id",
                             "type": "integer",
                             "required": false,
                             "description": "id of tag to associate"
                         },
                         {
-                            "paramType": "path",
+                            "paramType": "body",
                             "name": "name",
                             "type": "string",
                             "required": false,

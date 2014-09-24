@@ -12,12 +12,30 @@
                     "method": "GET",
                     "summary": "Get all information about a service",
                     "nickname": "getServiceDataArray_0",
-                    "type": "ServiceOutput"
+                    "type": "ServiceOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Service id"
+                        }
+                    ]
                 },
                 {
                     "method": "DELETE",
                     "summary": "Remove a service",
-                    "nickname": "getServiceDataArray_1"
+                    "nickname": "getServiceDataArray_1",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Service id"
+                        }
+                    ]
                 },
                 {
                     "method": "PUT",
@@ -25,6 +43,13 @@
                     "nickname": "getServiceDataArray_2",
                     "type": "ServiceOutput",
                     "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Service id"
+                        },
                         {
                             "paramType": "body",
                             "type": "ServiceInput"
@@ -41,7 +66,16 @@
                     "method": "GET",
                     "summary": "Return all profiles",
                     "nickname": "profiles",
-                    "type": "ServiceContactsOutput"
+                    "type": "ServiceContactsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Service id"
+                        }
+                    ]
                 }
             ]
         },
@@ -53,13 +87,45 @@
                     "method": "GET",
                     "summary": "Return a profile",
                     "nickname": "getProfile_0",
-                    "type": "ContactOutput"
+                    "type": "ContactOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Service id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "profileId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Profile id"
+                        }
+                    ]
                 },
                 {
                     "method": "PUT",
                     "summary": "",
                     "nickname": "getProfile_1",
-                    "type": "ContactOutput"
+                    "type": "ContactOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Service id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "profileId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Profile id"
+                        }
+                    ]
                 }
             ]
         },
@@ -73,13 +139,15 @@
                     "nickname": "setup",
                     "parameters": [
                         {
-                            "paramType": "body",
-                            "type": "ServiceSetup"
-                        },
-                        {
                             "paramType": "path",
                             "name": "id",
-                            "type": "The service id"
+                            "type": "integer",
+                            "required": true,
+                            "description": "Service id"
+                        },
+                        {
+                            "paramType": "body",
+                            "type": "ServiceSetup"
                         }
                     ]
                 }

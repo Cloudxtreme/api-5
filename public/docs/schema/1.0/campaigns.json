@@ -12,7 +12,16 @@
                     "method": "GET",
                     "summary": "Get a list of all campaigns",
                     "nickname": "getCampaigns",
-                    "type": "AccountCampaignsOutput"
+                    "type": "AccountCampaignsOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
                 },
                 {
                     "method": "PUT",
@@ -20,6 +29,13 @@
                     "nickname": "patchCampaigns",
                     "type": "AccountCampaignsOutput",
                     "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
                         {
                             "paramType": "body",
                             "type": "array",
@@ -33,7 +49,16 @@
                     "method": "POST",
                     "summary": "Create a new campaign",
                     "nickname": "createCampaign",
-                    "type": "CampaignOutput"
+                    "type": "CampaignOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        }
+                    ]
                 }
             ]
         },
@@ -45,19 +70,67 @@
                     "method": "DELETE",
                     "summary": "Remove a campaign",
                     "nickname": "getCampaign_0",
-                    "type": "DeleteResult"
+                    "type": "DeleteResult",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "campaignId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Campaign id"
+                        }
+                    ]
                 },
                 {
                     "method": "GET",
                     "summary": "Get campaign information",
                     "nickname": "getCampaign_1",
-                    "type": "CampaignOutput"
+                    "type": "CampaignOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "campaignId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Campaign id"
+                        }
+                    ]
                 },
                 {
                     "method": "PUT",
                     "summary": "Update campaign information",
                     "nickname": "getCampaign_2",
-                    "type": "CampaignOutput"
+                    "type": "CampaignOutput",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "accountId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Account id"
+                        },
+                        {
+                            "paramType": "path",
+                            "name": "campaignId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Campaign id"
+                        }
+                    ]
                 }
             ]
         }

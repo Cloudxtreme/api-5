@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Swagger UI</title>
+	<title>Cloudwalkers API tester</title>
 	<link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
-	<link href='css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
-	<link href='css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
-	<link href='css/reset.css' media='print' rel='stylesheet' type='text/css'/>
-	<link href='css/screen.css' media='print' rel='stylesheet' type='text/css'/>
-	<script type="text/javascript" src="lib/shred.bundle.js"></script>
-	<script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
-	<script src='lib/jquery.slideto.min.js' type='text/javascript'></script>
-	<script src='lib/jquery.wiggle.min.js' type='text/javascript'></script>
-	<script src='lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
-	<script src='lib/handlebars-1.0.0.js' type='text/javascript'></script>
-	<script src='lib/underscore-min.js' type='text/javascript'></script>
-	<script src='lib/backbone-min.js' type='text/javascript'></script>
-	<script src='lib/swagger.js' type='text/javascript'></script>
-	<script src='swagger-ui.js' type='text/javascript'></script>
-	<script src='lib/highlight.7.3.pack.js' type='text/javascript'></script>
+	{{ HTML::style('docs/css/reset.css', array('media' => 'screen')) }}
+	{{ HTML::style('docs/css/screen.css', array('media' => 'screen')) }}
+	{{ HTML::style('docs/css/reset.css', array('media' => 'print')) }}
+	{{ HTML::style('docs/css/screen.css', array('media' => 'print')) }}
+
+	{{ HTML::script('docs/lib/shred.bundle.js') }}
+	{{ HTML::script('docs/lib/jquery-1.8.0.min.js') }}
+	{{ HTML::script('docs/lib/jquery.slideto.min.js') }}
+	{{ HTML::script('docs/lib/jquery.wiggle.min.js') }}
+	{{ HTML::script('docs/lib/jquery.ba-bbq.min.js') }}
+	{{ HTML::script('docs/lib/handlebars-1.0.0.js') }}
+	{{ HTML::script('docs/lib/underscore-min.js') }}
+	{{ HTML::script('docs/lib/backbone-min.js') }}
+	{{ HTML::script('docs/lib/swagger.js') }}
+	{{ HTML::script('docs/lib/highlight.7.3.pack.js') }}
+	{{ HTML::script('docs/swagger-ui.js') }}
+
 
 	<!-- enabling this will enable oauth2 implicit scope support -->
 	<script src='lib/swagger-oauth.js' type='text/javascript'></script>
@@ -73,18 +75,19 @@
 <body class="swagger-section">
 <div id='header'>
 	<div class="swagger-ui-wrap">
-		<a id="logo" href="http://swagger.wordnik.com">swagger</a>
+		<a id="logo" href="#" style="padding-right: 210px;"></a>
 		<form id='api_selector'>
-			<div class='input icon-btn'>
-				<img id="show-pet-store-icon" src="images/pet_store_api.png" title="Show Swagger Petstore Example Apis">
-			</div>
-			<div class='input icon-btn'>
-				<img id="show-wordnik-dev-icon" src="images/wordnik_api.png" title="Show Wordnik Developer Apis">
-			</div>
-			<div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text" value="{{$url}}"/></div>
-			<div class='input' style="display: none;"><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>
+			{{--<div class='input icon-btn'>--}}
+				{{--<img id="show-pet-store-icon" src="images/pet_store_api.png" title="Show Swagger Petstore Example Apis">--}}
+			{{--</div>--}}
+			{{--<div class='input icon-btn'>--}}
+				{{--<img id="show-wordnik-dev-icon" src="images/wordnik_api.png" title="Show Wordnik Developer Apis">--}}
+			{{--</div>--}}
+			{{--<div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text" value="{{$url}}"/></div>--}}
+			{{--<div class='input' style="display: none;"><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>--}}
 			<div class='input'><input placeholder="bearer token" id="bearer" name="bearer" type="text" value=""/></div>
-<!--			<div class='input'><a id="explore" href="#">Explore</a></div>-->
+			<div class='input button'><a id="popup" href="../loginx">Login</a></div>
+			{{--<div class='input'><a id="explore" href="#">Login</a></div>--}}
 		</form>
 	</div>
 </div>

@@ -72,7 +72,7 @@ $env = $app->detectEnvironment(function () {
 		case 'FRM_BEE_11.bee-eng.CORP@C:\xampp\htdocs\cloudwalkers-engine.local':
 		case 'FRM_BEE_11@C:\xampp\htdocs\cloudwalkers-engine.local':
 		case 'Gabriela@/var/www/cloudwalkers-engine.local/public_html':
-		case 'Gabriela@/var/www/cloudwalkers-engine.local/public_html':
+		case 'ubuntu@/home/psilva/websites/cloudwalkers-api.local':
 			return 'local';
 			break;
 			
