@@ -391,9 +391,9 @@
                         {
                             "paramType": "path",
                             "name": "streamId",
-                            "type": "int|string",
+                            "type": "integer",
                             "required": true,
-                            "description": "Stream ID"
+                            "description": "Stream id"
                         }
                     ]
                 }
@@ -405,7 +405,16 @@
                 {
                     "method": "GET",
                     "summary": "Return all report ids from a specific stream",
-                    "nickname": "getReportIds"
+                    "nickname": "getReportIds",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "streamId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Stream id"
+                        }
+                    ]
                 }
             ]
         },
@@ -417,6 +426,13 @@
                     "summary": "Return all reports from a specific stream",
                     "nickname": "getReportsNew",
                     "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "streamId",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Stream id"
+                        },
                         {
                             "paramType": "query",
                             "name": "complete",

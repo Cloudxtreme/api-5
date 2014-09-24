@@ -65,10 +65,6 @@
             "description": "Log errors"
         },
         {
-            "path": "/mailer.{format}",
-            "description": "Mailer bounces and emails management"
-        },
-        {
             "path": "/messages.{format}",
             "description": "Return message tags"
         },

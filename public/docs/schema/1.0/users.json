@@ -17,7 +17,7 @@
                         {
                             "paramType": "path",
                             "name": "userId",
-                            "type": "int|string",
+                            "type": "integer",
                             "required": true,
                             "description": "ID of the user that needs to be fetch. Use 'me' to get the information of the currently logged in user."
                         }
@@ -39,7 +39,7 @@
                         {
                             "paramType": "path",
                             "name": "userId",
-                            "type": "int|string",
+                            "type": "integer",
                             "required": true,
                             "description": "ID of the user that needs to be fetch. Use 'me' to get the information of the currently logged in user."
                         },
@@ -75,7 +75,7 @@
                         {
                             "paramType": "path",
                             "name": "userId",
-                            "type": "int|string",
+                            "type": "integer",
                             "required": true,
                             "description": "ID of the user that needs to be fetch. Use 'me' to get the information of the currently logged in user."
                         },
@@ -123,7 +123,7 @@
                         {
                             "paramType": "path",
                             "name": "userId",
-                            "type": "int|string",
+                            "type": "integer",
                             "required": true,
                             "description": "ID of the user that needs to be fetch. Use 'me' to get the information of the currently logged in user."
                         },
@@ -156,7 +156,7 @@
                         {
                             "paramType": "path",
                             "name": "userId",
-                            "type": "int|string",
+                            "type": "integer",
                             "required": true,
                             "description": "ID of the user that needs to be fetch. Use 'me' to get the information of the currently logged in user."
                         }
@@ -182,7 +182,7 @@
                         {
                             "paramType": "path",
                             "name": "userId",
-                            "type": "int|string",
+                            "type": "integer",
                             "required": true,
                             "description": "ID of the user that needs to be fetch. Use 'me' to get the information of the currently logged in user."
                         }
@@ -208,7 +208,7 @@
                         {
                             "paramType": "path",
                             "name": "userId",
-                            "type": "int|string",
+                            "type": "integer",
                             "required": true,
                             "description": "ID of the user that needs to be fetch. Use 'me' to get the information of the currently logged in user."
                         },

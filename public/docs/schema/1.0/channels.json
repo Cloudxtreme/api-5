@@ -318,9 +318,9 @@
                         {
                             "paramType": "path",
                             "name": "channelId",
-                            "type": "int|string",
+                            "type": "integer",
                             "required": true,
-                            "description": "Channel ID"
+                            "description": "Channel id"
                         }
                     ]
                 }
