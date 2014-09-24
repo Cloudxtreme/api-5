@@ -65,6 +65,7 @@ class LoginController extends BaseController {
 //	    $bearer = Request::header('Authorization');
 	    $bearer = '123456789012345678';
 	    $token  = Request::segment(2);
+        $data = Input::all();
 
         // 2 entry points: with bearer (authenticated) or with access_token sent by email
 //	    if(!$bearer && !$token){
@@ -72,44 +73,56 @@ class LoginController extends BaseController {
 //	    }
 
 	    if($bearer){
-            return View::make('signin.change_password', array('auth'=>1));
             // access_token used - old password not needed
-		    // check user in engine and set headers in response
-		    $contents = View::make('signin.recover_password', array('data'));
-		    $response = Response::make($contents, 200);
-		    $response->header('Authorization', 'Bearer 123456789012345678');
-		    return $response;
+            if(!empty($data)) {
+                if(!Input::has('newpassword') || !Input::has('newpassword_confirm'))
+                    return View::make('signin.change_password', array('auth'=>1, 'error'=>'All fields required!'));
+
+                $rules = array(
+                    'newpassword' => 'required|min:5',
+                    'newpassword_confirm' => 'required|min:5|same:newpassword'
+                );
+
+                $validator = Validator::make($data, $rules);
+
+                if ($validator->fails()){
+                    $errors = $validator->messages();
+                    $error = $errors->first();
+                    return View::make('signin.change_password', array('auth'=>1, 'error'=>$error));
+                } else {
+                    return 'connecting with engine';
+                }
+            } else {
+                return View::make('signin.change_password', array('auth'=>1));
+            }
 	    } elseif($token) {
             // token used - old password is required
-            if(Input::has('oldpassword') && Input::has('newpassword') && Input::has('newpassword_confirm')){
+            if(!empty($data)){
+                if(!Input::has('oldpassword') || !Input::has('newpassword') || !Input::has('newpassword_confirm'))
+                    return View::make('signin.change_password', array('error'=>'All fields required!'));
+
                 $rules = array(
-                    'userId' => 'required|integer',
                     'oldpassword' => 'required',
                     'newpassword' => 'required',
                     'newpassword_confirm' => 'required|same:newpassword'
                 );
 
-                print_r($rules);
-                echo '<br>';
-                print_r(Input::all());
-                exit;
-
-                $validator = Validator::make(Input::all(), $rules);
-                $data = Input::all();
+                $validator = Validator::make($data, $rules);
 
                 if ($validator->fails()){
                     $errors = $validator->messages();
-                    $error = $errors->getMessages();
-                    return View::make('signin.change_password', $error);
+                    $error = $errors->first();
+                    return View::make('signin.change_password', array('error'=>$error));
                 } else {
                     $payload = (object) array('controller'=> 'UserController', 'action'=> 'changePassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
 
-                    print_r(array(45,43));
-                    print_r(Input::all(), true); exit;
-
                     $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
 
-                    return print_r($output,true);
+                    if($output['action']=='success'){
+                        return View::make('signin.change_password', array('msg'=>'You have a new password!'));
+                    } else {
+                        return View::make('signin.change_password', array('error'=>'Engine Error!'));
+                    }
 
                 }
             }

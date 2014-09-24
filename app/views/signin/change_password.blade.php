@@ -28,7 +28,7 @@
 
 	<p>Almost there. Please choose a new password.</p>
 
-	@if (!$auth)
+	@if (!isset($auth))
 	<div class="control-group">
 		<div class="controls">
 			<div class="input-icon left">
