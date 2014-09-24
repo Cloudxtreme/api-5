@@ -18,6 +18,7 @@ class CommunicationController extends BaseController {
             $output = App::make ('cwclient')->login ($username, $password);
             // if ok redirect
             if(isset($output['id'])){
+                dd($output);
                 return Redirect::to('http://devplatform.cloudwalkers.be');
             } else {
                 return View::make('signin.login', $output);
