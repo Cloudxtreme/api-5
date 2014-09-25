@@ -57,13 +57,15 @@ Route::filter('auth', function()
 	if(!$bearer)
 		$bearer = Input::get('bearer');
 	
-	if (!$bearer || strlen ($bearer) < 18)
+	if(!$bearer || strlen ($bearer) < 18)
 	
 		return App::abort(403);
 	
+
 	// Add Acces token to input
+	$bearer = explode(' ', $bearer);
 	
-	Input::merge( array('access_token'=> array_pop(explode(' ', $bearer))));
+	Input::merge (array('access_token'=> array_pop ($bearer)));
 });
 
 
