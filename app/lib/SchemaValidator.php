@@ -18,6 +18,7 @@ class SchemaValidator extends Validator
 	 */
 	public static function validate($input, $model)
 	{
+
 		$schema = Config::get('api.schemapath') . $model . '.json';
 		
 		$rules = file_exists ($schema)?
@@ -25,6 +26,16 @@ class SchemaValidator extends Validator
 			json_decode (file_get_contents ($schema), true):
 			array();
 		
+		// Check input type
+		if (is_object ($input))
+		
+			$input = (array) $input;
+			
+		else if (is_string ($input))
+			
+			$input = json_decode ($input);
+		
+		// Validate
 		$validator = Validator::make ($input, $rules);
 		
 		$validator->intersect = array_intersect_key ($input, $rules);
