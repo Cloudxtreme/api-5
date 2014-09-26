@@ -103,10 +103,12 @@ class OAuth2Controller extends BaseController {
 	 */
 	public function status ()
 	{
-		// First check
-		if (!Input::get('access_token'))
+		/* // First check
+		if (!Input::get('bearer'))
 			
 			App::abort(403);
+			
+		else Input::merge (array('access_token'=> Input::get ('bearer')));*/
 		
 		// Request from server
 		return self::e_dispatch ('status');	

@@ -21,7 +21,6 @@ Route::any ('oauth2-e/{path?}', 'Oauth2Controller@e_dispatch')->where ('path', '
 Route::group (array ('prefix' => '1.1'), function ($v)
 {
 	Route::get ('version', 'ProxyController@guest');
-	Route::get ('loginstatus', 'Oauth2Controller@status');
 });
 
 
@@ -30,6 +29,8 @@ Route::group (array ('prefix' => '1.1'), function ($v)
  */
 Route::group(array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 {
+	Route::get	('loginstatus',	'Oauth2Controller@status');
+	
 	// Accounts
 	Route::get	('accounts/{id}',								'AccountController@get');
 	Route::put	('accounts/{accountId}', 						'ProxyController@authenticated');
