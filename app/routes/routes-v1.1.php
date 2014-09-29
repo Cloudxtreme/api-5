@@ -3,6 +3,14 @@
 /**
  *	Static endpoints
  */
+ 
+/**	
+ *	Authenticated Engine Oauth2
+ */
+Route::group(array('before'=> 'auth'), function()
+{
+	Route::any ('oauth2-e/register', 'ViewController@registerapp');
+});
 
 
 /**	

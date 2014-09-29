@@ -7,6 +7,10 @@ class ViewController extends BaseController {
 
 	}
 
+	/**
+	 *	Login View
+	 *	Show login fields and handle action
+	 */
 	public function login ()
 	{
 		// Are e-mail and password set
@@ -29,6 +33,10 @@ class ViewController extends BaseController {
 		return View::make('signin.login', Input::all());
 	}
 	
+	/**
+	 *	Authorize Approve View
+	 *	Show approve options and handle action
+	 */
 	public function approve ($response = array())
 	{
 		// App is approved
@@ -47,6 +55,39 @@ class ViewController extends BaseController {
 		return View::make('signin.authorize', (array) $response);
 	}
 	
+	/**
+	 *	Register View
+	 *	Show client app registration and handle action
+	 */
+	public function registerapp ($response = array())
+	{
+		// Post action
+		if ( Input::get ('name') && Input::has ('redirect'))
+		
+			$response = json_decode
+			(
+				App::make('Oauth2Controller')->e_dispatch('registerapp')
+			);
+
+		// Block action
+		else if (Input::has ('layout'))
+			
+			$response->error = array('missing fields');
+
+		// define view
+		$view = isset ($response->success)?
+			
+			'oauth2.registerdone':
+			'oauth2.register';
+		
+
+		// Build View
+		return View::make($view, (array) $response);
+	}
+	
+	/**
+	 *	Logout View
+	 */
 	public function logout ()
 	{
 		// Call Oauth
@@ -55,6 +96,10 @@ class ViewController extends BaseController {
 		return View::make('signin.logout', (array) $response);
 	}
 
+	/**
+	 *	Lost Password View
+	 *	Show lost pasword options and handle action
+	 */
 	public function lostPassword ()
 	{
         $data = array();

@@ -29,7 +29,7 @@ class OAuth2Controller extends BaseController {
 	/**
 	 *	Allowed paths
 	 */
-	static $paths = array('authorize', 'approve', 'login', 'status', 'revoke');
+	static $paths = array('registerapp', 'authorize', 'approve', 'login', 'status', 'revoke');
 	
 	/**
 	 *	Dispatch
@@ -49,11 +49,11 @@ class OAuth2Controller extends BaseController {
 			Input::merge(Session::get('last_url'));
 		
 		// Send job
-		$jobload = (object) array('controller'=> 'AuthController', 'action'=> $action, 'user'=> Session::get('user'), 'payload'=> Input::all());
+		$jobload = (object) array('controller'=> 'AuthController', 'action'=> $action, 'user'=> Session::get ('user'), 'payload'=> Input::all());
 
 		$status = json_decode
 		(
-			self::jobdispatch('controllerDispatch', $jobload)
+			self::jobdispatch ('controllerDispatch', $jobload)
 		);
 		
 		// Check for redirect
