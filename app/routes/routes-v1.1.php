@@ -18,6 +18,7 @@ Route::group(array('before'=> 'auth'), function()
  */
 Route::any ('login-e', 'ViewController@login');
 Route::any ('logout-e', 'ViewController@logout');
+Route::any ('oauth2-e/register', 'ViewController@registerapp');
 Route::any ('oauth2-e/revoke', 'ViewController@logout');
 Route::any ('oauth2-e/approve', 'ViewController@approve');
 Route::any ('oauth2-e/{path?}', 'Oauth2Controller@e_dispatch')->where ('path', '.+');

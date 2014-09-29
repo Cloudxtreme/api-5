@@ -62,6 +62,7 @@
 				}
 			})
 
+			$('#bearer').val(window.localStorage.getItem('access_token'));
 			$('#bearer').change(function() {
 				var bearer = $('#bearer').val();
 				window.authorizations.add("key", new ApiKeyAuthorization("Authorization", "Bearer "+bearer, "header"));
@@ -86,7 +87,7 @@
 			{{--<div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text" value="{{$url}}"/></div>--}}
 			{{--<div class='input' style="display: none;"><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>--}}
 			<div class='input'><input placeholder="bearer token" id="bearer" name="bearer" type="text" value=""/></div>
-			<div class='input button'><a id="popup" href="../loginx">Login</a></div>
+			<div class='input button'><a id="popup" href="../login-e">Login</a></div>
 			{{--<div class='input'><a id="explore" href="#">Login</a></div>--}}
 		</form>
 	</div>

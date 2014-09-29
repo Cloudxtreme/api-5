@@ -71,10 +71,14 @@ $env = $app->detectEnvironment(function () {
 		case 'thijs-home-i7@/home/daedeloth/Workbench/cloudwalkers-api':
 		case 'FRM_BEE_11.bee-eng.CORP@C:\xampp\htdocs\cloudwalkers-engine.local':
 		case 'FRM_BEE_11@C:\xampp\htdocs\cloudwalkers-engine.local':
-		case 'ubuntu@/home/psilva/websites/cloudwalkers-api.local':
 			return 'local';
 			break;
-			
+
+        case 'ubuntu@/home/psilva/websites/cloudwalkers-api.local':
+            return 'local-pedro';
+            break;
+
+
 		case 'tickee-MBP-15.local@/webroot/cloudwalkers/api':
 			return 'local-koen';
 			break;

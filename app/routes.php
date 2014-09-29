@@ -36,10 +36,6 @@ Route::any('recoverpassword/{path?}', 'LoginController@recoverPassword')->where 
 Route::any('changepassword/{path?}', 'LoginController@changePassword')->where ('path', '.+');
 Route::any('404/{path?}', 'LoginController@error404')->where ('path', '.+');
 
-Route::any('email/{path?}', 'ViewController@email')->where ('path', '.+');
-Route::any('sms/{path?}', 'ViewController@sms')->where ('path', '.+');
-Route::any('registerx/{path?}', 'ViewController@register')->where ('path', '.+');
-
 Route::get ('authenticate/{path?}', 'NeuronProxyController@guest')->where ('path', '.+');
 //Route::get ('invitation/{path?}', array('before'=>'auth','uses'=>'LoginController@register'))->where ('path', '.+');
 Route::any ('invitation/{path?}', 'LoginController@register')->where ('path', '.+');

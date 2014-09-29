@@ -20,6 +20,9 @@
 		<button class="close" data-dismiss="alert"></button>
 		<span><p>{{ $msg }}</p></span>
 	</div>
+	<script>
+        window.localStorage.setItem('access_token', '{{ $msg }}');
+    </script>
 	@else
 
 	@endif
@@ -28,7 +31,7 @@
 
     <form class="form-signin pull-right" method="post" action="">
 
-        <input name="email" id='email' type="email" class="input-block-level" placeholder="@lang('login.email')">
+        <input name="email" id='email' type="email" class="input-block-level" placeholder="@lang('login.email'))">
         <input name="password" id='password' type="password" class="input-block-level" placeholder="@lang('login.password')">
         <input name="login" type="hidden" value="1" />
         <input type="submit" value="@lang('login.login')" />

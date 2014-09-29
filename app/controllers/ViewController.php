@@ -16,13 +16,20 @@ class ViewController extends BaseController {
 		// Are e-mail and password set
 		if(Input::get ('email') && Input::get ('password'))
 		{
-			// Oauth2 request
-			$response = App::make('Oauth2Controller')->login();
-			
+            // Request Foreground Job
+            $response = self::jobdispatch ( 'controllerDispatch', (object) array
+            (
+                'action'=> 'login',
+                'controller'=> 'AuthController',
+                'payload'=> array_intersect_key (Input::all(), array('email'=>Input::get ('email'), 'password'=>Input::get ('password')))
+            ));
+
+            $response = json_decode($response);
+
 			// If successful
-			if (isset ($response->redirect))
-				
-				App::abort(303, $response->redirect);
+			if (isset ($response->user))
+                return View::make('signin.login', array('msg'=> $response->access_token));
+//				App::abort(303, $response->redirect);
 			
 			// Else rebuild login
 			return View::make('signin.login', array('error'=> array($response->error)));
