@@ -29,7 +29,7 @@
 		<div class="controls">
 			<div class="input-icon left">
 				<i class="icon-envelope"></i>
-				<input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email" />
+				<input class="m-wrap placeholder-no-fix" type="email" placeholder="Email" name="email" />
 			</div>
 		</div>
 	</div>
