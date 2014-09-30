@@ -25,7 +25,7 @@ Route::any ('oauth2-e/{path?}', 'Oauth2Controller@e_dispatch')->where ('path', '
 /**
  *  Invitations && User info )
  */
-Route::any ('invitation/{path?}', 'ViewController@registeruser')->where ('path', '.+');
+Route::get ('invitation/{path?}', 'ViewController@registeruser')->where ('path', '.+');
 Route::any('recoverpassword/{path?}', 'ViewController@recoverpassword')->where ('path', '.+');
 Route::any('changepassword/{path?}', 'ViewController@changepassword')->where ('path', '.+');
 

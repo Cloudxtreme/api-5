@@ -34,7 +34,7 @@
 		</div>
 	</div>
 	<div class="form-actions">
-		<a href="" id="register-back-btn" type="button" class="btn">
+		<a href="login-e" id="register-back-btn" type="button" class="btn">
 			<i class="m-icon-swapleft"></i>  Back
 		</a>
 		<button type="submit" class="btn green pull-right">

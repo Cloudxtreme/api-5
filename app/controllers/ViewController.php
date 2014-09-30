@@ -120,7 +120,7 @@ class ViewController extends BaseController {
     /**
      *  Change password
      */
-    public function changePassword ()
+    public function changepassword ()
     {
 
 	    $bearer = Request::header('Authorization');
