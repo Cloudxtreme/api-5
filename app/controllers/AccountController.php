@@ -26,6 +26,7 @@ class AccountController extends BaseController {
 	
 	protected static $updateRules = array
 	(
+		'id'=> 'required|integer',
 		'resellerid'=> '',
 		'name'=> ''
 	);
@@ -129,7 +130,7 @@ class AccountController extends BaseController {
 		$input = array ('id'=> $id);
 	
 		// Request Foreground Job
-		$response = self::restDispatch ('destry', 'AccountController', $input, self::$getRules);
+		$response = self::restDispatch ('destroy', 'AccountController', $input, self::$getRules);
 		
 		return $response;
 	}
