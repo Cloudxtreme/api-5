@@ -1,33 +1,56 @@
 <?php
 
+/**
+ *	Accounts Controller
+ *	The accounts controller uses the Laravel RESTful Resource Controller method.
+ *
+ *	[http://laravel.com/docs/4.2/controllers#restful-resource-controllers]
+ *
+ *	Following routes are supported
+ *	GET			/resource				index		resource.index
+ *	POST		/resource				store		resource.store
+ *	GET			/resource/{resource}	show		resource.show
+ *	PUT/PATCH	/resource/{resource}	update		resource.update
+ *	DELETE		/resource/{resource}	destroy		resource.destroy
+ */
 class AccountController extends BaseController {
 
 	/**
-	 * Defaults
+	 *	Validation Rules
+	 *	Based on Laravel Validation
 	 */
-	protected static $validationRules = array
+	protected static $getRules = array
 	(
 		'id'=> 'required|integer'
 	);
 	
+	protected static $updateRules = array
+	(
+		'resellerid'=> '',
+		'name'=> ''
+	);
+
+	protected static $postRules = array
+	(
+		'name'=> 'required|string',
+		'resellerid'=> 'required|integer',
+		'planid'=> 'required|integer'
+	);	
+	
+	
 	/**
-	 *	Get Account by id.
-	 *	The response validation is set in schemas.
+	 *	RESTful actions
+	 */
+	 
+	/**
+	 *	Get Accounts
 	 *
 	 *	@return array
 	 */
-	public function get($id = null)
-	{	
-		// Validate
-		self::validate (array ('id'=> $id));
-	
+	public function index ()
+	{
 		// Request Foreground Job
-		$response = self::jobdispatch ( 'controllerDispatch', (object) array
-		(
-			'action'=> 'get',
-			'controller'=> 'AccountController', 
-			'payload'=> array_intersect_key (Input::all(), array_merge(self::$validationRules, self::$inputRules))
-		));
+		$response = self::restDispatch ('index', 'AccountController');
 		
 		return $response;
 		
@@ -36,25 +59,78 @@ class AccountController extends BaseController {
 	}
 	
 	/**
-	 * Validate Input
-	 * Retruns Laravel Validator object
+	 *	Post Account
 	 *
-	 * @return Validator
+	 *	@return object
 	 */
-	public static function validate ($input)
+	public function store ($resellerid = null)
 	{
-		// Add path attributes
-		$input = self::prepInput ($input);
+		// Validation parameters
+		if ($resellerid)
 		
-		// Perform validation
-		$validator = Validator::make ($input, array_merge(self::$inputRules, self::$validationRules));
+			$input = array ('resellerid'=> $resellerid);
 		
 		
-		// Check if the validator failed
-		return $validator->fails()?
+		// Request Foreground Job
+		$response = self::restDispatch ('store', 'AccountController', $input ?: array (), self::$postRules);
+				
+		return $response;
 		
-			Redirect::to(400)->withErrors($validator) :
-			$validator;
+		// Return schema based response
+		// return SchemaValidator::validate ($response, 'account')->intersect;
+	}	
+	
+	/**
+	 *	Get Account
+	 *
+	 *	@return object
+	 */
+	public function show ($id)
+	{
+		// Validation parameters
+		$input = array ('id'=> $id);
+		
+		// Request Foreground Job
+		$response = self::restDispatch ('show', 'AccountController', $input, self::$getRules);
+			
+		return $response;
+		
+		// Return schema based response
+		// return SchemaValidator::validate ($response, 'account')->intersect;
 	}
-
+	
+	/**
+	 *	Update Account
+	 *
+	 *	@return object
+	 */
+	public function update ($id)
+	{
+		// Validation parameters
+		$input = array ('id'=> $id);
+	
+		// Request Foreground Job
+		$response = self::restDispatch ('update', 'AccountController', $input, self::$updateRules);
+		
+		return $response;
+		
+		// Return schema based response
+		// return SchemaValidator::validate ($response, 'account')->intersect;
+	}
+	
+	/**
+	 *	Delete Accounts
+	 *
+	 *	@return boolean
+	 */
+	public function destroy ($id)
+	{
+		// Validation parameters
+		$input = array ('id'=> $id);
+	
+		// Request Foreground Job
+		$response = self::restDispatch ('destry', 'AccountController', $input, self::$getRules);
+		
+		return $response;
+	}
 }

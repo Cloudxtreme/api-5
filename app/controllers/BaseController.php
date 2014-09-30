@@ -7,7 +7,7 @@ class BaseController extends Controller
 	 */
 	const display = 'full';
 	
-	protected static $inputRules = array
+	protected static $baseValidationRules = array
 	(
 		'display'=> ''
 	);
@@ -31,13 +31,35 @@ class BaseController extends Controller
 		return Input::all();
 	}
 	
+
+	/**
+	 * Validate Input
+	 * Returns Laravel Validator object
+	 *
+	 * @return Validator
+	 */
+	public static function validate ($input, $rules = null)
+	{
+		// Add path attributes
+		$input = self::prepInput ($input);
+		
+		// Perform validation
+		$validator = Validator::make ($input, array_merge ($rules ?: self::$inputRules, self::$baseValidationRules));
+		
+		
+		// Check if the validator failed
+		return $validator->fails()?
+		
+			Redirect::to(400)->withErrors($validator) :
+			$validator;
+	}
 	
 	/**
 	 * Validate Input
 	 * Retruns Laravel Validator object
 	 *
 	 * @return Validator
-	 */
+	 
 	public static function validate ($input)
 	{
 		// Add path attributes
@@ -53,6 +75,7 @@ class BaseController extends Controller
 			Redirect::to(400)->withErrors($validator) :
 			$validator;
 	}
+	*/
 	
 	
 	/**
@@ -69,4 +92,30 @@ class BaseController extends Controller
 
 		 return $app->jobserver->request($job, $jobload);
 	 }
+	
+	 
+	/**
+	 *	REST Dispatch
+	 *	Jobdispatch extension with validation
+	 *
+	 *	@return Job response
+	 */
+	public static function restDispatch ($method, $controller, $input = null, $rules = null)
+	{
+		// Validation
+		if ($input)
+		{
+			self::validate ($input, $rules);
+			$payload = array_intersect_key (Input::all(), array_merge ($rules, self::$baseValidationRules));
+		}
+			
+
+		// Request Foreground Job
+		return self::jobdispatch ( 'controllerDispatch', (object) array
+		(
+			'action'=> $method,
+			'controller'=> $controller, 
+			'payload'=> isset ($payload)? $payload: self::prepInput (array ())
+		));
+	}
 }
