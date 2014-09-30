@@ -41,8 +41,13 @@ Route::group(array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::get	('loginstatus',	'Oauth2Controller@status');
 	
 	// Accounts
+	Route::resource	('accounts', 	'AccountController',		array('except' => array('create', 'edit')));
+	/*
+	Route::post	('accounts',									'AccountController@create');
 	Route::get	('accounts/{id}',								'AccountController@get');
-	Route::put	('accounts/{accountId}', 						'ProxyController@authenticated');
+	Route::put	('accounts/{id}',								'AccountController@update');
+	Route::delete	('accounts/{id}',							'AccountController@delete');
+	*/
 	Route::get	('accounts/{accountId}/alerts', 				'ProxyController@authenticated');
 	Route::get	('accounts/{accountId}/filteroptions',			'ProxyController@authenticated');
 	Route::get	('accounts/{accountId}/licenses', 				'ProxyController@authenticated');
