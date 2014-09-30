@@ -15,6 +15,15 @@
 
 	@endif
 
+	@if ( !empty ($msg) )
+	<div class="alert alert-error">
+		<button class="close" data-dismiss="alert"></button>
+		<span><p>{{ $msg }}</p></span>
+	</div>
+	@else
+
+	@endif
+
 	@if ( !empty ($feedback) )
 	@foreach ($feedback as $message)
 	<div class="alert alert-error">

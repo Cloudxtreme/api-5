@@ -16,6 +16,7 @@ Route::group(array('before'=> 'auth'), function()
  *	Engine-based Oauth2
  */
 Route::any ('login-e', 'ViewController@login');
+Route::any ('mlogin-e', 'ViewController@mlogin');
 Route::any ('logout-e', 'ViewController@logout');
 Route::any ('oauth2-e/register', 'ViewController@registerapp');
 Route::any ('oauth2-e/revoke', 'ViewController@logout');

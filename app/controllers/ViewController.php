@@ -34,6 +34,32 @@ class ViewController extends BaseController {
 	}
 
 	/**
+	 *	Mobile Login View
+	 *	Show login fields and handle action
+	 */
+	public function mlogin ()
+	{
+		// Are e-mail and password set
+		if(Input::get ('email') && Input::get ('password'))
+		{
+			// Oauth2 request
+			$response = App::make('Oauth2Controller')->login();
+
+			// If successful
+			if (isset ($response->redirect))
+
+				App::abort(303, $response->redirect);
+
+			// Else rebuild login
+			return View::make('mobile.login_form', array('error'=> array($response->error)));
+
+		}
+
+		// Default view
+		return View::make('mobile.login_form', Input::all());
+	}
+
+	/**
 	 *	Authorize Approve View
 	 *	Show approve options and handle action
 	 */
@@ -154,16 +180,19 @@ class ViewController extends BaseController {
             } else {
                 return View::make('signin.change_password', array('auth'=>1));
             }
-        } elseif($token) {
+        } elseif ($token) {
             // token used - old password is required
             if(!empty($data)){
                 if(!Input::has('oldpassword') || !Input::has('newpassword') || !Input::has('newpassword_confirm'))
                     return View::make('signin.change_password', array('error'=>'All fields required!'));
 
+                $data['token'] = $token;
+
                 $rules = array(
-                    'oldpassword' => 'required',
-                    'newpassword' => 'required',
-                    'newpassword_confirm' => 'required|same:newpassword'
+                    'token'                 => 'required',
+                    'oldpassword'           => 'required|min:5',
+                    'newpassword'           => 'required|min:5',
+                    'newpassword_confirm'   => 'required|min:5|same:newpassword'
                 );
 
                 $validator = Validator::make($data, $rules);
@@ -180,7 +209,7 @@ class ViewController extends BaseController {
                     if($output['action']=='success'){
                         return View::make('signin.change_password', array('msg'=>'You have a new password!'));
                     } else {
-                        return View::make('signin.change_password', array('error'=>'Engine Error!'));
+                        return View::make('signin.change_password', array('error'=>$output['msg']));
                     }
 
                 }
