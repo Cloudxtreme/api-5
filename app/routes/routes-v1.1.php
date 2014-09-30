@@ -23,7 +23,7 @@ Route::any ('oauth2-e/approve', 'ViewController@approve');
 Route::any ('oauth2-e/{path?}', 'Oauth2Controller@e_dispatch')->where ('path', '.+');
 
 /**
- *  Static pages ( invitations && user info )
+ *  Invitations && User info )
  */
 Route::any ('invitation/{path?}', 'ViewController@registeruser')->where ('path', '.+');
 Route::any('recoverpassword/{path?}', 'ViewController@recoverpassword')->where ('path', '.+');
