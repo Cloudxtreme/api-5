@@ -12,7 +12,6 @@ Route::group(array('before'=> 'auth'), function()
 	Route::any ('oauth2-e/register', 'ViewController@registerapp');
 });
 
-
 /**	
  *	Engine-based Oauth2
  */
@@ -23,6 +22,12 @@ Route::any ('oauth2-e/revoke', 'ViewController@logout');
 Route::any ('oauth2-e/approve', 'ViewController@approve');
 Route::any ('oauth2-e/{path?}', 'Oauth2Controller@e_dispatch')->where ('path', '.+');
 
+/**
+ *  Static pages ( invitations && user info )
+ */
+Route::any ('invitation/{path?}', 'ViewController@registeruser')->where ('path', '.+');
+Route::any('recoverpassword/{path?}', 'ViewController@recoverpassword')->where ('path', '.+');
+Route::any('changepassword/{path?}', 'ViewController@changepassword')->where ('path', '.+');
 
 /**
  *	Guest endpoints
@@ -31,7 +36,6 @@ Route::group (array ('prefix' => '1.1'), function ($v)
 {
 	Route::get ('version', 'ProxyController@guest');
 });
-
 
 /**
  *	Authenticated endpoints

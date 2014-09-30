@@ -40,7 +40,7 @@
         <div class="controls">
             <div class="input-icon left">
                 <i class="icon-envelope"></i>
-                <input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email" value="{{ $email }}" readonly />
+                <input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email" value="{{ $email or "" }}" readonly />
             </div>
         </div>
     </div>

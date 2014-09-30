@@ -19,7 +19,7 @@
 	
 	@endif
 
-	<form method="post">
+	<form method="post" action="">
 	
 		<ol>
 			<li>
