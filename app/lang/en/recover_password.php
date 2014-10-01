@@ -8,4 +8,8 @@ return array(
     'submit'                => 'Submit',
     'back'                  => 'Back',
 
+    // errors
+    'invalid.email'         => 'You should input a valid email!',
+
+
 );

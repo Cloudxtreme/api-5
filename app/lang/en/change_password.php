@@ -9,4 +9,7 @@ return array(
     'repeat_password'       => 'Repeat password',
     'submit'                => 'Submit',
 
+    // errors
+    'all.required'          => 'All fields required!',
+
 );

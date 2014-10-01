@@ -129,7 +129,7 @@ class ViewController extends BaseController {
             $validator = Validator::make($data, $rules);
 
             if ($validator->fails()){
-                $error = array('error'=> 'you should input a valid email!');
+                $error = array('error'=> trans('recover_password.invalid.email'));
                 return View::make('signin.recover_password', $error);
             } else {
                 $payload = (object) array('controller'=> 'UserController', 'action'=> 'recoverpassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules));
@@ -158,7 +158,7 @@ class ViewController extends BaseController {
             // access_token used - old password not needed
             if(!empty($data)) {
                 if(!Input::has('newpassword') || !Input::has('newpassword_confirm'))
-                    return View::make('signin.change_password', array('auth'=>1, 'error'=>'All fields required!'));
+                    return View::make('signin.change_password', array('auth'=>1, 'error' => trans('change_password.all.required')));
 
                 $rules = array(
                     'newpassword' => 'required|min:5',
@@ -183,7 +183,7 @@ class ViewController extends BaseController {
             // token used - old password is required
             if(!empty($data)){
                 if(!Input::has('oldpassword') || !Input::has('newpassword') || !Input::has('newpassword_confirm'))
-                    return View::make('signin.change_password', array('error'=>'All fields required!'));
+                    return View::make('signin.change_password', array('error' => trans('change_password.all.required')));
 
                 $data['token'] = $token;
 
@@ -206,9 +206,9 @@ class ViewController extends BaseController {
                     $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
 
                     if($output['action']=='success'){
-                        return View::make('signin.change_password', array('msg'=>'You have a new password!'));
+                        return View::make('signin.change_password', array('msg' => $output['msg']));
                     } else {
-                        return View::make('signin.change_password', array('error'=>$output['msg']));
+                        return View::make('signin.change_password', array('error' => $output['msg']));
                     }
 
                 }
@@ -230,6 +230,10 @@ class ViewController extends BaseController {
         $invitation_id = (int) Request::segment(2);
         $invitation_token = Request::segment(3);
 
+        // both fields required, validation of those is made in engine
+        if (!$invitation_id || !$invitation_token)
+            App::abort(404, 'Woops.');
+
         // validation for post data
         if(Request::isMethod('post')){
             $data = Input::all();
@@ -242,12 +246,13 @@ class ViewController extends BaseController {
             );
             $validator = Validator::make($data, $rules);
             if ($validator->fails()){
-                if(Input::get('password') != Input::get('password2')){
-                    $data['error'] ='Password fields must match.';
-                }
-                if(count(Input::all())<6){
-                    $data['error'] = 'All fields are required.';
-                }
+                $data['error'] = $validator->messages()->first();
+//                if(Input::get('password') != Input::get('password2')){
+//                    $data['error'] ='Password fields must match.';
+//                }
+//                if(count(Input::all())<6){
+//                    $data['error'] = 'All fields are required.';
+//                }
 
                 return View::make('signin.register', $data);
             }
