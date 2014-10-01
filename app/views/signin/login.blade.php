@@ -21,7 +21,7 @@
 		<span><p>{{ $msg }}</p></span>
 	</div>
 	<script>
-        window.localStorage.setItem('access_token', '{{ $msg }}');
+        //window.localStorage.setItem('access_token', '{{ $msg }}');
     </script>
 	@else
 
@@ -31,10 +31,10 @@
 
     <form class="form-signin pull-right" method="post" action="">
 
-        <input name="email" id='email' type="email" class="input-block-level" placeholder="@lang('login.email')">
-        <input name="password" id='password' type="password" class="input-block-level" placeholder="@lang('login.password')">
+        <input name="email" id='email' type="email" class="input-block-level" placeholder="{{ trans('login.email') }}">
+        <input name="password" id='password' type="password" class="input-block-level" placeholder="{{ trans('login.password') }}">
         <input name="login" type="hidden" value="1" />
-        <input type="submit" value="@lang('login.login')" />
+        <input type="submit" value="{{ trans('login.login') }}" />
 
     </form>
 
@@ -43,7 +43,7 @@
 </article>
 
 <article>
-    {{ HTML::linkAction('ViewController@recoverpassword', 'Lost Password', array(), array('class' => 'forgot-link')) }}
+    {{ HTML::linkAction('ViewController@recoverpassword', trans('login.forgot.password'), array(), array('class' => 'forgot-link')) }}
 </article>
 
 @stop

@@ -4,7 +4,7 @@
 
 <!-- BEGIN FORGOT PASSWORD FORM -->
 <form class="form-vertical forget-form" action="" method="post">
-	<h3 class="">Choose a new password</h3>
+	<h3 class="">{{ trans('change_password.title') }}</h3>
 
 	@if ( !empty ($error) )
 	<div class="alert alert-error">
@@ -35,14 +35,14 @@
 
 	@endif
 
-	<p>Almost there. Please choose a new password.</p>
+	<p>{{ trans('change_password.claim') }}</p>
 
 	@if (!isset($auth))
 	<div class="control-group">
 		<div class="controls">
 			<div class="input-icon left">
 				<i class="icon-lock"></i>
-				<input class="m-wrap placeholder-no-fix" type="password" placeholder="Old password" name="oldpassword" />
+				<input class="m-wrap placeholder-no-fix" type="password" placeholder="{{ trans('change_password.old_password') }}" name="oldpassword" />
 			</div>
 		</div>
 	</div>
@@ -52,7 +52,7 @@
 		<div class="controls">
 			<div class="input-icon left">
 				<i class="icon-lock"></i>
-				<input class="m-wrap placeholder-no-fix" type="password" placeholder="New password" name="newpassword" />
+				<input class="m-wrap placeholder-no-fix" type="password" placeholder="{{ trans('change_password.new_password') }}" name="newpassword" />
 			</div>
 		</div>
 	</div>
@@ -61,7 +61,7 @@
 		<div class="controls">
 			<div class="input-icon left">
 				<i class="icon-lock"></i>
-				<input class="m-wrap placeholder-no-fix" type="password" placeholder="Repeat password" name="newpassword_confirm" />
+				<input class="m-wrap placeholder-no-fix" type="password" placeholder="{{ trans('change_password.repeat_password') }}" name="newpassword_confirm" />
 			</div>
 		</div>
 	</div>
@@ -69,7 +69,7 @@
 	<div class="form-actions">
 		<input type="hidden" name="action" value="changepassword" />
 		<button type="submit" class="btn green pull-right">
-			Submit <i class="m-icon-swapright m-icon-white"></i>
+			{{ trans('change_password.submit') }} <i class="m-icon-swapright m-icon-white"></i>
 		</button>
 	</div>
 </form>

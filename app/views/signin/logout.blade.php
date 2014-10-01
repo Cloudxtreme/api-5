@@ -19,10 +19,8 @@
 	<p> </p>
 	<form class="form-signin pull-right" method="post" action="">
 
-<!--		<input name="email" id='email' type="email" class="input-block-level" placeholder="@lang('login.email')">-->
-<!--		<input name="password" id='password' type="password" class="input-block-level" placeholder="@lang('login.password')">-->
 		<input name="logout" type="hidden" value="1" />
-		<input type="submit" value="@lang('login.logout')" />
+		<input type="submit" value="{{ trans('login.logout') }}" />
 
 	</form>
 

@@ -16,9 +16,9 @@
 	@endif
 
 	<form method="post" action="{{ $action or "" }}">
-		<label>Do You Authorize [this app - <em>please create a appname field in oauth2/register and db</em>]?</label><br />
-		<input type="submit" name="authorized" value="yes">
-		<input type="submit" name="authorized" value="no">
+		<label>{{ trans('authorize.title') }}</label><br />
+		<input type="submit" name="authorized" value="{{ trans('authorize.yes') }}">
+		<input type="submit" name="authorized" value="{{ trans('authorize.no') }}">
 	</form>
 	
 </article>

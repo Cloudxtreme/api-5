@@ -4,8 +4,8 @@
 
 <article>
 
-	<h2>OAuth2 application registration</h2>
-	
+	<h2>{{ trans('register.title') }}</h2>
+
 	@if ( !empty ($error) )
 	@foreach ($error as $message)
 	<div class="alert alert-error">
@@ -15,7 +15,7 @@
 	
 	@else
 	
-	<p>Please provide a valid redirect URI. This application ID must be equal to the redirect URI that you use in your authorization call.</p>
+	<p>{{ trans('register.subtitle') }}</p>
 	
 	@endif
 
@@ -23,26 +23,26 @@
 	
 		<ol>
 			<li>
-				<label for="name">App name:</label>
+				<label for="name">{{ trans('register.app') }}</label>
 				<input type="text" id="name" name="name" />
 			</li>
 			
 			<li>
-				<label for="redirect">Redirect URI:</label>
+				<label for="redirect">{{ trans('register.redirect') }}</label>
 				<input type="url" id="redirect" name="redirect" />
 			</li>
 	
 			<li>
-				<label for="layout">Login design:</label>
+				<label for="layout">{{ trans('register.design') }}</label>
 				<select id="layout" name="layout">
-					<option value="default">default</option>
-					<option value="mobile">mobile</option>
-					<option value="platform">platform</option>
+					<option value="default">{{ trans('register.design.default') }}</option>
+					<option value="mobile">{{ trans('register.design.mobile') }}</option>
+					<option value="platform">{{ trans('register.design.platform') }}</option>
 				</select>
 			</li>
 	
 			<li>
-				<input type="submit" value='Register OAuth2 app' />
+				<input type="submit" value='{{ trans('register.submit.button') }}' />
 			</li>
 		</ol>
 	

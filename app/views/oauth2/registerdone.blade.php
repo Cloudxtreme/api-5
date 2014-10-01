@@ -14,28 +14,28 @@
 		
 	@endif
 
-	<h2>OAuth2 app registered</h2>
+	<h2>{{ trans('register.done.title') }}</h2>
 
-	<p>Please use following Client ID in your OAuth2 application.</p>
+	<p>{{ trans('register.done.subtitle') }}</p>
 	
 	<ul>
 		<li>
-			<strong>{{ $name }}</strong>
+			<strong>{{ $name or "" }}</strong>
 		</li>
 	
 		<li>
-			<strong>OAuth2 Client ID:</strong><br />
-	        {{ $clientid }}
+			<strong>{{ trans('register.done.client.id') }}</strong><br />
+	        {{ $clientid or "" }}
 		</li>
 	
 		<li>
-			<strong>OAuth2 Secret:</strong><br />
-	        {{ $secret }}
+			<strong>{{ trans('register.done.secret') }}</strong><br />
+	        {{ $secret or "" }}
 		</li>
 	
 		<li>
-			<strong>Redirect URI:</strong><br />
-	        {{ $redirecturi }}
+			<strong>{{ trans('register.done.redirect.uri') }}</strong><br />
+	        {{ $redirecturi or "" }}
 		</li>
 	
 	</ul>

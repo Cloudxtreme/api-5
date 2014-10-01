@@ -7,10 +7,10 @@
 
     @if ( !empty ($invitation) )
         <h3>
-            You are invited!
+            {{ trans('invitation.title') }}
         </h3>
 
-        <p>If you already have a Cloudwalkers account, don't bother with this registration form and head straight to the <a href="{{ URL::to('login') }}">login form</a>.</p>
+        <p>{{ trans('invitation.subtitle', array('url'=>URL::to('login-e'))) }}</p>
     @else
 
     @endif
@@ -33,71 +33,71 @@
 
 	@endif
 
-    <p>Enter your account details below:</p>
+    <p>{{ trans('invitation.account.details') }}</p>
     <div class="control-group">
         <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-        <label class="control-label visible-ie8 visible-ie9">Email</label>
+        <label class="control-label visible-ie8 visible-ie9">{{ trans('invitation.email') }}</label>
         <div class="controls">
             <div class="input-icon left">
                 <i class="icon-envelope"></i>
-                <input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email" value="{{ $email or "" }}" readonly />
+                <input class="m-wrap placeholder-no-fix" type="text" placeholder="{{ trans('invitation.email') }}" name="email" value="{{ $email or "" }}" readonly />
             </div>
         </div>
     </div>
 
     <div class="control-group">
-        <label class="control-label visible-ie8 visible-ie9">Name</label>
+        <label class="control-label visible-ie8 visible-ie9">{{ trans('invitation.name') }}</label>
         <div class="controls">
             <div class="input-icon left">
                 <i class="icon-user"></i>
-                <input class="m-wrap placeholder-no-fix" type="text" placeholder="Name" name="name" value="{{ $name or "" }}" required/>
+                <input class="m-wrap placeholder-no-fix" type="text" placeholder="{{ trans('invitation.name') }}" name="name" value="{{ $name or "" }}" required/>
             </div>
         </div>
     </div>
 
     <div class="control-group">
-        <label class="control-label visible-ie8 visible-ie9">First name</label>
+        <label class="control-label visible-ie8 visible-ie9">{{ trans('invitation.first.name') }}</label>
         <div class="controls">
             <div class="input-icon left">
                 <i class="icon-user"></i>
-                <input class="m-wrap placeholder-no-fix" type="text" placeholder="First name" name="firstname" value="{{ $firstname or "" }}" required/>
+                <input class="m-wrap placeholder-no-fix" type="text" placeholder="{{ trans('invitation.first.name') }}" name="firstname" value="{{ $firstname or "" }}" required/>
             </div>
         </div>
     </div>
 
     <div class="control-group">
-        <label class="control-label visible-ie8 visible-ie9">Password</label>
+        <label class="control-label visible-ie8 visible-ie9">{{ trans('invitation.password') }}</label>
         <div class="controls">
             <div class="input-icon left">
                 <i class="icon-lock"></i>
-                <input class="m-wrap placeholder-no-fix" type="password" id="register_password" placeholder="Password" name="password" required/>
+                <input class="m-wrap placeholder-no-fix" type="password" id="register_password" placeholder="{{ trans('invitation.password') }}" name="password" required/>
             </div>
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
+        <label class="control-label visible-ie8 visible-ie9">{{ trans('invitation.retype.password') }}</label>
         <div class="controls">
             <div class="input-icon left">
                 <i class="icon-ok"></i>
-                <input class="m-wrap placeholder-no-fix" type="password" placeholder="Re-type Your Password" name="password2" required/>
+                <input class="m-wrap placeholder-no-fix" type="password" placeholder="{{ trans('invitation.retype.password') }}" name="password2" required/>
             </div>
         </div>
     </div>
     <div class="control-group">
         <div class="controls">
             <label class="checkbox">
-                <input type="checkbox" name="tnc"/> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                <input type="checkbox" name="tnc"/> {{ trans('invitation.terms') }}
             </label>
             <div id="register_tnc_error"></div>
         </div>
     </div>
     <div class="form-actions">
-        <a href="{{ URL::to('login') }}" id="register-back-btn" type="button" class="btn">
+        <a href="{{ URL::to('login-e') }}" id="register-back-btn" type="button" class="btn">
             <i class="m-icon-swapleft"></i>
-            To login
+            {{ trans('invitation.to.login') }}
         </a>
         <button type="submit" id="register-submit-btn" class="btn green pull-right" name="register" value="1">
-            Sign Up <i class="m-icon-swapright m-icon-white"></i>
+            {{ trans('invitation.signup') }} <i class="m-icon-swapright m-icon-white"></i>
         </button>
     </div>
 </form>
