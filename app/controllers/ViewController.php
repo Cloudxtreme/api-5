@@ -148,7 +148,6 @@ class ViewController extends BaseController {
      */
     public function changepassword ()
     {
-
 	    $bearer = Request::header('Authorization');
         $token  = Request::segment(2);
         $data = Input::all();

@@ -15,20 +15,20 @@ Route::group(array('before'=> 'auth'), function()
 /**	
  *	Engine-based Oauth2
  */
-Route::any ('login-e', 'ViewController@login');
-Route::any ('mlogin-e', 'ViewController@mlogin');
-Route::any ('logout-e', 'ViewController@logout');
-Route::any ('oauth2-e/register', 'ViewController@registerapp');
-Route::any ('oauth2-e/revoke', 'ViewController@logout');
-Route::any ('oauth2-e/approve', 'ViewController@approve');
-Route::any ('oauth2-e/{path?}', 'Oauth2Controller@e_dispatch')->where ('path', '.+');
+Route::any ('login-e',              'ViewController@login');
+Route::any ('mlogin-e',             'ViewController@mlogin');
+Route::any ('logout-e',             'ViewController@logout');
+Route::any ('oauth2-e/register',    'ViewController@registerapp');
+Route::any ('oauth2-e/revoke',      'ViewController@logout');
+Route::any ('oauth2-e/approve',     'ViewController@approve');
+Route::any ('oauth2-e/{path?}',     'Oauth2Controller@e_dispatch')->where ('path', '.+');
 
 /**
- *  Invitations && User info )
+ *  Invitations && User info
  */
-Route::get ('invitation/{path?}', 'ViewController@registeruser')->where ('path', '.+');
-Route::any('recoverpassword/{path?}', 'ViewController@recoverpassword')->where ('path', '.+');
-Route::any('changepassword/{path?}', 'ViewController@changepassword')->where ('path', '.+');
+Route::get ('invitation/{path?}',       'ViewController@registeruser')->where ('path', '.+');
+Route::any ('recoverpassword/{path?}',  'ViewController@recoverpassword')->where ('path', '.+');
+Route::any ('changepassword/{path?}',   'ViewController@changepassword')->where ('path', '.+');
 
 /**
  *	Guest endpoints
@@ -41,7 +41,7 @@ Route::group (array ('prefix' => '1.1'), function ($v)
 /**
  *	Authenticated endpoints
  */
-Route::group(array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
+Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 {
 	Route::get	('loginstatus',	'Oauth2Controller@status');
 	
@@ -85,55 +85,55 @@ Route::group(array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::patch('accounts/{accountId}/validate',				'ProxyController@authenticated');
 
 	// Users
-	Route::get('users/{userId}', 'ProxyController@authenticated');
-	Route::put('users/{userId}', 'ProxyController@authenticated');
-	Route::put('users/{userId}/password', 'ProxyController@authenticated');
-	Route::get('users/{userId}/subscriptions', 'ProxyController@authenticated');
-	Route::delete('users/{userId}/subscriptions', 'ProxyController@authenticated');
-	Route::post('users/{userId}/subscriptions', 'ProxyController@authenticated');
+	Route::get      ('users/{userId}',                  'ProxyController@authenticated');
+	Route::put      ('users/{userId}',                  'ProxyController@authenticated');
+	Route::put      ('users/{userId}/password',         'ProxyController@authenticated');
+	Route::get      ('users/{userId}/subscriptions',    'ProxyController@authenticated');
+	Route::delete   ('users/{userId}/subscriptions',    'ProxyController@authenticated');
+	Route::post     ('users/{userId}/subscriptions',    'ProxyController@authenticated');
 	
 	// Contacts
-	Route::get('accounts/{accountId}/contactids', 'ProxyController@authenticated');
-	Route::get('accounts/{accountId}/contactids/following', 'ProxyController@authenticated');
-	Route::post('accounts/{accountId}/contacts', 'ProxyController@authenticated');
-	Route::get('accounts/{accountId}/contacts', 'ProxyController@authenticated');
-	Route::get('accounts/{accountId}/contacts/following', 'ProxyController@authenticated');
-	Route::get('accounts/{accountId}/contacts/search/{network}', 'ProxyController@authenticated');
-	Route::get('accounts/{accountId}/contacts/{contactId}', 'ProxyController@authenticated');
-	Route::put('accounts/{accountId}/contacts/{contactId}', 'ProxyController@authenticated');
-	Route::get('accounts/{accountId}/contacts/{contactId}/conversationids', 'ProxyController@authenticated');
-	Route::get('accounts/{accountId}/contacts/{contactId}/conversations', 'ProxyController@authenticated');
-	Route::get('accounts/{accountId}/contacts/{contactId}/messages', 'ProxyController@authenticated');
-	Route::get('accounts/{accountId}/contacts/{contactId}/noteids', 'ProxyController@authenticated');
-	Route::post('accounts/{accountId}/contacts/{contactId}/notes', 'ProxyController@authenticated');
-	Route::get('accounts/{accountId}/contacts/{contactId}/notes', 'ProxyController@authenticated');
-	Route::get('accounts/{accountId}/contacts/{contactId}/tagids', 'ProxyController@authenticated');
-	Route::get('accounts/{accountId}/contacts/{contactId}/tags', 'ProxyController@authenticated');
-	Route::post('accounts/{accountId}/contacts/{contactId}/tags', 'ProxyController@authenticated');
-	Route::delete('accounts/{accountId}/contacts/{contactId}/tags/{tagId}', 'ProxyController@authenticated');
+	Route::get      ('accounts/{accountId}/contactids',                             'ProxyController@authenticated');
+	Route::get      ('accounts/{accountId}/contactids/following',                   'ProxyController@authenticated');
+	Route::post     ('accounts/{accountId}/contacts',                               'ProxyController@authenticated');
+	Route::get      ('accounts/{accountId}/contacts',                               'ProxyController@authenticated');
+	Route::get      ('accounts/{accountId}/contacts/following',                     'ProxyController@authenticated');
+	Route::get      ('accounts/{accountId}/contacts/search/{network}',              'ProxyController@authenticated');
+	Route::get      ('accounts/{accountId}/contacts/{contactId}',                   'ProxyController@authenticated');
+	Route::put      ('accounts/{accountId}/contacts/{contactId}',                   'ProxyController@authenticated');
+	Route::get      ('accounts/{accountId}/contacts/{contactId}/conversationids',   'ProxyController@authenticated');
+	Route::get      ('accounts/{accountId}/contacts/{contactId}/conversations',     'ProxyController@authenticated');
+	Route::get      ('accounts/{accountId}/contacts/{contactId}/messages',          'ProxyController@authenticated');
+	Route::get      ('accounts/{accountId}/contacts/{contactId}/noteids',           'ProxyController@authenticated');
+	Route::post     ('accounts/{accountId}/contacts/{contactId}/notes',             'ProxyController@authenticated');
+	Route::get      ('accounts/{accountId}/contacts/{contactId}/notes',             'ProxyController@authenticated');
+	Route::get      ('accounts/{accountId}/contacts/{contactId}/tagids',            'ProxyController@authenticated');
+	Route::get      ('accounts/{accountId}/contacts/{contactId}/tags',              'ProxyController@authenticated');
+	Route::post     ('accounts/{accountId}/contacts/{contactId}/tags',              'ProxyController@authenticated');
+	Route::delete   ('accounts/{accountId}/contacts/{contactId}/tags/{tagId}',      'ProxyController@authenticated');
 	
 	// Services
-	Route::get('services/{id}', 'ProxyController@authenticated');
-	Route::delete('services/{id}', 'ProxyController@authenticated');
-	Route::put('services/{id}', 'ProxyController@authenticated');
-	Route::get('services/{id}/profiles', 'ProxyController@authenticated');
-	Route::get('services/{id}/profiles/{profileId}', 'ProxyController@authenticated');
-	Route::put('services/{id}/profiles/{profileId}', 'ProxyController@authenticated');
-	Route::post('services/{id}/setup', 'ProxyController@authenticated');
+	Route::get      ('services/{id}',                       'ProxyController@authenticated');
+	Route::delete   ('services/{id}',                       'ProxyController@authenticated');
+	Route::put      ('services/{id}',                       'ProxyController@authenticated');
+	Route::get      ('services/{id}/profiles',              'ProxyController@authenticated');
+	Route::get      ('services/{id}/profiles/{profileId}',  'ProxyController@authenticated');
+	Route::put      ('services/{id}/profiles/{profileId}',  'ProxyController@authenticated');
+	Route::post     ('services/{id}/setup',                 'ProxyController@authenticated');
 	
 	// Channels
-	Route::get('channels', 'ProxyController@authenticated');
-	Route::get('channels/{channelId}', 'ProxyController@authenticated');
-	Route::delete('channels/{channelId}', 'ProxyController@authenticated');
-	Route::put('channels/{channelId}', 'ProxyController@authenticated');
-	Route::post('channels/{channelId}/channels', 'ProxyController@authenticated');
-	Route::get('channels/{channelId}/count', 'ProxyController@authenticated');
-	Route::get('channels/{channelId}/messageids', 'ProxyController@authenticated');
-	Route::get('channels/{channelId}/messages', 'ProxyController@authenticated');
-	Route::get('channels/{channelId}/notificationsids', 'ProxyController@authenticated');
-	Route::post('channels/{channelId}/read', 'ProxyController@authenticated');
-	Route::get('channels/{channelId}/streamids', 'ProxyController@authenticated');
-	Route::get('channels/{channelId}/streams', 'ProxyController@authenticated');
+	Route::get      ('channels',                                'ProxyController@authenticated');
+	Route::get      ('channels/{channelId}',                    'ProxyController@authenticated');
+	Route::delete   ('channels/{channelId}',                    'ProxyController@authenticated');
+	Route::put      ('channels/{channelId}',                    'ProxyController@authenticated');
+	Route::post     ('channels/{channelId}/channels',           'ProxyController@authenticated');
+	Route::get      ('channels/{channelId}/count',              'ProxyController@authenticated');
+	Route::get      ('channels/{channelId}/messageids',         'ProxyController@authenticated');
+	Route::get      ('channels/{channelId}/messages',           'ProxyController@authenticated');
+	Route::get      ('channels/{channelId}/notificationsids',   'ProxyController@authenticated');
+	Route::post     ('channels/{channelId}/read',               'ProxyController@authenticated');
+	Route::get      ('channels/{channelId}/streamids',          'ProxyController@authenticated');
+	Route::get      ('channels/{channelId}/streams',            'ProxyController@authenticated');
 	
 	// Streams
 	Route::get('streams', 'ProxyController@authenticated');
