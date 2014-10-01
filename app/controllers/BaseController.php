@@ -43,14 +43,17 @@ class BaseController extends Controller
 		// Add path attributes
 		$input = self::prepInput ($input);
 		
+		
 		// Perform validation
 		$validator = Validator::make ($input, array_merge ($rules ?: self::$inputRules, self::$baseValidationRules));
 		
 		
+		//exit(json_encode($validator->fails()));
+		
 		// Check if the validator failed
 		return $validator->fails()?
 		
-			Redirect::to(400)->withErrors($validator) :
+			App::abort(400, $validator->messages()) :
 			$validator;
 	}
 	
@@ -103,12 +106,12 @@ class BaseController extends Controller
 	public static function restDispatch ($method, $controller, $input = null, $rules = null)
 	{
 		// Validation
-		if ($input)
+		if (is_array ($input))
 		{
 			self::validate ($input, $rules);
 			$payload = array_intersect_key (Input::all(), array_merge ($rules, self::$baseValidationRules));
 		}
-			
+		
 
 		// Request Foreground Job
 		return self::jobdispatch ( 'controllerDispatch', (object) array
