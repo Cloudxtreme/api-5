@@ -33,7 +33,7 @@ class AccountController extends BaseController {
 
 	protected static $postRules = array
 	(
-		'name'=> 'required|string',
+		'name'=> 'required|min:2',
 		'resellerid'=> 'required|integer',
 		'planid'=> 'required|integer'
 	);	
@@ -67,14 +67,14 @@ class AccountController extends BaseController {
 	public function store ($resellerid = null)
 	{
 		// Validation parameters
-		if ($resellerid)
+		$input = $resellerid?
 		
-			$input = array ('resellerid'=> $resellerid);
-		
+			 array ('resellerid'=> $resellerid) :
+			 array ();
 		
 		// Request Foreground Job
-		$response = self::restDispatch ('store', 'AccountController', $input ?: array (), self::$postRules);
-				
+		$response = self::restDispatch ('store', 'AccountController', $input, self::$postRules);
+			
 		return $response;
 		
 		// Return schema based response
