@@ -45,7 +45,7 @@ class BaseController extends Controller
 		
 		
 		// Perform validation
-		$validator = Validator::make ($input, array_merge ($rules ?: self::$inputRules, self::$baseValidationRules));
+		$validator = Validator::make ($input, array_merge ($rules ?: $this::$inputRules, self::$baseValidationRules));
 		
 		
 		//exit(json_encode($validator->fails()));

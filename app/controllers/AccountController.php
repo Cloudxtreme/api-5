@@ -33,7 +33,7 @@ class AccountController extends BaseController {
 
 	protected static $postRules = array
 	(
-		'name'=> 'required|string',
+		'name'=> 'required|min:2',
 		'resellerid'=> 'required|integer',
 		'planid'=> 'required|integer'
 	);	
