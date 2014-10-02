@@ -2,26 +2,24 @@
 
 @section('content')
 
+
+@if (!empty ($success))
+
+	<div>
+	    <span><p>{{ $message }}</p></span>
+	</div>
+
+@else
+
 <!-- BEGIN FORGOT PASSWORD FORM -->
 <form class="form-vertical forget-form" action="" method="post">
     <h3 class="">{{ trans('recover_password.title') }}</h3>
 
-    @if ( !empty ($error) )
+    @if ( !empty ($message) )
         <div class="alert alert-error">
             <button class="close" data-dismiss="alert"></button>
-            <span><p>{{ $error }}</p></span>
+            <span><p>{{ $message }}</p></span>
         </div>
-    @else
-
-    @endif
-
-    @if ( !empty ($msg) )
-        <div class="alert alert-error">
-            <button class="close" data-dismiss="alert"></button>
-            <span><p>{{ $msg }}</p></span>
-        </div>
-    @else
-
     @endif
 
 	<p>{{ trans('recover_password.subtitle') }}</p>
@@ -45,5 +43,6 @@
 </form>
 <!-- END FORGOT PASSWORD FORM -->
 
+@endif
 
 @stop

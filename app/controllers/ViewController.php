@@ -1,5 +1,9 @@
 <?php
 
+/**
+ *	View Controller
+ *	The view controller is used for static pages and login management.
+ */
 class ViewController extends BaseController {
 	
 	public function __construct ()
@@ -119,28 +123,39 @@ class ViewController extends BaseController {
     {
         $data = Input::all();
 
-        if(!empty($data)){
-            $data['url'] = URL::to('/');
-            $rules = array(
-                'email' => 'required|email',
-                'url'   => 'required'
-            );
+        // Define default view
+        if(empty($data))
 
-            $validator = Validator::make($data, $rules);
-
-            if ($validator->fails()){
-                $error = array('error'=> trans('recover_password.invalid.email'));
-                return View::make('signin.recover_password', $error);
-            } else {
-                $payload = (object) array('controller'=> 'UserController', 'action'=> 'recoverpassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules));
-
-                $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
-
-                return View::make('signin.recover_password', $output);
-            }
-        } else {
             return View::make('signin.recover_password');
-        }
+
+
+        // Post data actions and validation rules
+        $data['url'] = URL::to('/');
+        $data['ip']  = Request::getClientIp();
+
+        $rules = array(
+            'email' => 'required|email',
+            'ip'    => 'required|ip',
+            'url'   => 'required|url'
+        );
+
+        // input validation
+        $validator = Validator::make($data, $rules);
+
+        // validation error output
+        if ($validator->fails())
+
+            return View::make( 'signin.recover_password', array( 'message'=> $validator->messages()->first()) );
+
+
+        $payload = (object) array('controller'=> 'UserController', 'action'=> 'recoverpassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules));
+
+        $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
+
+
+        return View::make('signin.recover_password', $output);
+
+
     }
 
     /**
@@ -149,8 +164,10 @@ class ViewController extends BaseController {
     public function changepassword ()
     {
 	    $bearer = Request::header('Authorization');
+	    $bearer = 'Bearer 24ee80731476c05f3c7ae519297064b16f97ca33';
         $token  = Request::segment(2);
-        $data = Input::all();
+        $token  = Input::get('token');
+        $data   = Input::all();
 
         // 2 entry points: with bearer (authenticated) or with access_token sent by email
 
@@ -175,6 +192,8 @@ class ViewController extends BaseController {
                     $payload = (object) array('controller'=> 'UserController', 'action'=> 'changepassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
 
                     $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
+
+                    dd( $output );
                 }
             } else {
                 return View::make('signin.change_password', array('auth'=>1));
@@ -232,7 +251,7 @@ class ViewController extends BaseController {
 
         // both fields required, validation of those is made in engine
         if (!$invitation_id || !$invitation_token)
-            App::abort(404, 'Woops.');
+            App::abort(403, 'Unauthorized action.');
 
         // validation for post data
         if(Request::isMethod('post')){
