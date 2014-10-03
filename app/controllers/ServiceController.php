@@ -45,9 +45,9 @@ class ServiceController extends BaseController {
 	 *
 	 *	@return array
 	 */
-	public function index ($id)
+	public function index ($id, $secondid = null)
 	{
-		$input = array('id'=> $id);
+		$input = array('id'=> $secondid?: $id);
 		
 		// Request Foreground Job
 		$response = self::restDispatch ('index', 'ServiceController', $input, self::$getRules);
