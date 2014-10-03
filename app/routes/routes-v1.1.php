@@ -56,7 +56,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::get	('loginstatus',	'Oauth2Controller@status');
 	
 	// Accounts
-	Route::resource	('accounts', 			'AccountController',	array ('except' => array('create', 'edit', 'destroy')));
+	Route::resource	('accounts', 			'AccountController',	array ('except' => array('create', 'edit')));
 	Route::resource	('accounts.services',	'ServiceController',	array ('except' => array('create', 'edit')));
 	// Route::post		('account/{id}/services/{token}')->where ('token', '[a-z]+');
 	Route::get	('accounts/{accountId}/alerts', 				'ProxyController@authenticated');
@@ -118,7 +118,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::delete   ('accounts/{accountId}/contacts/{contactId}/tags/{tagId}',      'ProxyController@authenticated');
 	
 	// Services				
-	Route::resource	('services',	'ServiceController',	array ('except' => array('create', 'edit', 'store')));
+	Route::resource	('services',	'ServiceController',	array ('except' => array('index', 'create', 'edit', 'store')));
 	// Route::get      ('services/{id}',                       'ProxyController@authenticated');
 	// Route::delete   ('services/{id}',                       'ProxyController@authenticated');
 	// Route::put      ('services/{id}',                       'ProxyController@authenticated');
