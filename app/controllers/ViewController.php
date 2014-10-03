@@ -155,7 +155,6 @@ class ViewController extends BaseController {
 
         return View::make('signin.recover_password', $output);
 
-
     }
 
     /**
@@ -171,30 +170,31 @@ class ViewController extends BaseController {
 
         // 2 entry points: with bearer (authenticated) or with access_token sent by email
 
-        if($bearer){
+        if ($bearer)
+        {
             // access_token used - old password not needed
-            if(!empty($data)) {
-                if(!Input::has('newpassword') || !Input::has('newpassword_confirm'))
-                    return View::make('signin.change_password', array('auth'=>1, 'error' => trans('change_password.all.required')));
+            if (!empty($data))
+            {
 
                 $rules = array(
-                    'newpassword' => 'required|min:5',
-                    'newpassword_confirm' => 'required|min:5|same:newpassword'
+                    'newpassword'           => 'required|min:5',
+                    'newpassword_confirm'   => 'required|min:5|same:newpassword'
                 );
 
                 $validator = Validator::make($data, $rules);
 
-                if ($validator->fails()){
-                    $errors = $validator->messages();
-                    $error = $errors->first();
-                    return View::make('signin.change_password', array('auth'=>1, 'error'=>$error));
-                } else {
-                    $payload = (object) array('controller'=> 'UserController', 'action'=> 'changepassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
+                // validation error output
+                if ($validator->fails())
 
-                    $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
+                    return View::make( 'signin.change_password', array( 'message'=> $validator->messages()->first(), 'auth'=>1) );
 
-                    dd( $output );
-                }
+
+                $payload = (object) array('controller'=> 'UserController', 'action'=> 'changepassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
+
+                $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
+
+                dd( $output );
+
             } else {
                 return View::make('signin.change_password', array('auth'=>1));
             }

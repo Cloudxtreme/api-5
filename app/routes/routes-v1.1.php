@@ -130,102 +130,102 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::get      ('channels/{channelId}/streams',            'ProxyController@authenticated');
 	
 	// Streams
-	Route::get('streams', 'ProxyController@authenticated');
-	Route::get('streams/{streamId}', 'ProxyController@authenticated');
-	Route::get('streams/{streamId}/actions', 'ProxyController@authenticated');
-	Route::get('streams/{streamId}/besttimetopost', 'ProxyController@authenticated');
-	Route::get('streams/{streamId}/contacts/uniqueid/{uniqueid}', 'ProxyController@authenticated');
-	Route::get('streams/{streamId}/count', 'ProxyController@authenticated');
-	Route::get('streams/{streamId}/followers', 'ProxyController@authenticated');
-	Route::get('streams/{streamId}/following', 'ProxyController@authenticated');
-	Route::get('streams/{streamId}/live/messages', 'ProxyController@authenticated');
-	Route::get('streams/{streamId}/live/statistics', 'ProxyController@authenticated');
-	Route::get('streams/{streamId}/live/messageids', 'ProxyController@authenticated');
-	Route::post('streams/{streamId}/messages', 'ProxyController@authenticated');
-	Route::get('streams/{streamId}/messages', 'ProxyController@authenticated');
-	Route::post('streams/{streamId}/read', 'ProxyController@authenticated');
-	Route::get('streams/{streamId}/reportids', 'ProxyController@authenticated');
-	Route::get('streams/{streamId}/reports', 'ProxyController@authenticated');
-	Route::get('streams/{streamId}/validate', 'ProxyController@authenticated');
+	Route::get  ('streams',                                         'ProxyController@authenticated');
+	Route::get  ('streams/{streamId}',                              'ProxyController@authenticated');
+	Route::get  ('streams/{streamId}/actions',                      'ProxyController@authenticated');
+	Route::get  ('streams/{streamId}/besttimetopost',               'ProxyController@authenticated');
+	Route::get  ('streams/{streamId}/contacts/uniqueid/{uniqueid}', 'ProxyController@authenticated');
+	Route::get  ('streams/{streamId}/count',                        'ProxyController@authenticated');
+	Route::get  ('streams/{streamId}/followers',                    'ProxyController@authenticated');
+	Route::get  ('streams/{streamId}/following',                    'ProxyController@authenticated');
+	Route::get  ('streams/{streamId}/live/messages',                'ProxyController@authenticated');
+	Route::get  ('streams/{streamId}/live/statistics',              'ProxyController@authenticated');
+	Route::get  ('streams/{streamId}/live/messageids',              'ProxyController@authenticated');
+	Route::post ('streams/{streamId}/messages',                     'ProxyController@authenticated');
+	Route::get  ('streams/{streamId}/messages',                     'ProxyController@authenticated');
+	Route::post ('streams/{streamId}/read',                         'ProxyController@authenticated');
+	Route::get  ('streams/{streamId}/reportids',                    'ProxyController@authenticated');
+	Route::get  ('streams/{streamId}/reports',                      'ProxyController@authenticated');
+	Route::get  ('streams/{streamId}/validate',                     'ProxyController@authenticated');
 	
 	// Messages
-	Route::post('messages', 'ProxyController@authenticated');
-	Route::get('messages', 'NeuronProxyController@getMessauthenticatedages');
-	Route::delete('messages/{messageId}', 'ProxyController@authenticated');
-	Route::put('messages/{messageId}', 'ProxyController@authenticated');
-	Route::get('messages/{messageId}', 'ProxyController@authenticated');
-	Route::get('messages/{messageId}/actions', 'ProxyController@authenticated');
-	Route::post('messages/{messageId}/actions/{actionToken}', 'ProxyController@authenticated');
-	Route::get('messages/{messageId}/noteids', 'ProxyController@authenticated');
-	Route::post('messages/{messageId}/notes', 'ProxyController@authenticated');
-	Route::get('messages/{messageId}/notes', 'ProxyController@authenticated');
-	Route::get('messages/{messageId}/original', 'ProxyController@authenticated');
-	Route::put('messages/{messageId}/original', 'ProxyController@authenticated');
-	Route::put('messages/{messageId}/read', 'ProxyController@authenticated');
-	Route::get('messages/{messageId}/sendlog', 'ProxyController@authenticated');
-	Route::put('messages/{messageId}/skip', 'ProxyController@authenticated');
-	Route::get('messages/{messageId}/statistics', 'ProxyController@authenticated');
-	Route::get('messages/{messageId}/statistics/{statisticToken}', 'ProxyController@authenticated');
-	Route::put('messages/{messageId}/statistics/{statisticToken}', 'ProxyController@authenticated');
-	Route::get('messages/{messageId}/tagids', 'ProxyController@authenticated');
-	Route::get('messages/{messageId}/tags', 'ProxyController@authenticated');
-	Route::post('messages/{messageId}/tags', 'ProxyController@authenticated');
-	Route::delete('messages/{messageId}/tags/{tagId}', 'ProxyController@authenticated');
+	Route::post     ('messages',                                            'ProxyController@authenticated');
+	Route::get      ('messages',                                            'NeuronProxyController@getMessauthenticatedages');
+	Route::delete   ('messages/{messageId}',                                'ProxyController@authenticated');
+	Route::put      ('messages/{messageId}',                                'ProxyController@authenticated');
+	Route::get      ('messages/{messageId}',                                'ProxyController@authenticated');
+	Route::get      ('messages/{messageId}/actions',                        'ProxyController@authenticated');
+	Route::post     ('messages/{messageId}/actions/{actionToken}',          'ProxyController@authenticated');
+	Route::get      ('messages/{messageId}/noteids',                        'ProxyController@authenticated');
+	Route::post     ('messages/{messageId}/notes',                          'ProxyController@authenticated');
+	Route::get      ('messages/{messageId}/notes',                          'ProxyController@authenticated');
+	Route::get      ('messages/{messageId}/original',                       'ProxyController@authenticated');
+	Route::put      ('messages/{messageId}/original',                       'ProxyController@authenticated');
+	Route::put      ('messages/{messageId}/read',                           'ProxyController@authenticated');
+	Route::get      ('messages/{messageId}/sendlog',                        'ProxyController@authenticated');
+	Route::put      ('messages/{messageId}/skip',                           'ProxyController@authenticated');
+	Route::get      ('messages/{messageId}/statistics',                     'ProxyController@authenticated');
+	Route::get      ('messages/{messageId}/statistics/{statisticToken}',    'ProxyController@authenticated');
+	Route::put      ('messages/{messageId}/statistics/{statisticToken}',    'ProxyController@authenticated');
+	Route::get      ('messages/{messageId}/tagids',                         'ProxyController@authenticated');
+	Route::get      ('messages/{messageId}/tags',                           'ProxyController@authenticated');
+	Route::post     ('messages/{messageId}/tags',                           'ProxyController@authenticated');
+	Route::delete   ('messages/{messageId}/tags/{tagId}',                   'ProxyController@authenticated');
 	
 	// Notifications
-	Route::get('notifications', 'ProxyController@authenticated');
+	Route::get  ('notifications', 'ProxyController@authenticated');
 	
 	// Notes
-	Route::get('notes', 'ProxyController@authenticated');
-	Route::get('notes/{noteId}', 'ProxyController@authenticated');
-	Route::delete('notes/{noteId}', 'ProxyController@authenticated');
-	Route::put('notes/{noteId}', 'ProxyController@authenticated');
-	Route::get('notes/{noteId}/related', 'ProxyController@authenticated');
-	Route::get('notes/{noteId}/relatedids', 'ProxyController@authenticated');
+	Route::get      ('notes',                       'ProxyController@authenticated');
+	Route::get      ('notes/{noteId}',              'ProxyController@authenticated');
+	Route::delete   ('notes/{noteId}',              'ProxyController@authenticated');
+	Route::put      ('notes/{noteId}',              'ProxyController@authenticated');
+	Route::get      ('notes/{noteId}/related',      'ProxyController@authenticated');
+	Route::get      ('notes/{noteId}/relatedids',   'ProxyController@authenticated');
 	
 	// Tags
-	Route::get('tags', 'ProxyController@authenticated');
-	Route::get('tags/{tagId}', 'ProxyController@authenticated');
-	Route::post('tags/{tagId}/tags', 'ProxyController@authenticated');
-	Route::delete('tags/{tagId}/tags/{tagId2}', 'ProxyController@authenticated');
+	Route::get      ('tags',                        'ProxyController@authenticated');
+	Route::get      ('tags/{tagId}',                'ProxyController@authenticated');
+	Route::post     ('tags/{tagId}/tags',           'ProxyController@authenticated');
+	Route::delete   ('tags/{tagId}/tags/{tagId2}',  'ProxyController@authenticated');
 	
 	// Triggers
-	Route::put('triggers/{triggerId}', 'ProxyController@authenticated');
-	Route::get('triggers/{triggerId}', 'ProxyController@authenticated');
+	Route::put      ('triggers/{triggerId}',        'ProxyController@authenticated');
+	Route::get      ('triggers/{triggerId}',        'ProxyController@authenticated');
 	
 	// Campaigns
-	Route::get('accounts/{accountId}/campaigns', 'ProxyController@authenticated');
-	Route::put('accounts/{accountId}/campaigns', 'ProxyController@authenticated');
-	Route::post('accounts/{accountId}/campaigns', 'ProxyController@authenticated');
-	Route::delete('accounts/{accountId}/campaigns/{campaignId}', 'ProxyController@authenticated');
-	Route::get('accounts/{accountId}/campaigns/{campaignId}', 'ProxyController@authenticated');
-	Route::put('accounts/{accountId}/campaigns/{campaignId}', 'ProxyController@authenticated');
+	Route::get      ('accounts/{accountId}/campaigns',                  'ProxyController@authenticated');
+	Route::put      ('accounts/{accountId}/campaigns',                  'ProxyController@authenticated');
+	Route::post     ('accounts/{accountId}/campaigns',                  'ProxyController@authenticated');
+	Route::delete   ('accounts/{accountId}/campaigns/{campaignId}',     'ProxyController@authenticated');
+	Route::get      ('accounts/{accountId}/campaigns/{campaignId}',     'ProxyController@authenticated');
+	Route::put      ('accounts/{accountId}/campaigns/{campaignId}',     'ProxyController@authenticated');
 	
 	// Group
-	Route::post('accounts/{groupId}/groups', 'ProxyController@authenticated');
-	Route::get('groups', 'ProxyController@authenticated');
-	Route::put('groups/{groupId}', 'ProxyController@authenticated');
+	Route::post     ('accounts/{groupId}/groups',   'ProxyController@authenticated');
+	Route::get      ('groups',                      'ProxyController@authenticated');
+	Route::put      ('groups/{groupId}',            'ProxyController@authenticated');
 	
 	// Log
-	Route::post('log', 'ProxyController@authenticated');
+	Route::post ('log', 'ProxyController@authenticated');
 	
 	// Mailer
-	Route::get('mailer/bounces', 'ProxyController@authenticated');
-	Route::get('mailer/bounces/{bounceId}', 'ProxyController@authenticated');
-	Route::get('mailer/emails', 'ProxyController@authenticated');
-	Route::get('mailer/emails/{emailId}', 'ProxyController@authenticated');
+	Route::get  ('mailer/bounces',              'ProxyController@authenticated');
+	Route::get  ('mailer/bounces/{bounceId}',   'ProxyController@authenticated');
+	Route::get  ('mailer/emails',               'ProxyController@authenticated');
+	Route::get  ('mailer/emails/{emailId}',     'ProxyController@authenticated');
 	
 	// Ping
-	Route::get('accounts/{accountId}/ping', 'ProxyController@authenticated');
+	Route::get  ('accounts/{accountId}/ping',   'ProxyController@authenticated');
 	
 	// Resellers
-	Route::get('reseller/{resellerId}', 'ProxyController@authenticated');
-	Route::get('reseller/{resellerId}/accounts', 'ProxyController@authenticated');
-	Route::post('reseller/{resellerId}/accounts', 'ProxyController@authenticated');
-	Route::put('reseller/{resellerId}/accounts/{accountId}', 'ProxyController@authenticated');
-	Route::get('reseller/{resellerId}/plans', 'ProxyController@authenticated');
-	Route::post('reseller/{resellerId}/plans', 'ProxyController@authenticated');
-	Route::put('reseller/{resellerId}/plans/{planId}', 'ProxyController@authenticated');
+	Route::get  ('reseller/{resellerId}',                       'ProxyController@authenticated');
+	Route::get  ('reseller/{resellerId}/accounts',              'ProxyController@authenticated');
+	Route::post ('reseller/{resellerId}/accounts',              'ProxyController@authenticated');
+	Route::put  ('reseller/{resellerId}/accounts/{accountId}',  'ProxyController@authenticated');
+	Route::get  ('reseller/{resellerId}/plans',                 'ProxyController@authenticated');
+	Route::post ('reseller/{resellerId}/plans',                 'ProxyController@authenticated');
+	Route::put  ('reseller/{resellerId}/plans/{planId}',        'ProxyController@authenticated');
 });
 
 // 404 Not found
