@@ -57,29 +57,6 @@ class BaseController extends Controller
 			$validator;
 	}
 	
-	/**
-	 * Validate Input
-	 * Retruns Laravel Validator object
-	 *
-	 * @return Validator
-	 
-	public static function validate ($input)
-	{
-		// Add path attributes
-		$input = self::prepInput ($input);
-		
-		// Perform validation
-		$validator = Validator::make ($input, array_merge(self::$inputRules, self::$validationRules));
-		
-		
-		// Check if the validator failed
-		return $validator->fails()?
-		
-			Redirect::to(400)->withErrors($validator) :
-			$validator;
-	}
-	*/
-	
 	
 	/**
 	 *	Dispatch

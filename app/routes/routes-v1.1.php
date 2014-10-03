@@ -40,13 +40,25 @@ Route::group (array ('prefix' => '1.1'), function ($v)
 
 /**
  *	Authenticated endpoints
+ *
+ *	Some endpoints are supported by RESTful controllers
+ *	[http://laravel.com/docs/4.2/controllers#restful-resource-controllers]
+ *
+ *	Following routes might be supported
+ *	GET			/resource				index		resource.index
+ *	POST		/resource				store		resource.store
+ *	GET			/resource/{resource}	show		resource.show
+ *	PUT/PATCH	/resource/{resource}	update		resource.update
+ *	DELETE		/resource/{resource}	destroy		resource.destroy
  */
 Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 {
 	Route::get	('loginstatus',	'Oauth2Controller@status');
 	
 	// Accounts
-	Route::resource	('accounts', 	'AccountController',		array('except' => array('create', 'edit')));
+	Route::resource	('accounts', 			'AccountController',	array ('except' => array('create', 'edit', 'destroy')));
+	Route::resource	('accounts.services',	'ServiceController',	array ('except' => array('create', 'edit')));
+	// Route::post		('account/{id}/services/{token}')->where ('token', '[a-z]+');
 	Route::get	('accounts/{accountId}/alerts', 				'ProxyController@authenticated');
 	Route::get	('accounts/{accountId}/filteroptions',			'ProxyController@authenticated');
 	Route::get	('accounts/{accountId}/licenses', 				'ProxyController@authenticated');
@@ -58,7 +70,6 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::post	('accounts/{accountId}/read', 					'ProxyController@authenticated');
 	Route::get	('accounts/{accountId}/rolegroups', 			'ProxyController@authenticated');
 	Route::get	('accounts/{accountId}/serviceids', 			'ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/services', 				'ProxyController@authenticated');
 	Route::get	('accounts/{accountId}/services/available',		'ProxyController@authenticated');
 	Route::post	('accounts/{accountId}/services/{serviceToken}','ProxyController@authenticated');
 	Route::get	('accounts/{accountId}/statisticids/{timeSpan}','ProxyController@authenticated');
@@ -106,11 +117,12 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::post     ('accounts/{accountId}/contacts/{contactId}/tags',              'ProxyController@authenticated');
 	Route::delete   ('accounts/{accountId}/contacts/{contactId}/tags/{tagId}',      'ProxyController@authenticated');
 	
-	// Services
-	Route::get      ('services/{id}',                       'ProxyController@authenticated');
-	Route::delete   ('services/{id}',                       'ProxyController@authenticated');
-	Route::put      ('services/{id}',                       'ProxyController@authenticated');
-	Route::get      ('services/{id}/profiles',              'ProxyController@authenticated');
+	// Services				
+	Route::resource	('services',	'ServiceController',	array ('except' => array('create', 'edit', 'store')));
+	// Route::get      ('services/{id}',                       'ProxyController@authenticated');
+	// Route::delete   ('services/{id}',                       'ProxyController@authenticated');
+	// Route::put      ('services/{id}',                       'ProxyController@authenticated');
+	// Route::get      ('services/{id}/profiles',              'ProxyController@authenticated');
 	Route::get      ('services/{id}/profiles/{profileId}',  'ProxyController@authenticated');
 	Route::put      ('services/{id}/profiles/{profileId}',  'ProxyController@authenticated');
 	Route::post     ('services/{id}/setup',                 'ProxyController@authenticated');
