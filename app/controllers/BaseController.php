@@ -38,14 +38,14 @@ class BaseController extends Controller
 	 *
 	 * @return Validator
 	 */
-	public static function validate ($input, $rules = null)
+	public static function validate ($input, $rules = array ())
 	{
 		// Add path attributes
 		$input = self::prepInput ($input);
 		
 		
 		// Perform validation
-		$validator = Validator::make ($input, array_merge ($rules ?: $this::$inputRules, self::$baseValidationRules));
+		$validator = Validator::make ($input, array_merge ($rules, self::$baseValidationRules));
 		
 		
 		//exit(json_encode($validator->fails()));
