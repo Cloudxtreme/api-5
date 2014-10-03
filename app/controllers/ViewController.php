@@ -163,77 +163,84 @@ class ViewController extends BaseController {
     public function changepassword ()
     {
 	    $bearer = Request::header('Authorization');
-	    $bearer = 'Bearer 24ee80731476c05f3c7ae519297064b16f97ca33';
+//	    $bearer = '24ee80731476c05f3c7ae519297064b16f97ca33';
         $token  = Request::segment(2);
-        $token  = Input::get('token');
         $data   = Input::all();
 
         // 2 entry points: with bearer (authenticated) or with access_token sent by email
 
         if ($bearer)
         {
-            // access_token used - old password not needed
-            if (!empty($data))
-            {
 
-                $rules = array(
-                    'newpassword'           => 'required|min:5',
-                    'newpassword_confirm'   => 'required|min:5|same:newpassword'
-                );
+            if (empty($data))
 
-                $validator = Validator::make($data, $rules);
-
-                // validation error output
-                if ($validator->fails())
-
-                    return View::make( 'signin.change_password', array( 'message'=> $validator->messages()->first(), 'auth'=>1) );
-
-
-                $payload = (object) array('controller'=> 'UserController', 'action'=> 'changepassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
-
-                $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
-
-                dd( $output );
-
-            } else {
                 return View::make('signin.change_password', array('auth'=>1));
-            }
-        } elseif ($token) {
+
+
+            $rules = array(
+                'newpassword'           => 'required|min:5',
+                'newpassword_confirm'   => 'required|min:5|same:newpassword'
+            );
+
+            $validator = Validator::make($data, $rules);
+
+            // validation error output
+            if ($validator->fails())
+
+                return View::make( 'signin.change_password', array( 'message'=> $validator->messages()->first(), 'auth'=>1) );
+
+
+            $payload = (object) array('controller'=> 'UserController', 'action'=> 'changepassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
+
+            $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
+
+            // redirect to login if invalid bearer
+            if (isset($output['redirect']))
+
+                return Redirect::to($output['redirect']);
+
+
+            return View::make('signin.change_password', array_merge($output, array('auth'=>1)));
+
+
+        }
+
+        elseif ($token) {
+
             // token used - old password is required
-            if(!empty($data)){
-                if(!Input::has('oldpassword') || !Input::has('newpassword') || !Input::has('newpassword_confirm'))
-                    return View::make('signin.change_password', array('error' => trans('change_password.all.required')));
+            if (empty($data))
 
-                $data['token'] = $token;
+                return View::make('signin.change_password');
 
-                $rules = array(
-                    'token'                 => 'required',
-                    'oldpassword'           => 'required|min:5',
-                    'newpassword'           => 'required|min:5',
-                    'newpassword_confirm'   => 'required|min:5|same:newpassword'
-                );
 
-                $validator = Validator::make($data, $rules);
+            $data['token'] = $token;
 
-                if ($validator->fails()){
-                    $errors = $validator->messages();
-                    $error = $errors->first();
-                    return View::make('signin.change_password', array('error'=>$error));
-                } else {
-                    $payload = (object) array('controller'=> 'UserController', 'action'=> 'changepasswordtoken', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
+            $rules = array(
+                'token'                 => 'required',
+                'oldpassword'           => 'required|min:5',
+                'newpassword'           => 'required|min:5',
+                'newpassword_confirm'   => 'required|min:5|same:newpassword'
+            );
 
-                    $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
+            $validator = Validator::make($data, $rules);
 
-                    if($output['action']=='success'){
-                        return View::make('signin.change_password', array('msg' => $output['msg']));
-                    } else {
-                        return View::make('signin.change_password', array('error' => $output['msg']));
-                    }
+            // validation error output
+            if ($validator->fails())
 
-                }
-            }
-            return View::make('signin.change_password');
-        } else {
+                return View::make('signin.change_password', array( 'message'=> $validator->messages()->first()));
+
+
+            $payload = (object) array('controller'=> 'UserController', 'action'=> 'changepasswordtoken', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
+
+            $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
+
+
+            return View::make('signin.change_password', $output);
+
+        }
+
+        else {
+            // no token or bearer
             App::abort(404, 'Woops.');
         }
 
