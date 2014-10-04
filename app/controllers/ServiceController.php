@@ -70,8 +70,6 @@ class ServiceController extends BaseController {
 		
 		if ($token)
 			$input['token'] = $token;
-
-		exit(json_encode($input));
 		
 		// Request Foreground Job
 		$response = self::restDispatch ('store', 'ServiceController', $input, self::$postRules);
