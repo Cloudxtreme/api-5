@@ -56,9 +56,11 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::get	('loginstatus',	'Oauth2Controller@status');
 	
 	// Accounts
-	Route::resource	('accounts', 						'AccountController',		array ('except' => array('create', 'edit')));
-	Route::post		('accounts/{id}/services/{token}', 	'ServiceController@store')->where ('token', '[a-z]+');
-	Route::resource	('accounts.services',				'ServiceController',		array ('except' => array('create', 'edit')));
+	Route::get		('accounts/{id}/services/{token}/auth', 			'ServiceController@store')->where ('token', '[a-z]+');
+	Route::post		('accounts/{id}/services/{token}', 					'ServiceController@authurl')->where ('token', '[a-z]+');
+	
+	Route::resource	('accounts', 				'AccountController',	array ('except' => array('create', 'edit')));
+	Route::resource	('accounts.services',		'ServiceController',	array ('except' => array('store', 'create', 'edit')));
 	
 	Route::get	('accounts/{accountId}/alerts', 				'ProxyController@authenticated');
 	Route::get	('accounts/{accountId}/filteroptions',			'ProxyController@authenticated');
