@@ -163,7 +163,6 @@ class ViewController extends BaseController {
     public function changepassword ()
     {
 	    $bearer = Request::header('Authorization');
-//	    $bearer = '24ee80731476c05f3c7ae519297064b16f97ca33';
         $token  = Request::segment(2);
         $data   = Input::all();
 
@@ -256,51 +255,33 @@ class ViewController extends BaseController {
         $invitation_id = (int) Request::segment(2);
         $invitation_token = Request::segment(3);
 
-        // both fields required, validation of those is made in engine
-        if (!$invitation_id || !$invitation_token)
-            App::abort(403, 'Unauthorized action.');
+        $uri_params = array( 'invitation_id' => $invitation_id, 'invitation_token'  => $invitation_token);
 
-        // validation for post data
+        // url params must be set otherwise invitation is not valid
+        if(!$invitation_id || !$invitation_token)
+
+            App::abort(404, 'Woops.');
+
+
+        // validate all required data
         if(Request::isMethod('post')){
-            $data = Input::all();
+            $data = array_merge(Input::all(), $uri_params);
             $rules = array(
-                'email' => 'required|email',
-                'name' => 'required',
-                'firstname' => 'required',
-                'password' => 'required',
-                'password2' => 'required|same:password'
+                'invitation_id'     => 'required|integer',
+                'invitation_token'  => 'required|string',
+                'email'             => 'required|email',
+                'name'              => 'required',
+                'firstname'         => 'required',
+                'password'          => 'required',
+                'password2'         => 'required|same:password'
             );
             $validator = Validator::make($data, $rules);
-            if ($validator->fails()){
-                $data['error'] = $validator->messages()->first();
-//                if(Input::get('password') != Input::get('password2')){
-//                    $data['error'] ='Password fields must match.';
-//                }
-//                if(count(Input::all())<6){
-//                    $data['error'] = 'All fields are required.';
-//                }
+            if ($validator->fails())
 
-                return View::make('signin.register', $data);
-            }
+                return View::make( 'signin.register', array_merge(array( 'message'=> $validator->messages()->first()), Input::all() ));
+
         }
 
-        // validation url parameters
-        if(Request::isMethod('post')){
-            $rules1 = array(
-                'invitation_id' => 'required|integer',
-                'invitation_token' => 'required|string'
-            );
-
-            $data1 = array(
-                'invitation_id' => $invitation_id,
-                'invitation_token' => $invitation_token
-            );
-
-            $validator = Validator::make($data1, $rules1);
-            if ($validator->fails()){
-                App::abort(403, 'Unauthorized action.');
-            }
-        }
 
         $input_data = array(
             'form' => Input::all(),
@@ -308,30 +289,19 @@ class ViewController extends BaseController {
             'invitation_token' => $invitation_token
         );
 
+
         // call engine with input data & invite info
         $payload = (object) array('controller'=> 'UserController', 'action'=> 'register', 'open'=> round(microtime(true), 3), 'payload'=> $input_data);
         $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
 
+
         // output render
-        if( !empty($output['action']) && $output['action']=='success'){
+        if( isset($output['success']) )
             // trigger a notification to admin (for example)
             Event::fire('user.registration', array('msg', 'one more user registered in cloudwalkers'));
-            return View::make('signin.login', $output);
-        }
 
-        if( !empty($output['action']) && $output['action']=='register_form'){
-            return View::make('signin.register', $output);
-        }
 
-        if( !empty($output['action']) && $output['action']=='error'){
-            return View::make('signin.register', $output);
-        }
-
-        if( !empty($output['action']) && $output['action']=='invalid'){
-            App::abort(403, 'Unauthorized action.');
-        }
-
-        App::abort(404, 'Woops.');
+        return View::make('signin.register', array_merge($output, Input::all()));
 
     }
 

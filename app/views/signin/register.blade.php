@@ -2,36 +2,27 @@
 
 @section('content')
 
+@if (!empty ($success))
+
+	<div>
+	    <span><p>{{ $message }}</p></span>
+	</div>
+
+@else
+
 <!-- BEGIN REGISTRATION FORM -->
 <form class="form-vertical register-form" action="" method="post">
 
-    @if ( !empty ($invitation) )
-        <h3>
-            {{ trans('invitation.title') }}
-        </h3>
+    <h3>
+        {{ trans('invitation.title') }}
+    </h3>
 
-        <p>{{ trans('invitation.subtitle', array('url'=>URL::to('login-e'))) }}</p>
-    @else
-
-    @endif
-
-    @if ( !empty ($error) )
+    @if ( !empty ($message) )
         <div class="alert alert-error">
-            <!-- <button class="close" data-dismiss="alert"></button> -->
-            <span><p>{{ $error }}</p></span>
+            <button class="close" data-dismiss="alert"></button>
+            <span><p>{{ $message }}</p></span>
         </div>
-    @else
-
     @endif
-
-	@if ( !empty ($msg) )
-	<div class="alert alert-error">
-		<button class="close" data-dismiss="alert"></button>
-		<span><p>{{ $msg }}</p></span>
-	</div>
-	@else
-
-	@endif
 
     <p>{{ trans('invitation.account.details') }}</p>
     <div class="control-group">
@@ -102,5 +93,7 @@
     </div>
 </form>
 <!-- END REGISTRATION FORM -->
+
+@endif
 
 @stop
