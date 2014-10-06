@@ -268,26 +268,26 @@ class ViewController extends BaseController {
             $data = array_merge(Input::all(), $uri_params);
             $rules = array(
                 'invitation_id'     => 'required|integer',
-                'invitation_token'  => 'required|string',
+                'invitation_token'  => 'required',
                 'email'             => 'required|email',
                 'name'              => 'required',
                 'firstname'         => 'required',
                 'password'          => 'required',
                 'password2'         => 'required|same:password'
             );
+
             $validator = Validator::make($data, $rules);
+
             if ($validator->fails())
 
                 return View::make( 'signin.register', array_merge(array( 'message'=> $validator->messages()->first()), Input::all() ));
 
+
+
         }
 
 
-        $input_data = array(
-            'form' => Input::all(),
-            'invitation_id' => $invitation_id,
-            'invitation_token' => $invitation_token
-        );
+        $input_data = array_merge($uri_params, Input::all());
 
 
         // call engine with input data & invite info
