@@ -29,12 +29,21 @@ class ServiceController extends BaseController {
 		'id'=> 'required|integer'
 	);
 
+	protected static $authRules = array
+	(
+		'accountid'=> 'required|integer',
+		'token'=> 'required|min:5',
+		'redirect'=> 'required|url'
+	);	
+	
 	protected static $postRules = array
 	(
 		'accountid'=> 'required|integer',
-		'token'=> 'required|min:5'
+		'token'=> 'required|min:5',
+		'redirect'=> 'required|url',
+		'state'=> 'required',
+		'code'=> 'required'
 	);	
-	
 	
 	/**
 	 *	RESTful actions
@@ -56,11 +65,11 @@ class ServiceController extends BaseController {
 	}
 	
 	/**
-	 *	Post Account
+	 *	Authenticate service network
 	 *
 	 *	@return object
 	 */
-	public function store ($accountid = null, $token = null)
+	public function authurl ($accountid = null, $token = null)
 	{
 		// Validation parameters
 		$input = array();
@@ -70,12 +79,34 @@ class ServiceController extends BaseController {
 		
 		if ($token)
 			$input['token'] = $token;
+		
+		// Request Foreground Job
+		$response = self::restDispatch ('authurl', 'ServiceController', $input, self::$authRules);
+		
+			
+		// Or return error
+		return $response;
+	}
+	
+	/**
+	 *	Store service
+	 *	On network redirect - STRICT
+	 *
+	 *	@return object
+	 */
+	public function store ($accountid, $token)
+	{
+		// Validation parameters
+		$input = array();
+		
+		$input['accountid'] = $accountid;	
+		$input['token'] = $token;
 
-		exit(json_encode($input));
 		
 		// Request Foreground Job
 		$response = self::restDispatch ('store', 'ServiceController', $input, self::$postRules);
 			
+
 		return $response;
 	}	
 	
