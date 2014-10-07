@@ -18,7 +18,7 @@ class ViewController extends BaseController {
 	public function login ()
 	{
 		// Are e-mail and password set
-		if(Input::get ('email') && Input::get ('password'))
+		if(Input::has ('email') && Input::has ('password'))
 		{
 			// Oauth2 request
 			$response = App::make('Oauth2Controller')->login();
@@ -124,10 +124,13 @@ class ViewController extends BaseController {
         $data = Input::all();
 
         // Define default view
-        if(empty($data))
+        if(!Input::has('email'))
 
             return View::make('signin.recover_password');
 
+
+        // @todo replace all with
+        // $response = self::restDispatch ('update', 'AccountController', $input, self::$updateRules);
 
         // Post data actions and validation rules
         $data['url'] = URL::to('/');
@@ -162,6 +165,10 @@ class ViewController extends BaseController {
      */
     public function changepassword ()
     {
+        // @todo we have a filter for bearer app/filters.php :51
+        // @todo replace all with
+        // $response = self::restDispatch ('update', 'AccountController', $input, self::$updateRules);
+
 	    $bearer = Request::header('Authorization');
         $token  = Request::segment(2);
         $data   = Input::all();
