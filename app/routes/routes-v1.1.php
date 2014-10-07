@@ -86,7 +86,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::post	('accounts/{accountId}/urlshortener/shorten',	'ProxyController@authenticated');
 	Route::get	('accounts/{accountId}/urlshortener/{token}',	'ProxyController@authenticated');
 	Route::put	('accounts/{accountId}/urlshortener/{token}',	'ProxyController@authenticated');
-	Route::post	('accounts/{accountId}/users',					'ProxyController@authenticated');
+	Route::post	('accounts/{accountId}/users',					'AccountController@invite');
 	Route::get	('accounts/{accountId}/users/{userId}',			'ProxyController@authenticated');
 	Route::put	('accounts/{accountId}/users/{userId}',			'ProxyController@authenticated');
 	Route::patch('accounts/{accountId}/users/{userId}',			'ProxyController@authenticated');
