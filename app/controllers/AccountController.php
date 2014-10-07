@@ -142,8 +142,6 @@ class AccountController extends BaseController {
 	 */
 	public function invite ($id)
 	{
-        return Response::json('fuck', 300);
-
         // get json data
         $data = json_decode(Input::getContent());
 
