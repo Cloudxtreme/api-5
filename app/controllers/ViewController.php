@@ -152,7 +152,7 @@ class ViewController extends BaseController {
 
         $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
 
-
+        // make view
         return View::make('signin.recover_password', $output);
 
     }
@@ -292,6 +292,7 @@ class ViewController extends BaseController {
 
         // call engine with input data & invite info
         $payload = (object) array('controller'=> 'UserController', 'action'=> 'register', 'open'=> round(microtime(true), 3), 'payload'=> $input_data);
+
         $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
 
 
