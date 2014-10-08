@@ -26,7 +26,7 @@ Route::any ('oauth2-e/{path?}',     'Oauth2Controller@e_dispatch')->where ('path
 /**
  *  Invitations && User info
  */
-Route::any ('invitation/{path?}',       'ViewController@registeruser')->where ('path', '.+');
+Route::get ('invitation/{path?}',       'ViewController@registeruser')->where ('path', '.+');
 Route::any ('recoverpassword/{path?}',  'ViewController@recoverpassword')->where ('path', '.+');
 Route::any ('changepassword/{path?}',   'ViewController@changepassword')->where ('path', '.+');
 
@@ -86,7 +86,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::post	('accounts/{accountId}/urlshortener/shorten',	'ProxyController@authenticated');
 	Route::get	('accounts/{accountId}/urlshortener/{token}',	'ProxyController@authenticated');
 	Route::put	('accounts/{accountId}/urlshortener/{token}',	'ProxyController@authenticated');
-	Route::post	('accounts/{accountId}/users',					'AccountController@invite');
+	Route::post	('accounts/{accountId}/users',					'ProxyController@authenticated');
 	Route::get	('accounts/{accountId}/users/{userId}',			'ProxyController@authenticated');
 	Route::put	('accounts/{accountId}/users/{userId}',			'ProxyController@authenticated');
 	Route::patch('accounts/{accountId}/users/{userId}',			'ProxyController@authenticated');

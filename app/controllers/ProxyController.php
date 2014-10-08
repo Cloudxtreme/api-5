@@ -39,5 +39,18 @@ class ProxyController extends BaseController {
 			self::jobdispatch ('apiDispatch', $payload)
 		);
 	}
+	
+	
+	/**
+	  *	Schedule dispatch
+	  *	Call the schedule controller from API.
+	  */
+	 public function schedule()
+	 {
+		 // The job
+		 $jobload = (object) array('controller'=> 'ScheduleController', 'action'=> 'run', 'payload'=> null);
+
+		 return self::jobdispatch('controllerDispatch', $jobload);
+	 }
 
 }

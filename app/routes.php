@@ -11,6 +11,14 @@ use Neuron\MapperFactory;
 include 'routes/routes-v1.php';
 include 'routes/routes-v1.1.php';
 
+
+/**
+ *	Internal endpoints
+ */
+// Dispatch entry
+Route::get ('schedule', 'ProxyController@schedule');
+
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -21,6 +29,8 @@ include 'routes/routes-v1.1.php';
 | and give it the Closure to execute when that URI is requested.
 |
 */
+
+
 
 Route::get ('loginstatus', function ()
 {
@@ -36,10 +46,7 @@ Route::any('404/{path?}', 'LoginController@error404')->where ('path', '.+');
 Route::get ('authenticate/{path?}', 'NeuronProxyController@guest')->where ('path', '.+');
 //Route::get ('invitation/{path?}', array('before'=>'auth','uses'=>'LoginController@register'))->where ('path', '.+');
 
-Route::any('oauth2/{path?}', 'Oauth2Controller@dispatch')->where ('path', '.+');
-
-// Dispatch entry
-Route::get ('schedule', 'HomeController@schedule');
+Route::any('oauth2/{path?}', 'Oauth2Controller@dispatch')->where ('path', '.+')
 
 Route::get('local/accounts/{accountId}/contacts/{contactId}', 'ContactController@get');
 
