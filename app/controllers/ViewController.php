@@ -12,11 +12,14 @@ class ViewController extends BaseController {
 	}
 
 	/**
-	 *	Login View
+	 *	Login View (standard and mobile)
 	 *	Show login fields and handle action
 	 */
 	public function login ()
 	{
+        // choose view (standard or mobile)
+        $view = (Input::get ('view') == 'mobile')? 'mobile.login' : 'signin.login';
+
 		// Are e-mail and password set
 		if(Input::has ('email') && Input::has ('password'))
 		{
@@ -29,38 +32,12 @@ class ViewController extends BaseController {
 				App::abort(303, $response->redirect);
 
 			// Else rebuild login
-			return View::make('signin.login', array('error'=> array($response->error)));
+			return View::make($view, array('error'=> array($response->error)));
 
 		}
 
 		// Default view
-		return View::make('signin.login', Input::all());
-	}
-
-	/**
-	 *	Mobile Login View
-	 *	Show login fields and handle action
-	 */
-	public function mlogin ()
-	{
-		// Are e-mail and password set
-		if(Input::get ('email') && Input::get ('password'))
-		{
-			// Oauth2 request
-			$response = App::make('Oauth2Controller')->login();
-
-			// If successful
-			if (isset ($response->redirect))
-
-				App::abort(303, $response->redirect);
-
-			// Else rebuild login
-			return View::make('mobile.login_form', array('error'=> array($response->error)));
-
-		}
-
-		// Default view
-		return View::make('mobile.login_form', Input::all());
+		return View::make($view, Input::all());
 	}
 
 	/**
