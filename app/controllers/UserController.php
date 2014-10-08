@@ -37,9 +37,9 @@ class UserController extends BaseController {
 
     }
 
-    public function show($id1, $id2){
+    public function show($id, $userid){
 
-        return $id1 . ' - ' . $id2;
+        return $id . ' - ' . $userid;
     }
 
 
