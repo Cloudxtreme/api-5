@@ -22,16 +22,8 @@ include 'routes/routes-v1.1.php';
 |
 */
 
-Route::get ('loginstatus', function ()
-{
-	\Neuron\Session::getInstance ()->connect ();
-	$login = \Neuron\Session::getInstance ()->isLogin ();
-	return Response::json (array ('login' => $login));
-});
-
 Route::any('login/{path?}', 'LoginController@login')->where ('path', '.+');
 Route::any('logout/{path?}', 'LoginController@logout')->where ('path', '.+');
-Route::any('404/{path?}', 'LoginController@error404')->where ('path', '.+');
 
 Route::get ('authenticate/{path?}', 'NeuronProxyController@guest')->where ('path', '.+');
 //Route::get ('invitation/{path?}', array('before'=>'auth','uses'=>'LoginController@register'))->where ('path', '.+');
@@ -52,12 +44,6 @@ Route::any('docs/{version?}', function($version=null) {
     }
 });
 
-//Route::get('/', function()
-//{
-////    return Redirect::to ('https://superadmin.cloudwalkers.be/docs/api/');
-//    return App::make('ApiDocsController')->index('1.0');
-//});
-
 Route::get ('docs{path?}', function ($path = "")
 {
     return Redirect::to ('https://superadmin.cloudwalkers.be/docs/api/' . str_replace (" ", "+", $path));
@@ -67,8 +53,3 @@ Route::get ('docs{path?}', function ($path = "")
 
 // The All Catching One
 Route::match (array ('GET', 'POST', 'PATCH', 'PUT', 'DELETE'), '{path?}', 'NeuronProxyController@authenticated')->where ('path', '.+')->before (array ('before' => 'oauth2'));
-
-Route::any('{all}', function($uri)
-{
-    return 'yeah, right!';
-})->where('all', '.*');

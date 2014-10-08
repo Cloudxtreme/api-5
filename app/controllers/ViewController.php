@@ -303,12 +303,6 @@ class ViewController extends BaseController {
         $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
 
 
-        // output render
-        if( isset($output['success']) )
-            // trigger a notification to admin (for example)
-            Event::fire('user.registration', array('msg', 'one more user registered in cloudwalkers'));
-
-
         return View::make('signin.register', array_merge($output, Input::all()));
 
     }
