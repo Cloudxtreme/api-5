@@ -37,7 +37,7 @@ Route::any('logout/{path?}', 'LoginController@logout')->where ('path', '.+');
 Route::get ('authenticate/{path?}', 'NeuronProxyController@guest')->where ('path', '.+');
 //Route::get ('invitation/{path?}', array('before'=>'auth','uses'=>'LoginController@register'))->where ('path', '.+');
 
-Route::any('oauth2/{path?}', 'Oauth2Controller@dispatch')->where ('path', '.+')
+Route::any('oauth2/{path?}', 'Oauth2Controller@dispatch')->where ('path', '.+');
 
 Route::get('local/accounts/{accountId}/contacts/{contactId}', 'ContactController@get');
 
