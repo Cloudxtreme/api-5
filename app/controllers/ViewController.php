@@ -69,7 +69,7 @@ class ViewController extends BaseController {
 	public function registerapp ($response = array())
 	{
 		// Post action
-		if ( Input::get ('name') && Input::has ('redirect'))
+		if ( Input::has ('name') && Input::has ('redirect'))
 
 			$response = json_decode
 			(
