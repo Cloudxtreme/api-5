@@ -12,13 +12,16 @@ class ViewController extends BaseController {
 	}
 
 	/**
-	 *	Login View
+	 *	Login View (standard and mobile)
 	 *	Show login fields and handle action
 	 */
 	public function login ()
 	{
+        // choose view (standard or mobile)
+        $view = (Input::get ('view') == 'mobile')? 'mobile.login' : 'signin.login';
+
 		// Are e-mail and password set
-		if(Input::get ('email') && Input::get ('password'))
+		if(Input::has ('email') && Input::has ('password'))
 		{
 			// Oauth2 request
 			$response = App::make('Oauth2Controller')->login();
@@ -29,38 +32,12 @@ class ViewController extends BaseController {
 				App::abort(303, $response->redirect);
 
 			// Else rebuild login
-			return View::make('signin.login', array('error'=> array($response->error)));
+			return View::make($view, array('error'=> array($response->error)));
 
 		}
 
 		// Default view
-		return View::make('signin.login', Input::all());
-	}
-
-	/**
-	 *	Mobile Login View
-	 *	Show login fields and handle action
-	 */
-	public function mlogin ()
-	{
-		// Are e-mail and password set
-		if(Input::get ('email') && Input::get ('password'))
-		{
-			// Oauth2 request
-			$response = App::make('Oauth2Controller')->login();
-
-			// If successful
-			if (isset ($response->redirect))
-
-				App::abort(303, $response->redirect);
-
-			// Else rebuild login
-			return View::make('mobile.login_form', array('error'=> array($response->error)));
-
-		}
-
-		// Default view
-		return View::make('mobile.login_form', Input::all());
+		return View::make($view, Input::all());
 	}
 
 	/**
@@ -92,7 +69,7 @@ class ViewController extends BaseController {
 	public function registerapp ($response = array())
 	{
 		// Post action
-		if ( Input::get ('name') && Input::has ('redirect'))
+		if ( Input::has ('name') && Input::has ('redirect'))
 
 			$response = json_decode
 			(
@@ -124,10 +101,13 @@ class ViewController extends BaseController {
         $data = Input::all();
 
         // Define default view
-        if(empty($data))
+        if(!Input::has('email'))
 
             return View::make('signin.recover_password');
 
+
+        // @todo replace all with
+        // $response = self::restDispatch ('update', 'AccountController', $input, self::$updateRules);
 
         // Post data actions and validation rules
         $data['url'] = URL::to('/');
@@ -162,6 +142,10 @@ class ViewController extends BaseController {
      */
     public function changepassword ()
     {
+        // @todo we have a filter for bearer app/filters.php :51
+        // @todo replace all with
+        // $response = self::restDispatch ('update', 'AccountController', $input, self::$updateRules);
+
 	    $bearer = Request::header('Authorization');
         $token  = Request::segment(2);
         $data   = Input::all();
@@ -294,12 +278,6 @@ class ViewController extends BaseController {
         $payload = (object) array('controller'=> 'UserController', 'action'=> 'register', 'open'=> round(microtime(true), 3), 'payload'=> $input_data);
 
         $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
-
-
-        // output render
-        if( isset($output['success']) )
-            // trigger a notification to admin (for example)
-            Event::fire('user.registration', array('msg', 'one more user registered in cloudwalkers'));
 
 
         return View::make('signin.register', array_merge($output, Input::all()));

@@ -16,7 +16,6 @@ Route::group(array('before'=> 'auth'), function()
  *	Engine-based Oauth2
  */
 Route::any ('login-e',              'ViewController@login');
-Route::any ('mlogin-e',             'ViewController@mlogin');
 Route::any ('logout-e',             'ViewController@logout');
 Route::any ('oauth2-e/register',    'ViewController@registerapp');
 Route::any ('oauth2-e/revoke',      'ViewController@logout');
@@ -54,52 +53,54 @@ Route::group (array ('prefix' => '1.1'), function ($v)
 Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 {
 	Route::get	('loginstatus',	'Oauth2Controller@status');
-	
+
 	// Accounts
 	Route::get		('accounts/{id}/services/{token}/auth', 			'ServiceController@store')->where ('token', '[a-z]+');
 	Route::post		('accounts/{id}/services/{token}', 					'ServiceController@authurl')->where ('token', '[a-z]+');
-	
-	Route::resource	('accounts', 				'AccountController',	array ('except' => array('create', 'edit')));
-	Route::resource	('accounts.services',		'ServiceController',	array ('except' => array('store', 'create', 'edit')));
-	
-	Route::get	('accounts/{accountId}/alerts', 				'ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/filteroptions',			'ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/licenses', 				'ProxyController@authenticated');
-	Route::post	('accounts/{accountId}/licenses', 				'ProxyController@authenticated');
-	Route::post	('accounts/{accountId}/messages', 				'ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/noteids', 				'ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/notes', 					'ProxyController@authenticated');
-	Route::post	('accounts/{accountId}/notes', 					'ProxyController@authenticated');
-	Route::post	('accounts/{accountId}/read', 					'ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/rolegroups', 			'ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/serviceids', 			'ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/services/available',		'ProxyController@authenticated');
-	Route::post	('accounts/{accountId}/services/{serviceToken}','ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/statisticids/{timeSpan}','ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/statistics', 			'ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/statistics/{timeSpan}', 	'ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/tagids/{tagId}',			'ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/tags',					'ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/triggerids',				'ProxyController@authenticated');
-	Route::post	('accounts/{accountId}/triggers',				'ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/triggers',				'ProxyController@authenticated');
-	Route::post	('accounts/{accountId}/urlshortener/shorten',	'ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/urlshortener/{token}',	'ProxyController@authenticated');
-	Route::put	('accounts/{accountId}/urlshortener/{token}',	'ProxyController@authenticated');
-	Route::post	('accounts/{accountId}/users',					'ProxyController@authenticated');
-	Route::get	('accounts/{accountId}/users/{userId}',			'ProxyController@authenticated');
-	Route::put	('accounts/{accountId}/users/{userId}',			'ProxyController@authenticated');
-	Route::patch('accounts/{accountId}/users/{userId}',			'ProxyController@authenticated');
+
+    Route::resource	('accounts', 				'AccountController',	array ('except' => array('create', 'edit')));
+    Route::resource	('accounts.services',		'ServiceController',	array ('except' => array('store', 'create', 'edit')));
+    Route::resource	('accounts.users',		    'UserController',	    array ('except' => array('create', 'edit')));
+
+    Route::get	('accounts/{accountId}/alerts', 				'ProxyController@authenticated');
+    Route::get	('accounts/{accountId}/filteroptions',			'ProxyController@authenticated');
+    Route::get	('accounts/{accountId}/licenses', 				'ProxyController@authenticated');
+    Route::post	('accounts/{accountId}/licenses', 				'ProxyController@authenticated');
+    Route::post	('accounts/{accountId}/messages', 				'ProxyController@authenticated');
+    Route::get	('accounts/{accountId}/noteids', 				'ProxyController@authenticated');
+    Route::get	('accounts/{accountId}/notes', 					'ProxyController@authenticated');
+    Route::post	('accounts/{accountId}/notes', 					'ProxyController@authenticated');
+    Route::post	('accounts/{accountId}/read', 					'ProxyController@authenticated');
+    Route::get	('accounts/{accountId}/rolegroups', 			'ProxyController@authenticated');
+    Route::get	('accounts/{accountId}/serviceids', 			'ProxyController@authenticated');
+    Route::get	('accounts/{accountId}/services/available',		'ProxyController@authenticated');
+    Route::post	('accounts/{accountId}/services/{serviceToken}','ProxyController@authenticated');
+    Route::get	('accounts/{accountId}/statisticids/{timeSpan}','ProxyController@authenticated');
+    Route::get	('accounts/{accountId}/statistics', 			'ProxyController@authenticated');
+    Route::get	('accounts/{accountId}/statistics/{timeSpan}', 	'ProxyController@authenticated');
+    Route::get	('accounts/{accountId}/tagids/{tagId}',			'ProxyController@authenticated');
+    Route::get	('accounts/{accountId}/tags',					'ProxyController@authenticated');
+    Route::get	('accounts/{accountId}/triggerids',				'ProxyController@authenticated');
+    Route::post	('accounts/{accountId}/triggers',				'ProxyController@authenticated');
+    Route::get	('accounts/{accountId}/triggers',				'ProxyController@authenticated');
+    Route::post	('accounts/{accountId}/urlshortener/shorten',	'ProxyController@authenticated');
+    Route::get	('accounts/{accountId}/urlshortener/{token}',	'ProxyController@authenticated');
+    Route::put	('accounts/{accountId}/urlshortener/{token}',	'ProxyController@authenticated');
+    //Route::get	('accounts/{accountId}/users/{userId}',			'ProxyController@authenticated');
+    //Route::put	('accounts/{accountId}/users/{userId}',			'ProxyController@authenticated');
+    //Route::patch('accounts/{accountId}/users/{userId}',			'ProxyController@authenticated');
 	Route::patch('accounts/{accountId}/validate',				'ProxyController@authenticated');
 
 	// Users
-	Route::get      ('users/{userId}',                  'ProxyController@authenticated');
-	Route::put      ('users/{userId}',                  'ProxyController@authenticated');
+	Route::resource	('services',	'UserController',	array ('except' => array('index', 'create', 'edit', 'store')));
+	
+	//Route::get      ('users/{userId}',                  'ProxyController@authenticated');
+	//Route::put      ('users/{userId}',                  'ProxyController@authenticated');
 	Route::put      ('users/{userId}/password',         'ProxyController@authenticated');
 	Route::get      ('users/{userId}/subscriptions',    'ProxyController@authenticated');
 	Route::delete   ('users/{userId}/subscriptions',    'ProxyController@authenticated');
 	Route::post     ('users/{userId}/subscriptions',    'ProxyController@authenticated');
-	
+
 	// Contacts
 	Route::get      ('accounts/{accountId}/contactids',                             'ProxyController@authenticated');
 	Route::get      ('accounts/{accountId}/contactids/following',                   'ProxyController@authenticated');
@@ -119,10 +120,10 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::get      ('accounts/{accountId}/contacts/{contactId}/tags',              'ProxyController@authenticated');
 	Route::post     ('accounts/{accountId}/contacts/{contactId}/tags',              'ProxyController@authenticated');
 	Route::delete   ('accounts/{accountId}/contacts/{contactId}/tags/{tagId}',      'ProxyController@authenticated');
-	
-	// Services				
+
+	// Services
 	Route::resource	('services',	'ServiceController',	array ('except' => array('index', 'create', 'edit', 'store')));
-	
+
 	// Route::get      ('services/{id}',                       'ProxyController@authenticated');
 	// Route::delete   ('services/{id}',                       'ProxyController@authenticated');
 	// Route::put      ('services/{id}',                       'ProxyController@authenticated');
@@ -130,7 +131,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::get      ('services/{id}/profiles/{profileId}',  'ProxyController@authenticated');
 	Route::put      ('services/{id}/profiles/{profileId}',  'ProxyController@authenticated');
 	Route::post     ('services/{id}/setup',                 'ProxyController@authenticated');
-	
+
 	// Channels
 	Route::get      ('channels',                                'ProxyController@authenticated');
 	Route::get      ('channels/{channelId}',                    'ProxyController@authenticated');
@@ -144,7 +145,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::post     ('channels/{channelId}/read',               'ProxyController@authenticated');
 	Route::get      ('channels/{channelId}/streamids',          'ProxyController@authenticated');
 	Route::get      ('channels/{channelId}/streams',            'ProxyController@authenticated');
-	
+
 	// Streams
 	Route::get  ('streams',                                         'ProxyController@authenticated');
 	Route::get  ('streams/{streamId}',                              'ProxyController@authenticated');
@@ -163,7 +164,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::get  ('streams/{streamId}/reportids',                    'ProxyController@authenticated');
 	Route::get  ('streams/{streamId}/reports',                      'ProxyController@authenticated');
 	Route::get  ('streams/{streamId}/validate',                     'ProxyController@authenticated');
-	
+
 	// Messages
 	Route::post     ('messages',                                            'ProxyController@authenticated');
 	Route::get      ('messages',                                            'NeuronProxyController@getMessauthenticatedages');
@@ -187,10 +188,10 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::get      ('messages/{messageId}/tags',                           'ProxyController@authenticated');
 	Route::post     ('messages/{messageId}/tags',                           'ProxyController@authenticated');
 	Route::delete   ('messages/{messageId}/tags/{tagId}',                   'ProxyController@authenticated');
-	
+
 	// Notifications
 	Route::get  ('notifications', 'ProxyController@authenticated');
-	
+
 	// Notes
 	Route::get      ('notes',                       'ProxyController@authenticated');
 	Route::get      ('notes/{noteId}',              'ProxyController@authenticated');
@@ -198,17 +199,17 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::put      ('notes/{noteId}',              'ProxyController@authenticated');
 	Route::get      ('notes/{noteId}/related',      'ProxyController@authenticated');
 	Route::get      ('notes/{noteId}/relatedids',   'ProxyController@authenticated');
-	
+
 	// Tags
 	Route::get      ('tags',                        'ProxyController@authenticated');
 	Route::get      ('tags/{tagId}',                'ProxyController@authenticated');
 	Route::post     ('tags/{tagId}/tags',           'ProxyController@authenticated');
 	Route::delete   ('tags/{tagId}/tags/{tagId2}',  'ProxyController@authenticated');
-	
+
 	// Triggers
 	Route::put      ('triggers/{triggerId}',        'ProxyController@authenticated');
 	Route::get      ('triggers/{triggerId}',        'ProxyController@authenticated');
-	
+
 	// Campaigns
 	Route::get      ('accounts/{accountId}/campaigns',                  'ProxyController@authenticated');
 	Route::put      ('accounts/{accountId}/campaigns',                  'ProxyController@authenticated');
@@ -216,24 +217,24 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::delete   ('accounts/{accountId}/campaigns/{campaignId}',     'ProxyController@authenticated');
 	Route::get      ('accounts/{accountId}/campaigns/{campaignId}',     'ProxyController@authenticated');
 	Route::put      ('accounts/{accountId}/campaigns/{campaignId}',     'ProxyController@authenticated');
-	
+
 	// Group
 	Route::post     ('accounts/{groupId}/groups',   'ProxyController@authenticated');
 	Route::get      ('groups',                      'ProxyController@authenticated');
 	Route::put      ('groups/{groupId}',            'ProxyController@authenticated');
-	
+
 	// Log
 	Route::post ('log', 'ProxyController@authenticated');
-	
+
 	// Mailer
 	Route::get  ('mailer/bounces',              'ProxyController@authenticated');
 	Route::get  ('mailer/bounces/{bounceId}',   'ProxyController@authenticated');
 	Route::get  ('mailer/emails',               'ProxyController@authenticated');
 	Route::get  ('mailer/emails/{emailId}',     'ProxyController@authenticated');
-	
+
 	// Ping
 	Route::get  ('accounts/{accountId}/ping',   'ProxyController@authenticated');
-	
+
 	// Resellers
 	Route::get  ('reseller/{resellerId}',                       'ProxyController@authenticated');
 	Route::get  ('reseller/{resellerId}/accounts',              'ProxyController@authenticated');

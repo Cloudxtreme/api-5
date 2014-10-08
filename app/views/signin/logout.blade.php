@@ -15,7 +15,6 @@
 
 	@endif
 
-<!--	<h1 class="pull-left">{{ trans('login.login') }}</h1>-->
 	<p> </p>
 	<form class="form-signin pull-right" method="post" action="">
 
