@@ -5,7 +5,7 @@
     <meta content='True' name='HandheldFriendly' />
     <meta name="format-detection" content="telephone=no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-    <title>Cloudwalkers app</title>
+    <title>{{ $title or "Cloudwalkers" }}</title>
     {{ HTML::style('assets/mobile/app/base.css') }}
     {{ HTML::style('assets/mobile/theme/css/style.css') }}
     {{ HTML::style('assets/mobile/theme/css/bootstrap.min.css') }}
