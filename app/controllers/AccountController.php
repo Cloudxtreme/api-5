@@ -135,31 +135,4 @@ class AccountController extends BaseController {
 		return $response;
 	}
 
-	/**
-	 *	Invite to Accounts
-	 *
-	 *	@return boolean
-	 */
-	public function invite ($id)
-	{
-        // get json data
-        $data = json_decode(Input::getContent());
-
-        $url = URL::to('invitation');
-
-        $postRules = array
-        (
-            'email' => 'required|email',
-            'id'    => 'required|integer',
-            'url'   => 'required|url'
-        );
-
-		// Validation parameters
-		$input = array ('id' => $id, 'email' => $data->email, 'url' => $url);
-
-		// Request Foreground Job
-		$response = self::restDispatch ('invite', 'AccountController', $input, $postRules);
-
-		return $response;
-	}
 }
