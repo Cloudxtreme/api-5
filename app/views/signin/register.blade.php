@@ -17,12 +17,14 @@
         {{ trans('invitation.title') }}
     </h3>
 
-    @if ( !empty ($message) )
-        <div class="alert alert-error">
+	@if ( !empty ($messages) )
+	    <div class="alert alert-error">
             <button class="close" data-dismiss="alert"></button>
-            <span><p>{{ $message }}</p></span>
-        </div>
-    @endif
+		@foreach ($messages as $message)
+	        <span><p>{{ $message }}</p></span>
+		@endforeach
+		</div>
+	@endif
 
     <p>{{ trans('invitation.account.details') }}</p>
     <div class="control-group">
