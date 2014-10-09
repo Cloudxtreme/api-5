@@ -7,11 +7,12 @@
 
 if (!class_exists ('InvalidParameterException'))
 {
-	class InvalidParameterException extends Exception {
+	class InvalidParameterException extends Exception
+    {
 
         private $_errors;
 
-        public function __construct($errors = array(), $message="", $code = 0, Exception $previous = null)
+        public function __construct ($message="", $errors = array(), $code = 0, Exception $previous = null)
         {
             parent::__construct($message, $code, $previous);
 

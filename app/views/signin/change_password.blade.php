@@ -16,28 +16,18 @@
 	<h3 class="">{{ trans('change_password.title') }}</h3>
 
 
-	@if ( !empty ($message) )
-	<div class="alert alert-error">
-		<button class="close" data-dismiss="alert"></button>
-		<span><p>{{ $message }}</p></span>
-	</div>
-	@else
-
+	@if ( !empty ($messages) )
+	    <div class="alert alert-error">
+            <button class="close" data-dismiss="alert"></button>
+		@foreach ($messages as $message)
+	        <span><p>{{ $message }}</p></span>
+		@endforeach
+		</div>
 	@endif
 
 
 	<p>{{ trans('change_password.claim') }}</p>
 
-	@if (!isset($auth))
-	<div class="control-group">
-		<div class="controls">
-			<div class="input-icon left">
-				<i class="icon-lock"></i>
-				<input class="m-wrap placeholder-no-fix" type="password" placeholder="{{ trans('change_password.old_password') }}" name="oldpassword" />
-			</div>
-		</div>
-	</div>
-	@endif
 
 	<div class="control-group">
 		<div class="controls">

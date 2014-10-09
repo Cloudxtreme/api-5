@@ -18,8 +18,25 @@ class ViewController extends BaseController {
     protected static $lostPasswordRules = array
     (
         'email' => 'required|email',
-        'ip'    => 'required|ip',
-        'url'   => 'required|url'
+        'ip'    => 'required|ip'
+    );
+
+    protected static $changePasswordRules = array
+    (
+        'token'                 => 'required',
+        'newpassword'           => 'required|min:5',
+        'newpassword_confirm'   => 'required|min:5|same:newpassword'
+    );
+
+    protected static $registerUserRules = array
+    (
+        'invitation_id'     => 'required|integer',
+        'invitation_token'  => 'required',
+        'email'             => 'required|email',
+        'name'              => 'required',
+        'firstname'         => 'required',
+        'password'          => 'required',
+        'password2'         => 'required|same:password'
     );
 
 
@@ -138,18 +155,11 @@ class ViewController extends BaseController {
     /**
      *  Change password process
      *  only accessible with token
-     *
      */
     public function changepassword ()
     {
-
-        // @todo replace all with
-        // $response = self::restDispatch ('update', 'AccountController', $input, self::$updateRules);
-
-        $token  = Request::segment(2);
-
-        // token is required
-        if (!$token)
+        // url token parameter is required
+        if (!Request::segment(2))
 
             App::abort(404, 'Woops.');
 
@@ -159,31 +169,26 @@ class ViewController extends BaseController {
             return View::make('signin.change_password');
 
 
-        $rules = array(
-            'token'                 => 'required',
-            'newpassword'           => 'required|min:5',
-            'newpassword_confirm'   => 'required|min:5|same:newpassword'
-        );
+        // Merge Post data with url token (link received by email)
+        Input::merge (array('token' => Request::segment(2)));
 
-        $validator = Validator::make(Input::all(), $rules);
+        try
+        {
+            $response = self::restDispatch ('changepassword', 'UserController', Input::all(), self::$changePasswordRules);
 
-        // validation error output
-        if ($validator->fails())
+            return View::make('signin.change_password', array('messages'=>$response));
+        }
 
-            return View::make( 'signin.change_password', array( 'message'=> $validator->messages()->first(), 'auth'=>1) );
+        catch (Exception $e)
+        {
+            return View::make('signin.change_password', array('messages'=>$e->getErrors()));
+        }
 
-
-        $payload = (object) array('controller'=> 'UserController', 'action'=> 'changepassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key(Input::all(), $rules), 'user'=> null);
-
-        $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
 
         // redirect to login if invalid bearer
-        if (isset($output['redirect']))
-
-            return Redirect::to($output['redirect']);
-
-
-        return View::make('signin.changepasswordtoken', $output);
+//        if (isset($output['redirect']))
+//
+//            return Redirect::to($output['redirect']);
 
     }
 
@@ -194,50 +199,28 @@ class ViewController extends BaseController {
      */
     public function registeruser ()
     {
-        $invitation_id = (int) Request::segment(2);
-        $invitation_token = Request::segment(3);
 
-        $uri_params = array( 'invitation_id' => $invitation_id, 'invitation_token'  => $invitation_token);
-
-        // url params must be set otherwise invitation is not valid
-        if(!$invitation_id || !$invitation_token)
+        // url parameters must be set otherwise invitation is not valid
+        if(!Request::segment(2) || !Request::segment(3))
 
             App::abort(404, 'Woops.');
 
-
-        // validate all required data
-        if(Request::isMethod('post')){
-            $data = array_merge(Input::all(), $uri_params);
-            $rules = array(
-                'invitation_id'     => 'required|integer',
-                'invitation_token'  => 'required',
-                'email'             => 'required|email',
-                'name'              => 'required',
-                'firstname'         => 'required',
-                'password'          => 'required',
-                'password2'         => 'required|same:password'
-            );
-
-            $validator = Validator::make($data, $rules);
-
-            if ($validator->fails())
-
-                return View::make( 'signin.register', array_merge(array( 'message'=> $validator->messages()->first()), Input::all() ));
+        // Merge Post data with url token (link received by email)
+        Input::merge (array( 'invitation_id' => Request::segment(2), 'invitation_token' => Request::segment(3)));
 
 
+        try
+        {
+            $response = self::restDispatch ('changepassword', 'UserController', Input::all(), self::$registerUserRules);
+
+            return View::make('signin.register', array('messages'=>$response), Input::all());
         }
 
+        catch (Exception $e)
+        {
+            return View::make('signin.register', array('messages'=>$e->getErrors(), Input::all()));
+        }
 
-        $input_data = array_merge($uri_params, Input::all());
-
-
-        // call engine with input data & invite info
-        $payload = (object) array('controller'=> 'UserController', 'action'=> 'register', 'open'=> round(microtime(true), 3), 'payload'=> $input_data);
-
-        $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
-
-
-        return View::make('signin.register', array_merge($output, Input::all()));
 
     }
 
