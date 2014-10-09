@@ -15,12 +15,21 @@
 <form class="form-vertical forget-form" action="" method="post">
     <h3 class="">{{ trans('recover_password.title') }}</h3>
 
-    @if ( !empty ($message) )
-        <div class="alert alert-error">
+	@if ( !empty ($messages) )
+	    <div class="alert alert-error">
             <button class="close" data-dismiss="alert"></button>
-            <span><p>{{ $message }}</p></span>
-        </div>
-    @endif
+		@foreach ($messages as $message)
+	        <span><p>{{ $message }}</p></span>
+		@endforeach
+		</div>
+	@endif
+
+    {{--@if ( isset ($message) )--}}
+        {{--<div class="alert alert-error">--}}
+            {{--<button class="close" data-dismiss="alert"></button>--}}
+            {{--<span><p>{{ $message }}</p></span>--}}
+        {{--</div>--}}
+    {{--@endif--}}
 
 	<p>{{ trans('recover_password.subtitle') }}</p>
 	<div class="control-group">

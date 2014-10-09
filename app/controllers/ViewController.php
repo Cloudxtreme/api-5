@@ -11,6 +11,18 @@ class ViewController extends BaseController {
 
 	}
 
+    /**
+     *	Validation Rules
+     *	Based on Laravel Validation
+     */
+    protected static $lostPasswordRules = array
+    (
+        'email' => 'required|email',
+        'ip'    => 'required|ip',
+        'url'   => 'required|url'
+    );
+
+
 	/**
 	 *	Login View (standard and mobile)
 	 *	Show login fields and handle action
@@ -93,139 +105,85 @@ class ViewController extends BaseController {
 	}
 
     /**
-     *  Recover password proccess
-     *  send email to user with link to change password
+     *	Lost Password Form View and process
+     *	Show lost password form (input email) and handle action
      */
-    public function recoverpassword ()
+    public function lostPassword ()
     {
-        $data = Input::all();
 
         // Define default view
         if(!Input::has('email'))
 
-            return View::make('signin.recover_password');
+            return View::make('signin.lost_password');
 
 
-        // @todo replace all with
-        // $response = self::restDispatch ('update', 'AccountController', $input, self::$updateRules);
+        // Merge Post data with request ip (ip is stored in db)
+        Input::merge (array('ip' => Request::getClientIp()));
 
-        // Post data actions and validation rules
-        $data['url'] = URL::to('/');
-        $data['ip']  = Request::getClientIp();
+        try
+        {
+            $response = self::restDispatch ('lostpassword', 'UserController', Input::all(), self::$lostPasswordRules);
 
-        $rules = array(
-            'email' => 'required|email',
-            'ip'    => 'required|ip',
-            'url'   => 'required|url'
-        );
+            return View::make('signin.lost_password', array('messages'=>$response));
+        }
 
-        // input validation
-        $validator = Validator::make($data, $rules);
+        catch (Exception $e)
+        {
+            return View::make('signin.lost_password', array('messages'=>$e->getErrors()));
+        }
 
-        // validation error output
-        if ($validator->fails())
-
-            return View::make( 'signin.recover_password', array( 'message'=> $validator->messages()->first()) );
-
-
-        $payload = (object) array('controller'=> 'UserController', 'action'=> 'recoverpassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules));
-
-        $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
-
-        // make view
-        return View::make('signin.recover_password', $output);
 
     }
 
     /**
-     *  Change password
+     *  Change password process
+     *  only accessible with token
+     *
      */
     public function changepassword ()
     {
-        // @todo we have a filter for bearer app/filters.php :51
+
         // @todo replace all with
         // $response = self::restDispatch ('update', 'AccountController', $input, self::$updateRules);
 
-	    $bearer = Request::header('Authorization');
         $token  = Request::segment(2);
-        $data   = Input::all();
 
-        // 2 entry points: with bearer (authenticated) or with access_token sent by email
+        // token is required
+        if (!$token)
 
-        if ($bearer)
-        {
-
-            if (empty($data))
-
-                return View::make('signin.change_password', array('auth'=>1));
-
-
-            $rules = array(
-                'newpassword'           => 'required|min:5',
-                'newpassword_confirm'   => 'required|min:5|same:newpassword'
-            );
-
-            $validator = Validator::make($data, $rules);
-
-            // validation error output
-            if ($validator->fails())
-
-                return View::make( 'signin.change_password', array( 'message'=> $validator->messages()->first(), 'auth'=>1) );
-
-
-            $payload = (object) array('controller'=> 'UserController', 'action'=> 'changepassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
-
-            $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
-
-            // redirect to login if invalid bearer
-            if (isset($output['redirect']))
-
-                return Redirect::to($output['redirect']);
-
-
-            return View::make('signin.change_password', array_merge($output, array('auth'=>1)));
-
-
-        }
-
-        elseif ($token) {
-
-            // token used - old password is required
-            if (empty($data))
-
-                return View::make('signin.change_password');
-
-
-            $data['token'] = $token;
-
-            $rules = array(
-                'token'                 => 'required',
-                'oldpassword'           => 'required|min:5',
-                'newpassword'           => 'required|min:5',
-                'newpassword_confirm'   => 'required|min:5|same:newpassword'
-            );
-
-            $validator = Validator::make($data, $rules);
-
-            // validation error output
-            if ($validator->fails())
-
-                return View::make('signin.change_password', array( 'message'=> $validator->messages()->first()));
-
-
-            $payload = (object) array('controller'=> 'UserController', 'action'=> 'changepasswordtoken', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key($data, $rules), 'user'=> null);
-
-            $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
-
-
-            return View::make('signin.change_password', $output);
-
-        }
-
-        else {
-            // no token or bearer
             App::abort(404, 'Woops.');
-        }
+
+
+        if (!Request::isMethod('post'))
+
+            return View::make('signin.change_password');
+
+
+        $rules = array(
+            'token'                 => 'required',
+            'newpassword'           => 'required|min:5',
+            'newpassword_confirm'   => 'required|min:5|same:newpassword'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        // validation error output
+        if ($validator->fails())
+
+            return View::make( 'signin.change_password', array( 'message'=> $validator->messages()->first(), 'auth'=>1) );
+
+
+        $payload = (object) array('controller'=> 'UserController', 'action'=> 'changepassword', 'open'=> round(microtime(true), 3), 'payload'=> array_intersect_key(Input::all(), $rules), 'user'=> null);
+
+        $output = json_decode ( self::jobdispatch ('controllerDispatch', $payload), true);
+
+        // redirect to login if invalid bearer
+        if (isset($output['redirect']))
+
+            return Redirect::to($output['redirect']);
+
+
+        return View::make('signin.changepasswordtoken', $output);
 
     }
 
@@ -267,7 +225,6 @@ class ViewController extends BaseController {
                 return View::make( 'signin.register', array_merge(array( 'message'=> $validator->messages()->first()), Input::all() ));
 
 
-
         }
 
 
@@ -294,16 +251,6 @@ class ViewController extends BaseController {
 		$response = App::make('Oauth2Controller')->revoke();
 		
 		return View::make('signin.logout', (array) $response);
-	}
-
-	/**
-	 *	Lost Password View
-	 *	Show lost pasword options and handle action
-	 */
-	public function lostPassword ()
-	{
-        $data = array();
-		return View::make('signin.lost_password', $data);
 	}
 
 

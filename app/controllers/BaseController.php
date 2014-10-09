@@ -36,7 +36,7 @@ class BaseController extends Controller
 	 * Validate Input
 	 * Returns Laravel Validator object
 	 *
-	 * @return Validator
+	 * @throws Exception
 	 */
 	public static function validate ($input, $rules = array ())
 	{
@@ -51,10 +51,10 @@ class BaseController extends Controller
 		//exit(json_encode($validator->fails()));
 		
 		// Check if the validator failed
-		return $validator->fails()?
-		
-			App::abort(400, $validator->messages()) :
-			$validator;
+        if ($validator->fails())
+
+		    throw new InvalidParameterException ( $validator->messages()->all() );
+
 	}
 	
 	

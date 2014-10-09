@@ -34,46 +34,19 @@ ClassLoader::addDirectories(array(
 
 Log::useFiles(storage_path().'/logs/laravel.log');
 
+
 /*
 |--------------------------------------------------------------------------
-| Application Error Handler
+| Require The Errors File
 |--------------------------------------------------------------------------
 |
-| Here you may handle any errors that occur in your application, including
-| logging them or displaying custom views for specific errors. You may
-| even register several error handlers to handle different types of
-| exceptions. If nothing is returned, the default error view is
-| shown, which includes a detailed stack trace during debug.
+| Next we will load the errors file for the application. This gives us
+| a nice separate location to store our error handling.
 |
 */
 
-App::error(function(Exception $exception, $code)
-{
-	switch ($code)
-	{
-		// 1xx: Information
-		// 2xx: Successful
-		// 3xx: Redirection
-		case 303:
-			return Redirect::to ($exception->getMessage ());
-		// 4xx: Client Error
-		case 403:
-			return Response::view('404', array(), 403);
+require app_path().'/errors.php';
 
-		case 404:
-			return Response::view('404', array(), 404);
-
-		// 5xx: Server Error
-		case 500:
-			// internal server error
-			// custom this on production
-			Log::error($exception);
-//			return Response::view('404', array(), 500);
-
-		default:
-			Log::error($exception);
-	}
-});
 
 /*
 |--------------------------------------------------------------------------

@@ -27,7 +27,7 @@ Route::any ('oauth2-e/{path?}',     'Oauth2Controller@e_dispatch')->where ('path
  */
 Route::get ('invitation/{path?}',       'ViewController@registeruser')->where ('path', '.+');
 Route::any ('recoverpassword/{path?}',  'ViewController@recoverpassword')->where ('path', '.+');
-Route::any ('changepassword/{path?}',   'ViewController@changepassword')->where ('path', '.+');
+Route::any ('lostpassword/{path?}',     'ViewController@lostpassword')->where ('path', '.+');
 
 /**
  *	Guest endpoints
@@ -92,7 +92,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::patch('accounts/{accountId}/validate',				'ProxyController@authenticated');
 
 	// Users
-	Route::resource	('services',	'UserController',	array ('except' => array('index', 'create', 'edit', 'store')));
+	Route::resource	('users',	'UserController',	array ('except' => array('index', 'create', 'edit', 'store')));
 	
 	//Route::get      ('users/{userId}',                  'ProxyController@authenticated');
 	//Route::put      ('users/{userId}',                  'ProxyController@authenticated');
