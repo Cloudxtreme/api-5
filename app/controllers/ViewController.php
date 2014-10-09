@@ -185,11 +185,6 @@ class ViewController extends BaseController {
         }
 
 
-        // redirect to login if invalid bearer
-//        if (isset($output['redirect']))
-//
-//            return Redirect::to($output['redirect']);
-
     }
 
 
