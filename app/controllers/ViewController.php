@@ -15,17 +15,25 @@ class ViewController extends BaseController {
      *	Validation Rules
      *	Based on Laravel Validation
      */
+
     protected static $lostPasswordRules = array
     (
-        'email' => 'required|email',
-        'ip'    => 'required|ip'
+        'email'     => 'required|email',
+        'action'    => '',
+        'ip'        => 'required|ip'
     );
 
     protected static $changePasswordRules = array
     (
         'token'                 => 'required',
         'newpassword'           => 'required|min:5',
-        'newpassword_confirm'   => 'required|min:5|same:newpassword'
+        'newpassword_confirm'   => 'required|same:newpassword'
+    );
+
+    protected static $validateInvite = array
+    (
+        'invitation_id'     => 'required|integer',
+        'invitation_token'  => 'required'
     );
 
     protected static $registerUserRules = array
@@ -35,7 +43,7 @@ class ViewController extends BaseController {
         'email'             => 'required|email',
         'name'              => 'required',
         'firstname'         => 'required',
-        'password'          => 'required',
+        'password'          => 'required|min:5',
         'password2'         => 'required|same:password'
     );
 
@@ -135,13 +143,13 @@ class ViewController extends BaseController {
 
 
         // Merge Post data with request ip (ip is stored in db)
-        Input::merge (array('ip' => Request::getClientIp()));
+        Input::merge (array('ip' => Request::getClientIp(), 'action' => 'changepassword'));
 
         try
         {
             $response = self::restDispatch ('lostpassword', 'UserController', Input::all(), self::$lostPasswordRules);
 
-            return View::make('signin.lost_password', array('messages'=>$response));
+            return View::make('signin.lost_password', get_object_vars(json_decode($response)));
         }
 
         catch (Exception $e)
@@ -176,7 +184,7 @@ class ViewController extends BaseController {
         {
             $response = self::restDispatch ('changepassword', 'UserController', Input::all(), self::$changePasswordRules);
 
-            return View::make('signin.change_password', array('messages'=>$response));
+            return View::make('signin.change_password', get_object_vars(json_decode($response)));
         }
 
         catch (Exception $e)
@@ -206,14 +214,15 @@ class ViewController extends BaseController {
 
         try
         {
-            $response = self::restDispatch ('changepassword', 'UserController', Input::all(), self::$registerUserRules);
+            $rules = (Request::isMethod('post'))? self::$registerUserRules : self::$validateInvite;
+            $response = self::restDispatch ('register', 'UserController', Input::all(), $rules);
 
-            return View::make('signin.register', array('messages'=>$response), Input::all());
+            return View::make('signin.register', array_merge(get_object_vars(json_decode($response)), Input::all()));
         }
 
         catch (Exception $e)
         {
-            return View::make('signin.register', array('messages'=>$e->getErrors(), Input::all()));
+            return View::make('signin.register', array_merge(array('messages'=>$e->getErrors()), Input::all()));
         }
 
 

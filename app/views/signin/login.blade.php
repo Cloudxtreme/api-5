@@ -43,7 +43,7 @@
 </article>
 
 <article>
-    {{ HTML::linkAction('ViewController@recoverpassword', trans('login.forgot.password'), array(), array('class' => 'forgot-link')) }}
+    {{ HTML::linkAction('ViewController@lostpassword', trans('login.forgot.password'), array(), array('class' => 'forgot-link')) }}
 </article>
 
 @stop
