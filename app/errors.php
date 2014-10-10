@@ -40,15 +40,17 @@ if (!class_exists ('InvalidParameterException'))
 
 App::error(function(Exception $exception, $code, $fromConsole)
 {
+    $message = $exception->getMessage();
+
     if (get_class($exception)=='InvalidParameterException') {
 
         $code = $exception->getCode();
 
-        $messages = $exception->getMessage() . ';' . implode(';', $exception->getMessages());
+        $messages = $exception->getMessages();
 
-    } else {
+        if (!empty($messages))
 
-        $messages = $exception->getMessage();
+            $message .= ';' . implode(';', $exception->getMessages());
 
     }
 
@@ -59,11 +61,11 @@ App::error(function(Exception $exception, $code, $fromConsole)
         // 2xx: Successful
         // 3xx: Redirection
         case 303:
-            return Redirect::to ($exception->getMessage ());
+            return Redirect::to ($message);
 
         // 4xx: Client Error
         case 403:
-            exit (json_encode (array('error'=> $exception->getMessage())));
+            exit (json_encode (array('error'=> $message)));
 
         case 404:
             return Response::view('404', array(), 404);
@@ -75,10 +77,10 @@ App::error(function(Exception $exception, $code, $fromConsole)
 
     if ( $fromConsole )
     {
-        return 'Error '.$code.': '.$exception->getMessage()."\n";
+        return 'Error '.$code.': '.$message."\n";
     }
 
-    return json_encode (array ('message'=> $exception->getMessage ()));
+    return json_encode (array ('message'=> $message));
 
 
 });
