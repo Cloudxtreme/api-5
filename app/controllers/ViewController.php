@@ -147,16 +147,15 @@ class ViewController extends BaseController {
 
         try
         {
-            $response = self::restDispatch ('lostpassword', 'UserController', Input::all(), self::$lostPasswordRules);
-
-            return View::make('signin.lost_password', get_object_vars(json_decode($response)));
+            $response = get_object_vars(json_decode(self::restDispatch ('lostpassword', 'UserController', Input::all(), self::$lostPasswordRules)));
         }
 
         catch (Exception $e)
         {
-            return View::make('signin.lost_password', array('messages'=>$e->getErrors()));
+            $response = array('messages'=>$e->getErrors());
         }
 
+        return View::make('signin.lost_password', $response);
 
     }
 
@@ -182,15 +181,15 @@ class ViewController extends BaseController {
 
         try
         {
-            $response = self::restDispatch ('changepassword', 'UserController', Input::all(), self::$changePasswordRules);
-
-            return View::make('signin.change_password', get_object_vars(json_decode($response)));
+            $response = get_object_vars(json_decode(self::restDispatch ('changepassword', 'UserController', Input::all(), self::$changePasswordRules)));
         }
 
         catch (Exception $e)
         {
-            return View::make('signin.change_password', array('messages'=>$e->getErrors()));
+            $response = array('messages'=>$e->getErrors());
         }
+
+        return View::make('signin.change_password', $response);
 
 
     }
@@ -215,15 +214,15 @@ class ViewController extends BaseController {
         try
         {
             $rules = (Request::isMethod('post'))? self::$registerUserRules : self::$validateInvite;
-            $response = self::restDispatch ('register', 'UserController', Input::all(), $rules);
-
-            return View::make('signin.register', array_merge(get_object_vars(json_decode($response)), Input::all()));
+            $response = get_object_vars(json_decode(self::restDispatch ('register', 'UserController', Input::all(), $rules)));
         }
 
         catch (Exception $e)
         {
-            return View::make('signin.register', array_merge(array('messages'=>$e->getErrors()), Input::all()));
+            $response = array('messages'=>$e->getErrors());
         }
+
+        return View::make('signin.register', array_merge($response, Input::all()));
 
 
     }

@@ -36,7 +36,7 @@
 		<div class="controls">
 			<div class="input-icon left">
 				<i class="icon-envelope"></i>
-				<input class="m-wrap placeholder-no-fix" type="email" placeholder="{{ trans('recover_password.email') }}" name="email" />
+				<input class="m-wrap placeholder-no-fix" type="email" placeholder="{{ trans('recover_password.email') }}" name="email" required />
 			</div>
 		</div>
 	</div>

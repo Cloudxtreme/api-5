@@ -21,6 +21,11 @@ if (!class_exists ('InvalidParameterException'))
 
         public function getErrors() { return $this->_errors; }
 
+        public function __toString()
+        {
+            return isset ($this->_errors)? json_encode ($this->_errors) : $this->getMessage ();
+        }
+
     }
 }
 
