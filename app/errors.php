@@ -12,19 +12,14 @@ if (!class_exists ('InvalidParameterException'))
 
         private $_errors;
 
-        public function __construct ($message="", $errors = array(), $code = 600, Exception $previous = null)
+        public function __construct ($message="", $errors = array(), $code = 0, Exception $previous = null)
         {
             parent::__construct($message, $code, $previous);
 
             $this->_errors = $errors;
         }
 
-        public function getErrors() { return $this->_errors; }
-
-        public function __toString()
-        {
-            return isset ($this->_errors)? json_encode ($this->_errors) : $this->getMessage ();
-        }
+        public function getMessages() { return $this->_errors; }
 
     }
 }
@@ -45,14 +40,15 @@ if (!class_exists ('InvalidParameterException'))
 
 App::error(function(Exception $exception, $code, $fromConsole)
 {
+    if (get_class($exception)=='InvalidParameterException') {
 
-    // Custom exceptions
-    switch ($exception->getCode()) {
+        $code = $exception->getCode();
 
-        // 6xx: Custom Exception Error
-        case 600:
-            // class InvalidParameterException - default status code 600
-            return json_encode (array ('message' => $exception->getMessage (), 'messages' => $exception->getErrors()));
+        $messages = $exception->getMessage() . ';' . implode(';', $exception->getMessages());
+
+    } else {
+
+        $messages = $exception->getMessage();
 
     }
 
@@ -63,7 +59,7 @@ App::error(function(Exception $exception, $code, $fromConsole)
         // 2xx: Successful
         // 3xx: Redirection
         case 303:
-            exit (json_encode (array('redirect'=> $exception->getMessage())));
+            return Redirect::to ($exception->getMessage ());
 
         // 4xx: Client Error
         case 403:

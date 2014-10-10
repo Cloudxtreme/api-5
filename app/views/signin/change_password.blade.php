@@ -3,7 +3,7 @@
 @section('content')
 
 
-@if (!empty ($success))
+@if (!empty ($message))
 
 	<div>
 	    <span><p>{{ $message }}</p></span>

@@ -5,11 +5,6 @@
  *	The view controller is used for static pages and login management.
  */
 class ViewController extends BaseController {
-	
-	public function __construct ()
-	{
-
-	}
 
     /**
      *	Validation Rules
@@ -55,7 +50,7 @@ class ViewController extends BaseController {
 	public function login ()
 	{
         // choose view (standard or mobile)
-        $view = (Input::get ('view') == 'mobile')? 'mobile.login' : 'signin.login';
+        $view = (Input::get ('view') == 'mobile')? 'signin.login_mobile' : 'signin.login';
 
 		// Are e-mail and password set
 		if(Input::has ('email') && Input::has ('password'))
@@ -147,10 +142,10 @@ class ViewController extends BaseController {
 
         try
         {
-            $response = get_object_vars(json_decode(self::restDispatch ('lostpassword', 'UserController', Input::all(), self::$lostPasswordRules)));
+            $response = json_decode(self::restDispatch ('lostpassword', 'UserController', Input::all(), self::$lostPasswordRules), true);
         }
 
-        catch (Exception $e)
+        catch (InvalidParameterException $e)
         {
             $response = array('messages'=>$e->getErrors());
         }
@@ -181,10 +176,10 @@ class ViewController extends BaseController {
 
         try
         {
-            $response = get_object_vars(json_decode(self::restDispatch ('changepassword', 'UserController', Input::all(), self::$changePasswordRules)));
+            $response = json_decode(self::restDispatch ('changepassword', 'UserController', Input::all(), self::$changePasswordRules), true);
         }
 
-        catch (Exception $e)
+        catch (InvalidParameterException $e)
         {
             $response = array('messages'=>$e->getErrors());
         }
@@ -214,10 +209,10 @@ class ViewController extends BaseController {
         try
         {
             $rules = (Request::isMethod('post'))? self::$registerUserRules : self::$validateInvite;
-            $response = get_object_vars(json_decode(self::restDispatch ('register', 'UserController', Input::all(), $rules)));
+            $response = json_decode(self::restDispatch ('register', 'UserController', Input::all(), $rules), true);
         }
 
-        catch (Exception $e)
+        catch (InvalidParameterException $e)
         {
             $response = array('messages'=>$e->getErrors());
         }

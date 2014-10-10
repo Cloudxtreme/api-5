@@ -3,7 +3,7 @@
 @section('content')
 
 
-@if (!empty ($success))
+@if (!empty ($message))
 
 	<div>
 	    <span><p>{{ $message }}</p></span>
@@ -23,13 +23,6 @@
 		@endforeach
 		</div>
 	@endif
-
-    {{--@if ( isset ($message) )--}}
-        {{--<div class="alert alert-error">--}}
-            {{--<button class="close" data-dismiss="alert"></button>--}}
-            {{--<span><p>{{ $message }}</p></span>--}}
-        {{--</div>--}}
-    {{--@endif--}}
 
 	<p>{{ trans('recover_password.subtitle') }}</p>
 	<div class="control-group">

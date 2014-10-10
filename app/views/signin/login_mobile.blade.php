@@ -1,4 +1,4 @@
-@extends('layouts.mobile')
+@extends('...layouts.master_mobile')
 
 @section('content')
 
@@ -33,7 +33,7 @@
 </article>
 
 <article>
-{{ HTML::linkAction('ViewController@recoverpassword', trans('login.forgot.password'), array(), array('class' => 'forgot-link')) }}
+{{ HTML::linkAction('ViewController@lostpassword', trans('login.forgot.password'), array(), array('class' => 'forgot-link')) }}
 	{{--<a href="#" class="forgot-link" onclick="var ref = window.open('http://api.cloudwalkers.be/login/lostpassword', '_system');">Forgot password?</a>--}}
 </article>
 
