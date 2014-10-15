@@ -7,19 +7,19 @@
 
 if (!class_exists ('InvalidParameterException'))
 {
-	class InvalidParameterException extends Exception
+    class InvalidParameterException extends Exception
     {
 
         private $_errors;
 
-        public function __construct ($message="", $errors = array(), $code = 0, Exception $previous = null)
+        public function __construct ($message="", $errors = array(), $code = 600, Exception $previous = null)
         {
             parent::__construct($message, $code, $previous);
 
             $this->_errors = $errors;
         }
 
-        public function getMessages() { return $this->_errors; }
+        public function getErrors() { return $this->_errors; }
 
     }
 }
@@ -40,17 +40,14 @@ if (!class_exists ('InvalidParameterException'))
 
 App::error(function(Exception $exception, $code, $fromConsole)
 {
-    $message = $exception->getMessage();
 
-    if (get_class($exception)=='InvalidParameterException') {
+    // Custom exceptions
+    switch ($exception->getCode()) {
 
-        $code = $exception->getCode();
-
-        $messages = $exception->getMessages();
-
-        if (!empty($messages))
-
-            $message .= ';' . implode(';', $exception->getMessages());
+        // 6xx: Custom Exception Error
+        case 600:
+            // class InvalidParameterException - default status code 600
+            return json_encode (array ('message' => $exception->getMessage (), 'messages' => $exception->getErrors()));
 
     }
 
@@ -61,11 +58,11 @@ App::error(function(Exception $exception, $code, $fromConsole)
         // 2xx: Successful
         // 3xx: Redirection
         case 303:
-            return Redirect::to ($message);
+            exit (json_encode (array('redirect'=> $exception->getMessage())));
 
         // 4xx: Client Error
         case 403:
-            exit (json_encode (array('error'=> $message)));
+            exit (json_encode (array('error'=> $exception->getMessage())));
 
         case 404:
             return Response::view('404', array(), 404);
@@ -77,10 +74,10 @@ App::error(function(Exception $exception, $code, $fromConsole)
 
     if ( $fromConsole )
     {
-        return 'Error '.$code.': '.$message."\n";
+        return 'Error '.$code.': '.$exception->getMessage()."\n";
     }
 
-    return json_encode (array ('message'=> $message));
+    return json_encode (array ('message'=> $exception->getMessage ()));
 
 
 });

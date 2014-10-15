@@ -22,8 +22,13 @@ class UserController extends BaseController {
 	 */
 	public function store($id)
 	{
-        // get json data (post validation not needed, done by resource)
         $data = json_decode(Input::getContent());
+
+        // get json data (post validation not needed, done by resource)
+        if (!isset($data->email))
+
+            return Response::json(array('message'=>'email needed!'), 406);
+
 
         $url = URL::to('invitation');
 
@@ -33,7 +38,7 @@ class UserController extends BaseController {
         // Request Foreground Job
         $response = self::restDispatch ('invite', 'AccountController', $input, self::$storeRules);
 
-        return $response;
+        return Response::json(json_decode($response), 200);
 
     }
 

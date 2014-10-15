@@ -217,6 +217,7 @@ class ViewController extends BaseController {
             $response = array('messages'=>$e->getErrors());
         }
 
+
         return View::make('signin.register', array_merge($response, Input::all()));
 
 
