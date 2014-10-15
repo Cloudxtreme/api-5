@@ -125,10 +125,10 @@ class ViewController extends BaseController {
 	}
 
     /**
-     *	Lost Password Form View and process
+     *	Forgot Password Form View and process
      *	Show lost password form (input email) and handle action
      */
-    public function lostPassword ()
+    public function forgotPassword ()
     {
 
         // Define default view
