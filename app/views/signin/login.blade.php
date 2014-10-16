@@ -33,7 +33,7 @@
                     )) }}
 			    </div>
 			    <br>
-			    {{ Form::submit(trans('login.login'), array('class'=>'btn btn-color pull-right')) }}
+			    {{ Form::button(trans('login.login'), array('class'=>'btn btn-color pull-right', 'type' => 'submit')) }}
 
 			    {{ HTML::linkAction('ViewController@forgotpassword', trans('login.forgot.password'), array(), array('class' => 'muted pull-left', 'id' => 'forgotpw')) }}
 
