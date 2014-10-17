@@ -50,7 +50,7 @@ class ViewController extends BaseController {
 	public function login ()
 	{
         // choose view (standard or mobile)
-        $view = (Input::get ('view') == 'mobile')? 'signin.login_mobile' : 'signin.login';
+        // $view = (Input::get ('view') == 'mobile')? 'signin.login_mobile' : 'signin.login';
 
 		// Are e-mail and password set
 		if(Input::has ('email') && Input::has ('password'))
@@ -64,12 +64,12 @@ class ViewController extends BaseController {
 				App::abort(303, $response->redirect);
 
 			// Else rebuild login
-			return View::make($view, array('error'=> array($response->error)));
+			return View::make('signin.login', array('error'=> array($response->error)));
 
 		}
 
 		// Default view
-		return View::make($view, Input::all());
+		return View::make('signin.login', Input::all());
 	}
 
 	/**
@@ -134,7 +134,7 @@ class ViewController extends BaseController {
         // Define default view
         if(!Input::has('email'))
 
-            return View::make('signin.lost_password');
+            return View::make('signin.forgot_password');
 
 
         // Merge Post data with request ip (ip is stored in db)
@@ -150,7 +150,7 @@ class ViewController extends BaseController {
             $response = array('messages'=>$e->getErrors());
         }
 
-        return View::make('signin.lost_password', $response);
+        return View::make('signin.forgot_password', $response);
 
     }
 
@@ -231,8 +231,8 @@ class ViewController extends BaseController {
 	{
 		// Call Oauth
 		$response = App::make('Oauth2Controller')->revoke();
-		
-		return View::make('signin.logout', (array) $response);
+
+		return View::make('signin.login', (array) $response);
 	}
 
 

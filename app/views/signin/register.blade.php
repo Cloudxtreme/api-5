@@ -10,91 +10,110 @@
 
 @else
 
-<!-- BEGIN REGISTRATION FORM -->
-<form class="form-vertical register-form" action="" method="post">
-
-    <h3>
-        {{ trans('invitation.title') }}
-    </h3>
-
-	@if ( !empty ($messages) )
-	    <div class="alert alert-error">
-            <button class="close" data-dismiss="alert"></button>
-		@foreach ($messages as $message)
-	        <span><p>{{ $message }}</p></span>
-		@endforeach
+	<div class="staticmiddle">
+		<div class="staticlogo">
+			{{ HTML::image("assets/img/shield+name.png", "Cloudwalkers") }}
 		</div>
-	@endif
 
-    <p>{{ trans('invitation.account.details') }}</p>
-    <div class="control-group">
-        <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-        <label class="control-label visible-ie8 visible-ie9">{{ trans('invitation.email') }}</label>
-        <div class="controls">
-            <div class="input-icon left">
-                <i class="icon-envelope"></i>
-                <input class="m-wrap placeholder-no-fix" type="text" placeholder="{{ trans('invitation.email') }}" name="email" value="{{ $email or "" }}" readonly />
-            </div>
-        </div>
-    </div>
+		<div class="staticmiddle inside">
+			<div class="whiteframe">
+			@if (!empty ($success))
 
-    <div class="control-group">
-        <label class="control-label visible-ie8 visible-ie9">{{ trans('invitation.name') }}</label>
-        <div class="controls">
-            <div class="input-icon left">
-                <i class="icon-user"></i>
-                <input class="m-wrap placeholder-no-fix" type="text" placeholder="{{ trans('invitation.name') }}" name="name" value="{{ $name or "" }}" required/>
-            </div>
-        </div>
-    </div>
+                <div class="frametitle">
+                    <div class="title">
+                        {{ ($success==1)? trans('invitation.success.1', array('firstname'=> $firstname)) : trans('invitation.success.2', array('firstname'=> $firstname))}}
+                    </div>
+                    {{ ($success == 1)? trans('invitation.success.12', array('account'=> $account)) : trans('invitation.success.22', array('account'=> $account))}}
+                </div>
+                <span class="clearfix"></span>
+                <button type="submit" class="btn btn-color pull-right">Go to login</button>
+                <span class="clearfix"></span>
 
-    <div class="control-group">
-        <label class="control-label visible-ie8 visible-ie9">{{ trans('invitation.first.name') }}</label>
-        <div class="controls">
-            <div class="input-icon left">
-                <i class="icon-user"></i>
-                <input class="m-wrap placeholder-no-fix" type="text" placeholder="{{ trans('invitation.first.name') }}" name="firstname" value="{{ $firstname or "" }}" required/>
-            </div>
-        </div>
-    </div>
+            @else
+				<div class="frametitle">
+					<div class="title">
+						{{ trans('invitation.title') }}
+					</div>
+					<span class="small">{{ trans('invitation.account.details') }}</span>
+				</div>
 
-    <div class="control-group">
-        <label class="control-label visible-ie8 visible-ie9">{{ trans('invitation.password') }}</label>
-        <div class="controls">
-            <div class="input-icon left">
-                <i class="icon-lock"></i>
-                <input class="m-wrap placeholder-no-fix" type="password" id="register_password" placeholder="{{ trans('invitation.password') }}" name="password" required/>
-            </div>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label visible-ie8 visible-ie9">{{ trans('invitation.retype.password') }}</label>
-        <div class="controls">
-            <div class="input-icon left">
-                <i class="icon-ok"></i>
-                <input class="m-wrap placeholder-no-fix" type="password" placeholder="{{ trans('invitation.retype.password') }}" name="password2" required/>
-            </div>
-        </div>
-    </div>
-    <div class="control-group">
-        <div class="controls">
-            <label class="checkbox">
-                <input type="checkbox" name="tnc"/> {{ trans('invitation.terms') }}
-            </label>
-            <div id="register_tnc_error"></div>
-        </div>
-    </div>
-    <div class="form-actions">
-        <a href="{{ URL::to('login-e') }}" id="register-back-btn" type="button" class="btn">
-            <i class="m-icon-swapleft"></i>
-            {{ trans('invitation.to.login') }}
-        </a>
-        <button type="submit" id="register-submit-btn" class="btn green pull-right" name="register" value="1">
-            {{ trans('invitation.signup') }} <i class="m-icon-swapright m-icon-white"></i>
-        </button>
-    </div>
-</form>
-<!-- END REGISTRATION FORM -->
+					{{ Form::open(array(
+						'url' => '#',
+						'method' => 'post',
+		                'accept-charset' => 'UTF-8',
+		                'role' => 'form'))
+		            }}
+
+					    <div class="form-group">
+						    {{ Form::email('email', $email, array(
+		                        'class'         => 'form-control',
+		                        'readonly'      => '',
+		                        'placeholder'   => trans('invitation.email'),
+		                        'required'      => 'required'
+		                    )) }}
+					    </div>
+
+					    <div class="form-group">
+						    {{ Form::text('name', '', array(
+		                        'class'         => 'form-control',
+		                        'placeholder'   => trans('invitation.name'),
+		                        'required'      => 'required'
+		                    )) }}
+					    </div>
+
+					    <div class="form-group">
+						    {{ Form::text('firstname', '', array(
+		                        'class'         => 'form-control',
+		                        'placeholder'   => trans('invitation.first.name'),
+		                        'required'      => 'required'
+		                    )) }}
+					    </div>
+
+					    <div class="form-group">
+						    {{ Form::password('register_password', array(
+		                        'class'         => 'form-control',
+		                        'placeholder'   => trans('invitation.password'),
+		                        'required'      => 'required'
+		                    )) }}
+					    </div>
+
+					    <div class="form-group">
+						    {{ Form::password('password2', array(
+		                        'class'         => 'form-control',
+		                        'placeholder'   => trans('invitation.retype.password'),
+		                        'required'      => 'required'
+		                    )) }}
+					    </div>
+
+					    <div class="checkbox small">
+                            <label>
+                                <input type="checkbox"> {{ trans('invitation.terms') }}
+                            </label>
+                        </div>
+
+						@if ( !empty ($messages) )
+							<div class="noticehider">
+		                        <ul class="notice error dialog form">
+		                            @foreach ($messages as $message)
+		                                    <li>{{ $message }}</li>
+		                            @endforeach
+		                        </ul>
+		                    </div>
+	                    @endif
+
+					    {{ Form::button(trans('change_password.submit'), array('class'=>'btn btn-color pull-right', 'type' => 'submit')) }}
+
+					{{ Form::close() }}
+
+				<span class="clearfix"></span>
+			@endif
+			</div>
+		</div>
+
+		<div id="manuals" class="center">
+			<span class="ion-ios7-cloud-outline"></span>
+			Read our <a href="#">manuals</a></div>
+	</div>
 
 @endif
 

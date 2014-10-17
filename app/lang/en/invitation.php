@@ -13,5 +13,9 @@ return array(
     'terms'                 => 'I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>',
     'to.login'              => 'To login',
     'signup'                => 'Signup',
+    'success.1'             => 'Hi :firstname!',
+    'success.12'            => 'You are now a proud member of :account!',
+    'success.2'             => 'Hi :firstname!',
+    'success.22'            => 'You are already a proud member of :account!',
 
 );

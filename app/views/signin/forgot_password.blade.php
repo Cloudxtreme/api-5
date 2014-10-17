@@ -2,6 +2,15 @@
 
 @section('content')
 
+
+@if (!empty ($message))
+
+	<div>
+	    <span><p>{{ $message }}</p></span>
+	</div>
+
+@else
+
 	<div class="staticmiddle">
 		<div class="staticlogo">
 			{{ HTML::image("assets/img/shield+name.png", "Cloudwalkers") }}
@@ -9,24 +18,11 @@
 
 		<div class="staticmiddle inside">
 			<div class="whiteframe">
-			@if (!empty ($success))
-
 				<div class="frametitle">
 					<div class="title">
-						{{ '$user' }}
+						{{ trans('recover_password.title') }}
 					</div>
-					{{ '$account' }}
-				</div>
-				<span class="clearfix"></span>
-				<button type="submit" class="btn btn-color pull-right">Go to login</button>
-				<span class="clearfix"></span>
-
-            @else
-				<div class="frametitle">
-					<div class="title">
-						{{ trans('change_password.title') }}
-					</div>
-					<span class="small">{{ trans('change_password.claim') }}</span>
+					<span class="small">{{ trans('recover_password.subtitle') }}</span>
 				</div>
 
 					{{ Form::open(array(
@@ -37,17 +33,9 @@
 		            }}
 
 					    <div class="form-group">
-						    {{ Form::password('new_password', array(
+						    {{ Form::email('email', '', array(
 		                        'class'         => 'form-control',
-		                        'placeholder'   => trans('change_password.new_password'),
-		                        'required'      => 'required'
-		                    )) }}
-					    </div>
-
-					    <div class="form-group">
-						    {{ Form::password('newpassword_confirm', array(
-		                        'class'         => 'form-control',
-		                        'placeholder'   => trans('change_password.repeat_password'),
+		                        'placeholder'   => trans('recover_password.email'),
 		                        'required'      => 'required'
 		                    )) }}
 					    </div>
@@ -59,7 +47,7 @@
 		                                    <li>{{ $message }}</li>
 		                            @endforeach
 		                        </ul>
-		                    </div>
+	                        </div>
 	                    @endif
 
 	                    <br>
@@ -69,7 +57,6 @@
 					{{ Form::close() }}
 
 				<span class="clearfix"></span>
-			@endif
 			</div>
 		</div>
 
@@ -78,5 +65,6 @@
 			Read our <a href="#">manuals</a></div>
 	</div>
 
+@endif
 
 @stop
