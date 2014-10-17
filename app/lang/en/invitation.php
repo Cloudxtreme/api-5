@@ -17,5 +17,6 @@ return array(
     'success.12'            => 'You are now a proud member of :account!',
     'success.2'             => 'Hi :firstname!',
     'success.22'            => 'You are already a proud member of :account!',
+    'go.to.login'           => 'Go to login',
 
 );

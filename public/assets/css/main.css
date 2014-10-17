@@ -11,7 +11,9 @@ a, a:hover { color: #2EAFD7; }
 .btn-color{	background-color: #2EAFD7; color: #fff; }
 .btn-color:hover{ color: #fff; }
 .center{ text-align: center; }
-.form-control{ border-radius: 3px; height: 40px;}
+.form-control{ border-radius: 3px; height: 40px; color: #333;}
+.form-control::-webkit-input-placeholder { opacity: .5; }
+.form-control:-moz-placeholder { opacity: .5; }
 .form-group{ margin-bottom: 10px; }
 
 /* Notices */
