@@ -50,7 +50,7 @@ class ViewController extends BaseController {
 	public function login ()
 	{
         // choose view (standard or mobile)
-        // $view = (Input::get ('view') == 'mobile')? 'signin.login_mobile' : 'signin.login';
+        $view = (Input::get ('view') == 'mobile')? 'signin.login_mobile' : 'signin.login';
 
 		// Are e-mail and password set
 		if(Input::has ('email') && Input::has ('password'))
@@ -64,12 +64,12 @@ class ViewController extends BaseController {
 				App::abort(303, $response->redirect);
 
 			// Else rebuild login
-			return View::make('signin.login', array('error'=> array($response->error)));
+			return View::make($view, array('error'=> array($response->error)));
 
 		}
 
 		// Default view
-		return View::make('signin.login', Input::all());
+		return View::make($view, Input::all());
 	}
 
 	/**
@@ -149,6 +149,8 @@ class ViewController extends BaseController {
         {
             $response = array('messages'=>$e->getErrors());
         }
+
+        dd($response);
 
         return View::make('signin.forgot_password', $response);
 
