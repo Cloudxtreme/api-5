@@ -150,8 +150,6 @@ class ViewController extends BaseController {
             $response = array('messages'=>$e->getErrors());
         }
 
-        dd($response);
-
         return View::make('signin.forgot_password', $response);
 
     }
