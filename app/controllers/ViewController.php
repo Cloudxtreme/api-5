@@ -150,7 +150,7 @@ class ViewController extends BaseController {
             $response = array('messages'=>$e->getErrors());
         }
 
-        return View::make('signin.forgot_password', (array)$response);
+        return View::make('signin.forgot_password', (array) $response);
 
     }
 
@@ -190,7 +190,7 @@ class ViewController extends BaseController {
             return View::make('signin.login', $response);
 
 
-        return View::make('signin.change_password', $response);
+        return View::make('signin.change_password', (array) $response);
 
     }
 
@@ -223,7 +223,7 @@ class ViewController extends BaseController {
         }
 
 
-        return View::make('signin.register', array_merge($response, Input::all()));
+        return View::make('signin.register', array_merge((array) $response, Input::all()));
 
 
     }
