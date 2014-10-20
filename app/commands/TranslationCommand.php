@@ -4,6 +4,16 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
+
+/**
+ * Class TranslationCommand
+ *
+ * transform translation files in json files and stores them in folder
+ * /app/storage/translations
+ * run the script in console using:
+ * php artisan command:translation
+ */
+
 class TranslationCommand extends Command {
 
     /**
