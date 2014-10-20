@@ -71,7 +71,7 @@
 
 		<div id="manuals" class="center">
 			<span class="ion-ios7-cloud-outline"></span>
-			{{ trans('login.read') }} {{link_to(Config::get('api.manuals_url'), trans('login.manuals') , $attributes = array(), $secure = true)}}
+			{{ trans('login.read') }} {{link_to(Config::get('api.manuals_url'), trans('login.manuals') , $attributes = array('target'=>'_blank'), $secure = true)}}
 		</div>
 	</div>
 
