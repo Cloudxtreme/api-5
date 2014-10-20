@@ -2,15 +2,6 @@
 
 @section('content')
 
-
-@if (!empty ($message))
-
-	<div>
-	    <span><p>{{ $message }}</p></span>
-	</div>
-
-@else
-
 	<div class="staticmiddle">
 		<div class="staticlogo">
 			{{ HTML::image("assets/img/shield+name.png", "Cloudwalkers") }}
@@ -18,6 +9,24 @@
 
 		<div class="staticmiddle inside">
 			<div class="whiteframe">
+
+            @if(!empty ($success))
+
+                <div class="frametitle">
+                    <div class="title">
+                        {{ trans('recover_password.title') }}
+                    </div>
+                    <div class="noticehider">
+                        <ul class="notice success form">
+                            <li>{{ trans('recover_password.success') }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <span class="clearfix"></span>
+                <a href="{{URL::action('ViewController@login')}}"><button class="btn btn-color pull-right">{{ trans('invitation.go.to.login') }}</button></a>
+                <span class="clearfix"></span>
+
+            @else
 				<div class="frametitle">
 					<div class="title">
 						{{ trans('recover_password.title') }}
@@ -40,6 +49,14 @@
 		                    )) }}
 					    </div>
 
+					    @if (!empty ($message))
+	                        <div class="noticehider">
+	                            <ul class="notice error dialog form">
+	                                <li>{{ $message }}</li>
+	                            </ul>
+	                        </div>
+                        @endif
+
 						@if ( !empty ($messages) )
 							<div class="noticehider">
 		                        <ul class="notice error dialog form">
@@ -57,6 +74,7 @@
 					{{ Form::close() }}
 
 				<span class="clearfix"></span>
+				@endif
 			</div>
 		</div>
 
@@ -64,7 +82,5 @@
 			<span class="ion-ios7-cloud-outline"></span>
 			Read our <a href="#">manuals</a></div>
 	</div>
-
-@endif
 
 @stop

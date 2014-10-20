@@ -10,6 +10,7 @@ return array(
 
     // errors
     'invalid.email'         => 'You should input a valid email!',
+    'success'               => 'We just sent you an email, please check your inbox and follow the instructions!',
 
 
 );

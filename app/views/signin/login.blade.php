@@ -13,7 +13,16 @@
 			<div class="whiteframe">
 				<div class="frametitle">
                     <div class="title">{{ trans('login.login') }}</div>
-                </div>
+
+				@if(!empty ($success))
+	                <div class="noticehider">
+	                    <ul class="notice success form">
+	                        <li>{{ $message }}</li>
+	                    </ul>
+	                </div>
+	            @endif
+
+	            </div>
 
 				{{ Form::open(array(
 					'url' => '#',

@@ -142,7 +142,7 @@ class ViewController extends BaseController {
 
         try
         {
-            $response = json_decode(self::restDispatch ('lostpassword', 'UserController', Input::all(), self::$lostPasswordRules), true);
+            $response = json_decode(self::restDispatch ('forgotpassword', 'UserController', Input::all(), self::$lostPasswordRules), true);
         }
 
         catch (InvalidParameterException $e)
@@ -184,8 +184,13 @@ class ViewController extends BaseController {
             $response = array('messages'=>$e->getErrors());
         }
 
-        return View::make('signin.change_password', $response);
 
+        if (isset($response['success']))
+
+            return View::make('signin.login', $response);
+
+
+        return View::make('signin.change_password', $response);
 
     }
 

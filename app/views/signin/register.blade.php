@@ -20,7 +20,7 @@
                 </div>
 
                 <span class="clearfix"></span>
-                <button type="submit" class="btn btn-color pull-right">{{ trans('invitation.go.to.login') }}</button>
+               <a href="{{URL::action('ViewController@login')}}"><button type="submit" class="btn btn-color pull-right">{{ trans('invitation.go.to.login') }}</button></a>
                 <span class="clearfix"></span>
 
             @elseif(!empty ($success))
@@ -32,7 +32,7 @@
                     {{ ($success == 1)? trans('invitation.success.12', array('account'=> $account)) : trans('invitation.success.22', array('account'=> $account))}}
                 </div>
                 <span class="clearfix"></span>
-                <button type="submit" class="btn btn-color pull-right">{{ trans('invitation.go.to.login') }}</button>
+                <a href="{{URL::action('ViewController@login')}}"><button class="btn btn-color pull-right">{{ trans('invitation.go.to.login') }}</button></a>
                 <span class="clearfix"></span>
 
             @else

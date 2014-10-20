@@ -37,7 +37,7 @@
 		            }}
 
 					    <div class="form-group">
-						    {{ Form::password('new_password', array(
+						    {{ Form::password('newpassword', array(
 		                        'class'         => 'form-control',
 		                        'placeholder'   => trans('change_password.new_password'),
 		                        'required'      => 'required'
