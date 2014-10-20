@@ -13,7 +13,7 @@
  *	PUT/PATCH	/resource/{resource}	update		resource.update
  *	DELETE		/resource/{resource}	destroy		resource.destroy
  */
-class ServiceController extends BaseController {
+class StreamController extends BaseController {
 
 	/**
 	 *	Validation Rules
@@ -29,13 +29,6 @@ class ServiceController extends BaseController {
 		'id'=> 'required|integer'
 	);
 
-	protected static $authRules = array
-	(
-		'accountid'=> 'required|integer',
-		'token'=> 'required|min:5',
-		'redirect'=> 'required|url'
-	);	
-	
 	protected static $postRules = array
 	(
 		'accountid'=> 'required|integer',
@@ -50,7 +43,7 @@ class ServiceController extends BaseController {
 	 */
 	 
 	/**
-	 *	Get Accounts
+	 *	Get Streams
 	 *
 	 *	@return array
 	 */
@@ -59,37 +52,13 @@ class ServiceController extends BaseController {
 		$input = array('id'=> $secondid?: $id);
 		
 		// Request Foreground Job
-		$response = self::restDispatch ('index', 'ServiceController', $input, self::$getRules);
+		$response = self::restDispatch ('index', 'StreamController', $input, self::$getRules);
 		
 		return $response;
 	}
 	
 	/**
-	 *	Authenticate service network
-	 *
-	 *	@return object
-	 */
-	public function authurl ($accountid = null, $token = null)
-	{
-		// Validation parameters
-		$input = array();
-		
-		if ($accountid)
-			$input['accountid'] = $accountid;
-		
-		if ($token)
-			$input['token'] = $token;
-		
-		// Request Foreground Job
-		$response = self::restDispatch ('authurl', 'ServiceController', $input, self::$authRules);
-		
-			
-		// Or return error
-		return $response;
-	}
-	
-	/**
-	 *	Store service
+	 *	Store stream
 	 *	On network redirect - STRICT
 	 *
 	 *	@return object
@@ -104,7 +73,7 @@ class ServiceController extends BaseController {
 
 		
 		// Request Foreground Job
-		$response = self::restDispatch ('store', 'ServiceController', $input, self::$postRules);
+		$response = self::restDispatch ('store', 'StreamController', $input, self::$postRules);
 			
 
 		return $response;
@@ -121,7 +90,7 @@ class ServiceController extends BaseController {
 		$input = array ('id'=> $id);
 		
 		// Request Foreground Job
-		$response = self::restDispatch ('show', 'ServiceController', $input, self::$getRules);
+		$response = self::restDispatch ('show', 'StreamController', $input, self::$getRules);
 			
 		return $response;
 	}
@@ -137,7 +106,7 @@ class ServiceController extends BaseController {
 		$input = array ('id'=> $id);
 	
 		// Request Foreground Job
-		$response = self::restDispatch ('update', 'ServiceController', $input, self::$updateRules);
+		$response = self::restDispatch ('update', 'StreamController', $input, self::$updateRules);
 		
 		return $response;
 	}
@@ -153,7 +122,7 @@ class ServiceController extends BaseController {
 		$input = array ('id'=> $id);
 	
 		// Request Foreground Job
-		$response = self::restDispatch ('destroy', 'ServiceController', $input, self::$getRules);
+		$response = self::restDispatch ('destroy', 'StreamController', $input, self::$getRules);
 		
 		return $response;
 	}

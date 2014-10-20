@@ -147,8 +147,10 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::get      ('channels/{channelId}/streams',            'ProxyController@authenticated');
 
 	// Streams
-	Route::get  ('streams',                                         'ProxyController@authenticated');
-	Route::get  ('streams/{streamId}',                              'ProxyController@authenticated');
+	Route::resource	('streams',	'StreamController',	array ('except' => array('index', 'create', 'edit', 'store')));
+	
+	// Route::get  ('streams',                                         'ProxyController@authenticated');
+	// Route::get  ('streams/{streamId}',                              'ProxyController@authenticated');
 	Route::get  ('streams/{streamId}/actions',                      'ProxyController@authenticated');
 	Route::get  ('streams/{streamId}/besttimetopost',               'ProxyController@authenticated');
 	Route::get  ('streams/{streamId}/contacts/uniqueid/{uniqueid}', 'ProxyController@authenticated');
