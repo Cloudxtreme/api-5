@@ -51,7 +51,7 @@
 		            }}
 
 					    <div class="form-group">
-						    {{ Form::email('email', $email, array(
+						    {{ Form::email('email', (isset($email))?$email:'', array(
 		                        'class'         => 'form-control',
 		                        'readonly'      => '',
 		                        'placeholder'   => trans('invitation.email'),
