@@ -5,6 +5,17 @@ h1,h2,h3,h4,h5,h6 { font-weight: 300; }
 h1 { font-size: 44px; }
 a, a:hover { color: #2EAFD7; }
 
+
+/* Mobile style */
+.mobile { background: #fff; }
+.mobile .staticpage .staticlogo { margin-top: 70px;}
+.mobile .staticpage h1,
+.mobile .staticpage .frametitle .title { display: none;}
+.mobile .staticpage .whiteframe { border-bottom: none; margin: 10px auto 30px; }
+.mobile .staticpage .btn-lg { margin-bottom: 20px; width: 100%; font-size: 16px; }
+.mobile .staticpage #forgotpw { margin: 0px; }
+
+
 /* Global */
 .title{	font-size: 25px; }
 .btn{ border-radius: 2px; }
@@ -15,6 +26,7 @@ a, a:hover { color: #2EAFD7; }
 .form-control::-webkit-input-placeholder { opacity: .5; }
 .form-control:-moz-placeholder { opacity: .5; }
 .form-group{ margin-bottom: 10px; }
+
 
 /* Notices */
 .notice{
@@ -84,6 +96,7 @@ a, a:hover { color: #2EAFD7; }
 .notice.success{ border-color: #72d572; color: #72d572;}
 .notice.success:before{ border-bottom-color: #72d572; }
 
+
 /* Frames */
 .whiteframe { 
 	background: #ffffff; 
@@ -95,6 +108,7 @@ a, a:hover { color: #2EAFD7; }
 .whiteframe .frametitle{
 	margin-bottom: 20px;
 }
+
 
 /* Static page specifics */
 .staticpage{
@@ -158,4 +172,3 @@ a, a:hover { color: #2EAFD7; }
 	position: relative;
 	top: 2px;
 }
-

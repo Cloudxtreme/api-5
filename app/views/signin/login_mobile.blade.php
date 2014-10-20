@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.master_mobile')
 
 @section('content')
 
@@ -59,9 +59,9 @@
 
 		            <br>
 
-				    {{ Form::button(trans('login.login'), array('class'=>'btn btn-color pull-right', 'type' => 'submit')) }}
+				    {{ Form::button(trans('login.login'), array('class'=>'btn btn-color btn-lg', 'type' => 'submit')) }}
 
-				    {{ HTML::linkAction('ViewController@forgotpassword', trans('login.forgot.password'), array(), array('class' => 'muted pull-left', 'id' => 'forgotpw')) }}
+                    <div id="forgotpw" class="muted center" onclick="var ref = window.open('{{URL::action('ViewController@forgotpassword')}}', '_system');">{{trans('login.forgot.password')}}</div>
 
 				{{ Form::close() }}
 

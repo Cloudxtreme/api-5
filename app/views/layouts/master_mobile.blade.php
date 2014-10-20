@@ -11,7 +11,7 @@
         {{ HTML::style('assets/fonts/roboto.css') }}
 	</head>
 
-	<body>
+	<body class="mobile">
 		<div class="staticpage">
 
 	        @yield('content')
