@@ -181,6 +181,7 @@ class ViewController extends BaseController {
 
         catch (InvalidParameterException $e)
         {
+            dd($e);
             $response = array('messages'=>$e->getErrors());
         }
 
