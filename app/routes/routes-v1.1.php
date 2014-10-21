@@ -34,8 +34,22 @@ Route::any ('forgotpassword/{path?}',     'ViewController@forgotpassword')->wher
  */
 Route::group (array ('prefix' => '1.1'), function ($v)
 {
-	Route::get ('version', 'ProxyController@guest');
+
+    Route::get('version', function()
+    {
+        return Response::json(array(
+            'api' => array
+            (
+                'name'          => Config::get('api.name'),
+                'version'       => Config::get('api.current_version'),
+                'environment'   => App::environment(),
+                'status'        => Config::get('api.status'),
+            )
+        ));
+    });
+
 });
+
 
 /**
  *	Authenticated endpoints
