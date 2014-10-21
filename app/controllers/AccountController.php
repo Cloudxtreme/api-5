@@ -67,13 +67,15 @@ class AccountController extends BaseController {
 	public function store ($resellerid = null)
 	{
 		// Validation parameters
-		$input = $resellerid?
-		
-			 array ('resellerid'=> $resellerid) :
-			 array ();
+//		$input = $resellerid?
+//
+//			 array ('resellerid'=> $resellerid) :
+//			 array ();
+
+        Input::merge((array)json_decode(Input::getContent()));
 		
 		// Request Foreground Job
-		$response = self::restDispatch ('store', 'AccountController', $input, self::$postRules);
+		$response = self::restDispatch ('store', 'AccountController', Input::all(), self::$postRules);
 			
 		return $response;
 		
@@ -90,7 +92,7 @@ class AccountController extends BaseController {
 	{
 		// Validation parameters
 		$input = array ('id'=> $id);
-		
+
 		// Request Foreground Job
 		$response = self::restDispatch ('show', 'AccountController', $input, self::$getRules);
 			
