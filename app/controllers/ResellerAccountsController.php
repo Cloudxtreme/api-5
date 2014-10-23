@@ -1,19 +1,19 @@
 <?php
 
 /**
- *	Reseller Controller
+ *	ResellerAccounts Nested Controller
  *	The reseller controller uses the Laravel RESTful Resource Controller method.
  *
  *	[http://laravel.com/docs/4.2/controllers#restful-resource-controllers]
  *
  *	Following routes are supported
- *	GET			/resource				index		resource.index
- *	POST		/resource				store		resource.store
- *	GET			/resource/{resource}	show		resource.show
- *	PUT/PATCH	/resource/{resource}	update		resource.update
- *	DELETE		/resource/{resource}	destroy		resource.destroy
+ *	GET			/resource/{resource}/resource		                index		resource.index
+ *	POST		/resource/{resource}/resource		                store		resource.store
+ *	GET			/resource/{resource}/resource/{resource}            show		resource.show
+ *	PUT/PATCH	/resource/{resource}/resource/{resource}	        update		resource.update
+ *	DELETE		/resource/{resource}/resource/{resource}	        destroy		resource.destroy
  */
-class ResellerController extends BaseController {
+class ResellerAccountsController extends BaseController {
 
 	/**
 	 *	Validation Rules
@@ -21,7 +21,7 @@ class ResellerController extends BaseController {
 	 */
 	protected static $getRules = array
 	(
-		'id'=> 'required|integer'
+		'resellerid'=> 'required|integer'
 	);
 	
 	protected static $updateRules = array
@@ -47,10 +47,15 @@ class ResellerController extends BaseController {
 	 *
 	 *	@return array
 	 */
-	public function index ()
+	public function index ($resellerid)
 	{
-		// Request Foreground Job
-		$response = self::restDispatch ('index', 'ResellerController', array(), array());
+        // Validation parameters
+        $input = array();
+
+        $input['resellerid'] = $resellerid;
+
+        // Request Foreground Job
+		$response = self::restDispatch ('index', 'ResellerAccountsController', $input, self::$getRules);
 		
 		return $response;
 	}
@@ -84,6 +89,7 @@ class ResellerController extends BaseController {
 	 */
 	public function show ($id)
 	{
+        return 'show';
 		// Validation parameters
 		$input = array ('id'=> $id);
 		

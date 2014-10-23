@@ -13,6 +13,10 @@ class UserController extends BaseController {
         'url'   => 'required|url'
     );
 
+    public function index()
+    {
+        return 'account users';
+    }
 
 	/**
 	 * Invite to account
