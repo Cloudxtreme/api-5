@@ -2,7 +2,7 @@
 
 return array(
 
-    'title'                 => 'Do You Authorize [this app - <em>please create a appname field in oauth2/register and db</em>]?',
+    'title'                 => 'Do You Authorize Cloudwalkers APP?',
     'yes'                   => 'yes',
     'no'                    => 'no',
 
