@@ -119,7 +119,7 @@ class ResellerPlansController extends BaseController {
         Input::merge((array)json_decode(Input::getContent()));
 
         // Request Foreground Job
-        $response = self::restDispatch ('update', 'ResellerPlansController', Input::all(), self::$postRules);
+        $response = self::restDispatch ('update', 'ResellerPlansController', Input::all(), self::$putRules);
 
         return $response;
 	}
