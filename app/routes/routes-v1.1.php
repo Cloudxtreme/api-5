@@ -257,13 +257,13 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
     Route::resource	('resellers.accounts',	    'ResellerAccountsController',   array ('except' => array('create', 'edit')));
     Route::resource	('resellers.plans',	        'ResellerPlansController',      array ('except' => array('create', 'edit')));
 
-    Route::get  ('reseller/{resellerId}',                       'ProxyController@authenticated');
-	Route::get  ('reseller/{resellerId}/accounts',              'ProxyController@authenticated');
-	Route::post ('reseller/{resellerId}/accounts',              'ProxyController@authenticated');
-	Route::put  ('reseller/{resellerId}/accounts/{accountId}',  'ProxyController@authenticated');
-	Route::get  ('reseller/{resellerId}/plans',                 'ProxyController@authenticated');
-	Route::post ('reseller/{resellerId}/plans',                 'ProxyController@authenticated');
-	Route::put  ('reseller/{resellerId}/plans/{planId}',        'ProxyController@authenticated');
+//    Route::get  ('reseller/{resellerId}',                       'ProxyController@authenticated');
+//	Route::get  ('reseller/{resellerId}/accounts',              'ProxyController@authenticated');
+//	Route::post ('reseller/{resellerId}/accounts',              'ProxyController@authenticated');
+//	Route::put  ('reseller/{resellerId}/accounts/{accountId}',  'ProxyController@authenticated');
+//	Route::get  ('reseller/{resellerId}/plans',                 'ProxyController@authenticated');
+//	Route::post ('reseller/{resellerId}/plans',                 'ProxyController@authenticated');
+//	Route::put  ('reseller/{resellerId}/plans/{planId}',        'ProxyController@authenticated');
 });
 
 // 404 Not found

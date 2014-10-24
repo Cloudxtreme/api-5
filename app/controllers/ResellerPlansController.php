@@ -21,13 +21,31 @@ class ResellerPlansController extends BaseController {
 	 */
 	protected static $getRules = array
 	(
-		'id'=> 'required|integer'
+		'id'    => 'required|integer'
 	);
 	
 	protected static $showRules = array
 	(
-		'id'=> 'required|integer',
+		'id'    => 'required|integer',
         'planid'=> 'required|integer'
+    );
+
+    protected static $postRules = array
+    (
+        'resellerid'    => 'required|integer',
+        'name'          => 'required|min:2',
+        'adminslimit'   => 'required',
+        'userslimit'    => 'required',
+        'serviceslimit' => 'required',
+        'keywordslimit' => 'required',
+        'followinglimit'=> 'required',
+    );
+
+    protected static $putRules = array
+    (
+        'resellerid'    => 'required|integer',
+        'planid'        => 'required|integer',
+        'name'          => 'required|min:2'
     );
 
 	
@@ -58,20 +76,18 @@ class ResellerPlansController extends BaseController {
 	 *
 	 *	@return object
 	 */
-	public function store ($accountid, $token)
+	public function store ($resellerid)
 	{
-		// Validation parameters
-		$input = array();
-		
-		$input['accountid'] = $accountid;	
-		$input['token'] = $token;
+        // Validation parameters
+        Input::merge(array ('resellerid'=> $resellerid));
 
-		
-		// Request Foreground Job
-		$response = self::restDispatch ('store', 'ResellerAccountsController', $input, self::$postRules);
-			
+        Input::merge((array)json_decode(Input::getContent()));
 
-		return $response;
+        // Request Foreground Job
+        $response = self::restDispatch ('store', 'ResellerPlansController', Input::all(), self::$postRules);
+
+        return $response;
+
 	}	
 	
 	/**
@@ -95,15 +111,17 @@ class ResellerPlansController extends BaseController {
 	 *
 	 *	@return object
 	 */
-	public function update ($id)
+	public function update ($resellerid, $planid)
 	{
-		// Validation parameters
-		$input = array ('id'=> $id);
-	
-		// Request Foreground Job
-		$response = self::restDispatch ('update', 'ResellerAccountsController', $input, self::$updateRules);
-		
-		return $response;
+        // Validation parameters
+        Input::merge(array ('resellerid'=> $resellerid, 'planid'=> $planid));
+
+        Input::merge((array)json_decode(Input::getContent()));
+
+        // Request Foreground Job
+        $response = self::restDispatch ('update', 'ResellerPlansController', Input::all(), self::$postRules);
+
+        return $response;
 	}
 
 }

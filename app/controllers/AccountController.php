@@ -27,14 +27,14 @@ class AccountController extends BaseController {
 	protected static $updateRules = array
 	(
 		'id'=> 'required|integer',
-		'resellerid'=> 'integer',
+        'planid'=> 'required',
 		'name'=> 'required'
 	);
 
 	protected static $postRules = array
 	(
 		'name'=> 'required|min:2',
-		'planid'=> 'required|integer'
+		'planid'=> 'required'
 	);
 	
 	
@@ -63,7 +63,7 @@ class AccountController extends BaseController {
 	 *
 	 *	@return object
 	 */
-	public function store ($resellerid = null)
+	public function store ()
 	{
 		// Validation parameters
 //		$input = $resellerid?
@@ -109,7 +109,7 @@ class AccountController extends BaseController {
 	public function update ($id)
 	{
 		// Validation parameters
-        Input::merge(array ('id'=> $id));
+        Input::merge(array ('id'=> (int) $id));
 
         Input::merge((array)json_decode(Input::getContent()));
 

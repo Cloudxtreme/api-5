@@ -32,8 +32,17 @@ class ResellerAccountsController extends BaseController {
 
     protected static $postRules = array
     (
+        'resellerid'=> 'required|integer',
         'name'=> 'required|min:2',
-        'planid'=> 'required|integer'
+        'planid'=> 'required'
+    );
+
+    protected static $updateRules = array
+    (
+        'id'=> 'required|integer',
+        'resellerid'=> 'integer',
+        'name'=> 'required',
+        'planid'=> 'required'
     );
 
 	
@@ -97,13 +106,15 @@ class ResellerAccountsController extends BaseController {
 	 *
 	 *	@return object
 	 */
-	public function update ($id)
+	public function update ($resellerid, $id)
 	{
 		// Validation parameters
-		$input = array ('id'=> $id);
+        Input::merge(array ('id'=> $id, 'resellerid'=> $resellerid));
+
+        Input::merge((array)json_decode(Input::getContent()));
 	
 		// Request Foreground Job
-		$response = self::restDispatch ('update', 'ResellerAccountsController', $input, self::$updateRules);
+		$response = self::restDispatch ('update', 'AccountController', Input::all(), self::$updateRules);
 		
 		return $response;
 	}
