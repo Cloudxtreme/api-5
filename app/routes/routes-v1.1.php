@@ -255,6 +255,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
     Route::resource	('resellers',               'ResellerController',           array ('except' => array('create', 'edit')));
 
     Route::resource	('resellers.accounts',	    'ResellerAccountsController',   array ('except' => array('create', 'edit')));
+    Route::resource	('resellers.plans',	        'ResellerPlansController',      array ('except' => array('create', 'edit')));
 
     Route::get  ('reseller/{resellerId}',                       'ProxyController@authenticated');
 	Route::get  ('reseller/{resellerId}/accounts',              'ProxyController@authenticated');

@@ -1,7 +1,7 @@
 <?php
 
 /**
- *	ResellerAccounts Nested Controller
+ *	ResellerPlans Nested Controller
  *	The reseller controller uses the Laravel RESTful Resource Controller method.
  *
  *	[http://laravel.com/docs/4.2/controllers#restful-resource-controllers]
@@ -13,7 +13,7 @@
  *	PUT/PATCH	/resource/{resource}/resource/{resource}	        update		resource.update
  *	DELETE		/resource/{resource}/resource/{resource}	        destroy		resource.destroy
  */
-class ResellerAccountsController extends BaseController {
+class ResellerPlansController extends BaseController {
 
 	/**
 	 *	Validation Rules
@@ -21,18 +21,12 @@ class ResellerAccountsController extends BaseController {
 	 */
 	protected static $getRules = array
 	(
-		'resellerid'=> 'required|integer'
+		'id'=> 'required|integer'
 	);
 	
 	protected static $showRules = array
 	(
-        'resellerid'=> 'required|integer',
-		'id'=> 'required|integer'
-	);
-
-    protected static $postRules = array
-    (
-        'name'=> 'required|min:2',
+		'id'=> 'required|integer',
         'planid'=> 'required|integer'
     );
 
@@ -42,49 +36,53 @@ class ResellerAccountsController extends BaseController {
 	 */
 	 
 	/**
-	 *	Get Resellers
+	 *	Get Resellers plans
 	 *
 	 *	@return array
 	 */
-	public function index ($resellerid)
+	public function index ($id)
 	{
         // Validation parameters
         $input = array();
 
-        $input['resellerid'] = $resellerid;
+        $input['id'] = $id;
 
         // Request Foreground Job
-		$response = self::restDispatch ('index', 'ResellerAccountsController', $input, self::$getRules);
+		$response = self::restDispatch ('index', 'ResellerPlansController', $input, self::$getRules);
 		
 		return $response;
 	}
 	
 	/**
-	 *	Store Reseller
-	 *	On network redirect - STRICT
+	 *	Store Plan to Reseller
 	 *
 	 *	@return object
 	 */
-	public function store ($accountid)
+	public function store ($accountid, $token)
 	{
 		// Validation parameters
-        Input::merge((array)json_decode(Input::getContent()));
+		$input = array();
+		
+		$input['accountid'] = $accountid;	
+		$input['token'] = $token;
 
-        // Request Foreground Job
-        $response = self::restDispatch ('store', 'AccountController', Input::all(), self::$postRules);
+		
+		// Request Foreground Job
+		$response = self::restDispatch ('store', 'ResellerAccountsController', $input, self::$postRules);
+			
 
-        return $response;
+		return $response;
 	}	
 	
 	/**
-	 *	Get Reseller
+	 *	Get Reseller plan
 	 *
 	 *	@return object
 	 */
 	public function show ($resellerid, $id)
 	{
 		// Validation parameters
-		$input = array ('resellerid'=> $resellerid, 'id'=> $id);
+		$input = array ('id'=> $resellerid, 'planid'=> $id);
 
 		// Request Foreground Job
 		$response = self::restDispatch ('show', 'ResellerAccountsController', $input, self::$showRules);
@@ -93,7 +91,7 @@ class ResellerAccountsController extends BaseController {
 	}
 	
 	/**
-	 *	Update Reseller
+	 *	Update Reseller plan
 	 *
 	 *	@return object
 	 */
