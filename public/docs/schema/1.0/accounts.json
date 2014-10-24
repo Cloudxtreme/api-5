@@ -965,6 +965,8 @@
                 {
                     "method": "GET",
                     "summary": "Validate the account, make sure all streams exist.",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "nickname": "validate",
                     "type": "ValidResult",
                     "parameters": [
