@@ -51,7 +51,7 @@ class ResellerAccountsController extends BaseController {
 	 */
 	 
 	/**
-	 *	Get Resellers
+	 *	Get Reseller accounts
 	 *
 	 *	@return array
 	 */
@@ -69,8 +69,7 @@ class ResellerAccountsController extends BaseController {
 	}
 	
 	/**
-	 *	Store Reseller
-	 *	On network redirect - STRICT
+	 *	Store Reseller account
 	 *
 	 *	@return object
 	 */
@@ -86,7 +85,7 @@ class ResellerAccountsController extends BaseController {
 	}	
 	
 	/**
-	 *	Get Reseller
+	 *	Get Reseller account
 	 *
 	 *	@return object
 	 */
@@ -102,7 +101,7 @@ class ResellerAccountsController extends BaseController {
 	}
 	
 	/**
-	 *	Update Reseller
+	 *	Update Reseller account
 	 *
 	 *	@return object
 	 */

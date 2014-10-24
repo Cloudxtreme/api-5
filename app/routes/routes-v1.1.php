@@ -243,13 +243,13 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::post ('log', 'ProxyController@authenticated');
 
 	// Mailer
-	Route::get  ('mailer/bounces',              'ProxyController@authenticated');
-	Route::get  ('mailer/bounces/{bounceId}',   'ProxyController@authenticated');
-	Route::get  ('mailer/emails',               'ProxyController@authenticated');
-	Route::get  ('mailer/emails/{emailId}',     'ProxyController@authenticated');
+    // Route::get  ('mailer/bounces',              'ProxyController@authenticated');
+    // Route::get  ('mailer/bounces/{bounceId}',   'ProxyController@authenticated');
+    // Route::get  ('mailer/emails',               'ProxyController@authenticated');
+    // Route::get  ('mailer/emails/{emailId}',     'ProxyController@authenticated');
 
 	// Ping - deprecated | new ping will have all updated data no need to call this endpoint
-	Route::get  ('accounts/{accountId}/ping',   'ProxyController@authenticated');
+	// Route::get  ('accounts/{accountId}/ping',   'ProxyController@authenticated'); DEPRECATED
 
 	// Resellers
     Route::resource	('resellers',               'ResellerController',           array ('except' => array('create', 'edit')));
