@@ -222,6 +222,8 @@
                 {
                     "method": "GET",
                     "summary": "Return the proper procedures for the applied filter.",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "nickname": "Procedures",
                     "type": "ProcedureOutput",
                     "parameters": [
@@ -296,6 +298,8 @@
                 {
                     "method": "GET",
                     "summary": "Refresh stream",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "nickname": "Accounts",
                     "type": "Stream",
                     "parameters": [
