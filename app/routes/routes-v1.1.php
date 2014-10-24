@@ -248,7 +248,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::get  ('mailer/emails',               'ProxyController@authenticated');
 	Route::get  ('mailer/emails/{emailId}',     'ProxyController@authenticated');
 
-	// Ping
+	// Ping - deprecated | new ping will have all updated data no need to call this endpoint
 	Route::get  ('accounts/{accountId}/ping',   'ProxyController@authenticated');
 
 	// Resellers

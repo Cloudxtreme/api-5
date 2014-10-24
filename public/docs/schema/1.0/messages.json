@@ -11,6 +11,8 @@
                 {
                     "method": "POST",
                     "summary": "Create a new message",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "nickname": "createMessage",
                     "type": "MessageOutput",
                     "parameters": [

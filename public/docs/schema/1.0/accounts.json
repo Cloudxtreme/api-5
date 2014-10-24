@@ -275,6 +275,8 @@
                 {
                     "method": "POST",
                     "summary": "Set all messages of given account to read.",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "nickname": "read",
                     "type": "SuccessResult",
                     "parameters": [
@@ -608,7 +610,12 @@
                             "description": "Account id"
                         }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/tagids",
+            "operations": [
                 {
                     "method": "GET",
                     "summary": "return tags from the requested id's",
