@@ -236,7 +236,9 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 
 	// Ping
 	Route::get  ('accounts/{accountId}/ping',   'ProxyController@authenticated');
-
+	
+	Route::resource	('resellers.accounts',		'AccountController',	array ('except' => array('create', 'edit')));
+	
 	// Resellers
 	Route::get  ('reseller/{resellerId}',                       'ProxyController@authenticated');
 	Route::get  ('reseller/{resellerId}/accounts',              'ProxyController@authenticated');
