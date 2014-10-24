@@ -222,8 +222,8 @@
                 {
                     "method": "GET",
                     "summary": "Return the proper procedures for the applied filter.",
-                    "notes": "DEPRECATED",
-                    "deprecated": true,
+                    "notes": "DEPRECATED!",
+                    "deprecated": "true",
                     "nickname": "Procedures",
                     "type": "ProcedureOutput",
                     "parameters": [
