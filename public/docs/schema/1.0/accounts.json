@@ -255,6 +255,8 @@
                 {
                     "method": "GET",
                     "summary": "Get account updates",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "nickname": "getPing",
                     "type": "pong",
                     "parameters": [

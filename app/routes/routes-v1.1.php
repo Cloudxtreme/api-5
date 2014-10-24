@@ -76,34 +76,34 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
     Route::resource	('accounts.services',		'ServiceController',	array ('except' => array('store', 'create', 'edit')));
     Route::resource	('accounts.users',		    'UserController',	    array ('except' => array('create', 'edit')));
 
-    Route::get	('accounts/{accountId}/alerts', 				'ProxyController@authenticated');
-    Route::get	('accounts/{accountId}/filteroptions',			'ProxyController@authenticated');
-    Route::get	('accounts/{accountId}/licenses', 				'ProxyController@authenticated');
-    Route::post	('accounts/{accountId}/licenses', 				'ProxyController@authenticated');
-    Route::post	('accounts/{accountId}/messages', 				'ProxyController@authenticated');
-    Route::get	('accounts/{accountId}/noteids', 				'ProxyController@authenticated');
-    Route::get	('accounts/{accountId}/notes', 					'ProxyController@authenticated');
-    Route::post	('accounts/{accountId}/notes', 					'ProxyController@authenticated');
-    Route::post	('accounts/{accountId}/read', 					'ProxyController@authenticated');
-    Route::get	('accounts/{accountId}/rolegroups', 			'ProxyController@authenticated');
-    Route::get	('accounts/{accountId}/serviceids', 			'ProxyController@authenticated');
-    Route::get	('accounts/{accountId}/services/available',		'ProxyController@authenticated');
-    Route::post	('accounts/{accountId}/services/{serviceToken}','ProxyController@authenticated');
-    Route::get	('accounts/{accountId}/statisticids/{timeSpan}','ProxyController@authenticated');
-    Route::get	('accounts/{accountId}/statistics', 			'ProxyController@authenticated');
-    Route::get	('accounts/{accountId}/statistics/{timeSpan}', 	'ProxyController@authenticated');
-    Route::get	('accounts/{accountId}/tagids/{tagId}',			'ProxyController@authenticated');
-    Route::get	('accounts/{accountId}/tags',					'ProxyController@authenticated');
-    Route::get	('accounts/{accountId}/triggerids',				'ProxyController@authenticated');
-    Route::post	('accounts/{accountId}/triggers',				'ProxyController@authenticated');
-    Route::get	('accounts/{accountId}/triggers',				'ProxyController@authenticated');
-    Route::post	('accounts/{accountId}/urlshortener/shorten',	'ProxyController@authenticated');
-    Route::get	('accounts/{accountId}/urlshortener/{token}',	'ProxyController@authenticated');
-    Route::put	('accounts/{accountId}/urlshortener/{token}',	'ProxyController@authenticated');
+    Route::get	('accounts/{accountId}/alerts', 				'AccountController@getAlerts');
+    Route::get	('accounts/{accountId}/filteroptions',			'AccountController@getFilterOptions');
+    Route::get	('accounts/{accountId}/licenses', 				'AccountController@getLicenses');
+    Route::post	('accounts/{accountId}/licenses', 				'AccountController@postLicenses');
+    // Route::post	('accounts/{accountId}/messages', 				'AccountController@postMessages'); DEPRECATED
+    Route::get	('accounts/{accountId}/noteids', 				'AccountController@getNoteids');
+    Route::get	('accounts/{accountId}/notes', 					'AccountController@getNotes');
+    Route::post	('accounts/{accountId}/notes', 					'AccountController@postNotes');
+    // Route::post	('accounts/{accountId}/read', 					'AccountController@authenticated'); DEPRECATED
+    Route::get	('accounts/{accountId}/rolegroups', 			'AccountController@getRolegroups');
+    Route::get	('accounts/{accountId}/serviceids', 			'AccountController@getServiceids');
+    Route::get	('accounts/{accountId}/services/available',		'AccountController@getServicesAvailable');
+    Route::post	('accounts/{accountId}/services/{serviceToken}','AccountController@postServiceToken');
+    Route::get	('accounts/{accountId}/statisticids/{timeSpan}','AccountController@getStatisticidsTimeSpan');
+    Route::get	('accounts/{accountId}/statistics', 			'AccountController@getStatistics');
+    Route::get	('accounts/{accountId}/statistics/{timeSpan}', 	'AccountController@getStatisticsTimeSpan');
+    Route::get	('accounts/{accountId}/tagids/{tagId}',			'AccountController@getTagids');
+    Route::get	('accounts/{accountId}/tags',					'AccountController@getTags');
+    Route::get	('accounts/{accountId}/triggerids',				'AccountController@getTriggerids');
+    Route::post	('accounts/{accountId}/triggers',				'AccountController@postTriggers');
+    Route::get	('accounts/{accountId}/triggers',				'AccountController@getTriggers');
+    Route::post	('accounts/{accountId}/urlshortener/shorten',	'AccountController@postUrlShortener');
+    Route::get	('accounts/{accountId}/urlshortener/{token}',	'AccountController@getUrlShortener');
+    Route::put	('accounts/{accountId}/urlshortener/{token}',	'AccountController@putUrlShortener');
     //Route::get	('accounts/{accountId}/users/{userId}',			'ProxyController@authenticated');
     //Route::put	('accounts/{accountId}/users/{userId}',			'ProxyController@authenticated');
     //Route::patch('accounts/{accountId}/users/{userId}',			'ProxyController@authenticated');
-	Route::patch('accounts/{accountId}/validate',				'ProxyController@authenticated');
+    //Route::patch('accounts/{accountId}/validate',				'ProxyController@authenticated'); DEPRECATED
 
 	// Users
 	Route::resource	('users',	'UserController',	array ('except' => array('index', 'create', 'edit', 'store')));

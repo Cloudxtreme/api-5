@@ -312,6 +312,8 @@
                 {
                     "method": "POST",
                     "summary": "Set all messages of given channel to read.",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "nickname": "read",
                     "type": "SuccessResult",
                     "parameters": [
