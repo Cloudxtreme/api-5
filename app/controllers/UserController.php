@@ -13,6 +13,10 @@ class UserController extends BaseController {
         'url'   => 'required|url'
     );
 
+    public function index()
+    {
+        return 'account users';
+    }
 
 	/**
 	 * Invite to account
@@ -42,9 +46,9 @@ class UserController extends BaseController {
 
     }
 
-    public function show($id, $userid){
+    public function show($id){
 
-        return $id . ' - ' . $userid;
+        return $id ;
     }
 
 

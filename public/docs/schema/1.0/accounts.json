@@ -255,6 +255,8 @@
                 {
                     "method": "GET",
                     "summary": "Get account updates",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "nickname": "getPing",
                     "type": "pong",
                     "parameters": [
@@ -275,6 +277,8 @@
                 {
                     "method": "POST",
                     "summary": "Set all messages of given account to read.",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "nickname": "read",
                     "type": "SuccessResult",
                     "parameters": [
@@ -608,7 +612,12 @@
                             "description": "Account id"
                         }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "path": "/accounts/{accountId}/tagids",
+            "operations": [
                 {
                     "method": "GET",
                     "summary": "return tags from the requested id's",
@@ -958,6 +967,8 @@
                 {
                     "method": "GET",
                     "summary": "Validate the account, make sure all streams exist.",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "nickname": "validate",
                     "type": "ValidResult",
                     "parameters": [

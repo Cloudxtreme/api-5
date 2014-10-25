@@ -172,6 +172,8 @@
                 {
                     "method": "GET",
                     "summary": "List bounces",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "nickname": "Accounts",
                     "type": "Bounce",
                     "notes": "List of all email bounces from this server."
@@ -185,6 +187,8 @@
                     "method": "GET",
                     "summary": "Get bounce details",
                     "nickname": "Accounts",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "type": "Bounce",
                     "parameters": [
                         {
@@ -206,7 +210,8 @@
                     "method": "GET",
                     "summary": "API performance",
                     "nickname": "Accounts",
-                    "notes": "Legacy from the old admin area. Returns few stats."
+                    "notes": "DEPRECATED. Legacy from the old admin area. Returns few stats.",
+                    "deprecated": true
                 }
             ]
         },
@@ -217,6 +222,8 @@
                 {
                     "method": "GET",
                     "summary": "Return the proper procedures for the applied filter.",
+                    "notes": "DEPRECATED!",
+                    "deprecated": "true",
                     "nickname": "Procedures",
                     "type": "ProcedureOutput",
                     "parameters": [
@@ -291,6 +298,8 @@
                 {
                     "method": "GET",
                     "summary": "Refresh stream",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "nickname": "Accounts",
                     "type": "Stream",
                     "parameters": [

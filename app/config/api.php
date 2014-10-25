@@ -4,6 +4,12 @@
 
 return array(
 
+    'name'              => 'cloudwlakers',
+
+    'current_version'   => '1.1',
+
+    'status'            => 'alpha',
+
 	'schemapath' => __DIR__ . '/../schemas/',
 
     // documentation versions available in swagger

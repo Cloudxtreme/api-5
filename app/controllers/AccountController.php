@@ -27,15 +27,14 @@ class AccountController extends BaseController {
 	protected static $updateRules = array
 	(
 		'id'=> 'required|integer',
-		'resellerid'=> '',
-		'name'=> ''
+        'planid'=> 'required',
+		'name'=> 'required'
 	);
 
 	protected static $postRules = array
 	(
 		'name'=> 'required|min:2',
-		'resellerid'=> 'required|integer',
-		'planid'=> 'required|integer'
+		'planid'=> 'required'
 	);
 	
 	
@@ -64,16 +63,18 @@ class AccountController extends BaseController {
 	 *
 	 *	@return object
 	 */
-	public function store ($resellerid = null)
+	public function store ()
 	{
 		// Validation parameters
-		$input = $resellerid?
-		
-			 array ('resellerid'=> $resellerid) :
-			 array ();
+//		$input = $resellerid?
+//
+//			 array ('resellerid'=> $resellerid) :
+//			 array ();
+
+        Input::merge((array)json_decode(Input::getContent()));
 		
 		// Request Foreground Job
-		$response = self::restDispatch ('store', 'AccountController', $input, self::$postRules);
+		$response = self::restDispatch ('store', 'AccountController', Input::all(), self::$postRules);
 			
 		return $response;
 		
@@ -90,7 +91,7 @@ class AccountController extends BaseController {
 	{
 		// Validation parameters
 		$input = array ('id'=> $id);
-		
+
 		// Request Foreground Job
 		$response = self::restDispatch ('show', 'AccountController', $input, self::$getRules);
 			
@@ -108,10 +109,12 @@ class AccountController extends BaseController {
 	public function update ($id)
 	{
 		// Validation parameters
-		$input = array ('id'=> $id);
-	
+        Input::merge(array ('id'=> (int) $id));
+
+        Input::merge((array)json_decode(Input::getContent()));
+
 		// Request Foreground Job
-		$response = self::restDispatch ('update', 'AccountController', $input, self::$updateRules);
+		$response = self::restDispatch ('update', 'AccountController', Input::all(), self::$updateRules);
 		
 		return $response;
 		
@@ -134,5 +137,13 @@ class AccountController extends BaseController {
 		
 		return $response;
 	}
+
+    /**
+     * putUrlShortener
+     */
+    public function putUrlShortener ()
+    {
+        return 'putUrlShortener';
+    }
 
 }
