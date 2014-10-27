@@ -107,7 +107,7 @@ class PlansController extends BaseController {
         Input::merge((array)json_decode(Input::getContent()));
 
         // Request Foreground Job
-        $response = self::restDispatch ('update', 'ResellerPlansController', Input::all(), self::$putRules);
+        $response = self::restDispatch ('update', 'PlansController', Input::all(), self::$putRules);
 
         return $response;
 	}
@@ -124,7 +124,7 @@ class PlansController extends BaseController {
         $input = array ('id'=> $id);
 
         // Request Foreground Job
-        $response = self::restDispatch ('destroy', 'ResellerPlansController', $input, self::$showRules);
+        $response = self::restDispatch ('destroy', 'PlansController', $input, self::$showRules);
 
         return $response;
 	}
