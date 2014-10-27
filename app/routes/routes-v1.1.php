@@ -35,19 +35,6 @@ Route::any ('forgotpassword/{path?}',     'ViewController@forgotpassword')->wher
 Route::group (array ('prefix' => '1.1'), function ($v)
 {
 	
-	 Route::get('bar', function()
-    {
-        global $app;
-        
-        $jobload = (object) array ();
-		 
-		 // Add general data
-		 $jobload->open = round(microtime(true), 3);
-		 $jobload->access_token = Input::get('access_token');
-
-		 return $app->jobserver->request('bar', $jobload);
-    });
-	
     Route::get('version', function()
     {
         return Response::json(array(
