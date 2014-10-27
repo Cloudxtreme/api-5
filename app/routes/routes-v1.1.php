@@ -123,7 +123,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	
 	//Route::get      ('users/{userId}',                  'ProxyController@authenticated');
 	//Route::put      ('users/{userId}',                  'ProxyController@authenticated');
-	Route::put      ('users/{userId}/accounts',         'UserController@accounts');
+	Route::get      ('users/{userId}/accounts',         'UserController@accounts');
 	Route::put      ('users/{userId}/password',         'ProxyController@authenticated');
 	Route::get      ('users/{userId}/subscriptions',    'ProxyController@authenticated');
 	Route::delete   ('users/{userId}/subscriptions',    'ProxyController@authenticated');
