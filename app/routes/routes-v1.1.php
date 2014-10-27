@@ -253,6 +253,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 
 	// Resellers
     Route::resource	('resellers',               'ResellerController',           array ('except' => array('create', 'edit')));
+    Route::resource	('plans',                   'PlansController',              array ('except' => array('create', 'edit')));
 
     Route::resource	('resellers.accounts',	    'ResellerAccountsController',   array ('except' => array('create', 'edit')));
     Route::resource	('resellers.plans',	        'ResellerPlansController',      array ('except' => array('create', 'edit')));

@@ -27,8 +27,8 @@ class AccountController extends BaseController {
 	protected static $updateRules = array
 	(
 		'id'=> 'required|integer',
-        'planid'=> 'required',
-		'name'=> 'required'
+        'name'=> 'required',
+        'planid'=> ''
 	);
 
 	protected static $postRules = array
