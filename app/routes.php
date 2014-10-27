@@ -43,12 +43,6 @@ Route::get('local/accounts/{accountId}/contacts/{contactId}', 'ContactController
 
 
 /////////////////// docs //////////////////////
-// route to documentation and version control
-Route::any('docs/{version?}', function($version=null) {
-    if ($version) {
-        return App::make('ApiDocsController')->index($version);
-    }
-});
 
 Route::get ('docs{path?}', function ($path = "")
 {
