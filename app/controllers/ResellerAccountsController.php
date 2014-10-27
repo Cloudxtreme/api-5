@@ -73,7 +73,7 @@ class ResellerAccountsController extends BaseController {
 	 *
 	 *	@return object
 	 */
-	public function store ($accountid)
+	public function store ()
 	{
 		// Validation parameters
         Input::merge((array)json_decode(Input::getContent()));

@@ -6,6 +6,10 @@ class UserController extends BaseController {
      *	Validation Rules
      *	Based on Laravel Validation
      */
+    protected static $getRules = array
+    (
+        'id'    => 'required|integer'
+    );
     protected static $storeRules = array
     (
         'email' => 'required|email',
@@ -13,10 +17,6 @@ class UserController extends BaseController {
         'url'   => 'required|url'
     );
 
-    public function index()
-    {
-        return 'account users';
-    }
 
 	/**
 	 * Invite to account
@@ -27,12 +27,6 @@ class UserController extends BaseController {
 	public function store($id)
 	{
         $data = json_decode(Input::getContent());
-
-        // get json data (post validation not needed, done by resource)
-        if (!isset($data->email))
-
-            return Response::json(array('message'=>'email needed!'), 406);
-
 
         $url = URL::to('invitation');
 
@@ -46,10 +40,24 @@ class UserController extends BaseController {
 
     }
 
-    public function show($id){
+	/**
+	 * User accounts
+	 *
+     * @param   integer $id
+	 * @return  Response
+	 */
+	public function accounts($id)
+	{
+        // Validation parameters
+        $input = array ('id' => $id);
 
-        return $id ;
+        // Request Foreground Job
+        $response = self::restDispatch ('accounts', 'UserController', $input, self::$getRules);
+
+        return Response::json(json_decode($response), 200);
+
     }
+
 
 
 }
