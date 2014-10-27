@@ -138,12 +138,4 @@ class AccountController extends BaseController {
 		return $response;
 	}
 
-    /**
-     * putUrlShortener
-     */
-    public function putUrlShortener ()
-    {
-        return 'putUrlShortener';
-    }
-
 }
