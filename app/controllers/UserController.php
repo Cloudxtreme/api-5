@@ -36,7 +36,7 @@ class UserController extends BaseController {
         // Request Foreground Job
         $response = self::restDispatch ('invite', 'AccountController', $input, self::$storeRules);
 
-        return Response::json(json_decode($response), 200);
+        return $response;
 
     }
 
