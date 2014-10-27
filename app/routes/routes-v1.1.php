@@ -34,7 +34,20 @@ Route::any ('forgotpassword/{path?}',     'ViewController@forgotpassword')->wher
  */
 Route::group (array ('prefix' => '1.1'), function ($v)
 {
+	
+	 Route::get('bar', function()
+    {
+        global $app;
+        
+        $jobload = (object) array ();
+		 
+		 // Add general data
+		 $jobload->open = round(microtime(true), 3);
+		 $jobload->access_token = Input::get('access_token');
 
+		 return $app->jobserver->request('bar', $jobload);
+    });
+	
     Route::get('version', function()
     {
         return Response::json(array(
@@ -248,14 +261,16 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
     // Route::get  ('mailer/emails',               'ProxyController@authenticated');
     // Route::get  ('mailer/emails/{emailId}',     'ProxyController@authenticated');
 
-	// Ping - deprecated | new ping will have all updated data no need to call this endpoint
-	// Route::get  ('accounts/{accountId}/ping',   'ProxyController@authenticated'); DEPRECATED
-
+	// Ping
+	Route::get  ('/ping',   'ProxyController@authenticated');
+	
+	Route::resource	('resellers.accounts',		'AccountController',	array ('except' => array('create', 'edit')));
+	
 	// Resellers
     Route::resource	('resellers',               'ResellerController',           array ('except' => array('create', 'edit')));
     Route::resource	('plans',                   'PlansController',              array ('except' => array('create', 'edit')));
 
-    Route::resource	('resellers.accounts',	    'ResellerAccountsController',   array ('except' => array('create', 'edit')));
+	// Wrong controller Route::resource	('resellers.accounts',	    'ResellerAccountsController',   array ('except' => array('create', 'edit')));
     Route::resource	('resellers.plans',	        'ResellerPlansController',      array ('except' => array('create', 'edit')));
 
 //    Route::get  ('reseller/{resellerId}',                       'ProxyController@authenticated');
