@@ -33,7 +33,7 @@ class AccountController extends BaseController {
 
 	protected static $postRules = array
 	(	
-		'resellerid'=> 'required|integer'
+		'resellerid'=> 'required|integer',
 		'name'=> 'required|min:2',
 		'planid'=> 'required'
 	);
@@ -72,10 +72,10 @@ class AccountController extends BaseController {
 			array ('resellerid'=> $resellerid) :
 			array ();
 
-        Input::merge((array)json_decode(Input::getContent()));
+        //Input::merge ((array) json_decode (Input::getContent ()));
 		
 		// Request Foreground Job
-		$response = self::restDispatch ('store', 'AccountController', Input::all(), self::$postRules);
+		$response = self::restDispatch ('store', 'AccountController', $input, self::$postRules);
 			
 		return $response;
 		
