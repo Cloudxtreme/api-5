@@ -24,35 +24,6 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-/*
-$env = $app->detectEnvironment(array(
-
-	// "hostname" of the machine/server
-
-	'local' => array(
-		'thijs-home-i7',
-		'daedeloth-N550LF'
-	),
-	
-	'local-koen' => array(
-		'tickee-MBP-15.local'
-	),
-
-    'local-gaby' => array(
-        'Gabriela'
-    ),
-
-    'local-pedro' => array(
-        'psilva',
-	    'ubuntu'
-    ),
-	
-	'development' => array(
-		'vps601.serverpark.be'
-	)
-));
-*/
-
 $env = $app->detectEnvironment(function () {
 
 	// The environment name is a combination of your hostname
@@ -69,8 +40,6 @@ $env = $app->detectEnvironment(function () {
 		case 'thijs-home-i7@/home/daedeloth/Workbench/cloudwalkers-engine':
 		case 'daedeloth-N550LF@/home/daedeloth/Workbench/cloudwalkers-engine':
 		case 'thijs-home-i7@/home/daedeloth/Workbench/cloudwalkers-api':
-		case 'FRM_BEE_11.bee-eng.CORP@C:\xampp\htdocs\cloudwalkers-engine.local':
-		case 'FRM_BEE_11@C:\xampp\htdocs\cloudwalkers-engine.local':
 			return 'local';
 			break;
 
@@ -82,11 +51,6 @@ $env = $app->detectEnvironment(function () {
 		case 'tickee-MBP-15.local@/webroot/cloudwalkers/api':
 			return 'local-koen';
 			break;
-
-        case 'Gabriela@/var/www/cloudwalkers-engine.local/public_html':
-        case 'Gabriela@/var/www/cloudwalkers-api.local/public_html':
-            return 'local-gaby';
-            break;
 
 		case 'newstorage.serverpark.be@/var/www/workers/development':
 		case 'db.cloudwalkers.be@/home/cloudwalkers-development/cloudwalkers':
@@ -102,10 +66,6 @@ $env = $app->detectEnvironment(function () {
 
 		case 'newstorage.serverpark.be@/var/www/html/superadmin.cloudwalkers.be':
 			return 'superadmin';
-			break;
-
-		case 'tickee-MBP-15.local@/webroot/cloudwalkers/engine':
-			return 'dummy';
 			break;
 
 		case 'api.cloudwalkers.be@/var/www/html/api.cloudwalkers.be':

@@ -32,8 +32,13 @@ Route::any ('forgotpassword/{path?}',     'ViewController@forgotpassword')->wher
 /**
  *	Guest endpoints. No OAuth2 required
  */
-Route::group (array('prefix'=> '1.1'), function() {
-    Route::any('version', 'ApiDocsController@apiversion');
+Route::group (array('prefix'=> '1.1'), function()
+{
+    # System
+	Route::any('version', 'ApiDocsController@apiversion');
+ 
+    # Documentation
+	Route::any('docs/{version?}','ApiDocsController@index');
 });
 
 
@@ -52,39 +57,45 @@ Route::group (array('prefix'=> '1.1'), function() {
  */
 Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 {
-    // route to all api versions swagger documentation, if exist
-    Route::any('docs/{version?}','ApiDocsController@index');
-
-    // check login status - return bool
+    # System
 	Route::get	('loginstatus',	'Oauth2Controller@status');
 
-	// Accounts
+
+	# Accounts
+	Route::resource	('accounts', 				'AccountController',	array ('except' => array('create', 'edit')));
+	
+	# Accounts variations
+	Route::resource	('resellers.accounts',		'AccountController',	array ('except' => array('create', 'edit')));
+	
+	# Users
+	Route::resource	('users',	                'UserController',	    array ('except' => array('create', 'edit')));
+	
+	# Users variations
+	Route::resource	('accounts.users',		    'UserController',	    array ('except' => array('create', 'edit')));
+	
+	# Services
+	Route::resource	('services',	            'ServiceController',	array ('except' => array('create', 'edit')));
+	
+	# Services variations
 	Route::get		('accounts/{id}/services/{token}/auth', 			'ServiceController@store')->where ('token', '[a-z]+');
 	Route::post		('accounts/{id}/services/{token}', 					'ServiceController@authurl')->where ('token', '[a-z]+');
-
-    Route::resource	('accounts', 				'AccountController',	array ('except' => array('create', 'edit')));
-    Route::resource	('accounts.services',		'ServiceController',	array ('except' => array('store', 'create', 'edit')));
-    Route::resource	('accounts.users',		    'UserController',	    array ('except' => array('create', 'edit')));
-
-	// Users
-	Route::resource	('users',	                'UserController',	    array ('except' => array('create', 'edit')));
-
-    // Services
-    Route::resource	('services',	            'ServiceController',	array ('except' => array('create', 'edit')));
-
-    // Channels
-    Route::resource	('channels',	            'ChannelController',	array ('except' => array('index', 'create', 'edit', 'store')));
-
-    // Streams
-    Route::resource	('streams',	                'StreamController',	    array ('except' => array('index', 'create', 'edit', 'store')));
-
-    // Plans
-    Route::resource	('plans',                   'PlansController',      array ('except' => array('create', 'edit')));
-
-    // Resellers
-    Route::resource	('resellers',               'ResellerController',   array ('except' => array('create', 'edit')));
-    Route::resource	('resellers.accounts',		'AccountController',	array ('except' => array('create', 'edit')));
-    Route::resource	('resellers.plans',	        'PlansController',      array ('except' => array('create', 'edit')));
+	
+	Route::resource	('accounts.services',		'ServiceController',	array ('except' => array('store', 'create', 'edit')));
+	
+	# Channels
+	Route::resource	('channels',	            'ChannelController',	array ('except' => array('index', 'create', 'edit', 'store')));
+	
+	# Streams
+	Route::resource	('streams',	                'StreamController',	    array ('except' => array('index', 'create', 'edit', 'store')));
+	
+	# Plans
+	Route::resource	('plans',                   'PlansController',      array ('except' => array('create', 'edit')));
+	
+	# Plans variations
+	Route::resource	('resellers.plans',	        'PlansController',      array ('except' => array('create', 'edit')));
+	
+	# Resellers
+	Route::resource	('resellers',               'ResellerController',   array ('except' => array('create', 'edit')));
 
 });
 

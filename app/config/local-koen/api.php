@@ -9,7 +9,7 @@ return array(
 	| If set, the API will call the worker directly, instead of using a jobserver.
 	*/
 	
-	'synchronized' => true,
+	'synchronized' => false,
 	
 	/*
 	|--------------------------------------------------------------------------
@@ -19,6 +19,6 @@ return array(
 	*/
 	'engine' => array(
 	
-		'workerpath' => '/webroot/cloudwalkers/engine/workers/'
+		'workerpath' => '/webroot/cloudwalkers/engine/'
 	)
 );

@@ -19,7 +19,7 @@ return array(
 	*/
 	'engine' => array(
 	
-		'workerpath' => '/var/www/cloudwalkers-engine.local/workers/'
+		'workerpath' => '/var/www/cloudwalkers-engine.local/'
 	
 	)
 );
