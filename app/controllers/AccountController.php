@@ -32,7 +32,8 @@ class AccountController extends BaseController {
 	);
 
 	protected static $postRules = array
-	(
+	(	
+		'resellerid'=> 'required|integer'
 		'name'=> 'required|min:2',
 		'planid'=> 'required'
 	);
@@ -63,13 +64,13 @@ class AccountController extends BaseController {
 	 *
 	 *	@return object
 	 */
-	public function store ()
+	public function store ($resellerid = null)
 	{
 		// Validation parameters
-//		$input = $resellerid?
-//
-//			 array ('resellerid'=> $resellerid) :
-//			 array ();
+		$input = $resellerid?
+
+			array ('resellerid'=> $resellerid) :
+			array ();
 
         Input::merge((array)json_decode(Input::getContent()));
 		
