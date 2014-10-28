@@ -340,6 +340,8 @@
                 {
                     "method": "GET",
                     "summary": "Get the sendlog of this (outgoing) message",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "nickname": "getSendlog",
                     "parameters": [
                         {
