@@ -57,10 +57,6 @@
             "description": "Account contact information"
         },
         {
-            "path": "/group.{format}",
-            "description": "Group management"
-        },
-        {
             "path": "/log.{format}",
             "description": "Log errors"
         },

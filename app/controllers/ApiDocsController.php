@@ -34,10 +34,10 @@ class ApiDocsController extends BaseController {
         return Response::json(array(
             'api' => array
             (
-                'name'          => Config::get('api.name'),
-                'version'       => Config::get('api.current_version'),
-                'environment'   => App::environment(),
-                'status'        => Config::get('api.status'),
+                'name'                  => Config::get('api.name'),
+                'current version'       => Config::get('api.current_version'),
+                'environment'           => App::environment(),
+                'status'                => Config::get('api.status'),
             )
         ), 200);
     }

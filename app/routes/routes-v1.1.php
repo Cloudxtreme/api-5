@@ -32,14 +32,13 @@ Route::any ('forgotpassword/{path?}',     'ViewController@forgotpassword')->wher
 /**
  *	Guest endpoints. No OAuth2 required
  */
-Route::group (array('prefix'=> '1.1'), function()
-{
-    # System
-	Route::any('version', 'ApiDocsController@apiversion');
- 
-    # Documentation
-	Route::any('docs/{version?}','ApiDocsController@index');
-});
+
+# System
+Route::get('version', 'ApiDocsController@apiversion');
+
+# Documentation
+Route::get('apidocs/{version?}','ApiDocsController@index');
+
 
 
 /**

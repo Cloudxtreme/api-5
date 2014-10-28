@@ -23,6 +23,26 @@
                     ]
                 }
             ]
+        },
+        {
+            "path": "/notifications/{id}",
+            "description": "Operation on notifications",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get a specific notification by id",
+                    "nickname": "getFromId",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "integer",
+                            "required": true,
+                            "description": "Notification id"
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

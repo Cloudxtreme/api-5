@@ -385,6 +385,8 @@
                 {
                     "method": "GET",
                     "summary": "Message statistics management",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "nickname": "statistics",
                     "parameters": [
                         {
@@ -405,6 +407,8 @@
                 {
                     "method": "GET",
                     "summary": "Message statistics management",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "nickname": "statistics_0",
                     "parameters": [
                         {
@@ -426,6 +430,8 @@
                 {
                     "method": "PUT",
                     "summary": "my summary",
+                    "notes": "DEPRECATED",
+                    "deprecated": true,
                     "nickname": "statistics_1",
                     "parameters": [
                         {
