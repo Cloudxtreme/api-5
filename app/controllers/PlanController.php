@@ -1,7 +1,7 @@
 <?php
 
 /**
- *	Plans Controller
+ *	Plan Controller
  *	The plan controller uses the Laravel RESTful Resource Controller method.
  *
  *	[http://laravel.com/docs/4.2/controllers#restful-resource-controllers]
