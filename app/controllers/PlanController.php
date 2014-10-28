@@ -13,7 +13,7 @@
  *	PUT/PATCH	/resource/{resource}	        update		resource.update
  *	DELETE		/resource/{resource}	        destroy		resource.destroy
  */
-class PlansController extends BaseController {
+class PlanController extends BaseController {
 
 	/**
 	 *	Validation Rules

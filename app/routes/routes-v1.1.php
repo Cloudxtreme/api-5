@@ -88,10 +88,10 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::resource	('streams',	                'StreamController',	    array ('except' => array('index', 'create', 'edit', 'store')));
 	
 	# Plans
-	Route::resource	('plans',                   'PlansController',      array ('except' => array('create', 'edit')));
+	Route::resource	('plans',                   'PlanController',       array ('except' => array('create', 'edit')));
 	
 	# Plans variations
-	Route::resource	('resellers.plans',	        'PlansController',      array ('except' => array('create', 'edit')));
+	Route::resource	('resellers.plans',	        'PlanController',       array ('except' => array('create', 'edit')));
 	
 	# Resellers
 	Route::resource	('resellers',               'ResellerController',   array ('except' => array('create', 'edit')));
