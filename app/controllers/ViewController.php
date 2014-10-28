@@ -225,7 +225,6 @@ class ViewController extends BaseController {
 
         return View::make('signin.register', array_merge((array) $response, Input::all()));
 
-
     }
 
 	

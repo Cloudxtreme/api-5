@@ -1,8 +1,8 @@
 <?php
 
 /**
- *	Campaigns Controller
- *	The campaigns controller uses the Laravel RESTful Resource Controller method.
+ *	Campaign Controller
+ *	The campaign controller uses the Laravel RESTful Resource Controller method.
  *
  *	[http://laravel.com/docs/4.2/controllers#restful-resource-controllers]
  *
@@ -37,10 +37,6 @@ class CampaignController extends BaseController {
 	public function index ()
 	{
         return 'index';
-		// Request Foreground Job
-		$response = self::restDispatch ('index', 'AccountController');
-		
-		return $response;
 	}
 	
 	/**
@@ -51,17 +47,6 @@ class CampaignController extends BaseController {
 	public function store ()
 	{
         return 'store';
-
-		// Validation parameters
-        Input::merge((array)json_decode(Input::getContent()));
-		
-		// Request Foreground Job
-		$response = self::restDispatch ('store', 'AccountController', Input::all(), self::$postRules);
-			
-		return $response;
-		
-		// Return schema based response
-		// return SchemaValidator::validate ($response, 'account')->intersect;
 	}	
 	
 	/**
@@ -72,16 +57,6 @@ class CampaignController extends BaseController {
 	public function show ($id)
 	{
         return 'show';
-		// Validation parameters
-		$input = array ('id'=> $id);
-
-		// Request Foreground Job
-		$response = self::restDispatch ('show', 'AccountController', $input, self::$getRules);
-			
-		return $response;
-		
-		// Return schema based response
-		// return SchemaValidator::validate ($response, 'account')->intersect;
 	}
 	
 	/**
@@ -92,18 +67,6 @@ class CampaignController extends BaseController {
 	public function update ($id)
 	{
         return 'update';
-		// Validation parameters
-        Input::merge(array ('id'=> (int) $id));
-
-        Input::merge((array)json_decode(Input::getContent()));
-
-		// Request Foreground Job
-		$response = self::restDispatch ('update', 'AccountController', Input::all(), self::$updateRules);
-		
-		return $response;
-		
-		// Return schema based response
-		// return SchemaValidator::validate ($response, 'account')->intersect;
 	}
 	
 	/**
@@ -114,13 +77,6 @@ class CampaignController extends BaseController {
 	public function destroy ($id)
 	{
         return 'destroy';
-		// Validation parameters
-		$input = array ('id'=> $id);
-	
-		// Request Foreground Job
-		$response = self::restDispatch ('destroy', 'AccountController', $input, self::$getRules);
-		
-		return $response;
 	}
 
 

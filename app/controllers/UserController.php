@@ -28,11 +28,13 @@ class UserController extends BaseController {
 	{
         $url = URL::to('invitation');
 
+        // Validation parameters
+        $input = array ('id' => $id, 'url' => $url);
+
         Input::merge((array)json_decode(Input::getContent()));
-        Input::merge(array ('id' => $id, 'url' => $url));
 
         // Request Foreground Job
-        $response = self::restDispatch ('invite', 'AccountController', Input::all(), self::$storeRules);
+        $response = self::restDispatch ('invite', 'AccountController', $input, self::$storeRules);
 
         return $response;
 

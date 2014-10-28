@@ -72,8 +72,6 @@ class AccountController extends BaseController {
 			array ('resellerid'=> $resellerid) :
 			array ();
 
-        //Input::merge ((array) json_decode (Input::getContent ()));
-		
 		// Request Foreground Job
 		$response = self::restDispatch ('store', 'AccountController', $input, self::$postRules);
 			
@@ -110,12 +108,12 @@ class AccountController extends BaseController {
 	public function update ($id)
 	{
 		// Validation parameters
-        Input::merge(array ('id'=> (int) $id));
+        $input = array ('id'=> $id);
 
         Input::merge((array)json_decode(Input::getContent()));
 
 		// Request Foreground Job
-		$response = self::restDispatch ('update', 'AccountController', Input::all(), self::$updateRules);
+		$response = self::restDispatch ('update', 'AccountController', $input, self::$updateRules);
 		
 		return $response;
 		

@@ -61,9 +61,8 @@ class ResellerPlansController extends BaseController {
 	public function index ($id)
 	{
         // Validation parameters
-        $input = array();
+        $input = array('id' => $id);
 
-        $input['id'] = $id;
 
         // Request Foreground Job
 		$response = self::restDispatch ('index', 'ResellerPlansController', $input, self::$getRules);
@@ -79,12 +78,12 @@ class ResellerPlansController extends BaseController {
 	public function store ($resellerid)
 	{
         // Validation parameters
-        Input::merge(array ('resellerid'=> $resellerid));
+        $input = array ('resellerid'=> $resellerid);
 
         Input::merge((array)json_decode(Input::getContent()));
 
         // Request Foreground Job
-        $response = self::restDispatch ('store', 'ResellerPlansController', Input::all(), self::$postRules);
+        $response = self::restDispatch ('store', 'ResellerPlansController', $input, self::$postRules);
 
         return $response;
 
@@ -114,12 +113,12 @@ class ResellerPlansController extends BaseController {
 	public function update ($resellerid, $planid)
 	{
         // Validation parameters
-        Input::merge(array ('resellerid'=> $resellerid, 'planid'=> $planid));
+        $input = array ('resellerid'=> $resellerid, 'planid'=> $planid);
 
         Input::merge((array)json_decode(Input::getContent()));
 
         // Request Foreground Job
-        $response = self::restDispatch ('update', 'ResellerPlansController', Input::all(), self::$putRules);
+        $response = self::restDispatch ('update', 'ResellerPlansController', $input, self::$putRules);
 
         return $response;
 	}

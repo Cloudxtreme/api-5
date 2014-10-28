@@ -9,7 +9,7 @@ return array(
 	| If set, the API will call the worker directly, instead of using a jobserver.
 	*/
 	
-	'synchronized' => true,
+	'synchronized' => false,
 	
 	/*
 	|--------------------------------------------------------------------------

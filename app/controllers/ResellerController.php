@@ -50,7 +50,7 @@ class ResellerController extends BaseController {
 	public function index ()
 	{
 		// Request Foreground Job
-		$response = self::restDispatch ('index', 'ResellerController', array(), array());
+		$response = self::restDispatch ('index', 'ResellerController', null, null);
 		
 		return $response;
 	}
@@ -64,10 +64,7 @@ class ResellerController extends BaseController {
 	public function store ($accountid, $token)
 	{
 		// Validation parameters
-		$input = array();
-		
-		$input['accountid'] = $accountid;	
-		$input['token'] = $token;
+		$input = array('accountid' => $accountid, 'token' => $token);
 
 		
 		// Request Foreground Job
