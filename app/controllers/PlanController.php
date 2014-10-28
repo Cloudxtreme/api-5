@@ -54,7 +54,7 @@ class PlanController extends BaseController {
 	public function index ()
 	{
         // Request Foreground Job
-		$response = self::restDispatch ('index', 'PlansController', array(), array());
+		$response = self::restDispatch ('index', 'PlanController', array(), array());
 		
 		return $response;
 	}
@@ -70,7 +70,7 @@ class PlanController extends BaseController {
         Input::merge((array)json_decode(Input::getContent()));
 
         // Request Foreground Job
-        $response = self::restDispatch ('store', 'PlansController', Input::all(), self::$postRules);
+        $response = self::restDispatch ('store', 'PlanController', Input::all(), self::$postRules);
 
         return $response;
 
@@ -88,7 +88,7 @@ class PlanController extends BaseController {
 		$input = array ('id'=> $id);
 
 		// Request Foreground Job
-		$response = self::restDispatch ('show', 'PlansController', $input, self::$showRules);
+		$response = self::restDispatch ('show', 'PlanController', $input, self::$showRules);
 			
 		return $response;
 	}
@@ -107,7 +107,7 @@ class PlanController extends BaseController {
         Input::merge((array)json_decode(Input::getContent()));
 
         // Request Foreground Job
-        $response = self::restDispatch ('update', 'PlansController', Input::all(), self::$putRules);
+        $response = self::restDispatch ('update', 'PlanController', Input::all(), self::$putRules);
 
         return $response;
 	}
@@ -124,7 +124,7 @@ class PlanController extends BaseController {
         $input = array ('id'=> $id);
 
         // Request Foreground Job
-        $response = self::restDispatch ('destroy', 'PlansController', $input, self::$showRules);
+        $response = self::restDispatch ('destroy', 'PlanController', $input, self::$showRules);
 
         return $response;
 	}
