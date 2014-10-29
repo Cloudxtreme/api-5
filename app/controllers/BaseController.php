@@ -82,20 +82,28 @@ class BaseController extends Controller
 	 */
 	public static function restDispatch ($method, $controller, $input = null, $rules = null)
 	{
-		// Validation
+		# Validation
 		if (is_array ($input))
 		{
 			self::validate ($input, $rules);
 			$payload = array_intersect_key (Input::all(), array_merge ($rules, self::$baseValidationRules));
 		}
 		
-
-		// Request Foreground Job
-		return self::jobdispatch ( 'controllerDispatch', (object) array
+		
+		# Request Foreground Job
+		$response = self::jobdispatch ( 'controllerDispatch', (object) array
 		(
 			'action'=> $method,
 			'controller'=> $controller, 
 			'payload'=> isset ($payload)? $payload: self::prepInput (array ())
 		));
+		
+		# Error catching
+		if (preg_match ('/error/', substr ($response, 2, 8)))
+			
+			throw new WorkerException ($response);
+		
+		# Return	
+		return $response;
 	}
 }
