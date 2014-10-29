@@ -32,13 +32,16 @@ Route::any ('forgotpassword/{path?}',     'ViewController@forgotpassword')->wher
 /**
  *	Guest endpoints. No OAuth2 required
  */
+Route::group (array('prefix'=> '1.1'), function($v) {
 
-# System
-Route::get('version', 'ApiDocsController@apiversion');
+    # System
+    Route::get('version', 'ApiDocsController@apiversion');
+
+});
+
 
 # Documentation
 Route::get('apidocs/{version?}','ApiDocsController@index');
-
 
 
 /**
@@ -64,8 +67,9 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::resource	('accounts', 				'AccountController',	array ('except' => array('create', 'edit')));
 	
 	# Accounts variations
+	Route::resource	('users.accounts',		    'AccountController',	array ('except' => array('create', 'edit')));
 	Route::resource	('resellers.accounts',		'AccountController',	array ('except' => array('create', 'edit')));
-	
+
 	# Users
 	Route::resource	('users',	                'UserController',	    array ('except' => array('create', 'edit')));
 	
@@ -76,9 +80,11 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::resource	('services',	            'ServiceController',	array ('except' => array('create', 'edit')));
 	
 	# Services variations
-	Route::get		('accounts/{id}/services/{token}/auth', 			'ServiceController@store')->where ('token', '[a-z]+');
-	Route::post		('accounts/{id}/services/{token}', 					'ServiceController@authurl')->where ('token', '[a-z]+');
-	
+	Route::get		('accounts/{id}/services/{token}/auth', 			'ServiceController@show')->where ('token', '[a-z]+');
+	Route::post		('accounts/{id}/services/{token}', 					'ServiceController@store')->where ('token', '[a-z]+');
+	Route::get		('accounts/{id}/serviceids', 					    'ServiceController@index')->where ('id', '[0-9]+');
+	Route::get		('accounts/{id}/services', 					        'ServiceController@index')->where ('id', '[0-9]+');
+
 	Route::resource	('accounts.services',		'ServiceController',	array ('except' => array('store', 'create', 'edit')));
 	
 	# Channels

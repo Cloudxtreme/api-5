@@ -23,6 +23,11 @@ class ServiceController extends BaseController {
 	(
 		'id'=> 'required|integer'
 	);
+
+    protected static $getIdsRules = array
+	(
+		'ids'=> 'required'
+	);
 	
 	protected static $updateRules = array
 	(
@@ -50,16 +55,46 @@ class ServiceController extends BaseController {
 	 */
 	 
 	/**
-	 *	Get Accounts
+	 *	Get Services
 	 *
 	 *	@return array
 	 */
-	public function index ($id, $secondid = null)
+	public function index ($id = null, $secondid = null)
 	{
-		$input = array('id'=> $secondid?: $id);
-		
-		// Request Foreground Job
-		$response = self::restDispatch ('index', 'ServiceController', $input, self::$getRules);
+
+        if (!$id)
+        {
+            # /1.1/services GET (?ids)
+            if (Input::get('ids'))
+
+                $rules = self::$getIdsRules;
+
+
+            # /1.1/services GET
+            else
+
+                $rules = null;
+
+
+            $input = null;
+        }
+
+        else
+        {
+            # /1.1/accounts/id/serviceids GET
+            # /1.1/accounts/id/services GET
+
+            if (Request::segment(4) == 'serviceids')
+
+                Input::merge(array('display', 'ids'));
+
+            $input = array('id'=> $secondid?: $id);
+            $rules = self::$getRules;
+        }
+
+
+        // Request Foreground Job
+		$response = self::restDispatch ('index', 'ServiceController', $input, $rules);
 		
 		return $response;
 	}

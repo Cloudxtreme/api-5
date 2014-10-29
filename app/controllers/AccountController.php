@@ -48,11 +48,21 @@ class AccountController extends BaseController {
 	 *
 	 *	@return array
 	 */
-	public function index ()
+	public function index ($id=null)
 	{
+        $rules = null;
+        $input = null;
+
+        if ($id) {
+
+            $rules = self::$getRules;
+            $input['id'] = $id;
+
+        }
+
 		// Request Foreground Job
-		$response = self::restDispatch ('index', 'AccountController');
-		
+		$response = self::restDispatch ('index', 'AccountController', $input, $rules);
+
 		return $response;
 		
 		// Return schema based response
