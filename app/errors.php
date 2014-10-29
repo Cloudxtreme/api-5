@@ -12,7 +12,7 @@ if (!class_exists ('InvalidParameterException'))
 
         private $_errors;
 
-        public function __construct ($message="", $errors = array('Invalid parameters'), $code = 600, Exception $previous = null)
+        public function __construct ($message="", $errors = array('Invalid parameters'), $code = 400, Exception $previous = null)
         {
             parent::__construct($message, $code, $previous);
 

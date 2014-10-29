@@ -21,7 +21,8 @@ class AccountController extends BaseController {
 	 */
 	protected static $getRules = array
 	(
-		'id'=> 'required|integer'
+		'id'=> 'required|integer',
+		'type'=> ''
 	);
 	
 	protected static $updateRules = array
@@ -54,6 +55,11 @@ class AccountController extends BaseController {
         $input = null;
 
         if ($id) {
+            # /1.1/users/id/accounts GET
+            if (Request::segment(2)=='users') $input['type'] = 'users';
+
+            # /1.1/resellers/id/accounts GET
+            if (Request::segment(2)=='resellers') $input['type'] = 'resellers';
 
             $rules = self::$getRules;
             $input['id'] = $id;
@@ -81,6 +87,8 @@ class AccountController extends BaseController {
 
 			array ('resellerid'=> $resellerid) :
 			array ();
+
+        Input::merge((array)json_decode(Input::getContent()));
 
 		// Request Foreground Job
 		$response = self::restDispatch ('store', 'AccountController', $input, self::$postRules);
