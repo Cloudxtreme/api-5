@@ -37,7 +37,12 @@ class ChannelController extends BaseController {
 	 */
 	public function index()
 	{
-		//
+        Input::merge((array)json_decode(Input::getContent()));
+
+        // Request Foreground Job
+        $response = self::restDispatch ('store', 'AccountController', null, null);
+
+        return $response;
 	}
 
 
@@ -60,7 +65,15 @@ class ChannelController extends BaseController {
 	 */
 	public function show($id)
 	{
-		//
+        // Validation parameters
+        $input = array ();
+
+        Input::merge((array)json_decode(Input::getContent()));
+
+        // Request Foreground Job
+        $response = self::restDispatch ('store', 'AccountController', $input, self::$postRules);
+
+        return $response;
 	}
 
 
@@ -72,7 +85,15 @@ class ChannelController extends BaseController {
 	 */
 	public function update($id)
 	{
-		//
+        // Validation parameters
+        $input = array ();
+
+        Input::merge((array)json_decode(Input::getContent()));
+
+        // Request Foreground Job
+        $response = self::restDispatch ('store', 'AccountController', $input, self::$postRules);
+
+        return $response;
 	}
 
 

@@ -89,11 +89,19 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	
 	# Channels
 	Route::resource	('channels',	            'ChannelController',	array ('except' => array('index', 'create', 'edit', 'store')));
+
+    # Channels variations
+    Route::get		('accounts/{id}/channels', 					        'ChannelController@index')->where ('id', '[0-9]+');
+    Route::post		('accounts/{id}/channels',                          'ChannelController@store')->where ('id', '[0-9]+');
 	
 	# Streams
 	Route::resource	('streams',	                'StreamController',	    array ('except' => array('index', 'create', 'edit', 'store')));
-	
-	# Plans
+
+    # Streams variations
+    Route::get		('channels/{id}/streamids', 					    'StreamController@index')->where ('id', '[0-9]+');
+    Route::get		('channels/{id}/streams', 					        'StreamController@index')->where ('id', '[0-9]+');
+
+    # Plans
 	Route::resource	('plans',                   'PlanController',       array ('except' => array('create', 'edit')));
 	
 	# Plans variations
