@@ -22,7 +22,7 @@ class AccountController extends BaseController {
 	protected static $getRules = array
 	(
 		'id'=> 'required|integer',
-		'type'=> ''
+		'type'=> 'required'
 	);
 	
 	protected static $updateRules = array
@@ -63,7 +63,6 @@ class AccountController extends BaseController {
 
             $rules = self::$getRules;
             $input['id'] = $id;
-
         }
 
 		// Request Foreground Job
