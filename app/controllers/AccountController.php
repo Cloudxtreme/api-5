@@ -22,7 +22,7 @@ class AccountController extends BaseController {
 	protected static $getRules = array
 	(
 		'id'=> 'required|integer',
-		'type'=> 'required'
+		'type'=> ''
 	);
 	
 	protected static $updateRules = array
