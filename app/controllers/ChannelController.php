@@ -58,6 +58,7 @@ class ChannelController extends BaseController {
         $input = null;
         $rules = null;
 
+        return 'oi';
 
         if (!$id)
         {

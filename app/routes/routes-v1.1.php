@@ -92,7 +92,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	# Channels
     Route::get		('channelids', 					                    'ChannelController@chanelids');
 
-    Route::resource	('channels',	            'ChannelController',	array ('except' => array('index', 'create', 'edit', 'store')));
+    Route::resource	('channels',	            'ChannelController',	array ('except' => array('create', 'edit')));
 
     # Channels variations
     Route::get		('accounts/{id}/channelids', 					    'ChannelController@index')->where ('id', '[0-9]+');

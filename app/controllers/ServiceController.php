@@ -31,7 +31,8 @@ class ServiceController extends BaseController {
 	
 	protected static $updateRules = array
 	(
-		'id'=> 'required|integer'
+		'id'=> 'required|integer',
+		'active'=> 'required|between:0,1'
 	);
 
 	protected static $authRules = array
@@ -170,8 +171,10 @@ class ServiceController extends BaseController {
 	{
 		// Validation parameters
 		$input = array ('id'=> $id);
-	
-		// Request Foreground Job
+
+        Input::merge((array)json_decode(Input::getContent()));
+
+        // Request Foreground Job
 		$response = self::restDispatch ('update', 'ServiceController', $input, self::$updateRules);
 		
 		return $response;
