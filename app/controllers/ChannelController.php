@@ -53,12 +53,13 @@ class ChannelController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index ($id)
+	public function index ($id=null)
 	{
+
+
         $input = null;
         $rules = null;
 
-        return 'oi';
 
         if (!$id)
         {
@@ -73,6 +74,7 @@ class ChannelController extends BaseController {
             $input = array('id'=> $id, 'type' => Request::segment(2));
             $rules = self::$getRules;
         }
+
 
         // Request Foreground Job
         $response = self::restDispatch ('index', 'ChannelController', $input, $rules);
