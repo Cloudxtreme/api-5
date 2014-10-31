@@ -90,13 +90,15 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::resource	('accounts.services',		'ServiceController',	array ('except' => array('store', 'create', 'edit')));
 	
 	# Channels
-	Route::resource	('channels',	            'ChannelController',	array ('except' => array('index', 'create', 'edit', 'store')));
+    Route::get		('channelids', 					                    'ChannelController@chanelids');
+
+    Route::resource	('channels',	            'ChannelController',	array ('except' => array('index', 'create', 'edit', 'store')));
 
     # Channels variations
     Route::get		('accounts/{id}/channelids', 					    'ChannelController@index')->where ('id', '[0-9]+');
     Route::get		('accounts/{id}/channels', 					        'ChannelController@index')->where ('id', '[0-9]+');
     Route::post		('accounts/{id}/channels',                          'ChannelController@store')->where ('id', '[0-9]+');
-	
+
 	# Streams
 	Route::resource	('streams',	                'StreamController',	    array ('except' => array('index', 'create', 'edit', 'store')));
 

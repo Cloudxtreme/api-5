@@ -36,6 +36,13 @@ class ChannelController extends BaseController {
         'settings'=> 'required'
     );
 
+    protected static $updateRules = array
+    (
+        'id'=> 'required|integer',
+        'name'=> 'required|min:2',
+        'settings'=> 'required'
+    );
+
 
     /**
      *	RESTful actions
@@ -46,7 +53,7 @@ class ChannelController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index($id)
+	public function index ($id)
 	{
         $input = null;
         $rules = null;
@@ -78,9 +85,17 @@ class ChannelController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store ($id)
 	{
-		//
+        // Validation parameters
+        $input = array ('id' => $id);
+
+        Input::merge((array)json_decode(Input::getContent()));
+
+        // Request Foreground Job
+        $response = self::restDispatch ('store', 'ChannelController', $input, self::$postRules);
+
+        return $response;
 	}
 
 
@@ -90,15 +105,14 @@ class ChannelController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show ($id)
 	{
         // Validation parameters
-        $input = array ();
+        $input = array ('id' => $id);
 
-        Input::merge((array)json_decode(Input::getContent()));
 
         // Request Foreground Job
-        $response = self::restDispatch ('show', 'ChannelController', $input, self::$postRules);
+        $response = self::restDispatch ('show', 'ChannelController', $input, self::$getRules);
 
         return $response;
 	}
@@ -110,15 +124,15 @@ class ChannelController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update ($id)
 	{
         // Validation parameters
-        $input = array ();
+        $input = array ('id' => $id);
 
         Input::merge((array)json_decode(Input::getContent()));
 
         // Request Foreground Job
-        $response = self::restDispatch ('update', 'ChannelController', $input, self::$postRules);
+        $response = self::restDispatch ('update', 'ChannelController', $input, self::$updateRules);
 
         return $response;
 	}
@@ -130,7 +144,7 @@ class ChannelController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy ($id)
 	{
         // Validation parameters
         $input = array ('id'=> $id);
@@ -140,6 +154,15 @@ class ChannelController extends BaseController {
 
         return $response;
 	}
+
+    /**
+     * Get ids of the account channels
+     */
+    public function channelids ()
+    {
+        # STANDBY: not making sense
+        # how can we relate to account
+    }
 
 
 }

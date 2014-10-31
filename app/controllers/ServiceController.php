@@ -193,6 +193,11 @@ class ServiceController extends BaseController {
 		return $response;
 	}
 
+    /**
+     * Get available services
+     *
+     * @return object
+     */
     public function available ()
     {
         // Request Foreground Job
