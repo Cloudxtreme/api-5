@@ -192,4 +192,12 @@ class ServiceController extends BaseController {
 		
 		return $response;
 	}
+
+    public function available ()
+    {
+        // Request Foreground Job
+        $response = self::restDispatch ('available', 'ServiceController', null, null);
+
+        return $response;
+    }
 }

@@ -25,6 +25,17 @@ class ChannelController extends BaseController {
         'id'=> 'required|integer'
     );
 
+    protected static $getIdsRules = array
+    (
+        'ids'=> 'required'
+    );
+
+    protected static $postRules = array
+    (
+        'name'=> 'required|min:2',
+        'settings'=> 'required'
+    );
+
 
     /**
      *	RESTful actions
@@ -35,12 +46,28 @@ class ChannelController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($id)
 	{
-        Input::merge((array)json_decode(Input::getContent()));
+        $input = null;
+        $rules = null;
+
+
+        if (!$id)
+        {
+            # /1.1/channels GET (?ids)
+            $rules = self::$getIdsRules;
+        }
+
+        if ($id)
+        {
+            # /1.1/accounts/id/channels GET
+            # /1.1/channels/id/channels GET
+            $input = array('id'=> $id, 'type' => Request::segment(2));
+            $rules = self::$getRules;
+        }
 
         // Request Foreground Job
-        $response = self::restDispatch ('store', 'AccountController', null, null);
+        $response = self::restDispatch ('index', 'ChannelController', $input, $rules);
 
         return $response;
 	}
@@ -71,7 +98,7 @@ class ChannelController extends BaseController {
         Input::merge((array)json_decode(Input::getContent()));
 
         // Request Foreground Job
-        $response = self::restDispatch ('store', 'AccountController', $input, self::$postRules);
+        $response = self::restDispatch ('show', 'ChannelController', $input, self::$postRules);
 
         return $response;
 	}
@@ -91,7 +118,7 @@ class ChannelController extends BaseController {
         Input::merge((array)json_decode(Input::getContent()));
 
         // Request Foreground Job
-        $response = self::restDispatch ('store', 'AccountController', $input, self::$postRules);
+        $response = self::restDispatch ('update', 'ChannelController', $input, self::$postRules);
 
         return $response;
 	}
@@ -105,7 +132,13 @@ class ChannelController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+        // Validation parameters
+        $input = array ('id'=> $id);
+
+        // Request Foreground Job
+        $response = self::restDispatch ('destroy', 'ChannelController', $input, self::$getRules);
+
+        return $response;
 	}
 
 

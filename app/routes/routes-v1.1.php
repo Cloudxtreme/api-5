@@ -77,13 +77,15 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::resource	('accounts.users',		    'UserController',	    array ('except' => array('create', 'edit')));
 	
 	# Services
-	Route::resource	('services',	            'ServiceController',	array ('except' => array('create', 'edit')));
-	
-	# Services variations
-	Route::get		('accounts/{id}/services/{token}/auth', 			'ServiceController@show')->where ('token', '[a-z]+');
-	Route::post		('accounts/{id}/services/{token}', 					'ServiceController@store')->where ('token', '[a-z]+');
-	Route::get		('accounts/{id}/serviceids', 					    'ServiceController@index')->where ('id', '[0-9]+');
-	Route::get		('accounts/{id}/services', 					        'ServiceController@index')->where ('id', '[0-9]+');
+    Route::get		('services/available', 					            'ServiceController@available');
+
+    Route::resource	('services',	            'ServiceController',	array ('except' => array('create', 'edit')));
+
+    # Services variations
+    Route::get		('accounts/{id}/services/{token}/auth', 			'ServiceController@show')->where ('token', '[a-z]+');
+    Route::post		('accounts/{id}/services/{token}', 					'ServiceController@store')->where ('token', '[a-z]+');
+    Route::get		('accounts/{id}/serviceids', 					    'ServiceController@index')->where ('id', '[0-9]+');
+    Route::get		('accounts/{id}/services', 					        'ServiceController@index')->where ('id', '[0-9]+');
 
 	Route::resource	('accounts.services',		'ServiceController',	array ('except' => array('store', 'create', 'edit')));
 	
@@ -91,6 +93,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::resource	('channels',	            'ChannelController',	array ('except' => array('index', 'create', 'edit', 'store')));
 
     # Channels variations
+    Route::get		('accounts/{id}/channelids', 					    'ChannelController@index')->where ('id', '[0-9]+');
     Route::get		('accounts/{id}/channels', 					        'ChannelController@index')->where ('id', '[0-9]+');
     Route::post		('accounts/{id}/channels',                          'ChannelController@store')->where ('id', '[0-9]+');
 	

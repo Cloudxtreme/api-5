@@ -56,13 +56,9 @@ class AccountController extends BaseController {
 
         if ($id) {
             # /1.1/users/id/accounts GET
-            if (Request::segment(2)=='users') $input['type'] = 'users';
-
             # /1.1/resellers/id/accounts GET
-            if (Request::segment(2)=='resellers') $input['type'] = 'resellers';
-
+            $input = array('id'=> $id, 'type' => Request::segment(2));
             $rules = self::$getRules;
-            $input['id'] = $id;
         }
 
 		// Request Foreground Job
