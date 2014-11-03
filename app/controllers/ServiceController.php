@@ -60,9 +60,21 @@ class ServiceController extends BaseController {
 	 *
 	 *	@return array
 	 */
-	public function index ($id = null, $secondid = null)
+	public function index ($id = null /*, $secondid = null*/)
 	{
 
+        /*
+	       $input;
+		
+		if (!$id && !Input::get('ids'))
+			
+			throw new InvalidParameterException ('A parent ID or ids list should be provided.');
+		
+		else if ($id)
+		
+			$input = array ('id'=> $id);
+        */
+        
         if (!$id)
         {
             # /1.1/services GET (?ids)
@@ -95,7 +107,7 @@ class ServiceController extends BaseController {
 
 
         // Request Foreground Job
-		$response = self::restDispatch ('index', 'ServiceController', $input, $rules);
+		$response = self::restDispatch ('index', 'ServiceController', $input /*, $rules*/);
 		
 		return $response;
 	}
