@@ -100,7 +100,10 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
     Route::post		('accounts/{id}/channels',                          'ChannelController@store')->where ('id', '[0-9]+');
 
 	# Streams
-	Route::resource	('streams',	                'StreamController',	    array ('except' => array('index', 'create', 'edit', 'store')));
+    Route::get		('streams/{id}/refresh', 					        'StreamController@refresh')->where ('id', '[0-9]+');
+    Route::get		('streams/{id}/besttimetopost', 					'StreamController@besttimetopost')->where ('id', '[0-9]+');
+
+    Route::resource	('streams',	                'StreamController',	    array ('except' => array('index', 'create', 'edit', 'store')));
 
     # Streams variations
     Route::get		('channels/{id}/streamids', 					    'StreamController@index')->where ('id', '[0-9]+');

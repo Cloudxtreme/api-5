@@ -126,4 +126,40 @@ class StreamController extends BaseController {
 		
 		return $response;
 	}
+
+    /**
+     * Get stream besttimetopost
+     *
+     * @param $id
+     * @return Job
+     * @throws WorkerException
+     */
+    public function besttimetopost($id)
+    {
+        // Validation parameters
+        $input = array ('id'=> $id);
+
+        // Request Foreground Job
+        $response = self::restDispatch ('besttimetopost', 'StreamController', $input, self::$getRules);
+
+        return $response;
+    }
+
+    /**
+     * Force refresh stream
+     *
+     * @param $id
+     * @return Job
+     * @throws WorkerException
+     */
+    public function refresh($id)
+    {
+        // Validation parameters
+        $input = array ('id'=> $id);
+
+        // Request Foreground Job
+        $response = self::restDispatch ('refresh', 'StreamController', $input, self::$getRules);
+
+        return $response;
+    }
 }
