@@ -67,6 +67,9 @@ class ChannelController extends BaseController {
 
         if ($id)
         {
+            // case of requesting child channels of a parent channel
+            $input['type'] = (Request::segment(2) == 'channels')? 'channel' : 'account' ;
+
             $input = array ('id'=> $id);
             $rules = self::$getRules;
         }
