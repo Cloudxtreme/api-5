@@ -58,56 +58,33 @@ class ServiceController extends BaseController {
 	/**
 	 *	Get Services
 	 *
-	 *	@return array
-	 */
+     * @param null $id
+     * @return Job
+     * @throws InvalidParameterException
+     * @throws WorkerException
+     */
 	public function index ($id = null /*, $secondid = null*/)
 	{
+        $input = null;
+        $rules = null;
 
-        /*
-	       $input;
-		
 		if (!$id && !Input::get('ids'))
-			
+
 			throw new InvalidParameterException ('A parent ID or ids list should be provided.');
-		
-		else if ($id)
-		
-			$input = array ('id'=> $id);
-        */
-        
-        if (!$id)
+
+		if ($id)
         {
-            # /1.1/services GET (?ids)
-            if (Input::get('ids'))
-
-                $rules = self::$getIdsRules;
-
-
-            # /1.1/services GET
-            else
-
-                $rules = null;
-
-
-            $input = null;
-        }
-
-        else
-        {
-            # /1.1/accounts/id/serviceids GET
-            # /1.1/accounts/id/services GET
-
-            if (Request::segment(4) == 'serviceids')
-
-                Input::merge(array('display', 'ids'));
-
-            $input = array('id'=> $secondid?: $id);
+            $input = array ('id'=> $id);
             $rules = self::$getRules;
         }
 
+        if (Input::get('ids')) $rules = self::$getIdsRules;
+
+        if (Request::segment(4) == 'serviceids') $input['display'] = 'id';
+
 
         // Request Foreground Job
-		$response = self::restDispatch ('index', 'ServiceController', $input /*, $rules*/);
+		$response = self::restDispatch ('index', 'ServiceController', $input , $rules);
 		
 		return $response;
 	}

@@ -51,29 +51,29 @@ class ChannelController extends BaseController {
 	/**
 	 * Display a listing of the resource.
 	 *
-	 * @return Response
-	 */
-	public function index ($id=null)
+     * @param null $id
+     * @return Job
+     * @throws InvalidParameterException
+     * @throws WorkerException
+     */
+	public function index ($id = null)
 	{
-
-
         $input = null;
         $rules = null;
 
+        if (!$id && !Input::get('ids'))
 
-        if (!$id)
-        {
-            # /1.1/channels GET (?ids)
-            $rules = self::$getIdsRules;
-        }
+            throw new InvalidParameterException ('A parent ID or ids list should be provided.');
 
         if ($id)
         {
-            # /1.1/accounts/id/channels GET
-            # /1.1/channels/id/channels GET
-            $input = array('id'=> $id, 'type' => Request::segment(2));
+            $input = array ('id'=> $id);
             $rules = self::$getRules;
         }
+
+        if (Input::get('ids')) $rules = self::$getIdsRules;
+
+        if (Request::segment(2) == 'channelids') $input['display'] = 'id';
 
 
         // Request Foreground Job

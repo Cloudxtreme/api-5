@@ -23,6 +23,11 @@ class StreamController extends BaseController {
 	(
 		'id'=> 'required|integer'
 	);
+
+    protected static $getIdsRules = array
+    (
+        'ids'=> 'required'
+    );
 	
 	protected static $updateRules = array
 	(
@@ -45,15 +50,49 @@ class StreamController extends BaseController {
 	/**
 	 *	Get Streams
 	 *
-	 *	@return array
-	 */
-	public function index ($id, $secondid = null)
+     * @param $id
+     * @return Job
+     * @throws InvalidParameterException
+     * @throws WorkerException
+     */
+	public function index ($id)
 	{
-		$input = array('id'=> $secondid?: $id);
+        $input = null;
+        $rules = null;
+
+        if (!$id && !Input::get('ids'))
+
+            throw new InvalidParameterException ('A parent ID or ids list should be provided.');
+
+        if ($id)
+        {
+            $input = array ('id'=> $id);
+            $rules = self::$getRules;
+        }
+
+        if (Input::get('ids')) $rules = self::$getIdsRules;
+
+        if (Request::segment(4) == 'streamids') $input['display'] = 'id';
+
 		
 		// Request Foreground Job
-		$response = self::restDispatch ('index', 'StreamController', $input, self::$getRules);
+		$response = self::restDispatch ('index', 'StreamController', $input, $rules);
 		
+		return $response;
+	}
+
+	/**
+	 *	Get Stream Actions
+	 *
+	 *	@return array
+	 */
+	public function actions ($id, $secondid = null)
+	{
+		$input = array('id'=> $secondid?: $id);
+
+		// Request Foreground Job
+		$response = self::restDispatch ('actions', 'StreamController', $input, self::$getRules);
+
 		return $response;
 	}
 	

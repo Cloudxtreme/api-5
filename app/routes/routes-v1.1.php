@@ -102,6 +102,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	# Streams
     Route::get		('streams/{id}/refresh', 					        'StreamController@refresh')->where ('id', '[0-9]+');
     Route::get		('streams/{id}/besttimetopost', 					'StreamController@besttimetopost')->where ('id', '[0-9]+');
+    Route::get		('streams/{id}/actions', 					        'StreamController@actions')->where ('id', '[0-9]+');
 
     Route::resource	('streams',	                'StreamController',	    array ('except' => array('index', 'create', 'edit', 'store')));
 
