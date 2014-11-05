@@ -63,7 +63,7 @@ class ServiceController extends BaseController {
      * @throws InvalidParameterException
      * @throws WorkerException
      */
-	public function index ($id = null /*, $secondid = null*/)
+	public function index ($id = null)
 	{
         $input = null;
         $rules = null;
