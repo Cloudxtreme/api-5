@@ -55,7 +55,7 @@ class StreamController extends BaseController {
      * @throws InvalidParameterException
      * @throws WorkerException
      */
-	public function index ($id)
+	public function index ($id = null)
 	{
         $input = null;
         $rules = null;
@@ -63,6 +63,7 @@ class StreamController extends BaseController {
         if (!$id && !Input::get('ids'))
 
             throw new InvalidParameterException ('A parent ID or ids list should be provided.');
+
 
         if ($id)
         {
