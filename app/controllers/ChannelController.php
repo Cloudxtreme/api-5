@@ -22,12 +22,10 @@ class ChannelController extends BaseController {
      */
     protected static $getRules = array
     (
-        'id'=> 'required|integer'
-    );
-
-    protected static $getIdsRules = array
-    (
-        'ids'=> 'required'
+        'id'=> 'integer',
+        'ids'=> '',
+        'type'=> '',
+        'display'=> ''
     );
 
     protected static $postRules = array
@@ -61,7 +59,8 @@ class ChannelController extends BaseController {
         $input = null;
         $rules = null;
 
-        if (!$id && !Input::get('ids'))
+
+        if (!$id && !Input::get('ids') && Request::segment(2) != 'channelids')
 
             throw new InvalidParameterException ('A parent ID or ids list should be provided.');
 
@@ -70,17 +69,15 @@ class ChannelController extends BaseController {
             // case of requesting child channels of a parent channel
             $input['type'] = (Request::segment(2) == 'channels')? 'channel' : 'account' ;
 
-            $input = array ('id'=> $id);
-            $rules = self::$getRules;
+            $input['id'] = $id;
         }
-
-        if (Input::get('ids')) $rules = self::$getIdsRules;
 
         if (Request::segment(2) == 'channelids') $input['display'] = 'id';
 
+        $input['type'] = (Request::segment(2) == 'accounts')? 'account' : 'channel';
 
         // Request Foreground Job
-        $response = self::restDispatch ('index', 'ChannelController', $input, $rules);
+        $response = self::restDispatch ('index', 'ChannelController', $input, self::$getRules);
 
         return $response;
 	}

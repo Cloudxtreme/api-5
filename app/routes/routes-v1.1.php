@@ -90,7 +90,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::resource	('accounts.services',		'ServiceController',	array ('except' => array('store', 'create', 'edit')));
 	
 	# Channels
-    Route::get		('channelids', 					                    'ChannelController@chanelids');
+    # Route::get		('channelids', 					                    'ChannelController@index');
 
     Route::resource	('channels',	            'ChannelController',	array ('except' => array('create', 'edit')));
 
@@ -98,8 +98,9 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
     Route::get		('accounts/{id}/channelids', 					    'ChannelController@index')->where ('id', '[0-9]+');
     Route::get		('accounts/{id}/channels', 					        'ChannelController@index')->where ('id', '[0-9]+');
     Route::post		('accounts/{id}/channels',                          'ChannelController@store')->where ('id', '[0-9]+');
+    Route::get		('channels/{id}/channels', 					        'ChannelController@index')->where ('id', '[0-9]+');
 
-	# Streams
+    # Streams
     Route::get		('streams/{id}/refresh', 					        'StreamController@refresh')->where ('id', '[0-9]+');
     Route::get		('streams/{id}/besttimetopost', 					'StreamController@besttimetopost')->where ('id', '[0-9]+');
     Route::get		('streams/{id}/actions', 					        'StreamController@actions')->where ('id', '[0-9]+');
