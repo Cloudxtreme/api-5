@@ -21,12 +21,8 @@ class StreamController extends BaseController {
 	 */
 	protected static $getRules = array
 	(
-		'id'=> 'required|integer'
-	);
-
-    protected static $getIdsRules = array
-    (
-        'ids'=> 'required'
+		'id'=> 'required|integer',
+        'ids'=> ''
     );
 	
 	protected static $updateRules = array
@@ -67,11 +63,9 @@ class StreamController extends BaseController {
 
         if ($id)
         {
-            $input = array ('id'=> $id);
+            $input['id'] = $id;
             $rules = self::$getRules;
         }
-
-        if (Input::get('ids')) $rules = self::$getIdsRules;
 
         if (Request::segment(4) == 'streamids') $input['display'] = 'id';
 
