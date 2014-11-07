@@ -132,8 +132,10 @@ class ServiceController extends BaseController {
 	/**
 	 *	Get Account
 	 *
-	 *	@return object
-	 */
+     * @param $id
+     * @return Job
+     * @throws WorkerException
+     */
 	public function show ($id)
 	{
 		// Validation parameters
@@ -148,8 +150,10 @@ class ServiceController extends BaseController {
 	/**
 	 *	Update Account
 	 *
-	 *	@return object
-	 */
+     * @param $id
+     * @return Job
+     * @throws WorkerException
+     */
 	public function update ($id)
 	{
 		// Validation parameters
@@ -166,8 +170,10 @@ class ServiceController extends BaseController {
 	/**
 	 *	Delete Accounts
 	 *
-	 *	@return boolean
-	 */
+     * @param $id
+     * @return Job
+     * @throws WorkerException
+     */
 	public function destroy ($id)
 	{
 		// Validation parameters
