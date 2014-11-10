@@ -2,14 +2,48 @@
 
 class MessageController extends BaseController {
 
+    /**
+     *	Validation Rules
+     *	Based on Laravel Validation
+     */
+    protected static $getRules = array
+    (
+        'id'=> 'required|integer',
+        'ids'=> ''
+    );
+
+
+
 	/**
 	 * Display a listing of the resource.
 	 *
-	 * @return Response
-	 */
-	public function index()
+     * @param null $id
+     * @return Job
+     * @throws InvalidParameterException
+     * @throws WorkerException
+     */
+	public function index($id = null)
 	{
-		//
+        $input = null;
+        $rules = null;
+
+        if (!$id && !Input::get('ids'))
+
+            throw new InvalidParameterException ('A parent ID or ids list should be provided.');
+
+        if ($id)
+        {
+            $input['id'] = $id;
+            $rules = self::$getRules;
+        }
+
+        if (Request::segment(4) == 'messageids') $input['display'] = 'id';
+
+
+        // Request Foreground Job
+        $response = self::restDispatch ('index', 'MessageController', $input , $rules);
+
+        return $response;
 	}
 
 
@@ -32,7 +66,13 @@ class MessageController extends BaseController {
 	 */
 	public function show($id)
 	{
-		//
+        // Validation parameters
+        $input = array ('id'=> $id);
+
+        // Request Foreground Job
+        $response = self::restDispatch ('show', 'MessageController', $input, self::$getRules);
+
+        return $response;
 	}
 
 
