@@ -159,6 +159,7 @@ class ServiceController extends BaseController {
 		// Validation parameters
 		$input = array ('id'=> $id);
 
+        // used to merge the raw input (as is done by v1)
         Input::merge((array)json_decode(Input::getContent()));
 
         // Request Foreground Job

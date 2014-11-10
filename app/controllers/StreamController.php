@@ -27,7 +27,8 @@ class StreamController extends BaseController {
 	
 	protected static $updateRules = array
 	(
-		'id'=> 'required|integer'
+		'id'=> 'required|integer',
+        'active'=> 'required|integer'
 	);
 
 	protected static $postRules = array
@@ -138,7 +139,10 @@ class StreamController extends BaseController {
 	{
 		// Validation parameters
 		$input = array ('id'=> $id);
-	
+
+        // used to merge the raw input (as is done by v1)
+        Input::merge((array)json_decode(Input::getContent()));
+
 		// Request Foreground Job
 		$response = self::restDispatch ('update', 'StreamController', $input, self::$updateRules);
 		
