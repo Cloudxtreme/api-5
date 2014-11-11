@@ -121,13 +121,13 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 	Route::resource	('resellers',               'ResellerController',   array ('except' => array('create', 'edit')));
 
     # Messages
-    Route::get		('messages/{id}/actions', 					        'StreamController@actions')->where ('id', '[0-9]+');
-    Route::post		('messages/{id}/actions/{token}', 					'StreamController@actions')->where ('token', '[a-z]+');
-    Route::get		('messages/{id}/original', 					        'StreamController@original')->where ('id', '[0-9]+');
-    Route::patch	('messages/{id}/original', 					        'StreamController@original')->where ('id', '[0-9]+');
-    Route::patch	('messages/{id}/skip', 					            'StreamController@skip')->where ('id', '[0-9]+');
+    Route::get		('messages/{id}/actions', 					        'MessageController@actions')->where ('id', '[0-9]+');
+    Route::post		('messages/{id}/actions/{token}', 					'MessageController@actions')->where ('token', '[a-z]+');
+    Route::get		('messages/{id}/original', 					        'MessageController@original')->where ('id', '[0-9]+');
+    Route::patch	('messages/{id}/original', 					        'MessageController@original')->where ('id', '[0-9]+');
+    Route::patch	('messages/{id}/skip', 					            'MessageController@skip')->where ('id', '[0-9]+');
 
-    Route::resource	('messages',	             'StreamController',	array ('except' => array('create', 'edit')));
+    Route::resource	('messages',	             'MessageController',	array ('except' => array('create', 'edit')));
 
     # Messages variations
     Route::get		('accounts/{id}/messages', 					        'StreamController@index')->where ('id', '[0-9]+');
