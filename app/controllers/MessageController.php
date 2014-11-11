@@ -67,7 +67,10 @@ class MessageController extends BaseController {
 	public function show($id)
 	{
         // Validation parameters
-        $input = array ('id'=> $id);
+        $input['id'] = $id;
+        if (Request::segment(2) == 'messages') $input['display'] = 'message';
+        if (Request::segment(2) == 'notifications') $input['display'] = 'notification';
+        if (Request::segment(2) == 'notes') $input['display'] = 'note';
 
         // Request Foreground Job
         $response = self::restDispatch ('show', 'MessageController', $input, self::$getRules);
