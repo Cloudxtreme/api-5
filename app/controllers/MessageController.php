@@ -8,8 +8,10 @@ class MessageController extends BaseController {
      */
     protected static $getRules = array
     (
-        'id'=> 'required|integer',
-        'ids'=> ''
+        'id'=> 'integer',
+        'ids'=> '',
+        'type'=>'',
+        'display'=> ''
     );
 
 
@@ -24,21 +26,27 @@ class MessageController extends BaseController {
      */
 	public function index($id = null)
 	{
-        $input = null;
-        $rules = null;
+        $rules = self::$getRules;
+        $input['display'] = 'message';
+
 
         if (!$id && !Input::get('ids'))
 
             throw new InvalidParameterException ('A parent ID or ids list should be provided.');
 
+
         if ($id)
         {
             $input['id'] = $id;
-            $rules = self::$getRules;
+
+            if (Request::segment(2) == 'accounts') $input['type'] = 'account';
+            if (Request::segment(2) == 'channels') $input['type'] = 'channel';
+            if (Request::segment(2) == 'streams') $input['type'] = 'streams';
+            # todo review docs, not used (needs royal confirmation)
+            if (Request::segment(2) == 'contacts') $input['type'] = 'contacts';
         }
 
         if (Request::segment(4) == 'messageids') $input['display'] = 'id';
-
 
         // Request Foreground Job
         $response = self::restDispatch ('index', 'MessageController', $input , $rules);
@@ -68,9 +76,7 @@ class MessageController extends BaseController {
 	{
         // Validation parameters
         $input['id'] = $id;
-        if (Request::segment(2) == 'messages') $input['display'] = 'message';
-        if (Request::segment(2) == 'notifications') $input['display'] = 'notification';
-        if (Request::segment(2) == 'notes') $input['display'] = 'note';
+        $input['display'] = 'message';
 
         // Request Foreground Job
         $response = self::restDispatch ('show', 'MessageController', $input, self::$getRules);

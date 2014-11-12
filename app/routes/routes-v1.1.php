@@ -130,17 +130,17 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
     Route::resource	('messages',	             'MessageController',	array ('except' => array('create', 'edit')));
 
     # Messages variations
-    Route::get		('accounts/{id}/messages', 					        'StreamController@index')->where ('id', '[0-9]+');
-    Route::post		('accounts/{id}/messages', 					        'StreamController@index')->where ('id', '[0-9]+');
+    Route::get		('accounts/{id}/messages', 					        'MessageController@index')->where ('id', '[0-9]+');
+    Route::post		('accounts/{id}/messages', 					        'MessageController@index')->where ('id', '[0-9]+');
 
-    Route::get		('channels/{id}/messages', 					        'StreamController@index')->where ('id', '[0-9]+');
-    Route::get		('channels/{id}/messageids', 					    'StreamController@index')->where ('id', '[0-9]+');
+    Route::get		('channels/{id}/messages', 					        'MessageController@index')->where ('id', '[0-9]+');
+    Route::get		('channels/{id}/messageids', 					    'MessageController@index')->where ('id', '[0-9]+');
 
-    Route::get		('streams/{id}/messages', 					        'StreamController@index')->where ('id', '[0-9]+');
-    Route::get		('streams/{id}/messageids', 					    'StreamController@index')->where ('id', '[0-9]+');
+    Route::get		('streams/{id}/messages', 					        'MessageController@index')->where ('id', '[0-9]+');
+    Route::get		('streams/{id}/messageids', 					    'MessageController@index')->where ('id', '[0-9]+');
 
-    Route::get		('contacts/{id}/messages', 					        'StreamController@index')->where ('id', '[0-9]+');
-    Route::get		('contacts/{id}/messageids', 					    'StreamController@index')->where ('id', '[0-9]+');
+    Route::get		('contacts/{id}/messages', 					        'MessageController@index')->where ('id', '[0-9]+');
+    Route::get		('contacts/{id}/messageids', 					    'MessageController@index')->where ('id', '[0-9]+');
 
 });
 
