@@ -41,7 +41,7 @@ class MessageController extends BaseController {
 
             if (Request::segment(2) == 'accounts') $input['type'] = 'account';
             if (Request::segment(2) == 'channels') $input['type'] = 'channel';
-            if (Request::segment(2) == 'streams') $input['type'] = 'streams';
+            if (Request::segment(2) == 'streams') $input['type'] = 'stream';
             # todo review docs, not used (needs royal confirmation)
             if (Request::segment(2) == 'contacts') $input['type'] = 'contacts';
         }
