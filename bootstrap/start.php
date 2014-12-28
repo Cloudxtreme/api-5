@@ -49,6 +49,7 @@ $env = $app->detectEnvironment(function () {
 
 
 		case 'tickee-MBP-15.local@/webroot/cloudwalkers/api':
+		case 'Koens-Mac-Pro.local@/Volumes/HDD Server/webroot/cloudwalkers/api':
 			return 'local-koen';
 			break;
 
