@@ -26,3 +26,12 @@ foreach (Config::get ('gearman.servers') as $server => $port)
 }
 
 $data = $client->doHigh ('cron1', "cron1");
+
+
+/**
+ *	Scheduler
+ *	The new gearman scheduler cron (v1.1 only)
+ *
+ *	The loaded file should replace this one later on.
+ */
+include_once "../gearman-cron/schedule.php";
