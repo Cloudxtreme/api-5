@@ -34,4 +34,4 @@ $data = $client->doHigh ('cron1', "cron1");
  *
  *	The loaded file should replace this one later on.
  */
-include_once "../gearman-cron/schedule.php";
+include_once __DIR__.'/../gearman-cron/schedule.php';
