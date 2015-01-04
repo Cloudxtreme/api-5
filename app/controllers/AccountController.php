@@ -51,19 +51,19 @@ class AccountController extends BaseController {
 	 */
 	public function index ($id=null)
 	{
-        $rules = null;
-        $input = null;
-
-        if ($id) {
-            # /1.1/users/id/accounts GET
-            # /1.1/resellers/id/accounts GET
-            $input = array('id'=> $id, 'type' => Request::segment(2));
-            $rules = self::$getRules;
-        }
-
+		$rules = null;
+		$input = null;
+		
+		if ($id) {
+			# /1.1/users/id/accounts GET
+			# /1.1/resellers/id/accounts GET
+			$input = array('id'=> $id, 'type' => Request::segment(2));
+			$rules = self::$getRules;
+		}
+		
 		// Request Foreground Job
 		$response = self::restDispatch ('index', 'AccountController', $input, $rules);
-
+		
 		return $response;
 		
 		// Return schema based response

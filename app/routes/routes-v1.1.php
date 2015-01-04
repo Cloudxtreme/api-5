@@ -61,6 +61,7 @@ Route::group (array('prefix'=> '1.1', 'before'=> 'auth'), function($v)
 {
     # System
 	Route::get	('loginstatus',	'Oauth2Controller@status');
+	Route::get	('logs/digest',		'LogController@digest');
 
 
 	# Accounts
